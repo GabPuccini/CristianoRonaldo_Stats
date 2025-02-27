@@ -1,0 +1,295 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cristiano Ronaldo Stats</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+            background: linear-gradient(135deg, #1e2a78, #ff304f);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+            width: 100%;
+        }
+
+            .header h1 {
+                font-size: 3rem;
+                margin-bottom: 10px;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+
+            .header h2 {
+                font-size: 1.5rem;
+                font-weight: 400;
+                margin-bottom: 20px;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            }
+
+        .player-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .player-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+            .player-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .stats-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .stat-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 20px;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+            .stat-card:hover {
+                transform: translateY(-5px);
+            }
+
+            .stat-card h3 {
+                font-size: 1.8rem;
+                color: #1e2a78;
+                margin-bottom: 15px;
+                border-bottom: 2px solid #ff304f;
+                padding-bottom: 10px;
+            }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #ff304f;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .team-breakdown {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .team-stat {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding: 5px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .team-name {
+            font-weight: 600;
+            color: #1e2a78;
+        }
+
+        .team-number {
+            font-weight: 700;
+            color: #ff304f;
+        }
+
+        .footer {
+            margin-top: 40px;
+            color: white;
+            text-align: center;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .header h2 {
+                font-size: 1.2rem;
+            }
+
+            .silhouette {
+                width: 150px;
+                height: 150px;
+                font-size: 90px;
+            }
+
+            .stat-card {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Cristiano Ronaldo</h1>
+            <h2>Career Statistics</h2>
+        </div>
+
+        <div class="player-info">
+            <div class="player-image">
+                <img src="cristiano-ronaldo-foot-ball.jpg" alt="Cristiano Ronaldo" />
+            </div>
+        </div>
+
+        <div class="stats-wrapper">
+            <div class="stat-card">
+                <h3>Career Games</h3>
+                <div class="stat-number">1,267</div>
+                <div class="stat-label">Total Appearances</div>
+
+                <div class="team-breakdown">
+                    <div class="team-stat">
+                        <span class="team-name">Real Madrid</span>
+                        <span class="team-number">438</span>
+                    </div>
+                    <div class="team-stat">
+                        <span class="team-name">Manchester United</span>
+                        <span class="team-number">346</span>
+                    </div>
+                    <div class="team-stat">
+                        <span class="team-name">Juventus</span>
+                        <span class="team-number">134</span>
+                    </div>
+                    <div class="team-stat">
+                        <span class="team-name">Portugal</span>
+                        <span class="team-number">217</span>
+                    </div>
+                    <div class="team-stat">
+                        <span class="team-name">Al Nassr</span>
+                        <span class="team-number">99</span>
+                    </div>
+                    <div class="team-stat">
+                        <span class="team-name">Sporting CP</span>
+                        <span class="team-number">31</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <h3>Career Goals</h3>
+                <div class="stat-number">925</div>
+                <div class="stat-label">Total Goals Scored</div>
+
+                <div class="team-breakdown">
+                    <div class="team-stat">
+                        <span class="team-name">Real Madrid</span>
+                        <span class="team-number">450</span>
+                    </div>
+                    <div class="team-stat">
+                        <span class="team-name">Manchester United</span>
+                        <span class="team-number">145</span>
+                    </div>
+                    <div class="team-stat">
+                        <span class="team-name">Juventus</span>
+                        <span class="team-number">101</span>
+                    </div>
+                    <div class="team-stat">
+                        <span class="team-name">Portugal</span>
+                        <span class="team-number">135</span>
+                    </div>
+                    <div class="team-stat">
+                        <span class="team-name">Al Nassr</span>
+                        <span class="team-number">89</span>
+                    </div>
+                    <div class="team-stat">
+                        <span class="team-name">Sporting CP</span>
+                        <span class="team-number">5</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <h3>Career Assists</h3>
+                <div class="stat-number">287</div>
+                <div class="stat-label">Total Assists</div>
+
+                <div class="team-breakdown">
+                    <div class="team-stat">
+                        <span class="team-name">Real Madrid</span>
+                        <span class="team-number">131</span>
+                    </div>
+                    <div class="team-stat">
+                        <span class="team-name">Manchester United</span>
+                        <span class="team-number">64</span>
+                    </div>
+                    <div class="team-stat">
+                        <span class="team-name">Juventus</span>
+                        <span class="team-number">22</span>
+                    </div>
+                    <div class="team-stat">
+                        <span class="team-name">Portugal</span>
+                        <span class="team-number">45</span>
+                    </div>
+                    <div class="team-stat">
+                        <span class="team-name">Al Nassr</span>
+                        <span class="team-number">19</span>
+                    </div>
+                    <div class="team-stat">
+                        <span class="team-name">Sporting CP</span>
+                        <span class="team-number">6</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>* Statistics as of 27th February 2025</p>
+            <p>Note: Some statistics may vary based on different sources and counting methods</p>
+        </div>
+    </div>
+</body>
+</html>
