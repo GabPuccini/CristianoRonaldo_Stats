@@ -30,61 +30,171 @@
             background-color: #f7f7f7;
         }
 
+        /* Navigation */
+        .nav-bar {
+            background-color: #1a3a69;
+            padding: 0 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+        }
+
+        .nav-logo {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        /* Header */
         .header {
-            text-align: center;
-            padding: 40px 20px;
             background-color: #ffffff;
             width: 100%;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border-bottom: 3px solid #1a3a69;
+            position: relative;
+            overflow: hidden;
         }
 
-            .header h1 {
-                font-size: 2.5rem;
-                margin-bottom: 10px;
-                color: #1a3a69;
-                font-weight: 700;
-                letter-spacing: -1px;
-            }
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 40px;
+            align-items: center;
+        }
 
-            .header h2 {
-                font-size: 1.2rem;
-                font-weight: 400;
-                color: #6b7280;
-            }
+        .player-profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #e5e7eb;
+            background-color: #f3f4f6;
+        }
+
+        .player-profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .player-details {
+            flex: 1;
+        }
+
+        .player-name-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .player-name-section h1 {
+            font-size: 2.2rem;
+            color: #1a3a69;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin: 0;
+        }
+
+        .jersey-number {
+            background-color: #3b5998;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .player-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            font-size: 0.8rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .info-value {
+            font-size: 1rem;
+            color: #374151;
+            font-weight: 600;
+        }
+
+        .quick-stats {
+            display: flex;
+            gap: 30px;
+        }
+
+        .quick-stat {
+            text-align: center;
+            padding: 15px 25px;
+            background-color: #f9fafb;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .quick-stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a3a69;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .quick-stat-label {
+            font-size: 0.85rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 
         .content-wrapper {
             width: 100%;
             max-width: 1200px;
             padding: 30px 20px;
         }
-
-        .player-info {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 40px;
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .player-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-            overflow: hidden;
-            border: 4px solid #e5e7eb;
-            background-color: #f3f4f6;
-        }
-
-            .player-image img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
 
         .stats-wrapper {
             display: grid;
@@ -192,17 +302,40 @@
         }
 
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2rem;
+            .nav-links {
+                display: none;
             }
 
-            .header h2 {
-                font-size: 1rem;
+            .header-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 20px;
             }
 
-            .player-image {
-                width: 150px;
-                height: 150px;
+            .player-profile-img {
+                margin: 0 auto;
+            }
+
+            .player-name-section {
+                justify-content: center;
+            }
+
+            .player-name-section h1 {
+                font-size: 1.8rem;
+            }
+
+            .quick-stats {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .quick-stat {
+                padding: 10px 20px;
+            }
+
+            .quick-stat-number {
+                font-size: 1.5rem;
             }
 
             .stats-wrapper {
@@ -217,18 +350,78 @@
 </head>
 <body>
     <div class="container">
+        <!-- Navigation Bar -->
+        <nav class="nav-bar">
+            <div class="nav-content">
+                <a href="#" class="nav-logo">CR7 STATS</a>
+                <ul class="nav-links">
+                    <li><a href="#stats">Statistics</a></li>
+                    <li><a href="#career">Career</a></li>
+                    <li><a href="#records">Records</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Enhanced Header -->
         <div class="header">
-            <h1>Cristiano Ronaldo</h1>
-            <h2>Career Statistics</h2>
+            <div class="header-content">
+                <div class="player-profile-img">
+                    <img src="cristiano-ronaldo-foot-ball.jpg" alt="Cristiano Ronaldo" />
+                </div>
+                
+                <div class="player-details">
+                    <div class="player-name-section">
+                        <h1>Cristiano Ronaldo</h1>
+                        <div class="jersey-number">7</div>
+                    </div>
+                    
+                    <div class="player-info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Full Name</span>
+                            <span class="info-value">Cristiano Ronaldo dos Santos Aveiro</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Position</span>
+                            <span class="info-value">Forward</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Current Club</span>
+                            <span class="info-value">Al Nassr FC</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Nationality</span>
+                            <span class="info-value">🇵🇹 Portugal</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Date of Birth</span>
+                            <span class="info-value">February 5, 1985 (40 years)</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Height</span>
+                            <span class="info-value">1.87 m (6 ft 2 in)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quick-stats">
+                    <div class="quick-stat">
+                        <div class="quick-stat-number">926</div>
+                        <div class="quick-stat-label">Goals</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="quick-stat-number">287</div>
+                        <div class="quick-stat-label">Assists</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="quick-stat-number">1,269</div>
+                        <div class="quick-stat-label">Games</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="content-wrapper">
-            <div class="player-info">
-                <div class="player-image">
-                    <img src="cristiano-ronaldo-foot-ball.jpg" alt="Cristiano Ronaldo" />
-                </div>
-            </div>
-
             <div class="stats-wrapper">
                 <div class="stat-card">
                     <h3>Career Games</h3>
