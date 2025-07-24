@@ -207,6 +207,30 @@
             padding: 30px 20px;
         }
 
+        /* Divider with MORE text */
+        .more-divider {
+            display: flex;
+            align-items: center;
+            margin: 50px 0 40px 0;
+            width: 100%;
+        }
+
+        .more-divider::before,
+        .more-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .more-divider span {
+            padding: 0 30px;
+            color: #6b7280;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
         .stats-wrapper {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -433,6 +457,7 @@
         </div>
 
         <div class="content-wrapper">
+            <!-- Main Stats Section -->
             <div class="stats-wrapper">
                 <div class="stat-card">
                     <h3>Career Games</h3>
@@ -539,13 +564,114 @@
                     </div>
                 </div>
             </div>
+
+            <!-- MORE Divider -->
+            <div class="more-divider">
+                <span>MORE</span>
+            </div>
+
+            <!-- Additional Stats Section -->
+            <div class="stats-wrapper">
+                <div class="stat-card">
+                    <h3>Free Kick Goals</h3>
+                    <div class="stat-content">
+                        <div class="stat-number">65</div>
+                        <div class="stat-label">Total Free Kicks Scored</div>
+
+                        <div class="team-breakdown">
+                            <div class="team-stat">
+                                <span class="team-name">Real Madrid</span>
+                                <span class="team-number">33</span>
+                            </div>
+                            <div class="team-stat">
+                                <span class="team-name">Manchester United</span>
+                                <span class="team-number">15</span>
+                            </div>
+                            <div class="team-stat">
+                                <span class="team-name">Juventus</span>
+                                <span class="team-number">1</span>
+                            </div>
+                            <div class="team-stat">
+                                <span class="team-name">Portugal</span>
+                                <span class="team-number">11</span>
+                            </div>
+                            <div class="team-stat">
+                                <span class="team-name">Al Nassr</span>
+                                <span class="team-number">5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Penalty Goals</h3>
+                    <div class="stat-content">
+                        <div class="stat-number">175</div>
+                        <div class="stat-label">Total Penalties Scored</div>
+
+                        <div class="team-breakdown">
+                            <div class="team-stat">
+                                <span class="team-name">Real Madrid</span>
+                                <span class="team-number">81</span>
+                            </div>
+                            <div class="team-stat">
+                                <span class="team-name">Manchester United</span>
+                                <span class="team-number">21</span>
+                            </div>
+                            <div class="team-stat">
+                                <span class="team-name">Juventus</span>
+                                <span class="team-number">28</span>
+                            </div>
+                            <div class="team-stat">
+                                <span class="team-name">Portugal</span>
+                                <span class="team-number">20</span>
+                            </div>
+                            <div class="team-stat">
+                                <span class="team-name">Al Nassr</span>
+                                <span class="team-number">25</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Hat-tricks</h3>
+                    <div class="stat-content">
+                        <div class="stat-number">66</div>
+                        <div class="stat-label">Total Hat-tricks</div>
+
+                        <div class="team-breakdown">
+                            <div class="team-stat">
+                                <span class="team-name">Real Madrid</span>
+                                <span class="team-number">44</span>
+                            </div>
+                            <div class="team-stat">
+                                <span class="team-name">Manchester United</span>
+                                <span class="team-number">3</span>
+                            </div>
+                            <div class="team-stat">
+                                <span class="team-name">Juventus</span>
+                                <span class="team-number">3</span>
+                            </div>
+                            <div class="team-stat">
+                                <span class="team-name">Portugal</span>
+                                <span class="team-number">10</span>
+                            </div>
+                            <div class="team-stat">
+                                <span class="team-name">Al Nassr</span>
+                                <span class="team-number">6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="footer">
             <p>* Statistics as of 19th July 2025</p>
             <p>Note: Some statistics may vary based on different sources and counting methods</p>
             <p style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.2);">
-                Created by <strong>Gabriele Puccini</strong> • <a href="mailto:ronaldostats@pm.me" style="color: #5b8dd9; text-decoration: none;">Contact</a>
+                Created by <strong>Nome e Cognome</strong> • <a href="mailto:ronaldostats@pm.me" style="color: #5b8dd9; text-decoration: none;">Contact</a>
             </p>
         </div>
     </div>
