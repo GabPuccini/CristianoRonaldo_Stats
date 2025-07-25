@@ -1,0 +1,36 @@
+# Robots.txt for ronaldostats.app
+# Protegge da scraping aggressivo
+
+# Consenti Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Consenti Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Blocca bot di scraping noti
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+# Tutti gli altri bot - rallenta
+User-agent: *
+Allow: /
+Crawl-delay: 5
+
+# Sitemap (quando la creerai)
+Sitemap: https://ronaldostats.app/sitemap.xml
