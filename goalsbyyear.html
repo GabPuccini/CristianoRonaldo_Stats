@@ -12,6 +12,40 @@
             padding: 20px;
             margin: 0;
         }
+
+         .container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            background-color: #1a3a69;
+            padding: 0 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 50px;
+        }
+
+        .nav-logo {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
         
         .chart-container {
             max-width: 1200px;
@@ -86,6 +120,15 @@
     </style>
 </head>
 <body>
+
+   <div class="container">
+        <!-- Navigation Bar -->
+        <nav class="nav-bar">
+            <div class="nav-content">
+                <a href="index.html" class="nav-logo">HOME</a>
+            </div>
+        </nav>
+    
     <div class="chart-container">
         <div class="chart-header">
             <h2>Cristiano Ronaldo Goals Evolution</h2>
