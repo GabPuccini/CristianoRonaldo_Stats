@@ -443,9 +443,22 @@
         }
 
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
+    /* Keep navigation visible but adjust layout */
+    .nav-content {
+        flex-direction: column;
+        height: auto;
+        padding: 10px 0;
+    }
+    
+    .nav-logo {
+        margin-bottom: 10px;
+    }
+    
+    .nav-links {
+        /* Remove display: none; to keep links visible */
+        gap: 15px;
+        font-size: 0.85rem;
+    }
 
             .header-content {
                 grid-template-columns: 1fr;
