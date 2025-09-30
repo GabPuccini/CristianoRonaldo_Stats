@@ -443,21 +443,64 @@
         }
 
         @media (max-width: 768px) {
-    /* Keep navigation visible but adjust layout */
+    /* Make nav-bar relative for absolute positioning of dropdown */
+    .nav-bar {
+        position: relative;
+        width: 100%;
+    }
+    
+    /* Keep nav-content as flex for logo and hamburger */
     .nav-content {
-        flex-direction: column;
-        height: auto;
-        padding: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 50px;
+        flex-direction: row; /* Keep it row, not column */
     }
     
-    .nav-logo {
-        margin-bottom: 10px;
+    /* Show hamburger on mobile */
+    .hamburger {
+        display: flex;
     }
     
+    /* Style the nav links for mobile dropdown */
     .nav-links {
-        /* Remove display: none; to keep links visible */
-        gap: 15px;
-        font-size: 0.85rem;
+        position: absolute;
+        top: 50px; /* Height of nav bar */
+        left: 0;
+        right: 0;
+        background-color: #1a3a69;
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transform: translateY(-100%); /* Hidden above viewport */
+        transition: transform 0.3s ease;
+        opacity: 0;
+        z-index: 999;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Show menu when active class is added */
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+    .nav-links li {
+        margin: 10px 0;
+        list-style: none; /* Remove bullet points */
+    }
+    
+    .nav-links a {
+        display: block;
+        padding: 10px;
+        font-size: 1rem;
+        border-radius: 4px;
+        transition: background-color 0.2s;
+    }
+    
+    .nav-links a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
     }
 
             .header-content {
@@ -500,23 +543,60 @@
                 font-size: 2.5rem;
             }
         }
+
+        .hamburger {
+    display: none; /* Hidden by default on desktop */
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1001;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+    transition: 0.3s;
+    display: block;
+}
+
+/* Hamburger animation when active - creates an X shape */
+.hamburger.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Navigation Bar -->
         <nav class="nav-bar">
-            <div class="nav-content">
-                <a href="#" class="nav-logo">CR7 STATS</a>
-                <ul class="nav-links">
-                    <ul></ul>
-                    <li><a href="goalsbyyear.html">Goals by Year</a></li>
-                   <!-- <li><a href="#career">Career</a></li>
-                    <li><a href="#records">Records</a></li>
-                    <li><a href="#honours">Honours</a></li> -->
-                </ul>
-            </div>
-        </nav>
+    <div class="nav-content">
+        <a href="#" class="nav-logo">CR7 STATS</a>
+        
+        <!-- Add this hamburger menu button -->
+        <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <!-- Add the id="navLinks" to your existing nav-links -->
+        <ul class="nav-links" id="navLinks">
+            <li><a href="goalsbyyear.html">Goals by Year</a></li>
+        </ul>
+    </div>
+</nav>
 
         <!-- Enhanced Header -->
         <div class="header">
@@ -859,5 +939,49 @@
             }
         });
     </script>
+    <script>
+// Hamburger menu functionality
+function toggleMenu() {
+    // Get the navigation links and hamburger button
+    const navLinks = document.getElementById('navLinks');
+    const hamburger = document.getElementById('hamburgerBtn');
+    
+    // Toggle the 'active' class on both elements
+    navLinks.classList.toggle('active');
+    hamburger.classList.toggle('active');
+}
+
+// Close menu when clicking outside of it
+document.addEventListener('click', function(event) {
+    const navLinks = document.getElementById('navLinks');
+    const hamburger = document.getElementById('hamburgerBtn');
+    const navBar = document.querySelector('.nav-bar');
+    
+    // Check if click was outside nav area
+    if (!navBar.contains(event.target) && navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+        hamburger.classList.remove('active');
+    }
+});
+
+// Close menu when a link is clicked (for better user experience)
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            document.getElementById('navLinks').classList.remove('active');
+            document.getElementById('hamburgerBtn').classList.remove('active');
+        });
+    });
+});
+
+// Prevent menu from staying open when resizing window
+window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+        document.getElementById('navLinks').classList.remove('active');
+        document.getElementById('hamburgerBtn').classList.remove('active');
+    }
+});
+</script>
 </body>
 </html>
