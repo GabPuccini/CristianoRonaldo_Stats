@@ -434,6 +434,239 @@
             opacity: 0.9;
         }
 
+         /* Accent bar for stat cards */
+        .stat-card::before {
+            content: '';
+            display: block;
+            height: 4px;
+            background-color: #5b8dd9;
+        }
+
+/* Dark mode color variables */
+:root {
+    /* Light mode colors (default) */
+    --bg-primary: #f7f7f7;
+    --bg-secondary: #ffffff;
+    --bg-nav: #1a3a69;
+    --text-primary: #333;
+    --text-secondary: #6b7280;
+    --text-heading: #1a3a69;
+    --border-color: #e5e7eb;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-medium: rgba(0, 0, 0, 0.15);
+    --card-bg: #ffffff;
+    --stat-bg: #f9fafb;
+}
+
+[data-theme="dark"] {
+    /* Dark mode colors - customize these as you like */
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-nav: #0f172a;
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --text-heading: #60a5fa;
+    --border-color: #334155;
+    --shadow-light: rgba(0, 0, 0, 0.3);
+    --shadow-medium: rgba(0, 0, 0, 0.5);
+    --card-bg: #1e293b;
+    --stat-bg: #334155;
+}
+
+/* Theme toggle styles */
+.theme-toggle-wrapper {
+    position: absolute;
+    right: 60px; /* Position it to the left of hamburger on mobile */
+    display: flex;
+    align-items: center;
+}
+
+.theme-toggle {
+    position: relative;
+    width: 60px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.toggle-icon {
+    position: absolute;
+    font-size: 16px;
+    transition: opacity 0.3s ease;
+    user-select: none;
+}
+
+.toggle-icon.sun {
+    left: 6px;
+    opacity: 1;
+}
+
+.toggle-icon.moon {
+    right: 6px;
+    opacity: 0.3;
+}
+
+.toggle-slider {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    transform: translateX(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark mode toggle states */
+[data-theme="dark"] .toggle-icon.sun {
+    opacity: 0.3;
+}
+
+[data-theme="dark"] .toggle-icon.moon {
+    opacity: 1;
+}
+
+[data-theme="dark"] .toggle-slider {
+    transform: translateX(28px);
+}
+
+/* Apply CSS variables to your existing elements */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    background-color: var(--bg-primary);
+}
+
+.header {
+    background-color: var(--bg-secondary);
+}
+
+.stat-card {
+    background-color: var(--card-bg);
+    box-shadow: 0 1px 3px var(--shadow-light);
+}
+
+.stat-card:hover {
+    box-shadow: 0 4px 12px var(--shadow-medium);
+}
+
+.team-breakdown {
+    background-color: var(--stat-bg);
+}
+
+.team-stat {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.player-name-section h1 {
+    color: var(--text-heading);
+}
+
+.stat-number {
+    color: var(--text-heading);
+}
+
+.info-label,
+.stat-label,
+.quick-stat-label {
+    color: var(--text-secondary);
+}
+
+.info-value {
+    color: var(--text-primary);
+}
+
+.team-name {
+    color: var(--text-primary);
+}
+
+.team-number {
+    color: var(--text-heading);
+}
+
+.more-divider::before,
+.more-divider::after {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.more-divider span {
+    color: var(--text-secondary);
+}
+
+.player-profile-img {
+    border: 3px solid var(--border-color);
+    background-color: var(--stat-bg);
+}
+
+.quick-stat {
+    background-color: var(--stat-bg);
+    border: 1px solid var(--border-color);
+}
+
+.quick-stat-number {
+    color: var(--text-heading);
+}
+
+/* Navigation stays dark in both themes for consistency */
+.nav-bar {
+    background-color: #1a3a69;
+}
+
+/* Footer adjustments for dark mode */
+[data-theme="dark"] .footer {
+    background-color: #0f172a;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Desktop positioning */
+@media (min-width: 769px) {
+    .theme-toggle-wrapper {
+        position: static;
+        margin-left: auto;
+        margin-right: 20px;
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .theme-toggle-wrapper {
+        right: 50px;
+    }
+    
+    .theme-toggle {
+        width: 50px;
+        height: 26px;
+    }
+    
+    .toggle-slider {
+        width: 18px;
+        height: 18px;
+    }
+    
+    [data-theme="dark"] .toggle-slider {
+        transform: translateX(22px);
+    }
+    
+    .toggle-icon {
+        font-size: 14px;
+    }
+}
+        
+
 /* HAMBURGER BASE STYLES - Place these BEFORE the media query */
 .hamburger {
     display: none; /* Hidden by default on desktop */
@@ -466,16 +699,36 @@
 .hamburger.active span:nth-child(3) {
     transform: rotate(45deg) translate(-5px, -6px);
 }
-        
-        /* Accent bar for stat cards */
-        .stat-card::before {
-            content: '';
-            display: block;
-            height: 4px;
-            background-color: #5b8dd9;
-        }
 
-        @media (max-width: 768px) {
+
+<nav class="nav-bar">
+    <div class="nav-content">
+        <a href="#" class="nav-logo">CR7 STATS</a>
+        
+        <!-- Dark mode toggle - add this new element -->
+        <div class="theme-toggle-wrapper">
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                <span class="toggle-icon sun">☀️</span>
+                <span class="toggle-icon moon">🌙</span>
+                <span class="toggle-slider"></span>
+            </button>
+        </div>
+        
+        <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <ul class="nav-links" id="navLinks">
+            <li><a href="goalsbyyear.html">Goals by Year</a></li>
+        </ul>
+    </div>
+</nav>
+        
+        
+       
+  @media (max-width: 768px) {
     /* Make nav-bar relative for absolute positioning of dropdown */
     .nav-bar {
         position: relative;
@@ -985,5 +1238,35 @@ window.addEventListener('resize', function() {
     }
 });
 </script>
+
+    <script>
+// Dark mode functionality
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+}
+
+// Load saved theme preference or default to light mode
+function loadTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+}
+
+// Initialize theme on page load
+document.addEventListener('DOMContentLoaded', function() {
+    loadTheme();
+});
+
+// Also check theme on script load (in case DOMContentLoaded already fired)
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadTheme);
+} else {
+    loadTheme();
+}
+</script>
+    
 </body>
 </html>
