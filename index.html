@@ -434,6 +434,39 @@
             opacity: 0.9;
         }
 
+/* HAMBURGER BASE STYLES - Place these BEFORE the media query */
+.hamburger {
+    display: none; /* Hidden by default on desktop */
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1001;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+    transition: 0.3s;
+    display: block;
+}
+
+/* Hamburger animation when active - creates an X shape */
+.hamburger.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+        
         /* Accent bar for stat cards */
         .stat-card::before {
             content: '';
@@ -544,37 +577,6 @@
             }
         }
 
-        .hamburger {
-    display: none; /* Hidden by default on desktop */
-    flex-direction: column;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-    z-index: 1001;
-}
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background-color: white;
-    margin: 3px 0;
-    transition: 0.3s;
-    display: block;
-}
-
-/* Hamburger animation when active - creates an X shape */
-.hamburger.active span:nth-child(1) {
-    transform: rotate(-45deg) translate(-5px, 6px);
-}
-
-.hamburger.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-    transform: rotate(45deg) translate(-5px, -6px);
-}
     </style>
 </head>
 <body>
