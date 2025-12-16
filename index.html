@@ -570,131 +570,141 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        /* ========== MOBILE RESPONSIVE ========== */
-        @media (max-width: 768px) {
-            /* Theme toggle mobile positioning */
-            .theme-toggle-wrapper {
-                position: absolute;
-                left: auto;
-                right: 50px;
-                transform: none;
-            }
-            
-            .theme-toggle {
-                width: 50px;
-                height: 26px;
-            }
-            
-            .toggle-slider {
-                width: 18px;
-                height: 18px;
-            }
-            
-            [data-theme="dark"] .toggle-slider {
-                transform: translateX(22px);
-            }
-            
-            .toggle-icon {
-                font-size: 14px;
-            }
-            
-            /* Show hamburger on mobile */
-            .hamburger {
-                display: flex;
-            }
-            
-            /* Mobile navigation menu */
-            .nav-links {
-                position: absolute;
-                top: 50px;
-                left: 0;
-                right: 0;
-                background-color: #1a3a69;
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                transform: translateY(-100%);
-                transition: transform 0.3s ease;
-                opacity: 0;
-                z-index: 999;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-            }
-            
-            .nav-links.active {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            
-            .nav-links li {
-                margin: 10px 0;
-                list-style: none;
-            }
-            
-            .nav-links a {
-                display: block;
-                padding: 10px;
-                font-size: 1rem;
-                border-radius: 4px;
-                transition: background-color 0.2s;
-            }
-            
-            .nav-links a:hover {
-                background-color: rgba(255, 255, 255, 0.1);
-            }
 
-            /* Other mobile styles */
-            .header-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 20px;
-            }
+/* ========== MOBILE RESPONSIVE ========== */
+@media (max-width: 768px) {
+    /* Theme toggle mobile positioning - FIXED */
+    .theme-toggle-wrapper {
+        position: absolute;
+        left: auto;
+        right: 60px; /* Increased from 50px to give more space from hamburger */
+        transform: none;
+        z-index: 1002; /* Higher z-index to ensure it's clickable */
+    }
+    
+    .theme-toggle {
+        width: 50px;
+        height: 26px;
+    }
+    
+    .toggle-slider {
+        width: 18px;
+        height: 18px;
+    }
+    
+    [data-theme="dark"] .toggle-slider {
+        transform: translateX(22px);
+    }
+    
+    .toggle-icon {
+        font-size: 14px;
+    }
+    
+    /* Show hamburger on mobile */
+    .hamburger {
+        display: flex;
+        position: relative; /* Ensure proper positioning */
+        z-index: 1001;
+    }
+    
+    /* Mobile navigation menu - FIXED */
+    .nav-links {
+        position: absolute;
+        top: 50px;
+        left: 0;
+        right: 0;
+        background-color: #1a3a69;
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transform: translateY(-100%);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        opacity: 0;
+        z-index: 999;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        /* CRITICAL FIX: Hide the menu completely when not active */
+        pointer-events: none; /* This prevents clicking when invisible */
+        visibility: hidden; /* This ensures it's truly hidden */
+    }
+    
+    /* Show menu when active class is added - FIXED */
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto; /* Re-enable clicking when visible */
+        visibility: visible; /* Make it visible */
+    }
+    
+    .nav-links li {
+        margin: 10px 0;
+        list-style: none;
+    }
+    
+    .nav-links a {
+        display: block;
+        padding: 10px;
+        font-size: 1rem;
+        border-radius: 4px;
+        transition: background-color 0.2s;
+    }
+    
+    .nav-links a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
 
-            .player-profile-img {
-                margin: 0 auto;
-            }
+    /* Other mobile styles remain the same */
+    .header-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 20px;
+    }
 
-            .player-name-section {
-                justify-content: center;
-            }
+    .player-profile-img {
+        margin: 0 auto;
+    }
 
-            .player-name-section h1 {
-                font-size: 1.8rem;
-            }
+    .player-name-section {
+        justify-content: center;
+    }
 
-            .quick-stats {
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 15px;
-            }
+    .player-name-section h1 {
+        font-size: 1.8rem;
+    }
 
-            .quick-stat {
-                padding: 10px 20px;
-            }
+    .quick-stats {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
 
-            .quick-stat-number {
-                font-size: 1.5rem;
-            }
+    .quick-stat {
+        padding: 10px 20px;
+    }
 
-            .stats-wrapper {
-                grid-template-columns: 1fr;
-            }
+    .quick-stat-number {
+        font-size: 1.5rem;
+    }
 
-            .stat-number {
-                font-size: 2.5rem;
-            }
+    .stats-wrapper {
+        grid-template-columns: 1fr;
+    }
 
-            /* Cookie banner mobile */
-            .cookie-banner {
-                flex-direction: column;
-                text-align: center;
-                padding: 20px;
-            }
-            
-            .cookie-buttons {
-                width: 100%;
-                justify-content: center;
-            }
-        }
+    .stat-number {
+        font-size: 2.5rem;
+    }
+
+    /* Cookie banner mobile */
+    .cookie-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .cookie-buttons {
+        width: 100%;
+        justify-content: center;
+    }
+}
 
         /* Desktop theme toggle position */
         @media (min-width: 769px) {
@@ -1074,70 +1084,106 @@
     </script>
 
     <script>
-        // Hamburger menu functionality
-        function toggleMenu() {
-            const navLinks = document.getElementById('navLinks');
-            const hamburger = document.getElementById('hamburgerBtn');
-            
-            navLinks.classList.toggle('active');
-            hamburger.classList.toggle('active');
+// Hamburger menu functionality - IMPROVED
+function toggleMenu() {
+    const navLinks = document.getElementById('navLinks');
+    const hamburger = document.getElementById('hamburgerBtn');
+    
+    if (navLinks && hamburger) {
+        navLinks.classList.toggle('active');
+        hamburger.classList.toggle('active');
+    }
+}
+
+// Close menu when clicking outside - IMPROVED
+document.addEventListener('click', function(event) {
+    const navLinks = document.getElementById('navLinks');
+    const hamburger = document.getElementById('hamburgerBtn');
+    const navBar = document.querySelector('.nav-bar');
+    const themeToggle = document.getElementById('themeToggle');
+    
+    // Don't close menu if clicking the theme toggle
+    if (event.target === themeToggle || themeToggle.contains(event.target)) {
+        return;
+    }
+    
+    // Close menu if clicking outside navigation area
+    if (navLinks && hamburger && navBar && !navBar.contains(event.target) && navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+        hamburger.classList.remove('active');
+    }
+});
+
+// Close menu when a link is clicked
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            const navLinksEl = document.getElementById('navLinks');
+            const hamburgerEl = document.getElementById('hamburgerBtn');
+            if (navLinksEl && hamburgerEl) {
+                navLinksEl.classList.remove('active');
+                hamburgerEl.classList.remove('active');
+            }
+        });
+    });
+});
+
+// Prevent menu from staying open when resizing window
+window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+        const navLinks = document.getElementById('navLinks');
+        const hamburger = document.getElementById('hamburgerBtn');
+        if (navLinks && hamburger) {
+            navLinks.classList.remove('active');
+            hamburger.classList.remove('active');
         }
+    }
+});
+</script>
 
-        document.addEventListener('click', function(event) {
-            const navLinks = document.getElementById('navLinks');
-            const hamburger = document.getElementById('hamburgerBtn');
-            const navBar = document.querySelector('.nav-bar');
-            
-            if (!navBar.contains(event.target) && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                hamburger.classList.remove('active');
-            }
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-links a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    document.getElementById('navLinks').classList.remove('active');
-                    document.getElementById('hamburgerBtn').classList.remove('active');
-                });
-            });
-        });
-
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 768) {
-                document.getElementById('navLinks').classList.remove('active');
-                document.getElementById('hamburgerBtn').classList.remove('active');
-            }
-        });
-    </script>
 
     <script>
-        // Dark mode functionality
-        function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        }
+// Dark mode functionality with mobile touch support
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+}
 
-        function loadTheme() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-        }
-
-        // Initialize theme on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            loadTheme();
+// Add touch event support for mobile
+document.addEventListener('DOMContentLoaded', function() {
+    const themeToggle = document.getElementById('themeToggle');
+    
+    if (themeToggle) {
+        // Add both click and touch events for better mobile support
+        themeToggle.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent event bubbling
+            toggleTheme();
         });
+        
+        themeToggle.addEventListener('touchstart', function(e) {
+            e.stopPropagation(); // Prevent event bubbling
+        });
+    }
+    
+    // Load theme on page load
+    loadTheme();
+});
 
-        // Also check theme on script load (in case DOMContentLoaded already fired)
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', loadTheme);
-        } else {
-            loadTheme();
-        }
-    </script>
+function loadTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+}
+
+// Also check theme on script load
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadTheme);
+} else {
+    loadTheme();
+}
+</script>
 </body>
 </html>
