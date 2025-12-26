@@ -797,7 +797,7 @@
             transform: rotate(-45deg) translate(5px, -5px);
         }
 
-        /* Mobile Overlay */
+        /* Mobile Overlay - FIXED: Added pointer-events: none when not active */
         .sidebar-overlay {
             display: none;
             position: fixed;
@@ -808,11 +808,13 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 90;
             opacity: 0;
+            pointer-events: none;
             transition: opacity 0.3s ease;
         }
 
         .sidebar-overlay.active {
             opacity: 1;
+            pointer-events: auto;
         }
 
         /* ========== RESPONSIVE DESIGN ========== */
@@ -1435,14 +1437,14 @@
                         </svg>
                         @CR7statsapp
                     </a>
-                    <a href="/cdn-cgi/l/email-protection#7d0f12131c1119120e091c090e3d0d10531018">
+                    <a href="mailto:ronaldostats@pm.me">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                             <polyline points="22,6 12,13 2,6"></polyline>
                         </svg>
                         Contact
                     </a>
-                    <a href="/privacy.html">
+                    <a href="privacy.html">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                         </svg>
@@ -1457,7 +1459,7 @@
     <div id="cookieBanner" class="cookie-banner hidden">
         <div class="cookie-text">
             We use cookies to analyze site traffic. By continuing, you agree to our use of analytics cookies. 
-            <a href="/privacy.html">Learn more</a>
+            <a href="privacy.html">Learn more</a>
         </div>
         <div class="cookie-buttons">
             <button class="cookie-btn cookie-reject" onclick="rejectCookies()">Reject</button>
@@ -1465,7 +1467,7 @@
         </div>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // ========== Cookie Banner Logic ==========
         function getCookie(name) {
             const value = `; ${document.cookie}`;
@@ -1551,3 +1553,11 @@
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
+        }
+
+        // Attach event listener and initialize theme
+        themeToggle.addEventListener('click', toggleTheme);
+        loadTheme();
+    </script>
+</body>
+</html>
