@@ -836,18 +836,18 @@
                 <div class="contact-box">
                     <p><strong>If you have any questions about this privacy policy, please contact us:</strong></p>
                     <p>
-                     <a href="mailto:ronaldostats@pm.me">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                                <polyline points="22,6 12,13 2,6"></polyline>
-                            </svg>
-                            <span class="__cf_email__" data-cfemail="a3d1cccdc2cfc7ccd0d7c2d7d0e3d3ce8dcec6">[email&#160;protected]</span>
-                        </a>
+                     <a href="mailto:ronaldostats@pm.me" class="contact-link">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+    </svg>
+    ronaldostats@pm.me
+</a>
                     </p>
                 </div>
             </section>
 
-            <!-- Footer -->
+         <!-- Footer -->
             <footer class="footer">
                 <p>© 2025 RonaldoStats.app - All rights reserved</p>
                 <div class="footer-links">
@@ -857,7 +857,7 @@
                         </svg>
                         @CR7statsapp
                     </a>
-                    <a href="/cdn-cgi/l/email-protection#90e2fffef1fcf4ffe3e4f1e4e3d0e0fdbefdf5">
+                    <a href="mailto:ronaldostats@pm.me">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                             <polyline points="22,6 12,13 2,6"></polyline>
@@ -876,7 +876,7 @@
         </main>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // ========== Mobile Sidebar Logic ==========
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const sidebar = document.getElementById('sidebar');
@@ -921,4 +921,13 @@
 
         function toggleTheme() {
             const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+        loadTheme();
+    </script>
+</body>
+</html>
