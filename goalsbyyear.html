@@ -751,7 +751,7 @@
                         </svg>
                         @CR7statsapp
                     </a>
-                    <a href="/cdn-cgi/l/email-protection#87f5e8e9e6ebe3e8f4f3e6f3f4c7f7eaa9eae2">
+                    <a href="mailto:ronaldostats@pm.me">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                             <polyline points="22,6 12,13 2,6"></polyline>
@@ -763,7 +763,7 @@
         </main>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // ========== Mobile Sidebar Logic ==========
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const sidebar = document.getElementById('sidebar');
@@ -828,7 +828,6 @@
 
         // Get computed CSS variables
         function getChartColors() {
-            const style = getComputedStyle(document.documentElement);
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
             
             return {
@@ -918,7 +917,7 @@
                             afterLabel: function(context) {
                                 if (context.dataset.label === 'Goals per Year') {
                                     const age = context.label - 1985;
-                                    return `Age: ${age}`;
+                                    return 'Age: ' + age;
                                 }
                                 return '';
                             }
@@ -1035,4 +1034,8 @@
         // Calculate and update average dynamically
         const totalGoals = goalsPerYear.reduce((sum, goals) => sum + goals, 0);
         const yearsWithGoals = goalsPerYear.length;
-        const av
+        const average = (totalGoals / yearsWithGoals).toFixed(1);
+        document.getElementById('avgPerYear').textContent = average;
+    </script>
+</body>
+</html>
