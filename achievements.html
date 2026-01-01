@@ -4,6 +4,1163 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Achievements - Cristiano Ronaldo Stats</title>
+    <meta name="description" content="Complete list of Cristiano Ronaldo's career trophies, honours and individual awards spanning over two decades of football dominance.">
+    <link rel="icon" type="image/png" sizes="256x256" href="/cr7-logo-v2-256.png">
+    <link rel="apple-touch-icon" href="/cr7-logo-v2-512.png">
+    <meta property="og:image" content="https://ronaldostats.app/cr7-logo-v2-1024.png">
+    
+    <!-- Google Fonts - Same as other pages -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ========== CSS VARIABLES - Matching index.html ========== */
+        :root {
+            /* Light mode - Soft blue-gray palette */
+            --bg-gradient-start: #e8eef5;
+            --bg-gradient-end: #dde5ef;
+            --bg-card: rgba(255, 255, 255, 0.7);
+            --bg-card-hover: rgba(255, 255, 255, 0.9);
+            --bg-sidebar: rgba(255, 255, 255, 0.6);
+            --bg-stat-section: rgba(235, 242, 250, 0.5);
+            
+            --text-primary: #1a2a3a;
+            --text-secondary: #5a6a7a;
+            --text-muted: #8a9aaa;
+            
+            --accent-primary: #3b5998;
+            --accent-secondary: #5b8dd9;
+            --accent-coral: #e8857b;
+            --accent-blue-light: #a8c5e8;
+            --accent-gold: #d4a853;
+            --accent-gold-light: rgba(212, 168, 83, 0.15);
+            
+            --border-light: rgba(255, 255, 255, 0.8);
+            --border-subtle: rgba(0, 0, 0, 0.06);
+            
+            --shadow-soft: 0 2px 20px rgba(0, 0, 0, 0.04);
+            --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.06);
+            --shadow-card-hover: 0 8px 40px rgba(0, 0, 0, 0.1);
+            
+            --sidebar-width: 70px;
+            --sidebar-expanded: 240px;
+            
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+
+            /* Club colors */
+            --sporting-green: #00a651;
+            --united-red: #da291c;
+            --madrid-gold: #febe10;
+            --juve-black: #000000;
+            --alnassr-yellow: #fff000;
+            --portugal-green: #006600;
+        }
+
+        [data-theme="dark"] {
+            --bg-gradient-start: #0f1419;
+            --bg-gradient-end: #1a2332;
+            --bg-card: rgba(30, 40, 55, 0.8);
+            --bg-card-hover: rgba(40, 52, 70, 0.9);
+            --bg-sidebar: rgba(20, 30, 45, 0.9);
+            --bg-stat-section: rgba(25, 35, 50, 0.5);
+            
+            --text-primary: #e8eef5;
+            --text-secondary: #a0b0c0;
+            --text-muted: #607080;
+            
+            --accent-gold-light: rgba(212, 168, 83, 0.2);
+            
+            --border-light: rgba(255, 255, 255, 0.1);
+            --border-subtle: rgba(255, 255, 255, 0.05);
+            
+            --shadow-soft: 0 2px 20px rgba(0, 0, 0, 0.2);
+            --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
+            --shadow-card-hover: 0 8px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ========== RESET & BASE ========== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+            transition: background 0.4s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        .counter-value, .trophy-count, .trophy-count-badge { font-variant-numeric: tabular-nums lining-nums; }
+        .app-container { display: flex; min-height: 100vh; }
+
+        /* ========== SIDEBAR (Glassmorphism) ========== */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--bg-sidebar);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-right: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+            z-index: 100;
+            transition: width 0.3s ease, transform 0.3s ease;
+        }
+
+        .sidebar-logo {
+            width: 44px;
+            height: 44px;
+            background: var(--accent-primary);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+
+        .sidebar-logo:hover { transform: scale(1.05); }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+            padding: 0 12px;
+            flex: 1;
+        }
+
+        .nav-item {
+            width: 46px;
+            height: 46px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item:hover { background: var(--bg-card); color: var(--text-primary); }
+        .nav-item.active { background: var(--bg-card); color: var(--accent-primary); box-shadow: var(--shadow-soft); }
+        .nav-item svg { width: 22px; height: 22px; }
+
+        .nav-item .nav-label {
+            position: absolute;
+            left: 60px;
+            background: var(--text-primary);
+            color: var(--bg-gradient-start);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            z-index: 1000;
+        }
+
+        .nav-item:hover .nav-label { opacity: 1; }
+
+        .sidebar-footer { padding: 0 12px; width: 100%; }
+
+        .theme-toggle {
+            width: 46px;
+            height: 46px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle:hover { background: var(--bg-card); color: var(--text-primary); }
+        .theme-toggle svg { width: 22px; height: 22px; }
+        .theme-toggle .moon-icon { display: none; }
+        [data-theme="dark"] .theme-toggle .sun-icon { display: none; }
+        [data-theme="dark"] .theme-toggle .moon-icon { display: block; }
+
+        /* ========== MAIN CONTENT ========== */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+            max-width: 1400px;
+        }
+
+        /* ========== PAGE HEADER ========== */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .page-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-top: 4px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 10px 18px;
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-light);
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover { background: var(--bg-card-hover); color: var(--text-primary); }
+        .back-btn svg { width: 16px; height: 16px; }
+
+        /* ========== TROPHY COUNTER CARDS (Glassmorphism) ========== */
+        .trophy-counter {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .counter-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-light);
+            padding: 28px 24px;
+            text-align: center;
+            box-shadow: var(--shadow-card);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .counter-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-card-hover);
+        }
+
+        .counter-value {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-primary);
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        .counter-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        /* ========== FILTER TABS (Glassmorphism) ========== */
+        .filter-section { margin-bottom: 24px; }
+
+        .filter-tabs {
+            display: inline-flex;
+            gap: 6px;
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 6px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-light);
+        }
+
+        .filter-tab {
+            padding: 10px 20px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-tab:hover { color: var(--text-primary); }
+
+        .filter-tab.active {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .filter-tab .count {
+            background: var(--bg-stat-section);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .filter-tab.active .count {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        /* ========== ACCORDION SECTIONS (Glassmorphism) ========== */
+        .achievements-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .accordion-section {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-light);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        .accordion-section:hover {
+            box-shadow: var(--shadow-card-hover);
+        }
+
+        .accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 24px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            user-select: none;
+        }
+
+        .accordion-header:hover { background: var(--bg-stat-section); }
+
+        .accordion-title-group { display: flex; align-items: center; gap: 16px; }
+
+        /* Club Badges */
+        .club-badge {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: var(--bg-stat-section);
+            border: 2px solid var(--border-light);
+        }
+
+        .club-badge img { width: 34px; height: 34px; object-fit: contain; }
+
+        .club-badge.text-badge { font-weight: 700; font-size: 0.75rem; color: white; border: none; }
+        .club-badge.sporting { background: var(--sporting-green); }
+        .club-badge.united { background: var(--united-red); }
+        .club-badge.madrid { background: var(--madrid-gold); color: #1a1a1a; }
+        .club-badge.juve { background: var(--juve-black); }
+        .club-badge.alnassr { background: var(--alnassr-yellow); color: #1a1a1a; }
+        .club-badge.portugal { background: var(--portugal-green); }
+
+        .accordion-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .accordion-subtitle { font-size: 0.85rem; color: var(--text-muted); margin-top: 2px; }
+
+        .accordion-meta { display: flex; align-items: center; gap: 12px; }
+
+        .trophy-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-stat-section);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            min-width: 48px;
+        }
+
+        .accordion-arrow {
+            width: 22px;
+            height: 22px;
+            color: var(--text-muted);
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-section.open .accordion-arrow { transform: rotate(180deg); }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .accordion-section.open .accordion-content { max-height: 2000px; }
+
+        .accordion-body {
+            padding: 0 24px 24px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        /* ========== TROPHY GRID (Glassmorphism items) ========== */
+        .trophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px;
+            padding-top: 20px;
+        }
+
+        .trophy-item {
+            background: var(--bg-stat-section);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: var(--radius-md);
+            padding: 16px 18px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border: 1px solid var(--border-light);
+            transition: all 0.2s ease;
+        }
+
+        .trophy-item:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .trophy-info { flex: 1; min-width: 0; }
+
+        .trophy-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+
+        .trophy-years { display: flex; flex-wrap: wrap; gap: 6px; }
+
+        .trophy-year {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .trophy-count-badge {
+            background: var(--accent-primary);
+            color: white;
+            min-width: 32px;
+            height: 32px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+            padding: 0 10px;
+        }
+
+        /* Major award highlight */
+        .award-highlight {
+            background: var(--accent-gold-light);
+            border-color: var(--accent-gold);
+        }
+
+        .award-highlight:hover { background: var(--accent-gold-light); }
+
+        /* ========== FOOTER (Glassmorphism) ========== */
+        .footer {
+            margin-top: 40px;
+            padding: 28px;
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-light);
+            text-align: center;
+            box-shadow: var(--shadow-card);
+        }
+
+        .footer p { color: var(--text-muted); font-size: 0.875rem; }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            margin-top: 16px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover { color: var(--accent-primary); }
+        .footer-links svg { width: 18px; height: 18px; }
+
+        /* ========== MOBILE ========== */
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            width: 44px;
+            height: 44px;
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-sm);
+            z-index: 200;
+            cursor: pointer;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .mobile-menu-btn span {
+            width: 20px;
+            height: 2px;
+            background: var(--text-primary);
+            border-radius: 1px;
+            transition: all 0.2s ease;
+        }
+
+        .mobile-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
+        .mobile-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 90;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .sidebar-overlay.active { opacity: 1; pointer-events: auto; }
+
+        @media (max-width: 1024px) {
+            .trophy-counter { grid-template-columns: repeat(2, 1fr); }
+            .main-content { padding: 24px; }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn { display: flex; }
+            .sidebar-overlay { display: block; }
+            .sidebar { transform: translateX(-100%); width: var(--sidebar-expanded); padding: 72px 16px 24px; }
+            .sidebar.active { transform: translateX(0); }
+            .sidebar .nav-item { width: 100%; justify-content: flex-start; padding-left: 16px; gap: 12px; }
+            .sidebar .nav-item .nav-label { position: static; opacity: 1; background: transparent; color: var(--text-primary); padding: 0; }
+            .sidebar .theme-toggle { width: 100%; justify-content: flex-start; padding-left: 16px; gap: 12px; }
+            .main-content { margin-left: 0; padding: 72px 16px 24px; }
+            .page-header { flex-direction: column; gap: 16px; }
+            .page-title { font-size: 1.6rem; }
+            .trophy-counter { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .counter-card { padding: 22px 18px; }
+            .counter-value { font-size: 2rem; }
+            .filter-tabs { width: 100%; overflow-x: auto; display: flex; flex-wrap: nowrap; }
+            .filter-tab { padding: 8px 16px; font-size: 0.8125rem; white-space: nowrap; flex-shrink: 0; }
+            .accordion-header { padding: 16px 18px; }
+            .club-badge { width: 42px; height: 42px; }
+            .club-badge img { width: 30px; height: 30px; }
+            .accordion-title { font-size: 1rem; }
+            .accordion-meta { flex-direction: column; align-items: flex-end; gap: 8px; }
+            .trophy-grid { grid-template-columns: 1fr; }
+            .trophy-item { padding: 14px 16px; }
+            .footer-links { flex-direction: column; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <aside class="sidebar" id="sidebar">
+            <a href="index.html" class="sidebar-logo">CR7</a>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    <span class="nav-label">Home</span>
+                </a>
+                <a href="goalsbyyear.html" class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                    <span class="nav-label">Goals by Year</span>
+                </a>
+                <a href="goalsbyseason.html" class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                    <span class="nav-label">Goals by Season</span>
+                </a>
+                <a href="achievements.html" class="nav-item active">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+                    <span class="nav-label">Achievements</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    <span class="nav-label">Timeline</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="nav-label">Toggle Theme</span>
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <h1 class="page-title">Achievements & Honours</h1>
+                    <p class="page-subtitle">A legendary career spanning over two decades of dominance</p>
+                </div>
+                <a href="index.html" class="back-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    Back to Stats
+                </a>
+            </header>
+
+            <section class="trophy-counter">
+                <div class="counter-card">
+                    <div class="counter-value">35</div>
+                    <div class="counter-label">Total Trophies</div>
+                </div>
+                <div class="counter-card">
+                    <div class="counter-value">7</div>
+                    <div class="counter-label">League Titles</div>
+                </div>
+                <div class="counter-card">
+                    <div class="counter-value">5</div>
+                    <div class="counter-label">Champions League</div>
+                </div>
+                <div class="counter-card">
+                    <div class="counter-value">5</div>
+                    <div class="counter-label">Ballon d'Or</div>
+                </div>
+            </section>
+
+            <section class="filter-section">
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="all">All <span class="count">35</span></button>
+                    <button class="filter-tab" data-filter="club">Club Honours <span class="count">32</span></button>
+                    <button class="filter-tab" data-filter="national">National Team <span class="count">3</span></button>
+                    <button class="filter-tab" data-filter="individual">Individual Awards <span class="count">50+</span></button>
+                </div>
+            </section>
+
+            <div class="achievements-container">
+                <!-- Sporting CP -->
+                <div class="accordion-section" data-category="club">
+                    <div class="accordion-header">
+                        <div class="accordion-title-group">
+                            <div class="club-badge"><img src="logos/sporting-cp.png" alt="Sporting CP" onerror="this.parentElement.classList.add('text-badge','sporting'); this.parentElement.innerHTML='SCP';"></div>
+                            <div>
+                                <div class="accordion-title">Sporting CP</div>
+                                <div class="accordion-subtitle">2002–2003</div>
+                            </div>
+                        </div>
+                        <div class="accordion-meta">
+                            <div class="trophy-count">1</div>
+                            <svg class="accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <div class="trophy-grid">
+                                <div class="trophy-item">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">Supertaça Cândido de Oliveira</div>
+                                        <div class="trophy-years"><span class="trophy-year">2002</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">1</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manchester United -->
+                <div class="accordion-section" data-category="club">
+                    <div class="accordion-header">
+                        <div class="accordion-title-group">
+                            <div class="club-badge"><img src="logos/manchester-united.png" alt="Manchester United" onerror="this.parentElement.classList.add('text-badge','united'); this.parentElement.innerHTML='MU';"></div>
+                            <div>
+                                <div class="accordion-title">Manchester United</div>
+                                <div class="accordion-subtitle">2003–2009 & 2021–2022</div>
+                            </div>
+                        </div>
+                        <div class="accordion-meta">
+                            <div class="trophy-count">9</div>
+                            <svg class="accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <div class="trophy-grid">
+                                <div class="trophy-item">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">Premier League</div>
+                                        <div class="trophy-years"><span class="trophy-year">2006-07</span><span class="trophy-year">2007-08</span><span class="trophy-year">2008-09</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">3</div>
+                                </div>
+                                <div class="trophy-item">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">FA Cup</div>
+                                        <div class="trophy-years"><span class="trophy-year">2003-04</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">1</div>
+                                </div>
+                                <div class="trophy-item">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">Football League Cup</div>
+                                        <div class="trophy-years"><span class="trophy-year">2005-06</span><span class="trophy-year">2008-09</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">2</div>
+                                </div>
+                                <div class="trophy-item">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">FA Community Shield</div>
+                                        <div class="trophy-years"><span class="trophy-year">2007</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">1</div>
+                                </div>
+                                <div class="trophy-item award-highlight">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">UEFA Champions League</div>
+                                        <div class="trophy-years"><span class="trophy-year">2007-08</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">1</div>
+                                </div>
+                                <div class="trophy-item">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">FIFA Club World Cup</div>
+                                        <div class="trophy-years"><span class="trophy-year">2008</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">1</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real Madrid -->
+                <div class="accordion-section" data-category="club">
+                    <div class="accordion-header">
+                        <div class="accordion-title-group">
+                            <div class="club-badge"><img src="logos/real-madrid.png" alt="Real Madrid" onerror="this.parentElement.classList.add('text-badge','madrid'); this.parentElement.innerHTML='RM';"></div>
+                            <div>
+                                <div class="accordion-title">Real Madrid</div>
+                                <div class="accordion-subtitle">2009–2018</div>
+                            </div>
+                        </div>
+                        <div class="accordion-meta">
+                            <div class="trophy-count">16</div>
+                            <svg class="accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <div class="trophy-grid">
+                                <div class="trophy-item">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">La Liga</div>
+                                        <div class="trophy-years"><span class="trophy-year">2011-12</span><span class="trophy-year">2016-17</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">2</div>
+                                </div>
+                                <div class="trophy-item">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">Copa del Rey</div>
+                                        <div class="trophy-years"><span class="trophy-year">2010-11</span><span class="trophy-year">2013-14</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">2</div>
+                                </div>
+                                <div class="trophy-item">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">Supercopa de España</div>
+                                        <div class="trophy-years"><span class="trophy-year">2012</span><span class="trophy-year">2017</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">2</div>
+                                </div>
+                                <div class="trophy-item award-highlight">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">UEFA Champions League</div>
+                                        <div class="trophy-years"><span class="trophy-year">2013-14</span><span class="trophy-year">2015-16</span><span class="trophy-year">2016-17</span><span class="trophy-year">2017-18</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">4</div>
+                                </div>
+                                <div class="trophy-item">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">UEFA Super Cup</div>
+                                        <div class="trophy-years"><span class="trophy-year">2014</span><span class="trophy-year">2017</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">2</div>
+                                </div>
+                                <div class="trophy-item">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">FIFA Club World Cup</div>
+                                        <div class="trophy-years"><span class="trophy-year">2014</span><span class="trophy-year">2016</span><span class="trophy-year">2017</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">3</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Juventus -->
+                <div class="accordion-section" data-category="club">
+                    <div class="accordion-header">
+                        <div class="accordion-title-group">
+                            <div class="club-badge"><img src="logos/juventus.png" alt="Juventus" onerror="this.parentElement.classList.add('text-badge','juve'); this.parentElement.innerHTML='JUV';"></div>
+                            <div>
+                                <div class="accordion-title">Juventus</div>
+                                <div class="accordion-subtitle">2018–2021</div>
+                            </div>
+                        </div>
+                        <div class="accordion-meta">
+                            <div class="trophy-count">5</div>
+                            <svg class="accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <div class="trophy-grid">
+                                <div class="trophy-item">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">Serie A</div>
+                                        <div class="trophy-years"><span class="trophy-year">2018-19</span><span class="trophy-year">2019-20</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">2</div>
+                                </div>
+                                <div class="trophy-item">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">Coppa Italia</div>
+                                        <div class="trophy-years"><span class="trophy-year">2020-21</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">1</div>
+                                </div>
+                                <div class="trophy-item">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">Supercoppa Italiana</div>
+                                        <div class="trophy-years"><span class="trophy-year">2018</span><span class="trophy-year">2020</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">2</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Al-Nassr -->
+                <div class="accordion-section" data-category="club">
+                    <div class="accordion-header">
+                        <div class="accordion-title-group">
+                            <div class="club-badge"><img src="logos/al-nassr.png" alt="Al-Nassr" onerror="this.parentElement.classList.add('text-badge','alnassr'); this.parentElement.innerHTML='ALN';"></div>
+                            <div>
+                                <div class="accordion-title">Al-Nassr</div>
+                                <div class="accordion-subtitle">2023–Present</div>
+                            </div>
+                        </div>
+                        <div class="accordion-meta">
+                            <div class="trophy-count">1</div>
+                            <svg class="accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <div class="trophy-grid">
+                                <div class="trophy-item">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">Arab Club Champions Cup</div>
+                                        <div class="trophy-years"><span class="trophy-year">2023</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">1</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portugal -->
+                <div class="accordion-section" data-category="national">
+                    <div class="accordion-header">
+                        <div class="accordion-title-group">
+                            <div class="club-badge"><img src="logos/portugal.png" alt="Portugal" onerror="this.parentElement.classList.add('text-badge','portugal'); this.parentElement.innerHTML='POR';"></div>
+                            <div>
+                                <div class="accordion-title">Portugal National Team</div>
+                                <div class="accordion-subtitle">2003–Present</div>
+                            </div>
+                        </div>
+                        <div class="accordion-meta">
+                            <div class="trophy-count">3</div>
+                            <svg class="accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <div class="trophy-grid">
+                                <div class="trophy-item award-highlight">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">UEFA European Championship</div>
+                                        <div class="trophy-years"><span class="trophy-year">2016</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">1</div>
+                                </div>
+                                <div class="trophy-item award-highlight">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">UEFA Nations League</div>
+                                        <div class="trophy-years"><span class="trophy-year">2018-19</span><span class="trophy-year">2024-25</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">2</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Individual Awards -->
+                <div class="accordion-section open" data-category="individual">
+                    <div class="accordion-header">
+                        <div class="accordion-title-group">
+                            <div>
+                                <div class="accordion-title">Individual Awards</div>
+                                <div class="accordion-subtitle">Personal honours & records</div>
+                            </div>
+                        </div>
+                        <div class="accordion-meta">
+                            <div class="trophy-count">50+</div>
+                            <svg class="accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <div class="trophy-grid">
+                                <div class="trophy-item award-highlight">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">Ballon d'Or</div>
+                                        <div class="trophy-years"><span class="trophy-year">2008</span><span class="trophy-year">2013</span><span class="trophy-year">2014</span><span class="trophy-year">2016</span><span class="trophy-year">2017</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">5</div>
+                                </div>
+                                <div class="trophy-item award-highlight">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">The Best FIFA Men's Player</div>
+                                        <div class="trophy-years"><span class="trophy-year">2016</span><span class="trophy-year">2017</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">2</div>
+                                </div>
+                                <div class="trophy-item award-highlight">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">European Golden Shoe</div>
+                                        <div class="trophy-years"><span class="trophy-year">2007-08</span><span class="trophy-year">2010-11</span><span class="trophy-year">2013-14</span><span class="trophy-year">2014-15</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">4</div>
+                                </div>
+                                <div class="trophy-item">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">UEFA Men's Player of the Year</div>
+                                        <div class="trophy-years"><span class="trophy-year">2013-14</span><span class="trophy-year">2015-16</span><span class="trophy-year">2016-17</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">3</div>
+                                </div>
+                                <div class="trophy-item">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">UEFA Champions League Top Scorer</div>
+                                        <div class="trophy-years"><span class="trophy-year">07-08</span><span class="trophy-year">12-13</span><span class="trophy-year">13-14</span><span class="trophy-year">14-15</span><span class="trophy-year">15-16</span><span class="trophy-year">16-17</span><span class="trophy-year">17-18</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">7</div>
+                                </div>
+                                <div class="trophy-item">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">Premier League Player of the Season</div>
+                                        <div class="trophy-years"><span class="trophy-year">2006-07</span><span class="trophy-year">2007-08</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">2</div>
+                                </div>
+                                <div class="trophy-item">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">Pichichi Trophy</div>
+                                        <div class="trophy-years"><span class="trophy-year">2010-11</span><span class="trophy-year">2013-14</span><span class="trophy-year">2014-15</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">3</div>
+                                </div>
+                                <div class="trophy-item">
+                                    <div class="trophy-info">
+                                        <div class="trophy-name">FIFA FIFPro World 11</div>
+                                        <div class="trophy-years"><span class="trophy-year">2007–2021</span></div>
+                                    </div>
+                                    <div class="trophy-count-badge">15</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="footer">
+                <p>Statistics updated December 2025</p>
+                <div class="footer-links">
+                    <a href="https://x.com/CR7statsapp" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        @CR7statsapp
+                    </a>
+                    <a href="mailto:ronaldostats@pm.me">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        Contact
+                    </a>
+                    <a href="privacy.html">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        Privacy Policy
+                    </a>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+        themeToggle.addEventListener('click', toggleTheme);
+        loadTheme();
+
+        // Mobile Sidebar
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        function toggleSidebar() {
+            mobileMenuBtn.classList.toggle('active');
+            sidebar.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleSidebar);
+        sidebarOverlay.addEventListener('click', toggleSidebar);
+
+        document.querySelectorAll('.sidebar .nav-item').forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) toggleSidebar();
+            });
+        });
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                mobileMenuBtn.classList.remove('active');
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Accordion
+        document.querySelectorAll('.accordion-header').forEach(function(header) {
+            header.addEventListener('click', function() {
+                this.parentElement.classList.toggle('open');
+            });
+        });
+
+        // Filter Tabs
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const accordionSections = document.querySelectorAll('.accordion-section');
+
+        filterTabs.forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                filterTabs.forEach(function(t) { t.classList.remove('active'); });
+                tab.classList.add('active');
+                const filter = tab.getAttribute('data-filter');
+                accordionSections.forEach(function(section) {
+                    const category = section.getAttribute('data-category');
+                    section.style.display = (filter === 'all' || filter === category) ? 'block' : 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievements - Cristiano Ronaldo Stats</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="256x256" href="/cr7-logo-v2-256.png">
