@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Goals by Year - Cristiano Ronaldo Stats</title>
 
-   <!-- Favicon for browser tab -->
-<link rel="icon" type="image/png" sizes="256x256" href="/cr7-logo-v2-256.png">
-<link rel="apple-touch-icon" href="/cr7-logo-v2-512.png">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="256x256" href="/cr7-logo-v2-256.png">
+    <link rel="apple-touch-icon" href="/cr7-logo-v2-512.png">
 
-<!-- Social sharing image (Google, Twitter, Facebook, WhatsApp) -->
-<meta property="og:image" content="https://ronaldostats.app/cr7-logo-v2-1024.png">
-<meta property="og:image:width" content="1024">
-<meta property="og:image:height" content="1024">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ronaldostats.app/cr7-logo-v2-1024.png">
+    <!-- Social sharing image -->
+    <meta property="og:image" content="https://ronaldostats.app/cr7-logo-v2-1024.png">
+    <meta property="og:image:width" content="1024">
+    <meta property="og:image:height" content="1024">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:image" content="https://ronaldostats.app/cr7-logo-v2-1024.png">
     
     <!-- Google Fonts - Modern Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -402,34 +402,37 @@
 
         /* ========== FOOTER ========== */
         .footer {
-            margin-top: 30px;
-            padding: 24px;
+            margin-top: 40px;
+            padding: 28px;
             background: var(--bg-card);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: var(--radius-lg);
             border: 1px solid var(--border-light);
             text-align: center;
+            box-shadow: var(--shadow-card);
         }
 
         .footer p {
             color: var(--text-muted);
-            font-size: 0.85rem;
+            font-size: 0.875rem;
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-top: 12px;
+            gap: 28px;
+            margin-top: 16px;
         }
 
         .footer-links a {
-            color: var(--accent-secondary);
+            color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.85rem;
-            display: flex;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             transition: color 0.2s ease;
         }
 
@@ -438,8 +441,8 @@
         }
 
         .footer-links svg {
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
         }
 
         /* ========== MOBILE MENU BUTTON ========== */
@@ -482,7 +485,7 @@
             transform: rotate(-45deg) translate(5px, -5px);
         }
 
-        /* Mobile Overlay */
+        /* Mobile Overlay - CRITICAL FIX: pointer-events */
         .sidebar-overlay {
             display: none;
             position: fixed;
@@ -493,11 +496,13 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 90;
             opacity: 0;
+            pointer-events: none;
             transition: opacity 0.3s ease;
         }
 
         .sidebar-overlay.active {
             opacity: 1;
+            pointer-events: auto;
         }
 
         /* ========== RESPONSIVE DESIGN ========== */
@@ -596,12 +601,12 @@
             }
 
             .footer {
-                padding: 16px;
+                padding: 20px;
             }
 
             .footer-links {
                 flex-direction: column;
-                gap: 10px;
+                gap: 12px;
             }
         }
 
@@ -661,7 +666,12 @@
                 
                 <a href="achievements.html" class="nav-item">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                        <path d="M4 22h16"></path>
+                        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
                     </svg>
                     <span class="nav-label">Achievements</span>
                 </a>
@@ -728,7 +738,7 @@
 
                 <div class="stats-summary">
                     <div class="stat-box">
-                        <div class="stat-value">956</div>
+                        <div class="stat-value">954</div>
                         <div class="stat-label">Total Goals</div>
                     </div>
                     <div class="stat-box">
@@ -748,32 +758,34 @@
 
             <!-- Footer -->
             <footer class="footer">
-                <p>* Statistics as of 30th December 2025</p>
+                <p>Statistics updated January 2026</p>
                 <div class="footer-links">
-    <a href="https://x.com/CR7statsapp" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-        </svg>
-        @CR7statsapp
-    </a>
-    <a href="mailto:ronaldostats@pm.me">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-            <polyline points="22,6 12,13 2,6"></polyline>
-        </svg>
-        Contact
-    </a>
-    <a href="privacy.html">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-        </svg>
-        Privacy Policy
-    </a>
-</div>
+                    <a href="https://x.com/CR7statsapp" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                        @CR7statsapp
+                    </a>
+                    <a href="mailto:ronaldostats@pm.me">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        Contact
+                    </a>
+                    <a href="privacy.html">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        Privacy Policy
+                    </a>
+                </div>
             </footer>
         </main>
     </div>
 
+
+    <!-- All JavaScript -->
     <script>
         // ========== Mobile Sidebar Logic ==========
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -790,7 +802,6 @@
         mobileMenuBtn.addEventListener('click', toggleSidebar);
         sidebarOverlay.addEventListener('click', toggleSidebar);
 
-        // Close sidebar when clicking a nav link on mobile
         document.querySelectorAll('.sidebar .nav-item').forEach(link => {
             link.addEventListener('click', () => {
                 if (window.innerWidth <= 768) {
@@ -799,7 +810,6 @@
             });
         });
 
-        // Reset sidebar on window resize
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
                 mobileMenuBtn.classList.remove('active');
@@ -815,8 +825,6 @@
         function loadTheme() {
             const savedTheme = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
-            // Update chart colors when theme loads
-            setTimeout(updateChartColors, 100);
         }
 
         function toggleTheme() {
@@ -824,20 +832,17 @@
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
-            updateChartColors();
         }
 
         themeToggle.addEventListener('click', toggleTheme);
-
-        // Initialize theme
         loadTheme();
 
         // ========== Chart.js Setup ==========
         const years = [2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025];
-        const goalsPerYear = [5, 1, 13, 15, 25, 34, 35, 30, 48, 60, 63, 69, 61, 57, 55, 53, 49, 39, 44, 47, 16, 54, 43, 40];
-        const cumulativeGoals = [5, 6, 19, 34, 59, 93, 128, 158, 206, 266, 329, 398, 459, 516, 571, 624, 673, 712, 756, 803, 819, 873, 916, 956];
+        const goalsPerYear = [5, 1, 13, 15, 25, 34, 35, 30, 48, 60, 63, 69, 61, 57, 55, 53, 49, 39, 44, 47, 16, 54, 43, 41];
+        const cumulativeGoals = [5, 6, 19, 34, 59, 93, 128, 158, 206, 266, 329, 398, 459, 516, 571, 624, 673, 712, 756, 803, 819, 873, 916, 957];
 
-        // Get computed CSS variables
+        // Get chart colors based on theme
         function getChartColors() {
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
             
@@ -895,7 +900,7 @@
                 maintainAspectRatio: false,
                 interaction: {
                     mode: 'index',
-                    intersect: false,
+                    intersect: false
                 },
                 plugins: {
                     legend: {
@@ -963,7 +968,7 @@
                         display: true,
                         position: 'left',
                         grid: {
-                            drawOnChartArea: false,
+                            drawOnChartArea: false
                         },
                         ticks: {
                             font: {
@@ -1042,11 +1047,25 @@
             chart.update();
         }
 
+        // Override the toggleTheme function to also update chart
+        const originalToggleTheme = toggleTheme;
+        toggleTheme = function() {
+            originalToggleTheme();
+            updateChartColors();
+        };
+        
+        // Re-attach the click listener with the new function
+        themeToggle.removeEventListener('click', originalToggleTheme);
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Update chart colors on initial load
+        updateChartColors();
+
         // Calculate and update average dynamically
         const totalGoals = goalsPerYear.reduce((sum, goals) => sum + goals, 0);
         const yearsWithGoals = goalsPerYear.length;
-        const average = (totalGoals / yearsWithGoals).toFixed(1);
-        document.getElementById('avgPerYear').textContent = average;
+        const averageGoals = (totalGoals / yearsWithGoals).toFixed(1);
+        document.getElementById('avgPerYear').textContent = averageGoals;
     </script>
 </body>
 </html>
