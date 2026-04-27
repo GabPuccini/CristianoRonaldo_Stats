@@ -314,41 +314,10 @@
             .stats-table { font-size: 0.8rem; }
             .stats-table thead th { padding: 10px 8px; font-size: 0.7rem; }
             .stats-table tbody td { padding: 10px 8px; }
-            ..club-badge { width: 24px; height: 24px; font-size: 0.6rem; }
+            .club-badge { width: 24px; height: 24px; font-size: 0.6rem; }
             .club-badge-img { width: 24px; height: 24px; }
             .footer { padding: 20px; }
             .footer-links { flex-direction: column; gap: 12px; }
-
-            /* Mobile scroll UX improvements */
-            .scroll-hint { display: flex; }
-
-            .stats-table thead th:first-child,
-            .stats-table tbody td:first-child {
-                position: sticky;
-                left: 0;
-                z-index: 2;
-                box-shadow: 2px 0 4px rgba(0, 0, 0, 0.04);
-            }
-            .stats-table thead th:first-child {
-                background: var(--bg-table-header);
-                z-index: 3;
-            }
-            .stats-table tbody td:first-child {
-                background: var(--bg-card);
-            }
-            .stats-table tbody tr:nth-child(even) td:first-child {
-                background: var(--bg-table-row-alt);
-            }
-            .stats-table tbody tr.total-row td:first-child {
-                background: var(--bg-stat-section);
-            }
-            .stats-table tbody tr.career-total-row td:first-child {
-                background: var(--accent-primary);
-                color: white !important;
-            }
-            .stats-table tbody td:first-child .club-cell {
-                white-space: nowrap;
-            }
         }
     </style>
 </head>
@@ -409,22 +378,8 @@
                         <p class="table-subtitle">Season-by-season performance at club level</p>
                     </div>
                 </div>
-                <div class="scroll-hint">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                    Swipe to see all stats
-                </div>
                 <div class="table-wrapper">
                     <table class="stats-table">
-                <div class="scroll-hint">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                    Swipe to see all stats
-                </div>
                 <div class="table-wrapper">
                     <table class="stats-table">
                         <thead>
@@ -576,20 +531,6 @@
         }
         themeToggle.addEventListener('click', toggleTheme);
         loadTheme();
-
-        // Dismiss scroll hint after first horizontal scroll
-        document.querySelectorAll('.table-wrapper').forEach(function(wrapper) {
-            const hint = wrapper.previousElementSibling;
-            if (hint && hint.classList.contains('scroll-hint')) {
-                let dismissed = false;
-                wrapper.addEventListener('scroll', function() {
-                    if (!dismissed && wrapper.scrollLeft > 30) {
-                        hint.classList.add('dismissed');
-                        dismissed = true;
-                    }
-                }, { passive: true });
-            }
-        });
     </script>
 </body>
 </html>
