@@ -574,20 +574,6 @@
         }
         themeToggle.addEventListener('click', toggleTheme);
         loadTheme();
-
-        // Dismiss scroll hint after first horizontal scroll
-        document.querySelectorAll('.table-wrapper').forEach(function(wrapper) {
-            const hint = wrapper.previousElementSibling;
-            if (hint && hint.classList.contains('scroll-hint')) {
-                let dismissed = false;
-                wrapper.addEventListener('scroll', function() {
-                    if (!dismissed && wrapper.scrollLeft > 30) {
-                        hint.classList.add('dismissed');
-                        dismissed = true;
-                    }
-                }, { passive: true });
-            }
-        });
     </script>
 </body>
 </html>
