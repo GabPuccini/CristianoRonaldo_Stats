@@ -416,6 +416,8 @@
                     </svg>
                     Swipe to see all stats
                 </div>
+                <div class="table-wrapper">
+                    <table class="stats-table">
                 <div class="scroll-hint">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -574,6 +576,20 @@
         }
         themeToggle.addEventListener('click', toggleTheme);
         loadTheme();
+
+        // Dismiss scroll hint after first horizontal scroll
+        document.querySelectorAll('.table-wrapper').forEach(function(wrapper) {
+            const hint = wrapper.previousElementSibling;
+            if (hint && hint.classList.contains('scroll-hint')) {
+                let dismissed = false;
+                wrapper.addEventListener('scroll', function() {
+                    if (!dismissed && wrapper.scrollLeft > 30) {
+                        hint.classList.add('dismissed');
+                        dismissed = true;
+                    }
+                }, { passive: true });
+            }
+        });
     </script>
 </body>
 </html>
