@@ -3,337 +3,489 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Goals by Season - Cristiano Ronaldo Stats</title>
+    <title>Cristiano Ronaldo Goals by Season</title>
+    <meta name="description" content="Cristiano Ronaldo goals by season. A full club breakdown season by season plus Portugal year by year, with 830 club goals and 143 international goals. Updated June 2026.">
+    <link rel="canonical" href="https://ronaldostats.app/goalsbyseason.html">
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="256x256" href="/cr7-logo-v2-256.png">
     <link rel="apple-touch-icon" href="/cr7-logo-v2-512.png">
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ronaldostats.app/goalsbyseason.html">
+    <meta property="og:title" content="Cristiano Ronaldo Goals by Season">
+    <meta property="og:description" content="A full season by season club breakdown plus Portugal year by year. 830 club goals, 143 international goals.">
     <meta property="og:image" content="https://ronaldostats.app/cr7-logo-v2-1024.png">
     <meta property="og:image:width" content="1024">
     <meta property="og:image:height" content="1024">
     <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Cristiano Ronaldo Goals by Season">
+    <meta name="twitter:description" content="Season by season at club level, plus Portugal year by year.">
     <meta name="twitter:image" content="https://ronaldostats.app/cr7-logo-v2-1024.png">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Security -->
     <meta name="referrer" content="same-origin">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://ronaldostats.app/" },
+        { "@type": "ListItem", "position": 2, "name": "Goals by season", "item": "https://ronaldostats.app/goalsbyseason.html" }
+      ]
+    }
+    </script>
+
+    <!-- Google tag (gtag.js) - Respects Cookie Consent -->
+    <script>
+      function getCookieConsent() {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; cookieConsent=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        return null;
+      }
+
+      if (getCookieConsent() !== 'rejected') {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-HPECDH5S32';
+        document.head.appendChild(script);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-HPECDH5S32');
+      }
+    </script>
+
     <style>
+        /* ========== TOKENS ========== */
         :root {
-            --bg-gradient-start: #e8eef5;
-            --bg-gradient-end: #dde5ef;
-            --bg-card: rgba(255, 255, 255, 0.7);
-            --bg-card-hover: rgba(255, 255, 255, 0.9);
-            --bg-sidebar: rgba(255, 255, 255, 0.6);
-            --bg-stat-section: rgba(235, 242, 250, 0.5);
-            --bg-table-header: rgba(59, 89, 152, 0.95);
-            --bg-table-row-alt: rgba(235, 242, 250, 0.4);
-            --bg-table-row-hover: rgba(91, 141, 217, 0.1);
-            --bg-club-badge: rgba(59, 89, 152, 0.1);
-            --text-primary: #1a2a3a;
-            --text-secondary: #5a6a7a;
-            --text-muted: #8a9aaa;
-            --accent-primary: #3b5998;
-            --accent-secondary: #5b8dd9;
-            --accent-coral: #e8857b;
-            --accent-blue-light: #a8c5e8;
-            --accent-green: #4ade80;
-            --accent-gold: #fbbf24;
-            --border-light: rgba(255, 255, 255, 0.8);
-            --border-subtle: rgba(0, 0, 0, 0.06);
-            --border-table: rgba(0, 0, 0, 0.08);
-            --shadow-soft: 0 2px 20px rgba(0, 0, 0, 0.04);
-            --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.06);
-            --shadow-card-hover: 0 8px 40px rgba(0, 0, 0, 0.1);
-            --sidebar-width: 70px;
-            --sidebar-expanded: 240px;
-            --radius-sm: 12px;
-            --radius-md: 16px;
-            --radius-lg: 24px;
-            --radius-xl: 32px;
-            --sporting: #00a651;
-            --manutd: #da291c;
-            --realmadrid: #00529f;
-            --juventus: #000000;
-            --alnassr: #ffcc00;
-            --portugal: #006600;
+            --bg-start: #eaf0f9;
+            --bg-end: #dde6f3;
+
+            --surface: rgba(255, 255, 255, 0.72);
+            --surface-strong: rgba(255, 255, 255, 0.86);
+            --sidebar-bg: rgba(255, 255, 255, 0.62);
+
+            --ink: #16243a;
+            --ink-2: #56657f;
+            --ink-3: #8593a8;
+
+            --brand: #2f56cf;
+            --brand-ink: #2f56cf;
+            --brand-soft: rgba(47, 86, 207, 0.14);
+
+            --line: rgba(20, 30, 50, 0.08);
+            --line-strong: rgba(20, 30, 50, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.85);
+
+            --table-head: #1e3a8a;
+            --table-row-alt: rgba(47, 86, 207, 0.045);
+            --table-row-hover: rgba(47, 86, 207, 0.09);
+
+            --shadow-sm: 0 2px 14px rgba(20, 35, 70, 0.05);
+            --shadow-md: 0 10px 34px rgba(20, 35, 70, 0.08);
+            --shadow-lg: 0 18px 50px rgba(20, 35, 70, 0.14);
+
+            --hero-grad: linear-gradient(135deg, #1e3a8a 0%, #2f56cf 58%, #3a63d8 100%);
+
+            --sidebar-w: 76px;
+            --sidebar-expanded: 248px;
+
+            --r-sm: 12px;
+            --r-md: 16px;
+            --r-lg: 22px;
+            --r-xl: 30px;
         }
+
         [data-theme="dark"] {
-            --bg-gradient-start: #0f1419;
-            --bg-gradient-end: #1a2332;
-            --bg-card: rgba(30, 40, 55, 0.8);
-            --bg-card-hover: rgba(40, 52, 70, 0.9);
-            --bg-sidebar: rgba(20, 30, 45, 0.9);
-            --bg-stat-section: rgba(25, 35, 50, 0.5);
-            --bg-table-header: rgba(59, 89, 152, 0.9);
-            --bg-table-row-alt: rgba(40, 50, 70, 0.4);
-            --bg-table-row-hover: rgba(91, 141, 217, 0.15);
-            --bg-club-badge: rgba(91, 141, 217, 0.2);
-            --text-primary: #e8eef5;
-            --text-secondary: #a0b0c0;
-            --text-muted: #607080;
-            --border-light: rgba(255, 255, 255, 0.1);
-            --border-subtle: rgba(255, 255, 255, 0.05);
-            --border-table: rgba(255, 255, 255, 0.08);
-            --shadow-soft: 0 2px 20px rgba(0, 0, 0, 0.2);
-            --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
-            --shadow-card-hover: 0 8px 40px rgba(0, 0, 0, 0.4);
+            --bg-start: #0d131f;
+            --bg-end: #141d2e;
+
+            --surface: rgba(28, 38, 56, 0.74);
+            --surface-strong: rgba(34, 46, 68, 0.88);
+            --sidebar-bg: rgba(18, 27, 42, 0.86);
+
+            --ink: #e9eef6;
+            --ink-2: #a6b3c6;
+            --ink-3: #6b7a90;
+
+            --brand: #6f97f0;
+            --brand-ink: #93b2f5;
+            --brand-soft: rgba(111, 151, 240, 0.18);
+
+            --line: rgba(255, 255, 255, 0.08);
+            --line-strong: rgba(255, 255, 255, 0.14);
+            --glass-border: rgba(255, 255, 255, 0.10);
+
+            --table-head: #2a4694;
+            --table-row-alt: rgba(255, 255, 255, 0.03);
+            --table-row-hover: rgba(111, 151, 240, 0.12);
+
+            --shadow-sm: 0 2px 14px rgba(0, 0, 0, 0.25);
+            --shadow-md: 0 10px 34px rgba(0, 0, 0, 0.34);
+            --shadow-lg: 0 18px 50px rgba(0, 0, 0, 0.44);
         }
+
+        /* ========== RESET ========== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            background: linear-gradient(150deg, var(--bg-start) 0%, var(--bg-end) 100%);
+            background-attachment: fixed;
             min-height: 100vh;
-            color: var(--text-primary);
+            color: var(--ink);
+            line-height: 1.5;
             transition: background 0.4s ease, color 0.3s ease;
             overflow-x: hidden;
         }
-        .app-container { display: flex; min-height: 100vh; }
+        a { color: inherit; }
+        .visually-hidden {
+            position: absolute; width: 1px; height: 1px;
+            padding: 0; margin: -1px; overflow: hidden;
+            clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+        }
+        :focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 6px; }
+
+        /* ========== LAYOUT ========== */
+        .app { display: flex; min-height: 100vh; }
+
+        /* ========== SIDEBAR ========== */
         .sidebar {
-            position: fixed; left: 0; top: 0; width: var(--sidebar-width); height: 100vh;
-            background: var(--bg-sidebar); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-right: 1px solid var(--border-light); display: flex; flex-direction: column;
-            align-items: center; padding: 20px 0; z-index: 100; transition: width 0.3s ease, transform 0.3s ease;
+            position: fixed; left: 0; top: 0;
+            width: var(--sidebar-w); height: 100vh;
+            background: var(--sidebar-bg);
+            backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+            border-right: 1px solid var(--glass-border);
+            display: flex; flex-direction: column; align-items: center;
+            padding: 22px 0; z-index: 100;
+            transition: transform 0.32s cubic-bezier(.4,0,.2,1);
         }
         .sidebar-logo {
-            width: 44px; height: 44px; background: var(--accent-primary); border-radius: var(--radius-sm);
-            display: flex; align-items: center; justify-content: center; color: white;
-            font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1.1rem;
-            margin-bottom: 30px; cursor: pointer; transition: transform 0.2s ease; text-decoration: none;
+            width: 46px; height: 46px;
+            background: var(--hero-grad);
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800; font-size: 0.95rem; letter-spacing: 0.02em;
+            margin-bottom: 30px; text-decoration: none;
+            box-shadow: 0 6px 18px rgba(31, 58, 138, 0.35);
         }
-        .sidebar-logo:hover { transform: scale(1.05); }
-        .sidebar-nav { display: flex; flex-direction: column; gap: 8px; width: 100%; padding: 0 12px; flex: 1; }
+        .sidebar-nav { display: flex; flex-direction: column; gap: 8px; width: 100%; padding: 0 14px; flex: 1; }
         .nav-item {
-            width: 46px; height: 46px; border-radius: var(--radius-sm); display: flex;
-            align-items: center; justify-content: center; color: var(--text-muted);
-            cursor: pointer; transition: all 0.2s ease; text-decoration: none; position: relative;
+            position: relative; width: 48px; height: 48px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--ink-3); text-decoration: none;
+            transition: background 0.2s ease, color 0.2s ease;
         }
-        .nav-item:hover { background: var(--bg-card); color: var(--text-primary); }
-        .nav-item.active { background: var(--bg-card); color: var(--accent-primary); box-shadow: var(--shadow-soft); }
+        .nav-item:hover { background: var(--surface); color: var(--ink); }
+        .nav-item.active { background: var(--surface-strong); color: var(--brand-ink); box-shadow: var(--shadow-sm); }
+        .nav-item.active::before {
+            content: ''; position: absolute; left: -14px; top: 50%;
+            transform: translateY(-50%); width: 3px; height: 22px;
+            background: var(--brand); border-radius: 0 3px 3px 0;
+        }
         .nav-item svg { width: 22px; height: 22px; }
-        .nav-item .nav-label {
-            position: absolute; left: 60px; background: var(--text-primary); color: var(--bg-gradient-start);
-            padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 500;
-            white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
+        .nav-label {
+            position: absolute; left: 62px;
+            background: var(--ink); color: var(--bg-start);
+            padding: 6px 12px; border-radius: 9px;
+            font-size: 0.8rem; font-weight: 600; white-space: nowrap;
+            opacity: 0; transform: translateX(-4px); pointer-events: none;
+            box-shadow: var(--shadow-md);
+            transition: opacity 0.18s ease, transform 0.18s ease;
         }
-        .nav-item:hover .nav-label { opacity: 1; }
-        .sidebar-footer { display: flex; flex-direction: column; gap: 8px; padding: 0 12px; width: 100%; }
+        .nav-item:hover .nav-label,
+        .nav-item:focus-visible .nav-label,
+        .theme-toggle:hover .nav-label,
+        .theme-toggle:focus-visible .nav-label { opacity: 1; transform: translateX(0); }
+        .sidebar-footer { width: 100%; padding: 0 14px; }
         .theme-toggle {
-            width: 46px; height: 46px; border-radius: var(--radius-sm); display: flex;
-            align-items: center; justify-content: center; background: transparent; border: none;
-            color: var(--text-muted); cursor: pointer; transition: all 0.2s ease;
+            position: relative; width: 48px; height: 48px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            background: transparent; border: none; color: var(--ink-3);
+            cursor: pointer; transition: background 0.2s ease, color 0.2s ease;
         }
-        .theme-toggle:hover { background: var(--bg-card); color: var(--text-primary); }
+        .theme-toggle:hover { background: var(--surface); color: var(--ink); }
         .theme-toggle svg { width: 22px; height: 22px; }
         .theme-toggle .moon-icon { display: none; }
         [data-theme="dark"] .theme-toggle .sun-icon { display: none; }
         [data-theme="dark"] .theme-toggle .moon-icon { display: block; }
-        .main-content { flex: 1; margin-left: var(--sidebar-width); padding: 30px; transition: margin-left 0.3s ease; }
-        .page-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; }
-        .page-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.5px; }
-        .page-subtitle { color: var(--text-secondary); font-size: 0.95rem; margin-top: 4px; }
+
+        /* ========== MAIN ========== */
+        .main { flex: 1; margin-left: var(--sidebar-w); padding: 36px 40px 48px; max-width: 1280px; }
+
+        /* ========== HEADER ========== */
+        .page-head {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            gap: 24px; flex-wrap: wrap; margin-bottom: 26px;
+        }
+        .page-head-main { min-width: min(100%, 520px); }
+        .eyebrow {
+            display: inline-flex; align-items: center; font-size: 0.72rem; font-weight: 600;
+            letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 12px;
+        }
+        .page-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(1.9rem, 3.6vw, 2.6rem); font-weight: 800;
+            letter-spacing: -0.02em; line-height: 1.1; color: var(--ink);
+        }
+        .page-sub { color: var(--ink-2); font-size: 1rem; margin-top: 8px; max-width: 60ch; }
+        .updated-badge {
+            display: inline-flex; align-items: center; gap: 7px; padding: 5px 12px;
+            background: var(--surface); border: 1px solid var(--line); border-radius: 999px;
+            font-size: 0.74rem; font-weight: 600; color: var(--ink-2);
+        }
+        .updated-badge .dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: var(--brand); box-shadow: 0 0 0 4px var(--brand-soft);
+        }
         .back-btn {
-            display: flex; align-items: center; gap: 8px; color: var(--text-secondary); text-decoration: none;
-            font-size: 0.9rem; font-weight: 500; padding: 10px 16px; background: var(--bg-card);
-            border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); transition: all 0.2s ease;
+            display: inline-flex; align-items: center; gap: 8px;
+            color: var(--ink-2); text-decoration: none; font-size: 0.86rem; font-weight: 600;
+            padding: 10px 16px; background: var(--surface); border: 1px solid var(--line);
+            border-radius: var(--r-sm); box-shadow: var(--shadow-sm); white-space: nowrap;
+            transition: color 0.2s ease, transform 0.2s ease, background 0.2s ease;
         }
-        .back-btn:hover { background: var(--bg-card-hover); color: var(--text-primary); }
+        .back-btn:hover { color: var(--brand-ink); transform: translateX(-2px); }
         .back-btn svg { width: 18px; height: 18px; }
+
+        /* ========== SUMMARY CARDS ========== */
+        .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+        .summary-card {
+            background: var(--surface);
+            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--glass-border); border-radius: var(--r-md);
+            padding: 22px 20px; text-align: center; box-shadow: var(--shadow-sm);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .summary-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .summary-value {
+            font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.7rem, 3vw, 2.1rem);
+            font-weight: 800; line-height: 1; color: var(--brand-ink); font-variant-numeric: tabular-nums;
+        }
+        .summary-label {
+            font-size: 0.74rem; color: var(--ink-3); text-transform: uppercase;
+            letter-spacing: 0.06em; margin-top: 8px; font-weight: 600;
+        }
+
+        /* ========== TABLE CARD ========== */
         .table-card {
-            background: var(--bg-card); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-radius: var(--radius-xl); border: 1px solid var(--border-light); padding: 30px;
-            margin-bottom: 30px; box-shadow: var(--shadow-card); overflow: hidden;
+            background: var(--surface);
+            backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--glass-border); border-radius: var(--r-xl);
+            padding: 28px 30px; margin-bottom: 24px; box-shadow: var(--shadow-md);
         }
-        .table-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-        .table-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--text-primary); }
-        .table-subtitle { color: var(--text-muted); font-size: 0.9rem; margin-top: 4px; }
-        .table-wrapper { overflow-x: auto; border-radius: var(--radius-md); border: 1px solid var(--border-table); }
-        .stats-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; min-width: 900px; }
-        .stats-table thead { background: var(--bg-table-header); }
+        .table-header { margin-bottom: 22px; }
+        .table-title {
+            font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+            font-weight: 700; letter-spacing: -0.01em; color: var(--ink);
+        }
+        .table-subtitle { color: var(--ink-2); font-size: 0.9rem; margin-top: 5px; }
+        .table-wrapper { overflow-x: auto; overflow-y: hidden; border-radius: var(--r-md); border: 1px solid var(--line); }
+        .stats-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 900px; font-variant-numeric: tabular-nums; }
+        .stats-table thead { background: var(--table-head); }
         .stats-table thead th {
-            color: white; font-weight: 600; padding: 14px 12px; text-align: center;
-            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;
+            color: #fff; font-weight: 600; padding: 14px 12px; text-align: center;
+            font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap;
         }
-        .stats-table thead th:first-child { text-align: left; border-radius: var(--radius-md) 0 0 0; }
-        .stats-table thead th:last-child { border-radius: 0 var(--radius-md) 0 0; }
-        .stats-table tbody tr { transition: background 0.2s ease; }
-        .stats-table tbody tr:nth-child(even) { background: var(--bg-table-row-alt); }
-        .stats-table tbody tr:hover { background: var(--bg-table-row-hover); }
-        .stats-table tbody td { padding: 12px; text-align: center; border-bottom: 1px solid var(--border-table); color: var(--text-secondary); }
+        .stats-table thead th:first-child { text-align: left; }
+        .stats-table tbody tr { transition: background 0.18s ease; }
+        .stats-table tbody tr:nth-child(even) { background: var(--table-row-alt); }
+        .stats-table tbody tr:hover { background: var(--table-row-hover); }
+        .stats-table tbody td { padding: 12px; text-align: center; border-bottom: 1px solid var(--line); color: var(--ink-2); }
         .stats-table tbody td:first-child { text-align: left; }
         .stats-table tbody tr:last-child td { border-bottom: none; }
-        .club-cell { display: flex; align-items: center; gap: 10px; font-weight: 500; color: var(--text-primary); }
-        .club-badge {
-            width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; font-size: 0.7rem; font-weight: 700; color: white; flex-shrink: 0;
-        }
-        .club-badge.sporting { background: var(--sporting); }
-        .club-badge.manutd { background: var(--manutd); }
-        .club-badge.realmadrid { background: var(--realmadrid); }
-        .club-badge.juventus { background: var(--juventus); }
-        .club-badge.alnassr { background: var(--alnassr); color: #333; }
-        .club-badge.portugal { background: var(--portugal); }
-
-        .club-badge-img {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            object-fit: cover;
-            flex-shrink: 0;
-        }
+        .club-cell { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--ink); }
+        .club-badge-img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+        .season-cell { font-weight: 600; color: var(--ink); }
+        .league-cell { font-size: 0.84rem; color: var(--ink-3); }
+        .goals-cell { font-weight: 700; color: var(--brand-ink); }
+        .goals-cell.highlight { background: var(--brand-soft); border-radius: 6px; }
+        .total-row { background: var(--brand-soft) !important; }
+        .total-row td { color: var(--ink); font-weight: 600; border-top: 2px solid var(--brand); }
+        .total-row .total-label { font-weight: 700; color: var(--brand-ink); }
+        .career-total-row { background: var(--hero-grad) !important; }
+        .career-total-row td { color: #fff !important; font-weight: 700; border-top: none; }
+        .career-total-row .goals-cell { color: #fff; }
 
         /* Attribution tooltip */
-        .attribution {
-            display: inline;
-            position: relative;
-            cursor: help;
-            color: var(--text-muted);
-            font-size: 0.75rem;
-            text-decoration: none;
-        }
-
+        .attribution { position: relative; cursor: help; color: var(--ink-3); text-decoration: none; }
         .attribution:hover::after {
             content: "Club icons from vecteezy.com";
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--text-primary);
-            color: var(--bg-gradient-start);
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            white-space: nowrap;
-            z-index: 10;
-            margin-bottom: 4px;
+            position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+            background: var(--ink); color: var(--bg-start); padding: 6px 12px;
+            border-radius: 6px; font-size: 0.75rem; white-space: nowrap; z-index: 10; margin-bottom: 4px;
+            box-shadow: var(--shadow-md);
         }
-        .season-cell { font-weight: 500; color: var(--text-primary); }
-        .league-cell { font-size: 0.85rem; color: var(--text-muted); }
-        .goals-cell { font-weight: 600; color: var(--accent-primary); }
-        .goals-cell.highlight { background: rgba(59, 89, 152, 0.1); border-radius: 6px; padding: 4px 8px; }
-        .total-row { background: var(--bg-stat-section) !important; font-weight: 600; }
-        .total-row td { color: var(--text-primary); border-top: 2px solid var(--accent-primary); }
-        .total-row .total-label { font-weight: 700; color: var(--accent-primary); }
-        .career-total-row { background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)) !important; }
-        .career-total-row td { color: white !important; font-weight: 700; border-top: none; }
-        .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 30px; }
-        .summary-card {
-            background: var(--bg-card); backdrop-filter: blur(20px); border-radius: var(--radius-md);
-            padding: 20px; text-align: center; border: 1px solid var(--border-light); transition: all 0.2s ease;
-        }
-        .summary-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-soft); }
-        .summary-value { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2rem; font-weight: 800; color: var(--accent-primary); }
-        .summary-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+
+        /* ========== FOOTER ========== */
         .footer {
-            margin-top: 40px; padding: 28px; background: var(--bg-card); backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px); border-radius: var(--radius-lg); border: 1px solid var(--border-light);
-            text-align: center; box-shadow: var(--shadow-card);
+            margin-top: 32px; padding: 26px 30px;
+            background: var(--surface);
+            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--glass-border); border-radius: var(--r-lg);
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+            gap: 18px; box-shadow: var(--shadow-sm);
         }
-        .footer p { color: var(--text-muted); font-size: 0.875rem; }
-        .footer-links { display: flex; justify-content: center; gap: 28px; margin-top: 16px; }
+        .footer p { color: var(--ink-3); font-size: 0.85rem; }
+        .footer-links { display: flex; flex-wrap: wrap; gap: 24px; }
         .footer-links a {
-            color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500;
-            display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s ease;
+            display: inline-flex; align-items: center; gap: 8px; color: var(--ink-2);
+            text-decoration: none; font-size: 0.86rem; font-weight: 600; transition: color 0.2s ease;
         }
-        .footer-links a:hover { color: var(--accent-primary); }
-        .footer-links svg { width: 18px; height: 18px; }
-        .mobile-menu-btn {
-            display: none; position: fixed; top: 20px; left: 20px; width: 48px; height: 48px;
-            background: var(--bg-card); backdrop-filter: blur(20px); border: 1px solid var(--border-light);
-            border-radius: var(--radius-sm); z-index: 200; cursor: pointer; flex-direction: column;
-            align-items: center; justify-content: center; gap: 5px;
+        .footer-links a:hover { color: var(--brand-ink); }
+        .footer-links svg { width: 17px; height: 17px; }
+
+        /* ========== COOKIE BANNER ========== */
+        .cookie-banner {
+            position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%);
+            background: var(--surface-strong);
+            backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+            border: 1px solid var(--glass-border); border-radius: var(--r-lg);
+            padding: 18px 24px; box-shadow: var(--shadow-lg);
+            display: flex; align-items: center; gap: 18px; z-index: 1000;
+            max-width: 580px; width: calc(100% - 44px);
+            transition: transform 0.35s ease, opacity 0.35s ease;
         }
-        .mobile-menu-btn span { width: 22px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: all 0.3s ease; }
-        .mobile-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-        .mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
-        .mobile-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-        .sidebar-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); z-index: 90; opacity: 0; transition: opacity 0.3s ease; }
-        .sidebar-overlay.active { opacity: 1; }
+        .cookie-banner.hidden { transform: translateX(-50%) translateY(160%); opacity: 0; pointer-events: none; }
+        .cookie-text { flex: 1; font-size: 0.88rem; color: var(--ink-2); }
+        .cookie-text a { color: var(--brand-ink); font-weight: 600; }
+        .cookie-buttons { display: flex; gap: 10px; flex-shrink: 0; }
+        .cookie-btn { padding: 10px 20px; border-radius: 11px; font-size: 0.84rem; font-weight: 700; cursor: pointer; font-family: inherit; transition: all 0.2s ease; }
+        .cookie-accept { background: var(--brand); color: #fff; border: none; }
+        .cookie-accept:hover { filter: brightness(1.08); }
+        .cookie-reject { background: transparent; color: var(--ink-2); border: 1px solid var(--line-strong); }
+        .cookie-reject:hover { background: rgba(0,0,0,0.04); }
+
+        /* ========== MOBILE MENU ========== */
+        .mobile-btn {
+            display: none; position: fixed; top: 18px; left: 18px; width: 48px; height: 48px;
+            background: var(--surface-strong);
+            backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--glass-border); border-radius: 14px; z-index: 200; cursor: pointer;
+            flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+        }
+        .mobile-btn span { width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: all 0.3s ease; }
+        .mobile-btn.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .mobile-btn.active span:nth-child(2) { opacity: 0; }
+        .mobile-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+        .overlay { display: none; position: fixed; inset: 0; background: rgba(8, 14, 24, 0.5); z-index: 90; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        .overlay.active { opacity: 1; pointer-events: auto; }
+
+        /* ========== LOAD MOTION ========== */
+        .reveal { opacity: 0; transform: translateY(16px); animation: rise 0.6s cubic-bezier(.2,.7,.2,1) forwards; }
+        @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+        @media (prefers-reduced-motion: reduce) {
+            * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+            .reveal { opacity: 1 !important; transform: none !important; }
+        }
+
+        /* ========== RESPONSIVE ========== */
         @media (max-width: 1200px) { .summary-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) {
-            .mobile-menu-btn { display: flex; }
-            .sidebar-overlay { display: block; }
-            .sidebar { transform: translateX(-100%); width: var(--sidebar-expanded); padding: 80px 16px 20px; }
+            .mobile-btn { display: flex; }
+            .overlay { display: block; }
+            .sidebar { transform: translateX(-100%); width: var(--sidebar-expanded); padding: 84px 16px 22px; align-items: stretch; }
             .sidebar.active { transform: translateX(0); }
-            .sidebar .nav-item { width: 100%; justify-content: flex-start; padding-left: 16px; gap: 12px; }
-            .sidebar .nav-item .nav-label { position: static; opacity: 1; background: transparent; color: var(--text-primary); padding: 0; }
-            .sidebar .theme-toggle { width: 100%; justify-content: flex-start; padding-left: 16px; gap: 12px; }
-            .main-content { margin-left: 0; padding: 80px 16px 20px; }
-            .page-header { flex-direction: column; gap: 16px; }
-            .page-title { font-size: 1.5rem; }
-            .table-card { padding: 16px; }
-            .table-title { font-size: 1.2rem; }
+            .sidebar-logo { margin: 0 auto 26px; }
+            .nav-item { width: 100%; justify-content: flex-start; padding-left: 14px; gap: 14px; }
+            .nav-item.active::before { display: none; }
+            .nav-label { position: static; opacity: 1; transform: none; background: transparent; color: var(--ink); box-shadow: none; padding: 0; }
+            .theme-toggle { width: 100%; justify-content: flex-start; padding-left: 14px; gap: 14px; }
+            .main { margin-left: 0; padding: 84px 18px 40px; }
             .summary-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
             .summary-card { padding: 16px; }
-            .summary-value { font-size: 1.5rem; }
+            .table-card { padding: 18px 16px; }
             .stats-table { font-size: 0.8rem; }
-            .stats-table thead th { padding: 10px 8px; font-size: 0.7rem; }
+            .stats-table thead th { padding: 10px 8px; font-size: 0.68rem; }
             .stats-table tbody td { padding: 10px 8px; }
-            .club-badge { width: 24px; height: 24px; font-size: 0.6rem; }
             .club-badge-img { width: 24px; height: 24px; }
-            .footer { padding: 20px; }
-            .footer-links { flex-direction: column; gap: 12px; }
+            .footer { flex-direction: column; align-items: flex-start; padding: 22px; }
+            .cookie-banner { flex-direction: column; text-align: center; }
+            .cookie-buttons { width: 100%; justify-content: center; }
         }
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <button class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></button>
-        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="app">
+        <!-- Mobile menu -->
+        <button class="mobile-btn" id="mobileBtn" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="overlay" id="overlay"></div>
+
+        <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
-            <a href="index.html" class="sidebar-logo">CR7</a>
-            <nav class="sidebar-nav">
+            <a href="index.html" class="sidebar-logo" aria-label="Home">CR7</a>
+            <nav class="sidebar-nav" aria-label="Primary">
                 <a href="index.html" class="nav-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                     <span class="nav-label">Home</span>
                 </a>
                 <a href="goalsbyyear.html" class="nav-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
                     <span class="nav-label">Goals by Year</span>
                 </a>
-                <a href="goalsbyseason.html" class="nav-item active">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                <a href="goalsbyseason.html" class="nav-item active" aria-current="page">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
                     <span class="nav-label">Goals by Season</span>
                 </a>
                 <a href="achievements.html" class="nav-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
                     <span class="nav-label">Achievements</span>
                 </a>
-              
             </nav>
             <div class="sidebar-footer">
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                    <span class="nav-label">Toggle Theme</span>
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="nav-label">Toggle theme</span>
                 </button>
             </div>
         </aside>
-        <main class="main-content">
-            <header class="page-header">
-                <div>
-                    <h1 class="page-title">Goals by Season</h1>
-                    <p class="page-subtitle">Complete season-by-season breakdown for clubs and national team</p>
-                </div>
-                <a href="index.html" class="back-btn">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                    Back to Stats
-                </a>
-            </header>
-            <div class="summary-grid">
-                <div class="summary-card"><div class="summary-value">830</div><div class="summary-label">Club Goals</div></div>
-                <div class="summary-card"><div class="summary-value">143</div><div class="summary-label">International Goals</div></div>
-                <div class="summary-card"><div class="summary-value">1,099</div><div class="summary-label">Club Appearances</div></div>
-                <div class="summary-card"><div class="summary-value">227</div><div class="summary-label">International Caps</div></div>
-            </div>
-            <section class="table-card">
-                <div class="table-header">
-                    <div>
-                        <h2 class="table-title">Club Statistics</h2>
-                        <p class="table-subtitle">Season-by-season performance at club level</p>
+
+        <!-- Main -->
+        <main class="main">
+            <header class="page-head reveal" style="animation-delay:.02s">
+                <div class="page-head-main">
+                    <span class="eyebrow">Goals by season</span>
+                    <h1 class="page-title">Cristiano Ronaldo goals by season</h1>
+                    <p class="page-sub">A full season by season breakdown at club level, plus year by year for Portugal.</p>
+                    <div style="margin-top:16px">
+                        <span class="updated-badge"><span class="dot"></span> Updated June 2026</span>
                     </div>
                 </div>
-                <div class="table-wrapper">
-                    <table class="stats-table">
+                <a href="index.html" class="back-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    Back to stats
+                </a>
+            </header>
+
+            <div class="summary-grid reveal" style="animation-delay:.06s">
+                <div class="summary-card"><div class="summary-value">830</div><div class="summary-label">Club goals</div></div>
+                <div class="summary-card"><div class="summary-value">143</div><div class="summary-label">International goals</div></div>
+                <div class="summary-card"><div class="summary-value">1,099</div><div class="summary-label">Club appearances</div></div>
+                <div class="summary-card"><div class="summary-value">227</div><div class="summary-label">International caps</div></div>
+            </div>
+
+            <section class="table-card reveal" style="animation-delay:.10s">
+                <div class="table-header">
+                    <h2 class="table-title">Club statistics</h2>
+                    <p class="table-subtitle">Season by season performance at club level</p>
+                </div>
                 <div class="table-wrapper">
                     <table class="stats-table">
                         <thead>
@@ -341,49 +493,48 @@
                             <tr><th></th><th></th><th></th><th>Apps</th><th>Goals</th><th>Apps</th><th>Goals</th><th>Apps</th><th>Goals</th><th>Apps</th><th>Goals</th><th>Apps</th><th>Goals</th><th>Apps</th><th>Goals</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td><div class="club-cell"><img src="sporting.png" alt="Sporting CP" class="club-badge-img">Sporting CP B</div></td><td class="season-cell">2002–03</td><td class="league-cell">Segunda Divisão B</td><td>2</td><td class="goals-cell">0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>2</td><td class="goals-cell">0</td></tr>
-                            <tr><td><div class="club-cell"><img src="sporting.png" alt="Sporting CP" class="club-badge-img">Sporting CP</div></td><td class="season-cell">2002–03</td><td class="league-cell">Primeira Liga</td><td>25</td><td class="goals-cell">3</td><td>3</td><td>2</td><td>—</td><td>—</td><td>3</td><td>0</td><td>0</td><td>0</td><td>31</td><td class="goals-cell">5</td></tr>
-                            <tr><td><div class="club-cell"><img src="manchesterunited.jpg" alt="Manchester United" class="club-badge-img">Manchester United</div></td><td class="season-cell">2003–04</td><td class="league-cell">Premier League</td><td>29</td><td class="goals-cell">4</td><td>5</td><td>2</td><td>1</td><td>0</td><td>5</td><td>0</td><td>0</td><td>0</td><td>40</td><td class="goals-cell">6</td></tr>
-                            <tr><td><div class="club-cell"><img src="manchesterunited.jpg" alt="Manchester United" class="club-badge-img">Manchester United</div></td><td class="season-cell">2004–05</td><td class="league-cell">Premier League</td><td>33</td><td class="goals-cell">5</td><td>7</td><td>4</td><td>2</td><td>0</td><td>8</td><td>0</td><td>0</td><td>0</td><td>50</td><td class="goals-cell">9</td></tr>
-                            <tr><td><div class="club-cell"><img src="manchesterunited.jpg" alt="Manchester United" class="club-badge-img">Manchester United</div></td><td class="season-cell">2005–06</td><td class="league-cell">Premier League</td><td>33</td><td class="goals-cell">9</td><td>2</td><td>0</td><td>4</td><td>2</td><td>8</td><td>1</td><td>—</td><td>—</td><td>47</td><td class="goals-cell">12</td></tr>
-                            <tr><td><div class="club-cell"><img src="manchesterunited.jpg" alt="Manchester United" class="club-badge-img">Manchester United</div></td><td class="season-cell">2006–07</td><td class="league-cell">Premier League</td><td>34</td><td class="goals-cell">17</td><td>7</td><td>3</td><td>1</td><td>0</td><td>11</td><td>3</td><td>—</td><td>—</td><td>53</td><td class="goals-cell">23</td></tr>
-                            <tr><td><div class="club-cell"><img src="manchesterunited.jpg" alt="Manchester United" class="club-badge-img">Manchester United</div></td><td class="season-cell">2007–08</td><td class="league-cell">Premier League</td><td>34</td><td class="goals-cell highlight">31</td><td>3</td><td>3</td><td>0</td><td>0</td><td>11</td><td>8</td><td>1</td><td>0</td><td>49</td><td class="goals-cell">42</td></tr>
-                            <tr><td><div class="club-cell"><img src="manchesterunited.jpg" alt="Manchester United" class="club-badge-img">Manchester United</div></td><td class="season-cell">2008–09</td><td class="league-cell">Premier League</td><td>33</td><td class="goals-cell">18</td><td>2</td><td>1</td><td>4</td><td>2</td><td>12</td><td>4</td><td>2</td><td>1</td><td>53</td><td class="goals-cell">26</td></tr>
-                            <tr class="total-row"><td colspan="2"><span class="total-label">Manchester United Total (2003-09)</span></td><td></td><td>196</td><td class="goals-cell">84</td><td>26</td><td>13</td><td>12</td><td>4</td><td>55</td><td>16</td><td>3</td><td>1</td><td>292</td><td class="goals-cell">118</td></tr>
-                            <tr><td><div class="club-cell"><img src="realmadrid.jpg" alt="Real Madrid" class="club-badge-img">Real Madrid</div></td><td class="season-cell">2009–10</td><td class="league-cell">La Liga</td><td>29</td><td class="goals-cell">26</td><td>0</td><td>0</td><td>—</td><td>—</td><td>6</td><td>7</td><td>—</td><td>—</td><td>35</td><td class="goals-cell">33</td></tr>
-                            <tr><td><div class="club-cell"><img src="realmadrid.jpg" alt="Real Madrid" class="club-badge-img">Real Madrid</div></td><td class="season-cell">2010–11</td><td class="league-cell">La Liga</td><td>34</td><td class="goals-cell highlight">40</td><td>8</td><td>7</td><td>—</td><td>—</td><td>12</td><td>6</td><td>—</td><td>—</td><td>54</td><td class="goals-cell">53</td></tr>
-                            <tr><td><div class="club-cell"><img src="realmadrid.jpg" alt="Real Madrid" class="club-badge-img">Real Madrid</div></td><td class="season-cell">2011–12</td><td class="league-cell">La Liga</td><td>38</td><td class="goals-cell highlight">46</td><td>5</td><td>3</td><td>—</td><td>—</td><td>10</td><td>10</td><td>2</td><td>1</td><td>55</td><td class="goals-cell">60</td></tr>
-                            <tr><td><div class="club-cell"><img src="realmadrid.jpg" alt="Real Madrid" class="club-badge-img">Real Madrid</div></td><td class="season-cell">2012–13</td><td class="league-cell">La Liga</td><td>34</td><td class="goals-cell">34</td><td>7</td><td>7</td><td>—</td><td>—</td><td>12</td><td>12</td><td>2</td><td>2</td><td>55</td><td class="goals-cell">55</td></tr>
-                            <tr><td><div class="club-cell"><img src="realmadrid.jpg" alt="Real Madrid" class="club-badge-img">Real Madrid</div></td><td class="season-cell">2013–14</td><td class="league-cell">La Liga</td><td>30</td><td class="goals-cell">31</td><td>6</td><td>3</td><td>—</td><td>—</td><td>11</td><td>17</td><td>—</td><td>—</td><td>47</td><td class="goals-cell">51</td></tr>
-                            <tr><td><div class="club-cell"><img src="realmadrid.jpg" alt="Real Madrid" class="club-badge-img">Real Madrid</div></td><td class="season-cell">2014–15</td><td class="league-cell">La Liga</td><td>35</td><td class="goals-cell highlight">48</td><td>2</td><td>1</td><td>—</td><td>—</td><td>12</td><td>10</td><td>5</td><td>2</td><td>54</td><td class="goals-cell">61</td></tr>
-                            <tr><td><div class="club-cell"><img src="realmadrid.jpg" alt="Real Madrid" class="club-badge-img">Real Madrid</div></td><td class="season-cell">2015–16</td><td class="league-cell">La Liga</td><td>36</td><td class="goals-cell">35</td><td>0</td><td>0</td><td>—</td><td>—</td><td>12</td><td>16</td><td>—</td><td>—</td><td>48</td><td class="goals-cell">51</td></tr>
-                            <tr><td><div class="club-cell"><img src="realmadrid.jpg" alt="Real Madrid" class="club-badge-img">Real Madrid</div></td><td class="season-cell">2016–17</td><td class="league-cell">La Liga</td><td>29</td><td class="goals-cell">25</td><td>2</td><td>1</td><td>—</td><td>—</td><td>13</td><td>12</td><td>2</td><td>4</td><td>46</td><td class="goals-cell">42</td></tr>
-                            <tr><td><div class="club-cell"><img src="realmadrid.jpg" alt="Real Madrid" class="club-badge-img">Real Madrid</div></td><td class="season-cell">2017–18</td><td class="league-cell">La Liga</td><td>27</td><td class="goals-cell">26</td><td>0</td><td>0</td><td>—</td><td>—</td><td>13</td><td>15</td><td>4</td><td>3</td><td>44</td><td class="goals-cell">44</td></tr>
-                            <tr class="total-row"><td colspan="2"><span class="total-label">Real Madrid Total (2009-18)</span></td><td></td><td>292</td><td class="goals-cell">311</td><td>30</td><td>22</td><td>0</td><td>0</td><td>101</td><td>105</td><td>15</td><td>12</td><td>438</td><td class="goals-cell">450</td></tr>
-                            <tr><td><div class="club-cell"><img src="juventus.jpg" alt="Juventus" class="club-badge-img">Juventus</div></td><td class="season-cell">2018–19</td><td class="league-cell">Serie A</td><td>31</td><td class="goals-cell">21</td><td>2</td><td>0</td><td>—</td><td>—</td><td>9</td><td>6</td><td>1</td><td>1</td><td>43</td><td class="goals-cell">28</td></tr>
-                            <tr><td><div class="club-cell"><img src="juventus.jpg" alt="Juventus" class="club-badge-img">Juventus</div></td><td class="season-cell">2019–20</td><td class="league-cell">Serie A</td><td>33</td><td class="goals-cell">31</td><td>4</td><td>2</td><td>—</td><td>—</td><td>8</td><td>4</td><td>1</td><td>0</td><td>46</td><td class="goals-cell">37</td></tr>
-                            <tr><td><div class="club-cell"><img src="juventus.jpg" alt="Juventus" class="club-badge-img">Juventus</div></td><td class="season-cell">2020–21</td><td class="league-cell">Serie A</td><td>33</td><td class="goals-cell">29</td><td>4</td><td>2</td><td>—</td><td>—</td><td>6</td><td>4</td><td>1</td><td>1</td><td>44</td><td class="goals-cell">36</td></tr>
-                            <tr><td><div class="club-cell"><img src="juventus.jpg" alt="Juventus" class="club-badge-img">Juventus</div></td><td class="season-cell">2021–22</td><td class="league-cell">Serie A</td><td>1</td><td class="goals-cell">0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>1</td><td class="goals-cell">0</td></tr>
-                            <tr class="total-row"><td colspan="2"><span class="total-label">Juventus Total (2018-21)</span></td><td></td><td>98</td><td class="goals-cell">81</td><td>10</td><td>4</td><td>0</td><td>0</td><td>23</td><td>14</td><td>3</td><td>2</td><td>134</td><td class="goals-cell">101</td></tr>
-                            <tr><td><div class="club-cell"><img src="manchesterunited.jpg" alt="Manchester United" class="club-badge-img">Manchester United</div></td><td class="season-cell">2021–22</td><td class="league-cell">Premier League</td><td>30</td><td class="goals-cell">18</td><td>1</td><td>0</td><td>0</td><td>0</td><td>7</td><td>6</td><td>—</td><td>—</td><td>38</td><td class="goals-cell">24</td></tr>
-                            <tr><td><div class="club-cell"><img src="manchesterunited.jpg" alt="Manchester United" class="club-badge-img">Manchester United</div></td><td class="season-cell">2022–23</td><td class="league-cell">Premier League</td><td>10</td><td class="goals-cell">1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>6</td><td>2</td><td>—</td><td>—</td><td>16</td><td class="goals-cell">3</td></tr>
-                            <tr class="total-row"><td colspan="2"><span class="total-label">Manchester United Total (2021-22)</span></td><td></td><td>40</td><td class="goals-cell">19</td><td>1</td><td>0</td><td>0</td><td>0</td><td>13</td><td>8</td><td>0</td><td>0</td><td>54</td><td class="goals-cell">27</td></tr>
-                            <tr><td><div class="club-cell"><img src="alnassr.png" alt="Al-Nassr" class="club-badge-img">Al-Nassr</div></td><td class="season-cell">2022–23</td><td class="league-cell">Saudi Pro League</td><td>16</td><td class="goals-cell">14</td><td>2</td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>1</td><td>0</td><td>19</td><td class="goals-cell">14</td></tr>
-                            <tr><td><div class="club-cell"><img src="alnassr.png" alt="Al-Nassr" class="club-badge-img">Al-Nassr</div></td><td class="season-cell">2023–24</td><td class="league-cell">Saudi Pro League</td><td>31</td><td class="goals-cell highlight">35</td><td>4</td><td>3</td><td>—</td><td>—</td><td>9</td><td>6</td><td>7</td><td>6</td><td>51</td><td class="goals-cell">50</td></tr>
-                            <tr><td><div class="club-cell"><img src="alnassr.png" alt="Al-Nassr" class="club-badge-img">Al-Nassr</div></td><td class="season-cell">2024–25</td><td class="league-cell">Saudi Pro League</td><td>30</td><td class="goals-cell">25</td><td>1</td><td>0</td><td>—</td><td>—</td><td>8</td><td>8</td><td>2</td><td>2</td><td>41</td><td class="goals-cell">35</td></tr>
-                            <tr><td><div class="club-cell"><img src="alnassr.png" alt="Al-Nassr" class="club-badge-img">Al-Nassr</div></td><td class="season-cell">2025–26</td><td class="league-cell">Saudi Pro League</td><td>30</td><td class="goals-cell">28</td><td>1</td><td>0</td><td>—</td><td>—</td><td>4</td><td>1</td><td>2</td><td>1</td><td>37</td><td class="goals-cell">30</td></tr>
-                            <tr class="total-row"><td colspan="2"><span class="total-label">Al-Nassr Total (2022-present)</span></td><td></td><td>107</td><td class="goals-cell">102</td><td>8</td><td>3</td><td>0</td><td>0</td><td>21</td><td>15</td><td>12</td><td>9</td><td>148</td><td class="goals-cell">129</td></tr>
-                            <tr class="career-total-row"><td colspan="2"><strong>Career Total</strong></td><td></td><td>760</td><td>600</td><td>78</td><td>44</td><td>12</td><td>4</td><td>216</td><td>158</td><td>33</td><td>24</td><td>1,099</td><td>830</td></tr>
+                            <tr><td><div class="club-cell"><img src="sporting.png" alt="Sporting CP" class="club-badge-img">Sporting CP B</div></td><td class="season-cell">2002/03</td><td class="league-cell">Segunda Divisão B</td><td>2</td><td class="goals-cell">0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>2</td><td class="goals-cell">0</td></tr>
+                            <tr><td><div class="club-cell"><img src="sporting.png" alt="Sporting CP" class="club-badge-img">Sporting CP</div></td><td class="season-cell">2002/03</td><td class="league-cell">Primeira Liga</td><td>25</td><td class="goals-cell">3</td><td>3</td><td>2</td><td>—</td><td>—</td><td>3</td><td>0</td><td>0</td><td>0</td><td>31</td><td class="goals-cell">5</td></tr>
+                            <tr><td><div class="club-cell"><img src="manchesterunited.jpg" alt="Manchester United" class="club-badge-img">Manchester United</div></td><td class="season-cell">2003/04</td><td class="league-cell">Premier League</td><td>29</td><td class="goals-cell">4</td><td>5</td><td>2</td><td>1</td><td>0</td><td>5</td><td>0</td><td>0</td><td>0</td><td>40</td><td class="goals-cell">6</td></tr>
+                            <tr><td><div class="club-cell"><img src="manchesterunited.jpg" alt="Manchester United" class="club-badge-img">Manchester United</div></td><td class="season-cell">2004/05</td><td class="league-cell">Premier League</td><td>33</td><td class="goals-cell">5</td><td>7</td><td>4</td><td>2</td><td>0</td><td>8</td><td>0</td><td>0</td><td>0</td><td>50</td><td class="goals-cell">9</td></tr>
+                            <tr><td><div class="club-cell"><img src="manchesterunited.jpg" alt="Manchester United" class="club-badge-img">Manchester United</div></td><td class="season-cell">2005/06</td><td class="league-cell">Premier League</td><td>33</td><td class="goals-cell">9</td><td>2</td><td>0</td><td>4</td><td>2</td><td>8</td><td>1</td><td>—</td><td>—</td><td>47</td><td class="goals-cell">12</td></tr>
+                            <tr><td><div class="club-cell"><img src="manchesterunited.jpg" alt="Manchester United" class="club-badge-img">Manchester United</div></td><td class="season-cell">2006/07</td><td class="league-cell">Premier League</td><td>34</td><td class="goals-cell">17</td><td>7</td><td>3</td><td>1</td><td>0</td><td>11</td><td>3</td><td>—</td><td>—</td><td>53</td><td class="goals-cell">23</td></tr>
+                            <tr><td><div class="club-cell"><img src="manchesterunited.jpg" alt="Manchester United" class="club-badge-img">Manchester United</div></td><td class="season-cell">2007/08</td><td class="league-cell">Premier League</td><td>34</td><td class="goals-cell highlight">31</td><td>3</td><td>3</td><td>0</td><td>0</td><td>11</td><td>8</td><td>1</td><td>0</td><td>49</td><td class="goals-cell">42</td></tr>
+                            <tr><td><div class="club-cell"><img src="manchesterunited.jpg" alt="Manchester United" class="club-badge-img">Manchester United</div></td><td class="season-cell">2008/09</td><td class="league-cell">Premier League</td><td>33</td><td class="goals-cell">18</td><td>2</td><td>1</td><td>4</td><td>2</td><td>12</td><td>4</td><td>2</td><td>1</td><td>53</td><td class="goals-cell">26</td></tr>
+                            <tr class="total-row"><td colspan="2"><span class="total-label">Manchester United total (2003 to 2009)</span></td><td></td><td>196</td><td class="goals-cell">84</td><td>26</td><td>13</td><td>12</td><td>4</td><td>55</td><td>16</td><td>3</td><td>1</td><td>292</td><td class="goals-cell">118</td></tr>
+                            <tr><td><div class="club-cell"><img src="realmadrid.jpg" alt="Real Madrid" class="club-badge-img">Real Madrid</div></td><td class="season-cell">2009/10</td><td class="league-cell">La Liga</td><td>29</td><td class="goals-cell">26</td><td>0</td><td>0</td><td>—</td><td>—</td><td>6</td><td>7</td><td>—</td><td>—</td><td>35</td><td class="goals-cell">33</td></tr>
+                            <tr><td><div class="club-cell"><img src="realmadrid.jpg" alt="Real Madrid" class="club-badge-img">Real Madrid</div></td><td class="season-cell">2010/11</td><td class="league-cell">La Liga</td><td>34</td><td class="goals-cell highlight">40</td><td>8</td><td>7</td><td>—</td><td>—</td><td>12</td><td>6</td><td>—</td><td>—</td><td>54</td><td class="goals-cell">53</td></tr>
+                            <tr><td><div class="club-cell"><img src="realmadrid.jpg" alt="Real Madrid" class="club-badge-img">Real Madrid</div></td><td class="season-cell">2011/12</td><td class="league-cell">La Liga</td><td>38</td><td class="goals-cell highlight">46</td><td>5</td><td>3</td><td>—</td><td>—</td><td>10</td><td>10</td><td>2</td><td>1</td><td>55</td><td class="goals-cell">60</td></tr>
+                            <tr><td><div class="club-cell"><img src="realmadrid.jpg" alt="Real Madrid" class="club-badge-img">Real Madrid</div></td><td class="season-cell">2012/13</td><td class="league-cell">La Liga</td><td>34</td><td class="goals-cell">34</td><td>7</td><td>7</td><td>—</td><td>—</td><td>12</td><td>12</td><td>2</td><td>2</td><td>55</td><td class="goals-cell">55</td></tr>
+                            <tr><td><div class="club-cell"><img src="realmadrid.jpg" alt="Real Madrid" class="club-badge-img">Real Madrid</div></td><td class="season-cell">2013/14</td><td class="league-cell">La Liga</td><td>30</td><td class="goals-cell">31</td><td>6</td><td>3</td><td>—</td><td>—</td><td>11</td><td>17</td><td>—</td><td>—</td><td>47</td><td class="goals-cell">51</td></tr>
+                            <tr><td><div class="club-cell"><img src="realmadrid.jpg" alt="Real Madrid" class="club-badge-img">Real Madrid</div></td><td class="season-cell">2014/15</td><td class="league-cell">La Liga</td><td>35</td><td class="goals-cell highlight">48</td><td>2</td><td>1</td><td>—</td><td>—</td><td>12</td><td>10</td><td>5</td><td>2</td><td>54</td><td class="goals-cell">61</td></tr>
+                            <tr><td><div class="club-cell"><img src="realmadrid.jpg" alt="Real Madrid" class="club-badge-img">Real Madrid</div></td><td class="season-cell">2015/16</td><td class="league-cell">La Liga</td><td>36</td><td class="goals-cell">35</td><td>0</td><td>0</td><td>—</td><td>—</td><td>12</td><td>16</td><td>—</td><td>—</td><td>48</td><td class="goals-cell">51</td></tr>
+                            <tr><td><div class="club-cell"><img src="realmadrid.jpg" alt="Real Madrid" class="club-badge-img">Real Madrid</div></td><td class="season-cell">2016/17</td><td class="league-cell">La Liga</td><td>29</td><td class="goals-cell">25</td><td>2</td><td>1</td><td>—</td><td>—</td><td>13</td><td>12</td><td>2</td><td>4</td><td>46</td><td class="goals-cell">42</td></tr>
+                            <tr><td><div class="club-cell"><img src="realmadrid.jpg" alt="Real Madrid" class="club-badge-img">Real Madrid</div></td><td class="season-cell">2017/18</td><td class="league-cell">La Liga</td><td>27</td><td class="goals-cell">26</td><td>0</td><td>0</td><td>—</td><td>—</td><td>13</td><td>15</td><td>4</td><td>3</td><td>44</td><td class="goals-cell">44</td></tr>
+                            <tr class="total-row"><td colspan="2"><span class="total-label">Real Madrid total (2009 to 2018)</span></td><td></td><td>292</td><td class="goals-cell">311</td><td>30</td><td>22</td><td>0</td><td>0</td><td>101</td><td>105</td><td>15</td><td>12</td><td>438</td><td class="goals-cell">450</td></tr>
+                            <tr><td><div class="club-cell"><img src="juventus.jpg" alt="Juventus" class="club-badge-img">Juventus</div></td><td class="season-cell">2018/19</td><td class="league-cell">Serie A</td><td>31</td><td class="goals-cell">21</td><td>2</td><td>0</td><td>—</td><td>—</td><td>9</td><td>6</td><td>1</td><td>1</td><td>43</td><td class="goals-cell">28</td></tr>
+                            <tr><td><div class="club-cell"><img src="juventus.jpg" alt="Juventus" class="club-badge-img">Juventus</div></td><td class="season-cell">2019/20</td><td class="league-cell">Serie A</td><td>33</td><td class="goals-cell">31</td><td>4</td><td>2</td><td>—</td><td>—</td><td>8</td><td>4</td><td>1</td><td>0</td><td>46</td><td class="goals-cell">37</td></tr>
+                            <tr><td><div class="club-cell"><img src="juventus.jpg" alt="Juventus" class="club-badge-img">Juventus</div></td><td class="season-cell">2020/21</td><td class="league-cell">Serie A</td><td>33</td><td class="goals-cell">29</td><td>4</td><td>2</td><td>—</td><td>—</td><td>6</td><td>4</td><td>1</td><td>1</td><td>44</td><td class="goals-cell">36</td></tr>
+                            <tr><td><div class="club-cell"><img src="juventus.jpg" alt="Juventus" class="club-badge-img">Juventus</div></td><td class="season-cell">2021/22</td><td class="league-cell">Serie A</td><td>1</td><td class="goals-cell">0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>1</td><td class="goals-cell">0</td></tr>
+                            <tr class="total-row"><td colspan="2"><span class="total-label">Juventus total (2018 to 2021)</span></td><td></td><td>98</td><td class="goals-cell">81</td><td>10</td><td>4</td><td>0</td><td>0</td><td>23</td><td>14</td><td>3</td><td>2</td><td>134</td><td class="goals-cell">101</td></tr>
+                            <tr><td><div class="club-cell"><img src="manchesterunited.jpg" alt="Manchester United" class="club-badge-img">Manchester United</div></td><td class="season-cell">2021/22</td><td class="league-cell">Premier League</td><td>30</td><td class="goals-cell">18</td><td>1</td><td>0</td><td>0</td><td>0</td><td>7</td><td>6</td><td>—</td><td>—</td><td>38</td><td class="goals-cell">24</td></tr>
+                            <tr><td><div class="club-cell"><img src="manchesterunited.jpg" alt="Manchester United" class="club-badge-img">Manchester United</div></td><td class="season-cell">2022/23</td><td class="league-cell">Premier League</td><td>10</td><td class="goals-cell">1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>6</td><td>2</td><td>—</td><td>—</td><td>16</td><td class="goals-cell">3</td></tr>
+                            <tr class="total-row"><td colspan="2"><span class="total-label">Manchester United total (2021 to 2022)</span></td><td></td><td>40</td><td class="goals-cell">19</td><td>1</td><td>0</td><td>0</td><td>0</td><td>13</td><td>8</td><td>0</td><td>0</td><td>54</td><td class="goals-cell">27</td></tr>
+                            <tr><td><div class="club-cell"><img src="alnassr.png" alt="Al Nassr" class="club-badge-img">Al Nassr</div></td><td class="season-cell">2022/23</td><td class="league-cell">Saudi Pro League</td><td>16</td><td class="goals-cell">14</td><td>2</td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>1</td><td>0</td><td>19</td><td class="goals-cell">14</td></tr>
+                            <tr><td><div class="club-cell"><img src="alnassr.png" alt="Al Nassr" class="club-badge-img">Al Nassr</div></td><td class="season-cell">2023/24</td><td class="league-cell">Saudi Pro League</td><td>31</td><td class="goals-cell highlight">35</td><td>4</td><td>3</td><td>—</td><td>—</td><td>9</td><td>6</td><td>7</td><td>6</td><td>51</td><td class="goals-cell">50</td></tr>
+                            <tr><td><div class="club-cell"><img src="alnassr.png" alt="Al Nassr" class="club-badge-img">Al Nassr</div></td><td class="season-cell">2024/25</td><td class="league-cell">Saudi Pro League</td><td>30</td><td class="goals-cell">25</td><td>1</td><td>0</td><td>—</td><td>—</td><td>8</td><td>8</td><td>2</td><td>2</td><td>41</td><td class="goals-cell">35</td></tr>
+                            <tr><td><div class="club-cell"><img src="alnassr.png" alt="Al Nassr" class="club-badge-img">Al Nassr</div></td><td class="season-cell">2025/26</td><td class="league-cell">Saudi Pro League</td><td>30</td><td class="goals-cell">28</td><td>1</td><td>0</td><td>—</td><td>—</td><td>4</td><td>1</td><td>2</td><td>1</td><td>37</td><td class="goals-cell">30</td></tr>
+                            <tr class="total-row"><td colspan="2"><span class="total-label">Al Nassr total (2022 to present)</span></td><td></td><td>107</td><td class="goals-cell">102</td><td>8</td><td>3</td><td>0</td><td>0</td><td>21</td><td>15</td><td>12</td><td>9</td><td>148</td><td class="goals-cell">129</td></tr>
+                            <tr class="career-total-row"><td colspan="2"><strong>Career total</strong></td><td></td><td>760</td><td>600</td><td>78</td><td>44</td><td>12</td><td>4</td><td>216</td><td>158</td><td>33</td><td>24</td><td>1,099</td><td>830</td></tr>
                         </tbody>
                     </table>
                 </div>
             </section>
-            <section class="table-card">
+
+            <section class="table-card reveal" style="animation-delay:.14s">
                 <div class="table-header">
-                    <div>
-                        <h2 class="table-title">National Team Statistics</h2>
-                        <p class="table-subtitle">Year-by-year performance for Portugal</p>
-                    </div>
+                    <h2 class="table-title">National team statistics</h2>
+                    <p class="table-subtitle">Year by year performance for Portugal</p>
                 </div>
                 <div class="table-wrapper">
                     <table class="stats-table" style="min-width: 700px;">
@@ -395,11 +546,11 @@
                             <tr><td><div class="club-cell"><img src="portugal.png" alt="Portugal" class="club-badge-img">Portugal U15</div></td><td class="season-cell">2001</td><td>2</td><td class="goals-cell">1</td><td>7</td><td>6</td><td>9</td><td class="goals-cell">7</td></tr>
                             <tr><td><div class="club-cell"><img src="portugal.png" alt="Portugal" class="club-badge-img">Portugal U17</div></td><td class="season-cell">2001</td><td>—</td><td>—</td><td>3</td><td>2</td><td>3</td><td class="goals-cell">2</td></tr>
                             <tr><td><div class="club-cell"><img src="portugal.png" alt="Portugal" class="club-badge-img">Portugal U17</div></td><td class="season-cell">2002</td><td>4</td><td class="goals-cell">3</td><td>—</td><td>—</td><td>4</td><td class="goals-cell">3</td></tr>
-                            <tr class="total-row"><td colspan="2"><span class="total-label">Portugal U17 Total</span></td><td>4</td><td class="goals-cell">3</td><td>3</td><td>2</td><td>7</td><td class="goals-cell">5</td></tr>
+                            <tr class="total-row"><td colspan="2"><span class="total-label">Portugal U17 total</span></td><td>4</td><td class="goals-cell">3</td><td>3</td><td>2</td><td>7</td><td class="goals-cell">5</td></tr>
                             <tr><td><div class="club-cell"><img src="portugal.png" alt="Portugal" class="club-badge-img">Portugal U20</div></td><td class="season-cell">2003</td><td>—</td><td>—</td><td>5</td><td>1</td><td>5</td><td class="goals-cell">1</td></tr>
                             <tr><td><div class="club-cell"><img src="portugal.png" alt="Portugal" class="club-badge-img">Portugal U21</div></td><td class="season-cell">2002</td><td>0</td><td class="goals-cell">0</td><td>1</td><td>1</td><td>1</td><td class="goals-cell">1</td></tr>
                             <tr><td><div class="club-cell"><img src="portugal.png" alt="Portugal" class="club-badge-img">Portugal U21</div></td><td class="season-cell">2003</td><td>7</td><td class="goals-cell">2</td><td>2</td><td>0</td><td>9</td><td class="goals-cell">2</td></tr>
-                            <tr class="total-row"><td colspan="2"><span class="total-label">Portugal U21 Total</span></td><td>7</td><td class="goals-cell">2</td><td>3</td><td>1</td><td>10</td><td class="goals-cell">3</td></tr>
+                            <tr class="total-row"><td colspan="2"><span class="total-label">Portugal U21 total</span></td><td>7</td><td class="goals-cell">2</td><td>3</td><td>1</td><td>10</td><td class="goals-cell">3</td></tr>
                             <tr><td><div class="club-cell"><img src="portugal.png" alt="Portugal" class="club-badge-img">Portugal U23</div></td><td class="season-cell">2004</td><td>2</td><td class="goals-cell">1</td><td>1</td><td>1</td><td>3</td><td class="goals-cell">2</td></tr>
                             <tr><td><div class="club-cell"><img src="portugal.png" alt="Portugal" class="club-badge-img">Portugal</div></td><td class="season-cell">2003</td><td>—</td><td>—</td><td>2</td><td>0</td><td>2</td><td class="goals-cell">0</td></tr>
                             <tr><td><div class="club-cell"><img src="portugal.png" alt="Portugal" class="club-badge-img">Portugal</div></td><td class="season-cell">2004</td><td>11</td><td class="goals-cell">7</td><td>5</td><td>0</td><td>16</td><td class="goals-cell">7</td></tr>
@@ -425,67 +576,118 @@
                             <tr><td><div class="club-cell"><img src="portugal.png" alt="Portugal" class="club-badge-img">Portugal</div></td><td class="season-cell">2024</td><td>10</td><td class="goals-cell">5</td><td>2</td><td>2</td><td>12</td><td class="goals-cell">7</td></tr>
                             <tr><td><div class="club-cell"><img src="portugal.png" alt="Portugal" class="club-badge-img">Portugal</div></td><td class="season-cell">2025</td><td>9</td><td class="goals-cell">8</td><td>0</td><td>0</td><td>9</td><td class="goals-cell">8</td></tr>
                             <tr><td><div class="club-cell"><img src="portugal.png" alt="Portugal" class="club-badge-img">Portugal</div></td><td class="season-cell">2026</td><td>0</td><td class="goals-cell">0</td><td>1</td><td>0</td><td>1</td><td class="goals-cell">0</td></tr>
-                            <tr class="total-row"><td colspan="2"><span class="total-label">Portugal Senior Total</span></td><td>172</td><td class="goals-cell">121</td><td>55</td><td>22</td><td>227</td><td class="goals-cell">143</td></tr>
-                            <tr class="career-total-row"><td colspan="2"><strong>International Career Total</strong></td><td>187</td><td>128</td><td>74</td><td>33</td><td>261</td><td>161</td></tr>
+                            <tr class="total-row"><td colspan="2"><span class="total-label">Portugal senior total</span></td><td>172</td><td class="goals-cell">121</td><td>55</td><td>22</td><td>227</td><td class="goals-cell">143</td></tr>
+                            <tr class="career-total-row"><td colspan="2"><strong>International career total</strong></td><td>187</td><td>128</td><td>74</td><td>33</td><td>261</td><td>161</td></tr>
                         </tbody>
                     </table>
                 </div>
             </section>
-            <footer class="footer">
+
+            <footer class="footer reveal" style="animation-delay:.18s">
                 <p>Statistics updated June 2026 <a href="https://www.vecteezy.com" target="_blank" rel="noopener" class="attribution">*</a></p>
                 <div class="footer-links">
                     <a href="https://x.com/CR7statsapp" target="_blank" rel="noopener">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                         @CR7statsapp
                     </a>
                     <a href="mailto:ronaldostats@pm.me">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                         Contact
                     </a>
                     <a href="privacy.html">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                        Privacy Policy
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        Privacy policy
                     </a>
                 </div>
             </footer>
         </main>
     </div>
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const sidebar = document.getElementById('sidebar');
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-        function toggleSidebar() {
-            mobileMenuBtn.classList.toggle('active');
-            sidebar.classList.toggle('active');
-            sidebarOverlay.classList.toggle('active');
-            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+
+    <!-- Cookie banner -->
+    <div id="cookieBanner" class="cookie-banner hidden">
+        <div class="cookie-text">
+            We use cookies to analyse site traffic. By continuing, you agree to our use of analytics cookies.
+            <a href="/privacy.html">Learn more</a>
+        </div>
+        <div class="cookie-buttons">
+            <button class="cookie-btn cookie-reject" onclick="rejectCookies()">Reject</button>
+            <button class="cookie-btn cookie-accept" onclick="acceptCookies()">Accept</button>
+        </div>
+    </div>
+
+    <script>
+        // ===== Cookie banner =====
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
         }
-        mobileMenuBtn.addEventListener('click', toggleSidebar);
-        sidebarOverlay.addEventListener('click', toggleSidebar);
+        function setCookie(name, value, days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
+        }
+        function acceptCookies() {
+            setCookie('cookieConsent', 'accepted', 365);
+            document.getElementById('cookieBanner').classList.add('hidden');
+        }
+        function rejectCookies() {
+            setCookie('cookieConsent', 'rejected', 365);
+            document.getElementById('cookieBanner').classList.add('hidden');
+            window['ga-disable-G-HPECDH5S32'] = true;
+            document.cookie = '_ga=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            document.cookie = '_gid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        }
+        window.addEventListener('load', function () {
+            const consent = getCookie('cookieConsent');
+            if (!consent) {
+                setTimeout(() => document.getElementById('cookieBanner').classList.remove('hidden'), 1000);
+            } else if (consent === 'rejected') {
+                window['ga-disable-G-HPECDH5S32'] = true;
+            }
+        });
+
+        // ===== Mobile sidebar =====
+        const mobileBtn = document.getElementById('mobileBtn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        function toggleSidebar() {
+            const open = sidebar.classList.toggle('active');
+            mobileBtn.classList.toggle('active', open);
+            overlay.classList.toggle('active', open);
+            mobileBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            mobileBtn.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+            document.body.style.overflow = open ? 'hidden' : '';
+        }
+        mobileBtn.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
         document.querySelectorAll('.sidebar .nav-item').forEach(link => {
             link.addEventListener('click', () => { if (window.innerWidth <= 768) toggleSidebar(); });
         });
         window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                mobileMenuBtn.classList.remove('active');
+            if (window.innerWidth > 768 && sidebar.classList.contains('active')) {
                 sidebar.classList.remove('active');
-                sidebarOverlay.classList.remove('active');
+                mobileBtn.classList.remove('active');
+                overlay.classList.remove('active');
+                mobileBtn.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
             }
         });
+
+        // ===== Theme =====
         const themeToggle = document.getElementById('themeToggle');
-        function loadTheme() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-        }
-        function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        }
-        themeToggle.addEventListener('click', toggleTheme);
-        loadTheme();
+        (function loadTheme() {
+            let theme = localStorage.getItem('theme');
+            if (!theme) {
+                theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+        themeToggle.addEventListener('click', function () {
+            const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        });
     </script>
 </body>
 </html>
