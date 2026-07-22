@@ -340,6 +340,7 @@
             color: rgba(22, 36, 58, 0.10);
         }
         .tl-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        .tl-photo.has-img::before, .tl-photo.has-img::after { display: none; }
         .tl-photo[data-era="sporting"] { background: linear-gradient(140deg, rgba(46, 139, 87, 0.16), rgba(46, 139, 87, 0.04)); }
         .tl-photo[data-era="united"] { background: linear-gradient(140deg, rgba(192, 57, 43, 0.14), rgba(192, 57, 43, 0.04)); }
         .tl-photo[data-era="madrid"] { background: linear-gradient(140deg, rgba(47, 86, 207, 0.14), rgba(214, 178, 80, 0.08)); }
@@ -545,12 +546,12 @@
                 <ol class="timeline">
                     <!-- Sporting CP -->
                     <li>
-                        <h2 class="era-mark"><span><span class="era-badge" aria-hidden="true"><img src="sporting.png" alt="" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('fallback')"></span>Sporting CP <span class="era-years">2002 to 2003</span></span></h2>
+                        <h2 class="era-mark"><span><span class="era-badge" aria-hidden="true"><img src="/sporting.png" alt="" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('fallback')"></span>Sporting CP <span class="era-years">2002 to 2003</span></span></h2>
                         <ol class="era-items">
                             <li class="milestone tl-reveal">
                                 <span class="node" aria-hidden="true"></span>
                                 <article class="tl-card">
-                                    <figure class="tl-photo" data-era="sporting" data-year="2002" data-photo="timeline/sporting-debut"></figure>
+                                    <figure class="tl-photo has-img" data-era="sporting" data-year="2002" data-photo="timeline/sporting-debut"><picture><source srcset="/timeline/sporting-debut.webp" type="image/webp"><img src="/timeline/sporting-debut.jpg" alt="A teenage Cristiano Ronaldo on the ball for Sporting CP against Manchester United" width="399" height="501" loading="lazy" decoding="async"></picture></figure>
                                     <div class="tl-body">
                                         <time class="tl-time" datetime="2002-08-14">August 2002</time>
                                         <h3>The boy from Madeira</h3>
@@ -563,7 +564,7 @@
 
                     <!-- Manchester United -->
                     <li>
-                        <h2 class="era-mark"><span><span class="era-badge" aria-hidden="true"><img src="manchesterunited.jpg" alt="" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('fallback')"></span>Manchester United <span class="era-years">2003 to 2009</span></span></h2>
+                        <h2 class="era-mark"><span><span class="era-badge" aria-hidden="true"><img src="/manchesterunited.jpg" alt="" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('fallback')"></span>Manchester United <span class="era-years">2003 to 2009</span></span></h2>
                         <ol class="era-items">
                             <li class="milestone tl-reveal">
                                 <span class="node" aria-hidden="true"></span>
@@ -625,7 +626,7 @@
 
                     <!-- Real Madrid -->
                     <li>
-                        <h2 class="era-mark"><span><span class="era-badge" aria-hidden="true"><img src="realmadrid.jpg" alt="" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('fallback')"></span>Real Madrid <span class="era-years">2009 to 2018</span></span></h2>
+                        <h2 class="era-mark"><span><span class="era-badge" aria-hidden="true"><img src="/realmadrid.jpg" alt="" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('fallback')"></span>Real Madrid <span class="era-years">2009 to 2018</span></span></h2>
                         <ol class="era-items">
                             <li class="milestone tl-reveal">
                                 <span class="node" aria-hidden="true"></span>
@@ -674,7 +675,7 @@
                             <li class="milestone tl-reveal">
                                 <span class="node" aria-hidden="true"></span>
                                 <article class="tl-card">
-                                    <figure class="tl-photo" data-era="madrid" data-year="2017" data-photo="timeline/ballon-dor-five"></figure>
+                                    <figure class="tl-photo has-img" data-era="madrid" data-year="2017" data-photo="timeline/ballon-dor-five"><picture><source srcset="/timeline/ballon-dor-five.webp" type="image/webp"><img src="/timeline/ballon-dor-five.jpg" alt="Cristiano Ronaldo standing behind his five Ballon d'Or trophies" width="1024" height="871" loading="lazy" decoding="async"></picture></figure>
                                     <div class="tl-body">
                                         <time class="tl-time" datetime="2017-12-07">7 December 2017</time>
                                         <h3>Five Ballon d'Ors</h3>
@@ -709,12 +710,12 @@
 
                     <!-- Juventus -->
                     <li>
-                        <h2 class="era-mark"><span><span class="era-badge" aria-hidden="true"><img src="juventus.jpg" alt="" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('fallback')"></span>Juventus <span class="era-years">2018 to 2021</span></span></h2>
+                        <h2 class="era-mark"><span><span class="era-badge" aria-hidden="true"><img src="/juventus.jpg" alt="" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('fallback')"></span>Juventus <span class="era-years">2018 to 2021</span></span></h2>
                         <ol class="era-items">
                             <li class="milestone tl-reveal">
                                 <span class="node" aria-hidden="true"></span>
                                 <article class="tl-card">
-                                    <figure class="tl-photo" data-era="juventus" data-year="2018" data-photo="timeline/juventus-move"></figure>
+                                    <figure class="tl-photo has-img" data-era="juventus" data-year="2018" data-photo="timeline/juventus-move"><picture><source srcset="/timeline/juventus-move.webp" type="image/webp"><img src="/timeline/juventus-move.jpg" alt="Cristiano Ronaldo celebrates in the Juventus number 7 shirt in front of a full stadium" width="1200" height="675" loading="lazy" decoding="async"></picture></figure>
                                     <div class="tl-body">
                                         <time class="tl-time" datetime="2018-07-10">10 July 2018</time>
                                         <h3>The €117m Juventus move</h3>
@@ -738,7 +739,7 @@
 
                     <!-- Return to Manchester United -->
                     <li>
-                        <h2 class="era-mark"><span><span class="era-badge" aria-hidden="true"><img src="manchesterunited.jpg" alt="" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('fallback')"></span>Return to Manchester <span class="era-years">2021 to 2022</span></span></h2>
+                        <h2 class="era-mark"><span><span class="era-badge" aria-hidden="true"><img src="/manchesterunited.jpg" alt="" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('fallback')"></span>Return to Manchester <span class="era-years">2021 to 2022</span></span></h2>
                         <ol class="era-items">
                             <li class="milestone tl-reveal">
                                 <span class="node" aria-hidden="true"></span>
@@ -754,7 +755,7 @@
                             <li class="milestone tl-reveal">
                                 <span class="node" aria-hidden="true"></span>
                                 <article class="tl-card">
-                                    <figure class="tl-photo" data-era="united" data-year="2021" data-photo="timeline/united-return"></figure>
+                                    <figure class="tl-photo has-img" data-era="united" data-year="2021" data-photo="timeline/united-return"><picture><source srcset="/timeline/united-return.webp" type="image/webp"><img src="/timeline/united-return.jpg" alt="Cristiano Ronaldo slides on his knees celebrating a goal for Manchester United" width="1200" height="800" loading="lazy" decoding="async"></picture></figure>
                                     <div class="tl-body">
                                         <time class="tl-time" datetime="2021-09-11">11 September 2021</time>
                                         <h3>Home again</h3>
@@ -767,7 +768,7 @@
 
                     <!-- Al Nassr -->
                     <li>
-                        <h2 class="era-mark"><span><span class="era-badge" aria-hidden="true"><img src="alnassr.png" alt="" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('fallback')"></span>Al Nassr <span class="era-years">2023 to now</span></span></h2>
+                        <h2 class="era-mark"><span><span class="era-badge" aria-hidden="true"><img src="/alnassr.png" alt="" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('fallback')"></span>Al Nassr <span class="era-years">2023 to now</span></span></h2>
                         <ol class="era-items">
                             <li class="milestone tl-reveal">
                                 <span class="node" aria-hidden="true"></span>
