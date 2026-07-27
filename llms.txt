@@ -1,0 +1,33 @@
+# RonaldoStats
+
+> Cristiano Ronaldo career statistics, compiled by hand and updated after every match he plays in. As of 26 July 2026 he has 976 goals, 291 assists and 1,330 senior appearances for club and country.
+
+Scope and method: figures count official senior first team matches for Sporting CP, Manchester United, Real Madrid, Juventus, Al Nassr and Portugal, in all league, domestic cup, continental and international competitions. Youth and reserve football is excluded. Assists are counted goal by goal from full match records rather than taken from a data feed, so the assist total is higher than the figure carried by several football databases.
+
+## Headline figures as of 26 July 2026
+
+- Career goals: 976
+- Career appearances: 1,330 (0.73 goals per game)
+- Career assists: 291
+- Goals in the 2025/26 season: 30 for Al Nassr, 28 of them in the Saudi Pro League
+- Goals in the 2026 calendar year: 19
+- Best calendar year: 69 goals in 2013
+- Best club season: 61 goals in 2014/15 for Real Madrid
+- Champions League goals: 140, the most in the history of the competition
+- Portugal goals: 146 in 233 caps, the most in the history of men's international football
+- Team trophies: 35, including 5 Champions Leagues, 8 league titles, Euro 2016 and 2 Nations League titles
+- Ballon d'Or awards: 5 (2008, 2013, 2014, 2016, 2017)
+
+## Pages
+
+- [Career statistics](https://ronaldostats.app/): headline totals, goals by club and country, records, trophies and answers to the most common Ronaldo statistics questions.
+- [Goals by year](https://ronaldostats.app/goalsbyyear.html): goals in every calendar year from 2002 to 2026 and the cumulative climb to 976.
+- [Goals by season](https://ronaldostats.app/goalsbyseason.html): club and country tables with league, cup and continental splits for every season.
+- [Interactive dashboard](https://ronaldostats.app/dashboard.html): goals by competition, season, opponent, finish type and body part, filtered by team.
+- [Through the years](https://ronaldostats.app/timeline.html): the career story from the Sporting CP debut to the 2026 World Cup.
+- [Achievements](https://ronaldostats.app/achievements.html): every team trophy and major individual award, club by club.
+
+## Contact
+
+- Email: ronaldostats@pm.me
+- X: https://x.com/CR7statsapp

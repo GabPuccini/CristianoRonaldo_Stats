@@ -11,6 +11,36 @@ User-agent: Bingbot
 Allow: /
 Crawl-delay: 1
 
+# Consenti i crawler di ricerca e citazione AI
+# (These are the search and citation agents, not the training crawlers.
+#  Blocking them removes the site from AI answer citations.)
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
 # Blocca bot di scraping noti
 User-agent: MJ12bot
 Disallow: /
@@ -24,6 +54,9 @@ Disallow: /
 User-agent: DotBot
 Disallow: /
 
+# GPTBot is the OpenAI training crawler, kept blocked.
+# It is separate from OAI-SearchBot and ChatGPT-User above,
+# so citation eligibility is not affected.
 User-agent: GPTBot
 Disallow: /
 
