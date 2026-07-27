@@ -658,6 +658,118 @@
             .cookie-banner { flex-direction: column; text-align: center; }
             .cookie-buttons { width: 100%; justify-content: center; }
         }
+
+        /* ========== MOBILE NAVIGATION DRAWER ========== */
+        /* On desktop the header is transparent to layout, so the rail is unchanged */
+        .drawer-head { display: contents; }
+        .drawer-close { display: none; }
+
+        @media (max-width: 768px) {
+            .mobile-btn {
+                top: calc(18px + env(safe-area-inset-top, 0px));
+                left: calc(18px + env(safe-area-inset-left, 0px));
+                transition: opacity 0.2s ease, visibility 0s linear 0s;
+            }
+            /* The drawer carries its own close button, so the floating one steps aside */
+            .mobile-btn.active {
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transition: opacity 0.2s ease, visibility 0s linear 0.2s;
+            }
+
+            /* the open drawer is modal, so it sits above the cookie banner */
+            .overlay { z-index: 1100; }
+            .sidebar {
+                z-index: 1200;
+                width: min(var(--sidebar-expanded), 82vw);
+                padding: calc(18px + env(safe-area-inset-top, 0px)) 14px calc(20px + env(safe-area-inset-bottom, 0px));
+                padding-left: calc(14px + env(safe-area-inset-left, 0px));
+                align-items: stretch;
+                background: rgba(255, 255, 255, 0.95);
+                transform: translateX(-100%);
+                visibility: hidden;
+                box-shadow: none;
+                transition: transform 0.32s cubic-bezier(.4,0,.2,1), visibility 0s linear 0.32s;
+            }
+            .sidebar.active {
+                transform: translateX(0);
+                visibility: visible;
+                transition: transform 0.32s cubic-bezier(.4,0,.2,1), visibility 0s linear 0s;
+                box-shadow: 16px 0 50px rgba(20, 35, 70, 0.20);
+            }
+
+            .drawer-head {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+                margin: 0 0 20px;
+                padding-bottom: 18px;
+                border-bottom: 1px solid var(--line);
+            }
+            .sidebar-logo { margin: 0; flex-shrink: 0; }
+            .drawer-close {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 44px; height: 44px;
+                flex-shrink: 0;
+                border: 1px solid var(--line);
+                border-radius: 13px;
+                background: var(--surface);
+                color: var(--ink-2);
+                cursor: pointer;
+                transition: color 0.2s ease, background 0.2s ease;
+            }
+            .drawer-close:hover { color: var(--brand-ink); background: var(--surface-strong); }
+            .drawer-close svg { width: 20px; height: 20px; }
+
+            .sidebar-nav {
+                gap: 4px;
+                padding: 0;
+                overflow-y: auto;
+                overscroll-behavior: contain;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .nav-item {
+                width: 100%;
+                height: auto;
+                min-height: 52px;
+                justify-content: flex-start;
+                padding: 0 14px 0 18px;
+                gap: 14px;
+                border-radius: 14px;
+                color: var(--ink-2);
+            }
+            .nav-item svg { flex-shrink: 0; }
+            .nav-item:hover { background: var(--brand-soft); color: var(--ink); }
+            .nav-item.active {
+                background: var(--brand-soft);
+                color: var(--brand-ink);
+                box-shadow: none;
+            }
+            .nav-item.active::before {
+                display: block;
+                left: 0;
+                height: 26px;
+                border-radius: 0 3px 3px 0;
+            }
+            .nav-label {
+                position: static;
+                opacity: 1;
+                transform: none;
+                background: transparent;
+                color: inherit;
+                box-shadow: none;
+                padding: 0;
+                font-size: 0.95rem;
+                font-weight: 600;
+                white-space: normal;
+            }
+            .nav-item.active .nav-label { font-weight: 700; }
+        }
     </style>
 </head>
 <body>
@@ -670,7 +782,12 @@
 
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
-            <a href="index.html" class="sidebar-logo" aria-label="Home">CR7</a>
+            <div class="drawer-head">
+                <a href="index.html" class="sidebar-logo" aria-label="Home">CR7</a>
+                <button type="button" class="drawer-close" id="drawerClose" aria-label="Close navigation">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
             <nav class="sidebar-nav" aria-label="Primary">
                 <a href="index.html" class="nav-item">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
@@ -1184,32 +1301,67 @@
             }
         });
 
-        // ===== Mobile sidebar =====
-        const mobileBtn = document.getElementById('mobileBtn');
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
-        function toggleSidebar() {
-            const open = sidebar.classList.toggle('active');
-            mobileBtn.classList.toggle('active', open);
-            overlay.classList.toggle('active', open);
-            mobileBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-            mobileBtn.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
-            document.body.style.overflow = open ? 'hidden' : '';
-        }
-        mobileBtn.addEventListener('click', toggleSidebar);
-        overlay.addEventListener('click', toggleSidebar);
-        document.querySelectorAll('.sidebar .nav-item').forEach(link => {
-            link.addEventListener('click', () => { if (window.innerWidth <= 768) toggleSidebar(); });
-        });
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768 && sidebar.classList.contains('active')) {
-                sidebar.classList.remove('active');
-                mobileBtn.classList.remove('active');
-                overlay.classList.remove('active');
-                mobileBtn.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = '';
+        // ===== Mobile navigation drawer =====
+        (function () {
+            const mobileBtn = document.getElementById('mobileBtn');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const closeBtn = document.getElementById('drawerClose');
+            const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
+            const focusable = () => sidebar.querySelectorAll('a[href], button:not([disabled])');
+
+            function setOpen(open) {
+                sidebar.classList.toggle('active', open);
+                mobileBtn.classList.toggle('active', open);
+                overlay.classList.toggle('active', open);
+                mobileBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+                mobileBtn.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+                document.body.style.overflow = open ? 'hidden' : '';
+
+                // Move focus with the drawer, reading layout first so the target is focusable
+                if (open) {
+                    sidebar.getBoundingClientRect();
+                    const target = closeBtn || focusable()[0];
+                    if (target) target.focus();
+                } else if (isMobile() && sidebar.contains(document.activeElement)) {
+                    mobileBtn.getBoundingClientRect();
+                    mobileBtn.focus();
+                }
             }
-        });
+
+            mobileBtn.addEventListener('click', () => setOpen(!sidebar.classList.contains('active')));
+            overlay.addEventListener('click', () => setOpen(false));
+            if (closeBtn) closeBtn.addEventListener('click', () => setOpen(false));
+
+            document.addEventListener('keydown', event => {
+                if (!sidebar.classList.contains('active')) return;
+                if (event.key === 'Escape') { event.preventDefault(); setOpen(false); return; }
+                if (event.key !== 'Tab') return;
+
+                // Keep tabbing inside the open drawer
+                const items = Array.prototype.slice.call(focusable());
+                if (!items.length) return;
+                const first = items[0], last = items[items.length - 1];
+                if (!sidebar.contains(document.activeElement)) { event.preventDefault(); first.focus(); }
+                else if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+                else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+            });
+
+            sidebar.querySelectorAll('.nav-item').forEach(link => {
+                link.addEventListener('click', () => { if (isMobile()) setOpen(false); });
+            });
+
+            window.addEventListener('resize', () => {
+                if (!isMobile() && sidebar.classList.contains('active')) {
+                    sidebar.classList.remove('active');
+                    mobileBtn.classList.remove('active');
+                    overlay.classList.remove('active');
+                    mobileBtn.setAttribute('aria-expanded', 'false');
+                    mobileBtn.setAttribute('aria-label', 'Open navigation');
+                    document.body.style.overflow = '';
+                }
+            });
+        })();
 
         // ===== Timeline motion: JavaScript path only when the CSS feature is missing =====
         (function () {
