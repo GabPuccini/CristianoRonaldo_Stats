@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Home: Cristiano Ronaldo career statistics -->
+  <url>
+    <loc>https://ronaldostats.app/</loc>
+    <lastmod>2026-07-27</lastmod>
+  </url>
+
+  <!-- Goals in every calendar year from 2002 to 2026 -->
+  <url>
+    <loc>https://ronaldostats.app/goalsbyyear.html</loc>
+    <lastmod>2026-07-22</lastmod>
+  </url>
+
+  <!-- Season by season club and country tables -->
+  <url>
+    <loc>https://ronaldostats.app/goalsbyseason.html</loc>
+    <lastmod>2026-07-22</lastmod>
+  </url>
+
+  <!-- Interactive stats dashboard -->
+  <url>
+    <loc>https://ronaldostats.app/dashboard.html</loc>
+    <lastmod>2026-07-22</lastmod>
+  </url>
+
+  <!-- Through the years -->
+  <url>
+    <loc>https://ronaldostats.app/timeline.html</loc>
+    <lastmod>2026-07-23</lastmod>
+  </url>
+
+  <!-- Achievements and honours -->
+  <url>
+    <loc>https://ronaldostats.app/achievements.html</loc>
+    <lastmod>2026-07-22</lastmod>
+  </url>
+
+  <!-- Privacy policy -->
+  <url>
+    <loc>https://ronaldostats.app/privacy.html</loc>
+    <lastmod>2026-06-08</lastmod>
+  </url>
+
+</urlset>

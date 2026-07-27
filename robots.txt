@@ -65,5 +65,6 @@ User-agent: *
 Allow: /
 Crawl-delay: 5
 
-# Sitemap (quando la creerai)
+# Sitemap
+# Aggiorna lastmod in sitemap.xml quando cambi una pagina
 Sitemap: https://ronaldostats.app/sitemap.xml
