@@ -44,14 +44,36 @@ shown on the competitions chart. Common pairs:
 | Saudi Pro League, the league | `league` | `Saudi Pro League` |
 | King's Cup | `cup` | `King's Cup` |
 | AFC Champions League | `cont` | `AFC Champions League` |
-| Saudi Super Cup, Arab Club Champions Cup | `other` | that exact name |
-| World Cup qualifier | `league` | `World Cup qualifiers` |
-| Euro qualifier | `league` | `Euro qualifiers` |
+| Saudi Super Cup, Arab Club Champions Cup, Club World Cup, super cups | `other` | `Other cup competitions` |
+| World Cup qualifier | `league` | `World Cup qualifying` |
+| Euro qualifier | `league` | `Euro qualifying` |
 | Nations League | `league` | `Nations League` |
 | friendly | `league` | `Friendlies` |
-| World Cup, Euros | `league` | `World Cup` or `Euros` |
+| World Cup | `league` | `World Cup` |
+| Euros, European Championship | `league` | `European Championship` |
 
 For Portugal the `--comp` slot is ignored, only the label matters.
+
+**The label must match one of these exactly.** They are the labels the site
+already publishes on the competitions chart, and `--competition-label` is used
+as a dictionary key: an unrecognised label does not fail, it quietly adds a
+second row, so `Euro qualifiers` alongside `Euro qualifying` would split one
+tally into two and the chart would show both. The 22 valid labels are:
+
+    La Liga                 Champions League        Premier League
+    Saudi Pro League        Serie A                 Euro qualifying
+    World Cup qualifying    Other cup competitions  Copa del Rey
+    Friendlies              AFC Champions League    Nations League
+    European Championship   FA Cup                  World Cup
+    Coppa Italia            League Cup              King's Cup
+    Primeira Liga           Confederations Cup      Europa League
+    Taca de Portugal
+
+Anything that is not on that list belongs in `Other cup competitions`, which is
+how the chart already groups the Club World Cup, the UEFA Super Cup, domestic
+super cups and the Arab Club Champions Cup. Only add a genuinely new label when
+Ronaldo plays a competition he has never played before, and expect a new bar to
+appear on the chart when you do.
 
 ### Defaults when he does not say
 
