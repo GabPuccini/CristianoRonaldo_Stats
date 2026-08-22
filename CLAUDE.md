@@ -45,26 +45,26 @@ shown on the competitions chart. Common pairs:
 | King's Cup | `cup` | `King's Cup` |
 | AFC Champions League | `cont` | `AFC Champions League` |
 | Saudi Super Cup, Arab Club Champions Cup, Club World Cup, super cups | `other` | `Other cup competitions` |
-| World Cup qualifier | `league` | `World Cup qualifying` |
-| Euro qualifier | `league` | `Euro qualifying` |
+| World Cup qualifier | `league` | `World Cup qualifiers` |
+| Euro qualifier | `league` | `Euro qualifiers` |
 | Nations League | `league` | `Nations League` |
 | friendly | `league` | `Friendlies` |
 | World Cup | `league` | `World Cup` |
-| Euros, European Championship | `league` | `European Championship` |
+| Euros, European Championship | `league` | `Euros` |
 
 For Portugal the `--comp` slot is ignored, only the label matters.
 
 **The label must match one of these exactly.** They are the labels the site
 already publishes on the competitions chart, and `--competition-label` is used
 as a dictionary key: an unrecognised label does not fail, it quietly adds a
-second row, so `Euro qualifiers` alongside `Euro qualifying` would split one
+second row, so `Euro qualifying` alongside `Euro qualifiers` would split one
 tally into two and the chart would show both. The 22 valid labels are:
 
     La Liga                 Champions League        Premier League
-    Saudi Pro League        Serie A                 Euro qualifying
-    World Cup qualifying    Other cup competitions  Copa del Rey
+    Saudi Pro League        Serie A                 Euro qualifiers
+    World Cup qualifiers    Other cup competitions  Copa del Rey
     Friendlies              AFC Champions League    Nations League
-    European Championship   FA Cup                  World Cup
+    Euros                   FA Cup                  World Cup
     Coppa Italia            League Cup              King's Cup
     Primeira Liga           Confederations Cup      Europa League
     Taca de Portugal
