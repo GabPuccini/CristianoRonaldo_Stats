@@ -1,0 +1,111 @@
+{
+  "_README": "SHAPE REFERENCE ONLY. Career totals reconcile (976/1,330/291) but the per season appearance splits and the Portugal year splits are placeholders. Build the real data/ronaldo.json from the site HTML, see MIGRATION_PROMPT.md.",
+  "meta": {
+    "updated": "2026-08-22",
+    "goal_target": 1000,
+    "born": "1985-02-05",
+    "current_season": "2025/26"
+  },
+  "teams": [
+    { "id": "realmadrid", "name": "Real Madrid", "years": "2009 to 2018", "assists": 131 },
+    { "id": "portugal", "name": "Portugal", "years": "2003 to present", "assists": 45 },
+    { "id": "manutd", "name": "Manchester United", "years": "2003 to 2009, 2021 to 2022", "assists": 64 },
+    { "id": "alnassr", "name": "Al Nassr", "years": "2023 to present", "assists": 23 },
+    { "id": "juventus", "name": "Juventus", "years": "2018 to 2021", "assists": 22 },
+    { "id": "sporting", "name": "Sporting CP", "years": "2002 to 2003", "assists": 6 }
+  ],
+  "seasons": [
+    {
+      "team": "sporting",
+      "season": "2002/03",
+      "division": "Segunda Divisao B",
+      "in_career": false,
+      "comps": {
+        "league": { "apps": 2, "goals": 0 },
+        "cup": null,
+        "lcup": null,
+        "cont": null,
+        "other": null
+      }
+    },
+    {
+      "team": "sporting",
+      "season": "2002/03",
+      "division": "",
+      "in_career": true,
+      "comps": {
+        "league": { "apps": 31, "goals": 5 },
+        "cup": null,
+        "lcup": null,
+        "cont": null,
+        "other": null
+      }
+    }
+  ],
+  "years": [
+    { "year": 2002, "goals": 5, "age": 17 },
+    { "year": 2026, "goals": 19, "age": 41 }
+  ],
+  "portugal_years": [
+    { "year": 2003, "apps": 2, "goals": 0 },
+    { "year": 2026, "apps": 5, "goals": 1 }
+  ],
+  "competitions": {
+    "La Liga": 311,
+    "Champions League": 140,
+    "Premier League": 103,
+    "Saudi Pro League": 102,
+    "Serie A": 81,
+    "Other cups": 25,
+    "Copa del Rey": 22,
+    "AFC Champions League": 15,
+    "FA Cup": 13,
+    "Coppa Italia": 4,
+    "League Cup": 4,
+    "King's Cup": 3,
+    "Primeira Liga": 3,
+    "Europa League": 2,
+    "Taca de Portugal": 2,
+    "Euro qualifiers": 41,
+    "World Cup qualifiers": 41,
+    "Friendlies": 22,
+    "Nations League": 15,
+    "Euros": 14,
+    "World Cup": 11,
+    "Confederations Cup": 2
+  },
+  "bodyparts": {
+    "sporting": [2, 2, 1, 0],
+    "manutd": [97, 23, 24, 1],
+    "realmadrid": [299, 80, 70, 1],
+    "juventus": [62, 21, 18, 0],
+    "alnassr": [86, 26, 16, 1],
+    "portugal": [85, 33, 28, 0]
+  },
+  "penalties": {
+    "realmadrid": 81,
+    "alnassr": 32,
+    "juventus": 28,
+    "portugal": 22,
+    "manutd": 21
+  },
+  "freekicks": {
+    "realmadrid": 33,
+    "manutd": 15,
+    "portugal": 11,
+    "alnassr": 6,
+    "juventus": 1
+  },
+  "hattricks": {
+    "realmadrid": 44,
+    "portugal": 10,
+    "alnassr": 6,
+    "manutd": 3,
+    "juventus": 3
+  },
+  "opponents": {
+    "realmadrid": { "Sevilla": 27, "Getafe": 23, "Atletico Madrid": 22 },
+    "alnassr": { "Al Wehda": 10, "Al Fateh": 9 }
+  },
+  "log": []
+}

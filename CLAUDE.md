@@ -1,0 +1,133 @@
+# ronaldostats.app
+
+Static site, hand written HTML, CSS and vanilla JavaScript. No framework, no
+build step for the markup itself. Hosted on GitHub, served through Cloudflare.
+
+## The one rule about statistics
+
+`data/ronaldo.json` is the single source of truth. **Never edit a number
+directly in an HTML file.** Every published figure is either marked with a
+`data-stat` attribute or sits inside a `STATS:BEGIN` region, and
+`scripts/update_stats.py` rewrites all of them from the JSON.
+
+If you hand edit a number in HTML it will be silently overwritten on the next
+update, and worse, the site will disagree with itself across pages.
+
+## When Rambo says Ronaldo scored
+
+Translate the sentence into one command and run it. Do not ask for details he
+did not give; use the defaults below and tell him afterwards what you assumed
+so he can correct it.
+
+    python scripts/update_stats.py goal --team TEAM --comp SLOT \
+        --competition-label "LABEL" --opponent "NAME" --body BODY \
+        --type TYPE --new-appearance
+
+### Team values
+
+| He says | `--team` |
+|---|---|
+| Al Nassr, Saudi league, his club | `alnassr` |
+| Portugal, national team, internationals | `portugal` |
+| Real Madrid | `realmadrid` |
+| Manchester United, United | `manutd` |
+| Juventus, Juve | `juventus` |
+| Sporting, Sporting CP | `sporting` |
+
+### Competition slot and label
+
+`--comp` is the column in the season table. `--competition-label` is the name
+shown on the competitions chart. Common pairs:
+
+| He says | `--comp` | `--competition-label` |
+|---|---|---|
+| Saudi Pro League, the league | `league` | `Saudi Pro League` |
+| King's Cup | `cup` | `King's Cup` |
+| AFC Champions League | `cont` | `AFC Champions League` |
+| Saudi Super Cup, Arab Club Champions Cup | `other` | that exact name |
+| World Cup qualifier | `league` | `World Cup qualifiers` |
+| Euro qualifier | `league` | `Euro qualifiers` |
+| Nations League | `league` | `Nations League` |
+| friendly | `league` | `Friendlies` |
+| World Cup, Euros | `league` | `World Cup` or `Euros` |
+
+For Portugal the `--comp` slot is ignored, only the label matters.
+
+### Defaults when he does not say
+
+* `--body right` (right foot, his most common)
+* `--type openplay`
+* `--new-appearance` on, because a goal implies he played
+* season defaults to `meta.current_season`, year defaults to today
+
+Add `--type penalty` or `--type freekick` when he says so, `--body left`,
+`--body head` or `--body other`, `--opponent "Name"` whenever he names the
+opposition, and `--assists N` if he also created goals.
+
+### Other events
+
+    python scripts/update_stats.py appearance --team alnassr --comp league
+    python scripts/update_stats.py assist --team portugal --count 1
+    python scripts/update_stats.py hattrick --team alnassr
+    python scripts/update_stats.py show     # current headline figures
+    python scripts/update_stats.py check    # validate, write nothing
+    python scripts/update_stats.py build    # rewrite HTML from current data
+    python scripts/update_stats.py undo     # revert the last event
+
+### Worked examples
+
+> "Ronaldo scored 1 goal in the Saudi Pro League against Al Hilal"
+
+    python scripts/update_stats.py goal --team alnassr --comp league \
+        --competition-label "Saudi Pro League" --opponent "Al Hilal" --new-appearance
+
+> "he scored a header for Portugal in a World Cup qualifier against Hungary and got an assist"
+
+    python scripts/update_stats.py goal --team portugal --comp league \
+        --competition-label "World Cup qualifiers" --opponent "Hungary" \
+        --body head --assists 1 --new-appearance
+
+> "hat trick for Al Nassr in the league, two right foot one penalty, against Al Fateh"
+
+    python scripts/update_stats.py goal --team alnassr --comp league --competition-label "Saudi Pro League" --opponent "Al Fateh" --new-appearance
+    python scripts/update_stats.py goal --team alnassr --comp league --competition-label "Saudi Pro League" --opponent "Al Fateh"
+    python scripts/update_stats.py goal --team alnassr --comp league --competition-label "Saudi Pro League" --opponent "Al Fateh" --type penalty
+    python scripts/update_stats.py hattrick --team alnassr
+
+Note only the first goal of a match carries `--new-appearance`.
+
+## After every update
+
+1. The script prints the new totals and refuses to write if anything fails to
+   reconcile. If it fails, read the error, fix the data, do not force it.
+2. Check `git diff` and confirm only expected numbers moved.
+3. Commit with a message naming the event, for example
+   `Goal 977: Al Nassr v Al Hilal, Saudi Pro League`.
+4. Push. Cloudflare serves the new file within a minute or two, and a hard
+   refresh with Ctrl Shift R shows it immediately.
+
+## Site wide writing rules
+
+* British English.
+* **Never use em dashes, en dashes or hyphens in visible text.** Hyphens are
+  allowed only inside CSS, HTML and code syntax such as attribute names and
+  file names. Write "goals per game" and "2002 to 2003", never with a dash.
+* Never render statistics as images. Always real HTML tables.
+* The navigation is duplicated in full on every page on purpose. Do not
+  centralise it into a shared include or inject it with JavaScript; static
+  markup on every page is deliberate for search engines.
+* Keep the light glassmorphism design system: DM Sans for body, Plus Jakarta
+  Sans for display, brand blue `#2f56cf`, frosted translucent cards.
+* Every page keeps its reduced motion override and its JSON-LD block.
+
+## Validation the script enforces
+
+The update is rejected unless all of these hold:
+
+* calendar years sum to career goals
+* body part splits sum to career goals, and per team to that team's goals
+* competitions sum to career goals
+* penalties plus free kicks never exceed goals, per team and overall
+* opponent goals never exceed that team's total
+
+`data/ronaldo.backup.json` holds the previous state so `undo` always works.

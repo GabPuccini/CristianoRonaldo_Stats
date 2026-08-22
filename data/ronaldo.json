@@ -1,0 +1,1218 @@
+{
+  "_notes": "Single source of truth for every published figure. Built from the site HTML on 22 August 2026. opponents holds goals only, keyed by the dashboard view (club, saudi and intl are aggregate views, the rest are club eras); the parallel opponent_apps map holds the games column for the same rows. Both lists are the top scorers against, not complete sets.",
+  "meta": {
+    "updated": "2026-07-26",
+    "goal_target": 1000,
+    "born": "1985-02-05",
+    "current_season": "2025/26"
+  },
+  "teams": [
+    {
+      "id": "realmadrid",
+      "name": "Real Madrid",
+      "years": "2009 to 2018",
+      "assists": 131
+    },
+    {
+      "id": "portugal",
+      "name": "Portugal",
+      "years": "2003 to present",
+      "assists": 45
+    },
+    {
+      "id": "manutd",
+      "name": "Manchester United",
+      "years": "2003 to 2009, 2021 to 2022",
+      "assists": 64
+    },
+    {
+      "id": "alnassr",
+      "name": "Al Nassr",
+      "years": "2023 to present",
+      "assists": 23
+    },
+    {
+      "id": "juventus",
+      "name": "Juventus",
+      "years": "2018 to 2021",
+      "assists": 22
+    },
+    {
+      "id": "sporting",
+      "name": "Sporting CP",
+      "years": "2002 to 2003",
+      "assists": 6
+    }
+  ],
+  "seasons": [
+    {
+      "team": "sporting",
+      "season": "2002/03",
+      "division": "Segunda Divisão B",
+      "in_career": false,
+      "comps": {
+        "league": {
+          "apps": 2,
+          "goals": 0
+        },
+        "cup": null,
+        "lcup": null,
+        "cont": null,
+        "other": null
+      }
+    },
+    {
+      "team": "sporting",
+      "season": "2002/03",
+      "division": "Primeira Liga",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 25,
+          "goals": 3
+        },
+        "cup": {
+          "apps": 3,
+          "goals": 2
+        },
+        "lcup": null,
+        "cont": {
+          "apps": 3,
+          "goals": 0
+        },
+        "other": {
+          "apps": 0,
+          "goals": 0
+        }
+      }
+    },
+    {
+      "team": "manutd",
+      "season": "2003/04",
+      "division": "Premier League",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 29,
+          "goals": 4
+        },
+        "cup": {
+          "apps": 5,
+          "goals": 2
+        },
+        "lcup": {
+          "apps": 1,
+          "goals": 0
+        },
+        "cont": {
+          "apps": 5,
+          "goals": 0
+        },
+        "other": {
+          "apps": 0,
+          "goals": 0
+        }
+      }
+    },
+    {
+      "team": "manutd",
+      "season": "2004/05",
+      "division": "Premier League",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 33,
+          "goals": 5
+        },
+        "cup": {
+          "apps": 7,
+          "goals": 4
+        },
+        "lcup": {
+          "apps": 2,
+          "goals": 0
+        },
+        "cont": {
+          "apps": 8,
+          "goals": 0
+        },
+        "other": {
+          "apps": 0,
+          "goals": 0
+        }
+      }
+    },
+    {
+      "team": "manutd",
+      "season": "2005/06",
+      "division": "Premier League",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 33,
+          "goals": 9
+        },
+        "cup": {
+          "apps": 2,
+          "goals": 0
+        },
+        "lcup": {
+          "apps": 4,
+          "goals": 2
+        },
+        "cont": {
+          "apps": 8,
+          "goals": 1
+        },
+        "other": null
+      }
+    },
+    {
+      "team": "manutd",
+      "season": "2006/07",
+      "division": "Premier League",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 34,
+          "goals": 17
+        },
+        "cup": {
+          "apps": 7,
+          "goals": 3
+        },
+        "lcup": {
+          "apps": 1,
+          "goals": 0
+        },
+        "cont": {
+          "apps": 11,
+          "goals": 3
+        },
+        "other": null
+      }
+    },
+    {
+      "team": "manutd",
+      "season": "2007/08",
+      "division": "Premier League",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 34,
+          "goals": 31
+        },
+        "cup": {
+          "apps": 3,
+          "goals": 3
+        },
+        "lcup": {
+          "apps": 0,
+          "goals": 0
+        },
+        "cont": {
+          "apps": 11,
+          "goals": 8
+        },
+        "other": {
+          "apps": 1,
+          "goals": 0
+        }
+      }
+    },
+    {
+      "team": "manutd",
+      "season": "2008/09",
+      "division": "Premier League",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 33,
+          "goals": 18
+        },
+        "cup": {
+          "apps": 2,
+          "goals": 1
+        },
+        "lcup": {
+          "apps": 4,
+          "goals": 2
+        },
+        "cont": {
+          "apps": 12,
+          "goals": 4
+        },
+        "other": {
+          "apps": 2,
+          "goals": 1
+        }
+      }
+    },
+    {
+      "team": "realmadrid",
+      "season": "2009/10",
+      "division": "La Liga",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 29,
+          "goals": 26
+        },
+        "cup": {
+          "apps": 0,
+          "goals": 0
+        },
+        "lcup": null,
+        "cont": {
+          "apps": 6,
+          "goals": 7
+        },
+        "other": null
+      }
+    },
+    {
+      "team": "realmadrid",
+      "season": "2010/11",
+      "division": "La Liga",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 34,
+          "goals": 40
+        },
+        "cup": {
+          "apps": 8,
+          "goals": 7
+        },
+        "lcup": null,
+        "cont": {
+          "apps": 12,
+          "goals": 6
+        },
+        "other": null
+      }
+    },
+    {
+      "team": "realmadrid",
+      "season": "2011/12",
+      "division": "La Liga",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 38,
+          "goals": 46
+        },
+        "cup": {
+          "apps": 5,
+          "goals": 3
+        },
+        "lcup": null,
+        "cont": {
+          "apps": 10,
+          "goals": 10
+        },
+        "other": {
+          "apps": 2,
+          "goals": 1
+        }
+      }
+    },
+    {
+      "team": "realmadrid",
+      "season": "2012/13",
+      "division": "La Liga",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 34,
+          "goals": 34
+        },
+        "cup": {
+          "apps": 7,
+          "goals": 7
+        },
+        "lcup": null,
+        "cont": {
+          "apps": 12,
+          "goals": 12
+        },
+        "other": {
+          "apps": 2,
+          "goals": 2
+        }
+      }
+    },
+    {
+      "team": "realmadrid",
+      "season": "2013/14",
+      "division": "La Liga",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 30,
+          "goals": 31
+        },
+        "cup": {
+          "apps": 6,
+          "goals": 3
+        },
+        "lcup": null,
+        "cont": {
+          "apps": 11,
+          "goals": 17
+        },
+        "other": null
+      }
+    },
+    {
+      "team": "realmadrid",
+      "season": "2014/15",
+      "division": "La Liga",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 35,
+          "goals": 48
+        },
+        "cup": {
+          "apps": 2,
+          "goals": 1
+        },
+        "lcup": null,
+        "cont": {
+          "apps": 12,
+          "goals": 10
+        },
+        "other": {
+          "apps": 5,
+          "goals": 2
+        }
+      }
+    },
+    {
+      "team": "realmadrid",
+      "season": "2015/16",
+      "division": "La Liga",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 36,
+          "goals": 35
+        },
+        "cup": {
+          "apps": 0,
+          "goals": 0
+        },
+        "lcup": null,
+        "cont": {
+          "apps": 12,
+          "goals": 16
+        },
+        "other": null
+      }
+    },
+    {
+      "team": "realmadrid",
+      "season": "2016/17",
+      "division": "La Liga",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 29,
+          "goals": 25
+        },
+        "cup": {
+          "apps": 2,
+          "goals": 1
+        },
+        "lcup": null,
+        "cont": {
+          "apps": 13,
+          "goals": 12
+        },
+        "other": {
+          "apps": 2,
+          "goals": 4
+        }
+      }
+    },
+    {
+      "team": "realmadrid",
+      "season": "2017/18",
+      "division": "La Liga",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 27,
+          "goals": 26
+        },
+        "cup": {
+          "apps": 0,
+          "goals": 0
+        },
+        "lcup": null,
+        "cont": {
+          "apps": 13,
+          "goals": 15
+        },
+        "other": {
+          "apps": 4,
+          "goals": 3
+        }
+      }
+    },
+    {
+      "team": "juventus",
+      "season": "2018/19",
+      "division": "Serie A",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 31,
+          "goals": 21
+        },
+        "cup": {
+          "apps": 2,
+          "goals": 0
+        },
+        "lcup": null,
+        "cont": {
+          "apps": 9,
+          "goals": 6
+        },
+        "other": {
+          "apps": 1,
+          "goals": 1
+        }
+      }
+    },
+    {
+      "team": "juventus",
+      "season": "2019/20",
+      "division": "Serie A",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 33,
+          "goals": 31
+        },
+        "cup": {
+          "apps": 4,
+          "goals": 2
+        },
+        "lcup": null,
+        "cont": {
+          "apps": 8,
+          "goals": 4
+        },
+        "other": {
+          "apps": 1,
+          "goals": 0
+        }
+      }
+    },
+    {
+      "team": "juventus",
+      "season": "2020/21",
+      "division": "Serie A",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 33,
+          "goals": 29
+        },
+        "cup": {
+          "apps": 4,
+          "goals": 2
+        },
+        "lcup": null,
+        "cont": {
+          "apps": 6,
+          "goals": 4
+        },
+        "other": {
+          "apps": 1,
+          "goals": 1
+        }
+      }
+    },
+    {
+      "team": "juventus",
+      "season": "2021/22",
+      "division": "Serie A",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 1,
+          "goals": 0
+        },
+        "cup": null,
+        "lcup": null,
+        "cont": null,
+        "other": null
+      }
+    },
+    {
+      "team": "manutd",
+      "season": "2021/22",
+      "division": "Premier League",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 30,
+          "goals": 18
+        },
+        "cup": {
+          "apps": 1,
+          "goals": 0
+        },
+        "lcup": {
+          "apps": 0,
+          "goals": 0
+        },
+        "cont": {
+          "apps": 7,
+          "goals": 6
+        },
+        "other": null
+      }
+    },
+    {
+      "team": "manutd",
+      "season": "2022/23",
+      "division": "Premier League",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 10,
+          "goals": 1
+        },
+        "cup": {
+          "apps": 0,
+          "goals": 0
+        },
+        "lcup": {
+          "apps": 0,
+          "goals": 0
+        },
+        "cont": {
+          "apps": 6,
+          "goals": 2
+        },
+        "other": null
+      }
+    },
+    {
+      "team": "alnassr",
+      "season": "2022/23",
+      "division": "Saudi Pro League",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 16,
+          "goals": 14
+        },
+        "cup": {
+          "apps": 2,
+          "goals": 0
+        },
+        "lcup": null,
+        "cont": null,
+        "other": {
+          "apps": 1,
+          "goals": 0
+        }
+      }
+    },
+    {
+      "team": "alnassr",
+      "season": "2023/24",
+      "division": "Saudi Pro League",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 31,
+          "goals": 35
+        },
+        "cup": {
+          "apps": 4,
+          "goals": 3
+        },
+        "lcup": null,
+        "cont": {
+          "apps": 9,
+          "goals": 6
+        },
+        "other": {
+          "apps": 7,
+          "goals": 6
+        }
+      }
+    },
+    {
+      "team": "alnassr",
+      "season": "2024/25",
+      "division": "Saudi Pro League",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 30,
+          "goals": 25
+        },
+        "cup": {
+          "apps": 1,
+          "goals": 0
+        },
+        "lcup": null,
+        "cont": {
+          "apps": 8,
+          "goals": 8
+        },
+        "other": {
+          "apps": 2,
+          "goals": 2
+        }
+      }
+    },
+    {
+      "team": "alnassr",
+      "season": "2025/26",
+      "division": "Saudi Pro League",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 30,
+          "goals": 28
+        },
+        "cup": {
+          "apps": 1,
+          "goals": 0
+        },
+        "lcup": null,
+        "cont": {
+          "apps": 4,
+          "goals": 1
+        },
+        "other": {
+          "apps": 2,
+          "goals": 1
+        }
+      }
+    }
+  ],
+  "years": [
+    {
+      "year": 2002,
+      "goals": 5,
+      "age": 17
+    },
+    {
+      "year": 2003,
+      "goals": 1,
+      "age": 18
+    },
+    {
+      "year": 2004,
+      "goals": 13,
+      "age": 19
+    },
+    {
+      "year": 2005,
+      "goals": 15,
+      "age": 20
+    },
+    {
+      "year": 2006,
+      "goals": 25,
+      "age": 21
+    },
+    {
+      "year": 2007,
+      "goals": 34,
+      "age": 22
+    },
+    {
+      "year": 2008,
+      "goals": 35,
+      "age": 23
+    },
+    {
+      "year": 2009,
+      "goals": 30,
+      "age": 24
+    },
+    {
+      "year": 2010,
+      "goals": 48,
+      "age": 25
+    },
+    {
+      "year": 2011,
+      "goals": 60,
+      "age": 26
+    },
+    {
+      "year": 2012,
+      "goals": 63,
+      "age": 27
+    },
+    {
+      "year": 2013,
+      "goals": 69,
+      "age": 28
+    },
+    {
+      "year": 2014,
+      "goals": 61,
+      "age": 29
+    },
+    {
+      "year": 2015,
+      "goals": 57,
+      "age": 30
+    },
+    {
+      "year": 2016,
+      "goals": 55,
+      "age": 31
+    },
+    {
+      "year": 2017,
+      "goals": 53,
+      "age": 32
+    },
+    {
+      "year": 2018,
+      "goals": 49,
+      "age": 33
+    },
+    {
+      "year": 2019,
+      "goals": 39,
+      "age": 34
+    },
+    {
+      "year": 2020,
+      "goals": 44,
+      "age": 35
+    },
+    {
+      "year": 2021,
+      "goals": 47,
+      "age": 36
+    },
+    {
+      "year": 2022,
+      "goals": 16,
+      "age": 37
+    },
+    {
+      "year": 2023,
+      "goals": 54,
+      "age": 38
+    },
+    {
+      "year": 2024,
+      "goals": 43,
+      "age": 39
+    },
+    {
+      "year": 2025,
+      "goals": 41,
+      "age": 40
+    },
+    {
+      "year": 2026,
+      "goals": 19,
+      "age": 41
+    }
+  ],
+  "portugal_years": [
+    {
+      "year": 2003,
+      "apps": 2,
+      "goals": 0
+    },
+    {
+      "year": 2004,
+      "apps": 16,
+      "goals": 7
+    },
+    {
+      "year": 2005,
+      "apps": 11,
+      "goals": 2
+    },
+    {
+      "year": 2006,
+      "apps": 14,
+      "goals": 6
+    },
+    {
+      "year": 2007,
+      "apps": 10,
+      "goals": 5
+    },
+    {
+      "year": 2008,
+      "apps": 8,
+      "goals": 1
+    },
+    {
+      "year": 2009,
+      "apps": 7,
+      "goals": 1
+    },
+    {
+      "year": 2010,
+      "apps": 11,
+      "goals": 3
+    },
+    {
+      "year": 2011,
+      "apps": 8,
+      "goals": 7
+    },
+    {
+      "year": 2012,
+      "apps": 13,
+      "goals": 5
+    },
+    {
+      "year": 2013,
+      "apps": 9,
+      "goals": 10
+    },
+    {
+      "year": 2014,
+      "apps": 9,
+      "goals": 5
+    },
+    {
+      "year": 2015,
+      "apps": 5,
+      "goals": 3
+    },
+    {
+      "year": 2016,
+      "apps": 13,
+      "goals": 13
+    },
+    {
+      "year": 2017,
+      "apps": 11,
+      "goals": 11
+    },
+    {
+      "year": 2018,
+      "apps": 7,
+      "goals": 6
+    },
+    {
+      "year": 2019,
+      "apps": 10,
+      "goals": 14
+    },
+    {
+      "year": 2020,
+      "apps": 6,
+      "goals": 3
+    },
+    {
+      "year": 2021,
+      "apps": 14,
+      "goals": 13
+    },
+    {
+      "year": 2022,
+      "apps": 12,
+      "goals": 3
+    },
+    {
+      "year": 2023,
+      "apps": 9,
+      "goals": 10
+    },
+    {
+      "year": 2024,
+      "apps": 12,
+      "goals": 7
+    },
+    {
+      "year": 2025,
+      "apps": 9,
+      "goals": 8
+    },
+    {
+      "year": 2026,
+      "apps": 7,
+      "goals": 3
+    }
+  ],
+  "competitions": {
+    "La Liga": 311,
+    "Champions League": 140,
+    "Premier League": 103,
+    "Saudi Pro League": 102,
+    "Serie A": 81,
+    "Euro qualifying": 41,
+    "World Cup qualifying": 41,
+    "Other cup competitions": 25,
+    "Copa del Rey": 22,
+    "Friendlies": 22,
+    "AFC Champions League": 15,
+    "Nations League": 15,
+    "European Championship": 14,
+    "FA Cup": 13,
+    "World Cup": 11,
+    "Coppa Italia": 4,
+    "League Cup": 4,
+    "King's Cup": 3,
+    "Primeira Liga": 3,
+    "Confederations Cup": 2,
+    "Europa League": 2,
+    "Taca de Portugal": 2
+  },
+  "bodyparts": {
+    "sporting": [
+      2,
+      2,
+      1,
+      0
+    ],
+    "manutd": [
+      97,
+      23,
+      24,
+      1
+    ],
+    "realmadrid": [
+      299,
+      80,
+      70,
+      1
+    ],
+    "juventus": [
+      62,
+      21,
+      18,
+      0
+    ],
+    "alnassr": [
+      86,
+      26,
+      16,
+      1
+    ],
+    "portugal": [
+      85,
+      33,
+      28,
+      0
+    ]
+  },
+  "penalties": {
+    "realmadrid": 81,
+    "manutd": 21,
+    "portugal": 22,
+    "alnassr": 32,
+    "juventus": 28
+  },
+  "freekicks": {
+    "realmadrid": 33,
+    "manutd": 15,
+    "portugal": 11,
+    "alnassr": 6,
+    "juventus": 1
+  },
+  "hattricks": {
+    "realmadrid": 44,
+    "manutd": 3,
+    "portugal": 10,
+    "alnassr": 6,
+    "juventus": 3
+  },
+  "opponents": {
+    "club": {
+      "Sevilla": 27,
+      "Atletico Madrid": 25,
+      "Getafe": 23,
+      "Celta Vigo": 20,
+      "Barcelona": 20,
+      "Athletic Bilbao": 17,
+      "Malaga": 17,
+      "Real Sociedad": 15,
+      "Espanyol": 15,
+      "Valencia": 15,
+      "Villarreal": 15,
+      "Levante": 14,
+      "Tottenham Hotspur": 14
+    },
+    "saudi": {
+      "Al Wehda": 10,
+      "Damac": 9,
+      "Al Fateh": 9,
+      "Al Shabab": 8,
+      "Al Khaleej": 7,
+      "Al Ittihad": 6,
+      "Al Hilal": 6,
+      "Al Feiha": 6,
+      "Al Taee": 5,
+      "Al Riyadh": 5,
+      "Al Ahli": 5
+    },
+    "intl": {
+      "Luxembourg": 11,
+      "Hungary": 9,
+      "Sweden": 7,
+      "Lithuania": 7,
+      "Armenia": 7,
+      "Andorra": 6,
+      "Switzerland": 5,
+      "Latvia": 5
+    },
+    "sporting": {
+      "Moreirense": 2,
+      "Boavista": 1,
+      "Estarreja": 1,
+      "FC Oliveira do Hospital": 1
+    },
+    "manutd": {
+      "Tottenham Hotspur": 10,
+      "Arsenal": 9,
+      "Aston Villa": 9,
+      "Newcastle United": 8,
+      "Fulham": 7,
+      "Wigan Athletic": 7,
+      "Bolton Wanderers": 6,
+      "Portsmouth": 6,
+      "West Ham United": 6,
+      "Everton": 6,
+      "Middlesbrough": 5,
+      "Norwich City": 4,
+      "Reading": 4
+    },
+    "realmadrid": {
+      "Sevilla": 27,
+      "Getafe": 23,
+      "Atletico Madrid": 22,
+      "Celta Vigo": 20,
+      "Barcelona": 18,
+      "Athletic Bilbao": 17,
+      "Malaga": 17,
+      "Espanyol": 15,
+      "Real Sociedad": 15,
+      "Valencia": 15,
+      "Levante": 14,
+      "Deportivo La Coruna": 13,
+      "Villarreal": 13
+    },
+    "juventus": {
+      "Cagliari": 8,
+      "Udinese": 7,
+      "Parma": 6,
+      "Sassuolo": 6,
+      "Genoa": 5,
+      "Lazio": 5,
+      "Roma": 5,
+      "Sampdoria": 5,
+      "Inter Milan": 4,
+      "AC Milan": 4,
+      "Napoli": 4,
+      "Torino": 4,
+      "Atletico Madrid": 3
+    }
+  },
+  "opponent_apps": {
+    "club": {
+      "Sevilla": 18,
+      "Atletico Madrid": 37,
+      "Getafe": 14,
+      "Celta Vigo": 13,
+      "Barcelona": 34,
+      "Athletic Bilbao": 18,
+      "Malaga": 19,
+      "Real Sociedad": 11,
+      "Espanyol": 16,
+      "Valencia": 20,
+      "Villarreal": 21,
+      "Levante": 14,
+      "Tottenham Hotspur": 20
+    },
+    "saudi": {
+      "Al Wehda": 6,
+      "Damac": 6,
+      "Al Fateh": 7,
+      "Al Shabab": 9,
+      "Al Khaleej": 7,
+      "Al Ittihad": 9,
+      "Al Hilal": 11,
+      "Al Feiha": 8,
+      "Al Taee": 3,
+      "Al Riyadh": 5,
+      "Al Ahli": 7
+    },
+    "intl": {
+      "Luxembourg": 11,
+      "Hungary": 8,
+      "Sweden": 7,
+      "Lithuania": 3,
+      "Armenia": 5,
+      "Andorra": 3,
+      "Switzerland": 4,
+      "Latvia": 4
+    },
+    "sporting": {
+      "Moreirense": 1,
+      "Boavista": 1,
+      "Estarreja": 1,
+      "FC Oliveira do Hospital": 1
+    },
+    "manutd": {
+      "Tottenham Hotspur": 6,
+      "Arsenal": 6,
+      "Aston Villa": 7,
+      "Newcastle United": 4,
+      "Fulham": 5,
+      "Wigan Athletic": 5,
+      "Bolton Wanderers": 4,
+      "Portsmouth": 4,
+      "West Ham United": 4,
+      "Everton": 5,
+      "Middlesbrough": 5,
+      "Norwich City": 2,
+      "Reading": 3
+    },
+    "realmadrid": {
+      "Sevilla": 13,
+      "Getafe": 12,
+      "Atletico Madrid": 14,
+      "Celta Vigo": 10,
+      "Barcelona": 16,
+      "Athletic Bilbao": 10,
+      "Malaga": 11,
+      "Espanyol": 7,
+      "Real Sociedad": 7,
+      "Valencia": 11,
+      "Levante": 9,
+      "Deportivo La Coruna": 6,
+      "Villarreal": 10
+    },
+    "juventus": {
+      "Cagliari": 3,
+      "Udinese": 4,
+      "Parma": 3,
+      "Sassuolo": 5,
+      "Genoa": 4,
+      "Lazio": 4,
+      "Roma": 4,
+      "Sampdoria": 4,
+      "Inter Milan": 3,
+      "AC Milan": 4,
+      "Napoli": 4,
+      "Torino": 4,
+      "Atletico Madrid": 1
+    }
+  },
+  "log": []
+}
