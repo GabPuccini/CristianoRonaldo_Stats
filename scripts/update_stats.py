@@ -197,6 +197,37 @@ def derive(data):
     for name, n in career_competitions(data).items():
         out[f"comp.{slug(name)}"] = str(n)
 
+    # Trophies and awards. Every count on the site is the length of a year list,
+    # so adding a trophy in one place moves the counters, the accordions, the
+    # filter tabs and the prose together.
+    hon = data.get("honours", {})
+    teams_hon = hon.get("teams", {})
+    LEAGUES = {"Premier League", "La Liga", "Serie A", "Saudi Pro League", "Primeira Liga"}
+    club_total = national_total = 0
+    for tid, trophies in teams_hon.items():
+        n = sum(len(t["years"]) for t in trophies)
+        out[f"honours.{tid}.count"] = str(n)
+        out[f"honours.{tid}.kinds"] = str(len(trophies))
+        for t in trophies:
+            out[f"honours.{tid}.{slug(t['name'])}"] = str(len(t["years"]))
+        if tid == "portugal":
+            national_total += n
+        else:
+            club_total += n
+    out["honours.club"] = str(club_total)
+    out["honours.national"] = str(national_total)
+    out["honours.total"] = str(club_total + national_total)
+    out["honours.leagues"] = str(sum(
+        len(t["years"]) for v in teams_hon.values() for t in v if t["name"] in LEAGUES))
+    out["honours.championsleague"] = str(sum(
+        len(t["years"]) for v in teams_hon.values() for t in v
+        if t["name"] == "UEFA Champions League"))
+    for award in hon.get("individual", []):
+        out[f"award.{slug(award['name'])}"] = str(award["count"])
+    if "individual_floor" in hon:
+        out["award.floor"] = str(hon["individual_floor"])
+        out["award.floor_plus"] = f"{hon['individual_floor']}+"
+
     # Calendar years, with the running career total recomputed every time
     running = 0
     year_rows = []
@@ -367,6 +398,18 @@ def validate(data, facts):
         if sum(slots) != team_goals:
             errors.append(
                 f"body parts for {tid} sum to {sum(slots)}, that team has {team_goals} goals")
+
+    # Trophies must belong to a team the site knows about, and every trophy must
+    # carry the years it was won, since the counts are those lists' lengths.
+    known = {t["id"] for t in data["teams"]}
+    for tid, trophies in data.get("honours", {}).get("teams", {}).items():
+        if tid not in known:
+            errors.append(f"honours listed for unknown team {tid}")
+        for t in trophies:
+            if not t.get("years"):
+                errors.append(f"{tid} trophy {t.get('name', '?')} has no years")
+            if len(set(t["years"])) != len(t["years"]):
+                errors.append(f"{tid} trophy {t['name']} repeats a year")
 
     pens = sum(data["penalties"].values())
     fks = sum(data["freekicks"].values())

@@ -1245,5 +1245,235 @@
   "competition_rollup": {
     "Arab Club Champions Cup": "Other cup competitions",
     "Saudi Super Cup": "Other cup competitions"
+  },
+  "honours": {
+    "_note": "Team trophies, by team, each with the years it was won. The counts on every page are the length of these year lists, so a new trophy is added in one place. Individual awards are separate and are not part of the 35.",
+    "teams": {
+      "sporting": [
+        {
+          "name": "Supertaça Cândido de Oliveira",
+          "years": [
+            "2002"
+          ]
+        }
+      ],
+      "manutd": [
+        {
+          "name": "Premier League",
+          "years": [
+            "2006/07",
+            "2007/08",
+            "2008/09"
+          ]
+        },
+        {
+          "name": "FA Cup",
+          "years": [
+            "2003/04"
+          ]
+        },
+        {
+          "name": "Football League Cup",
+          "years": [
+            "2005/06",
+            "2008/09"
+          ]
+        },
+        {
+          "name": "FA Community Shield",
+          "years": [
+            "2007"
+          ]
+        },
+        {
+          "name": "UEFA Champions League",
+          "years": [
+            "2007/08"
+          ]
+        },
+        {
+          "name": "FIFA Club World Cup",
+          "years": [
+            "2008"
+          ]
+        }
+      ],
+      "realmadrid": [
+        {
+          "name": "La Liga",
+          "years": [
+            "2011/12",
+            "2016/17"
+          ]
+        },
+        {
+          "name": "Copa del Rey",
+          "years": [
+            "2010/11",
+            "2013/14"
+          ]
+        },
+        {
+          "name": "Supercopa de España",
+          "years": [
+            "2012",
+            "2017"
+          ]
+        },
+        {
+          "name": "UEFA Champions League",
+          "years": [
+            "2013/14",
+            "2015/16",
+            "2016/17",
+            "2017/18"
+          ]
+        },
+        {
+          "name": "UEFA Super Cup",
+          "years": [
+            "2014",
+            "2017"
+          ]
+        },
+        {
+          "name": "FIFA Club World Cup",
+          "years": [
+            "2014",
+            "2016",
+            "2017"
+          ]
+        }
+      ],
+      "juventus": [
+        {
+          "name": "Serie A",
+          "years": [
+            "2018/19",
+            "2019/20"
+          ]
+        },
+        {
+          "name": "Coppa Italia",
+          "years": [
+            "2020/21"
+          ]
+        },
+        {
+          "name": "Supercoppa Italiana",
+          "years": [
+            "2018",
+            "2020"
+          ]
+        }
+      ],
+      "alnassr": [
+        {
+          "name": "Saudi Pro League",
+          "years": [
+            "2025/26"
+          ]
+        },
+        {
+          "name": "Arab Club Champions Cup",
+          "years": [
+            "2023"
+          ]
+        }
+      ],
+      "portugal": [
+        {
+          "name": "UEFA European Championship",
+          "years": [
+            "2016"
+          ]
+        },
+        {
+          "name": "UEFA Nations League",
+          "years": [
+            "2018/19",
+            "2024/25"
+          ]
+        }
+      ]
+    },
+    "individual": [
+      {
+        "name": "Ballon d'Or",
+        "years": [
+          "2008",
+          "2013",
+          "2014",
+          "2016",
+          "2017"
+        ],
+        "count": 5
+      },
+      {
+        "name": "The Best FIFA Men's Player",
+        "years": [
+          "2016",
+          "2017"
+        ],
+        "count": 2
+      },
+      {
+        "name": "European Golden Shoe",
+        "years": [
+          "2007/08",
+          "2010/11",
+          "2013/14",
+          "2014/15"
+        ],
+        "count": 4
+      },
+      {
+        "name": "UEFA Men's Player of the Year",
+        "years": [
+          "2013/14",
+          "2015/16",
+          "2016/17"
+        ],
+        "count": 3
+      },
+      {
+        "name": "UEFA Champions League top scorer",
+        "years": [
+          "07/08",
+          "12/13",
+          "13/14",
+          "14/15",
+          "15/16",
+          "16/17",
+          "17/18"
+        ],
+        "count": 7
+      },
+      {
+        "name": "Premier League Player of the Season",
+        "years": [
+          "2006/07",
+          "2007/08"
+        ],
+        "count": 2
+      },
+      {
+        "name": "Pichichi Trophy",
+        "years": [
+          "2010/11",
+          "2013/14",
+          "2014/15"
+        ],
+        "count": 3
+      },
+      {
+        "name": "FIFA FIFPro World 11",
+        "years": [
+          "2007 to 2021"
+        ],
+        "count": 15
+      }
+    ],
+    "individual_floor": 50
   }
 }
