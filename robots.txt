@@ -66,5 +66,7 @@ Allow: /
 Crawl-delay: 5
 
 # Sitemap
-# Aggiorna lastmod in sitemap.xml quando cambi una pagina
+# I lastmod delle sei pagine di statistiche li aggiorna da solo
+# scripts/update_stats.py a ogni build. Non modificarli a mano.
+# Solo privacy.html resta manuale, perche lo script non la tocca.
 Sitemap: https://ronaldostats.app/sitemap.xml

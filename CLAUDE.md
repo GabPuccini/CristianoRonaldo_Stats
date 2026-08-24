@@ -13,6 +13,10 @@ directly in an HTML file.** Every published figure is either marked with a
 If you hand edit a number in HTML it will be silently overwritten on the next
 update, and worse, the site will disagree with itself across pages.
 
+`sitemap.xml` is driven too: the `lastmod` of each of the six statistics pages
+tracks the update date, since those pages really do change every time. Only
+`privacy.html` keeps a hand written date, because the script never touches it.
+
 ## When Rambo says Ronaldo scored
 
 Translate the sentence into one command and run it. Do not ask for details he
@@ -141,8 +145,9 @@ Note only the first goal of a match carries `--new-appearance`.
 1. The script prints the new totals and refuses to write if anything fails to
    reconcile. If it fails, read the error, fix the data, do not force it.
 2. Check `git diff` and confirm only expected numbers moved. One goal touches all
-   six pages, so a diff limited to fewer than that means something is not wired
-   up and should be looked at rather than committed.
+   six pages plus `sitemap.xml`, so a diff limited to fewer than seven files
+   means something is not wired up and should be looked at rather than
+   committed.
 3. Commit with a message naming the event, for example
    `Goal 977: Al Nassr v Al Hilal, Saudi Pro League`.
 4. Push. Cloudflare serves the new file within a minute or two, and a hard

@@ -1056,7 +1056,41 @@ def write_html(data, values, regions, dry_run=False):
             report["files"].append(name)
             if not dry_run:
                 path.write_text(updated, encoding="utf-8")
+
+    sitemap = update_sitemap(values, report, dry_run)
+    if sitemap:
+        report["files"].append(sitemap)
     return report
+
+
+def update_sitemap(values, report, dry_run=False):
+    """Every page the engine rebuilds genuinely changed, so its lastmod moves
+    with the data. Pages the engine does not touch, such as the privacy policy,
+    keep whatever date they already carry: claiming they changed would be a
+    false signal to a crawler."""
+    path = ROOT / "sitemap.xml"
+    if not path.exists():
+        return None
+    original = path.read_text(encoding="utf-8")
+    updated = original
+    owned = {"index.html": "https://ronaldostats.app/"}
+    owned.update({name: f"https://ronaldostats.app/{name}" for name in PAGES
+                  if name != "index.html"})
+    for name, loc in owned.items():
+        pattern = (r"(<loc>" + re.escape(loc) + r"</loc>\s*<lastmod>)([^<]*)(</lastmod>)")
+        hits = list(re.finditer(pattern, updated))
+        if len(hits) != 1:
+            report["rules"].append(
+                f"sitemap.xml: expected 1 entry for {name}, found {len(hits)}")
+            continue
+        m = hits[0]
+        updated = updated[:m.start(2)] + values["meta.updated.iso"] + updated[m.end(2):]
+        report["texts"] += 1
+    if updated == original:
+        return None
+    if not dry_run:
+        path.write_text(updated, encoding="utf-8")
+    return "sitemap.xml"
 
 
 # ----------------------------------------------------------------------------
