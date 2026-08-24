@@ -21,8 +21,8 @@ listed, because guessing there would publish the wrong number later.
 """
 
 import re
+import subprocess
 import sys
-from collections import Counter
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -195,8 +195,25 @@ def anchor_for(head, pos, end, width):
     return lit(before) + r"([\d,]+(?:\.\d+)?)" + lit(after)
 
 
+def pages_agree():
+    """The generator reads the current pages to build its patterns, so a page
+    that disagrees with the dataset would have its wrong figure baked into a
+    rule and republished for good. Refuse in that case."""
+    proc = subprocess.run([sys.executable, str(Path(__file__).with_name("verify_against_html.py"))],
+                          capture_output=True, text=True)
+    if proc.returncode == 0:
+        return True
+    print("The pages do not agree with the dataset, so the rules would be built")
+    print("from wrong figures. Resolve this first:\n")
+    tail = [l for l in proc.stdout.splitlines() if l.strip()][-12:]
+    print("\n".join(tail))
+    return False
+
+
 def main():
     global COMP_LABELS
+    if not pages_agree():
+        return 1
     values, _, _ = engine.derive(engine.load())
     # longest first, so "Champions League" never wins over "AFC Champions League"
     COMP_LABELS = sorted(engine.career_competitions(engine.load()), key=len, reverse=True)
