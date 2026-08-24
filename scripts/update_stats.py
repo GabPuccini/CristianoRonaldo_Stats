@@ -178,6 +178,73 @@ def derive(data):
     out["season.best.season"] = best_season["season"]
     out["season.best.team"] = teams[best_season["team"]]["name"]
 
+    # Season table cells, one key per published cell, so the season page can be
+    # driven without regenerating any of its markup.
+    slots = ["league", "cup", "lcup", "cont", "other"]
+    club_col = {s: [0, 0] for s in slots}
+    spell, spells = None, []
+    for i, row in enumerate(data["seasons"]):
+        r_apps = r_goals = 0
+        for slot in slots:
+            cell = row["comps"].get(slot)
+            if cell is None:
+                out[f"season.{i}.{slot}.apps"] = "n/a"
+                out[f"season.{i}.{slot}.goals"] = "n/a"
+                continue
+            out[f"season.{i}.{slot}.apps"] = str(cell["apps"])
+            out[f"season.{i}.{slot}.goals"] = str(cell["goals"])
+            r_apps += cell["apps"]
+            r_goals += cell["goals"]
+        out[f"season.{i}.total.apps"] = f"{r_apps:,}"
+        out[f"season.{i}.total.goals"] = f"{r_goals:,}"
+        if not row.get("in_career", True):
+            continue
+        for slot in slots:
+            cell = row["comps"].get(slot)
+            if cell:
+                club_col[slot][0] += cell["apps"]
+                club_col[slot][1] += cell["goals"]
+        # a spell is a run of consecutive seasons at the same club
+        if spell is None or spell["team"] != row["team"]:
+            spell = {"team": row["team"], "cols": {s: [0, 0] for s in slots}}
+            spells.append(spell)
+        for slot in slots:
+            cell = row["comps"].get(slot)
+            if cell:
+                spell["cols"][slot][0] += cell["apps"]
+                spell["cols"][slot][1] += cell["goals"]
+
+    for n, sp in enumerate(spells):
+        t_apps = sum(v[0] for v in sp["cols"].values())
+        t_goals = sum(v[1] for v in sp["cols"].values())
+        for slot in slots:
+            out[f"spell.{n}.{slot}.apps"] = f'{sp["cols"][slot][0]:,}'
+            out[f"spell.{n}.{slot}.goals"] = f'{sp["cols"][slot][1]:,}'
+        out[f"spell.{n}.total.apps"] = f"{t_apps:,}"
+        out[f"spell.{n}.total.goals"] = f"{t_goals:,}"
+
+    for slot in slots:
+        out[f"club.total.{slot}.apps"] = f"{club_col[slot][0]:,}"
+        out[f"club.total.{slot}.goals"] = f"{club_col[slot][1]:,}"
+
+    # Portugal year rows: only the total columns are modelled, the competitive
+    # and friendly split is not in the dataset yet.
+    for row in data["portugal_years"]:
+        out[f"portugal.{row['year']}.apps"] = str(row["apps"])
+        out[f"portugal.{row['year']}.goals"] = str(row["goals"])
+
+    # Current season, as quoted on the home page and the season page
+    cur = data["meta"]["current_season"]
+    cur_rows = [r for r in data["seasons"] if r["season"] == cur and r.get("in_career", True)]
+    if cur_rows:
+        cg = sum(c["goals"] for r in cur_rows for c in r["comps"].values() if c)
+        out["season.current.name"] = cur
+        out["season.current.goals"] = str(cg)
+        out["season.current.league_goals"] = str(sum(
+            r["comps"]["league"]["goals"] for r in cur_rows if r["comps"].get("league")))
+    out["season.count"] = str(len({r["season"] for r in data["seasons"] if r.get("in_career", True)}))
+    out["career.assist_rate"] = f"{career_apps / career_assists:.1f}" if career_assists else "0.0"
+
     # Dates
     updated = dt.date.fromisoformat(data["meta"]["updated"])
     out["meta.updated.iso"] = updated.isoformat()
