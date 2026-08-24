@@ -655,7 +655,9 @@ def text_rules(generated=True):
             (r"Updated " + D + r"\.", "meta.updated.long"),
             (r"debut at \d+ to " + G + r" career goals, milestone by milestone and dated\. Updated", "career.goals"),
             (r"debut at \d+ to " + G + r" career goals, milestone by milestone and dated\.\"", "career.goals"),
-            (r'"description": "' + G + r' career goals and counting', "career.goals"),
+            # the timeline's list entries carry the date first, so this is
+            # anchored on the words rather than on the start of the string
+            (r"" + G + r" career goals and counting", "career.goals"),
             (r"The last great number is " + G + r" away\.", "career.remaining"),
             (r"scored " + G + r" goals in [\d,]+ games\.", "team.realmadrid.goals"),
             (r"scored [\d,]+ goals in " + G + r" games\.", "team.realmadrid.apps"),
@@ -1092,6 +1094,14 @@ def check_pages():
         for i, m in enumerate(LD_RE.finditer(text)):
             if "data-stat" in m.group(1):
                 errors.append(f"{name}: JSON-LD block {i} contains a data-stat marker")
+            # schema.org Event is for something a reader can attend or buy a
+            # ticket for. Career milestones are not, so Google validates them as
+            # events, reports missing location, organizer and offers, and the
+            # only way to satisfy it is to invent them. Use a plain ListItem.
+            if '"@type": "Event"' in m.group(1):
+                errors.append(
+                    f"{name}: JSON-LD block {i} marks up an Event. Career history "
+                    f"is not an attendable event; use a ListItem instead.")
             try:
                 json.loads(m.group(1))
             except ValueError as exc:
