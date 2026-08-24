@@ -96,6 +96,24 @@ opposition, and `--assists N` if he also created goals.
     python scripts/update_stats.py build    # rewrite HTML from current data
     python scripts/update_stats.py undo     # revert the last event
 
+### The other scripts
+
+    python scripts/verify_against_html.py   # engine against every published figure
+    python scripts/check_coverage.py        # is any figure still hand maintained?
+    python scripts/gen_head_rules.py        # only after editing head prose
+
+`verify_against_html.py` compares what the engine computes against what each page
+prints, and exits 1 on any disagreement. `check_coverage.py` is the stricter one:
+it walks every page and fails if a figure the engine could produce is neither
+marked, nor in a region, nor covered by a text rule. Both should be clean before
+you commit.
+
+`gen_head_rules.py` rewrites `scripts/head_rules.py`, which drives the figures in
+titles, meta descriptions and JSON-LD, where no marker can go. Run it only when
+you have changed the wording of a head, and only when the pages already agree
+with the data, since it reads the current pages to build its patterns. Every rule
+it writes is checked on each build, so a stale one is reported, not ignored.
+
 ### Worked examples
 
 > "Ronaldo scored 1 goal in the Saudi Pro League against Al Hilal"
@@ -122,7 +140,9 @@ Note only the first goal of a match carries `--new-appearance`.
 
 1. The script prints the new totals and refuses to write if anything fails to
    reconcile. If it fails, read the error, fix the data, do not force it.
-2. Check `git diff` and confirm only expected numbers moved.
+2. Check `git diff` and confirm only expected numbers moved. One goal touches all
+   six pages, so a diff limited to fewer than that means something is not wired
+   up and should be looked at rather than committed.
 3. Commit with a message naming the event, for example
    `Goal 977: Al Nassr v Al Hilal, Saudi Pro League`.
 4. Push. Cloudflare serves the new file within a minute or two, and a hard

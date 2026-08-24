@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+# Local working state: the previous dataset, written before every event so
+# undo always works. Transient, not part of the site.
+data/ronaldo.backup.json

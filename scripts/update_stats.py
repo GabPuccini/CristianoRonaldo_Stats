@@ -256,6 +256,18 @@ def derive(data):
     out["year.current.year"] = str(year_rows[-1]["year"])
     out["year.count"] = str(len(year_rows))
     out["year.average"] = f"{sum(r['goals'] for r in year_rows) / len(year_rows):.1f}"
+    for row in year_rows:
+        out[f"year.{row['year']}.goals"] = str(row["goals"])
+        out[f"year.{row['year']}.cumulative"] = f"{row['cumulative']:,}"
+        out[f"year.{row['year']}.age"] = str(row["age"])
+    # the sparkline's aria-label is the only description a screen reader gets,
+    # so it is composed here rather than left to drift
+    best = max(year_rows, key=lambda r: r["goals"])
+    cur = year_rows[-1]
+    out["spark.label"] = (
+        "Bar chart of Cristiano Ronaldo goals in each calendar year from "
+        f"{year_rows[0]['year']} to {cur['year']}, peaking at {best['goals']} goals "
+        f"in {best['year']} and standing at {cur['goals']} goals so far in {cur['year']}")
     out["year.first"] = str(year_rows[0]["year"])
     out["year.first.goals"] = str(year_rows[0]["goals"])
     out["year.last"] = str(year_rows[-1]["year"])
@@ -301,6 +313,12 @@ def derive(data):
             continue
         cell = row["comps"].get("league")
         league_of[(row["team"], row["season"])] = cell["goals"] if cell else 0
+    # keyed by the season label as the pages print it, so prose and structured
+    # data can name a campaign directly
+    for row in season_totals:
+        tag = row["season"].replace("/", "-")
+        out[f"season.{tag}.{row['team']}.goals"] = str(row["goals"])
+        out[f"season.{tag}.{row['team']}.apps"] = str(row["apps"])
     out["season.best.league_goals"] = str(
         league_of.get((best_season["team"], best_season["season"]), 0))
     for tid in teams:
@@ -539,13 +557,19 @@ ATTR_SPEC_RE = re.compile(r'data-stat-attr="([^"]+)"')
 # strand a figure.
 # ----------------------------------------------------------------------------
 
-def text_rules():
+try:
+    from head_rules import RULES as GENERATED_HEAD_RULES
+except ImportError:                                   # generated file not present
+    GENERATED_HEAD_RULES = {}
+
+
+def text_rules(generated=True):
     G = r"([\d,]+)"                       # a figure, with or without a comma
     D = r"(\d{1,2} \w+ \d{4})"            # a long date, e.g. 26 July 2026
     common = [
         (r'"dateModified": "(\d{4}-\d\d-\d\d)"', "meta.updated.iso"),
     ]
-    return {
+    table = {
         "index.html": common + [
             (r"as of " + D + r"[.,]", "meta.updated.long", 8),
             (r"has " + G + r" career goals, [\d,]+ assists", "career.goals", 2),
@@ -554,6 +578,30 @@ def text_rules():
             (r'content="' + G + r" goals, [\d,]+ assists", "career.goals", 2),
             (r'content="[\d,]+ goals, ' + G + r" assists", "career.assists", 2),
             (r'content="[\d,]+ goals, [\d,]+ assists and ' + G + r" appearances", "career.apps", 2),
+            (r"Cristiano Ronaldo is " + G + r" years old", "person.age"),
+            (r"for Real Madrid, " + G + r" for Manchester United and [\d,]+ for Juventus",
+             "comp.manutd.championsleague"),
+            (r"history of the competition: [\d,]+ for Real Madrid, [\d,]+ for Manchester "
+             r"United and " + G + r" for Juventus", "comp.juventus.championsleague"),
+            (r"free kick goals: [\d,]+ for Real Madrid, [\d,]+ for Manchester United, "
+             r"[\d,]+ for Portugal, [\d,]+ for Al Nassr and " + G + r" for Juventus",
+             "freekicks.juventus"),
+            (r"[\d,]+ for Portugal, " + G + r" for Al Nassr and [\d,]+ for Juventus",
+             "freekicks.alnassr"),
+            (r"hat tricks, [\d,]+ of them for Real Madrid, [\d,]+ for Portugal, [\d,]+ for "
+             r"Al Nassr, [\d,]+ for Manchester United and " + G + r" for Juventus",
+             "hattricks.juventus"),
+            (r"hat tricks, " + G + r" of them for Real Madrid", "hattricks.realmadrid"),
+            (r"of them for Real Madrid, " + G + r" for Portugal, [\d,]+ for Al Nassr",
+             "hattricks.portugal"),
+            (r"for Portugal, " + G + r" for Al Nassr, [\d,]+ for Manchester United",
+             "hattricks.alnassr"),
+            (r"for Al Nassr, " + G + r" for Manchester United and [\d,]+ for Juventus\.",
+             "hattricks.manutd"),
+            (r"free kick goals: [\d,]* ?for Real Madrid, " + G + r" for Manchester United",
+             "freekicks.manutd"),
+            (r"for Manchester United, " + G + r" for Portugal, [\d,]* ?for Al Nassr",
+             "freekicks.portugal"),
             (r"\.progress-fill \{ width: ([\d.]+)% !important; \}", "career.pct"),
             (r"\.progress-fill \{\n            height: 100%;\n            width: ([\d.]+)%;", "career.pct"),
         ],
@@ -583,6 +631,7 @@ def text_rules():
             (r"Ronaldo's " + G + r" goals by team", "career.goals", 2),
             (r"dashboard follows: " + G + r" career goals by competition", "career.goals"),
             (r'twitter:description" content="' + G + r" career goals by competition", "career.goals"),
+            (r"finish type as of [^:]*: " + G + r" in La Liga", "comp.laliga"),
         ],
         "timeline.html": common + [
             (r"Updated " + D + r"\.", "meta.updated.long"),
@@ -596,6 +645,7 @@ def text_rules():
             (r"he has " + G + r" career goals, [\d,]+ short of", "career.goals"),
             (r"career goals, " + G + r" short of [\d,]+\.", "career.remaining"),
             (r"short of " + G + r'\."', "career.target"),
+            (r"At " + G + r" he is still playing", "person.age"),
         ],
         "achievements.html": common + [
             (r"as of " + D + r"[.,]", "meta.updated.long", 5),
@@ -616,8 +666,16 @@ def text_rules():
             (r"Champions League " + G + r" times: once with Manchester", "honours.championsleague"),
             (r"has won " + G + r" Ballon d'Or awards, in", "award.ballondor"),
             (r"has won " + G + r" league titles in four countries", "honours.leagues"),
+            (r'"Real Madrid: ' + G + r" trophies, including", "honours.realmadrid.count"),
+            (r"Real Madrid, with " + G + r" trophies in nine seasons", "honours.realmadrid.count"),
+            (r"of the Year awards and " + G + r" selections in the FIFA", "award.fifafifproworld11"),
         ],
     }
+    # The rest of the head is generated: see scripts/gen_head_rules.py. The
+    # generator passes generated=False so it never reads back its own output.
+    for page, extra in (GENERATED_HEAD_RULES if generated else {}).items():
+        table.setdefault(page, []).extend(extra)
+    return table
 
 
 def script_rules():
@@ -631,6 +689,11 @@ def script_rules():
             (r"a total such as the " + G + r" against Atletico Madrid", "opponent.club.atleticomadrid.goals"),
             (r"His " + G + r" World Cup goals include three", "comp.portugal.worldcup"),
             (r"All " + G + r" across the whole career", "career.goals"),
+            # the provenance comment above DATA quotes the total it reconciles to
+            (r"which reconciles exactly with the " + G + r" total here", "career.goals"),
+            (r"published on ronaldostats\.app, updated ([A-Z][a-z]+ \d{4})", "meta.updated.short"),
+            (r"body part figures come from the MessivsRonaldo\.app database,\n"
+             r"        // ([A-Z][a-z]+ \d{4}),", "meta.updated.short"),
         ],
     }
 
@@ -711,8 +774,16 @@ def rewrite_page(text, values, regions, report):
                 else:
                     attrs += f' {attr_name}="{values[attr_key]}"'
                 report["attrs"] += 1
-        body = values[key] if key is not None else m.group("body")
-        if key is not None:
+        body = m.group("body")
+        if key is None:
+            # An attribute only marker leaves the body alone, but the body may
+            # hold markers of its own, and the outer match has already consumed
+            # them, so descend rather than passing them through untouched.
+            body = VALUE_RE.sub(value_sub, body)
+        else:
+            if KEY_RE.search(body):
+                report["nested"].append(f"{key} wraps another marker, which it would erase")
+            body = values[key]
             report["values"] += 1
         return f'<{m.group("tag")}{attrs}>{body}</{m.group("tag")}>'
 
@@ -894,6 +965,37 @@ def build_regions(data, tables, values):
     r["array.dash.portugal_years"] = pairs_block(
         [(row["year"], row["goals"]) for row in tables["portugal_years"]], " " * 16, 6)
 
+    # ---- The home page sparkline ----------------------------------------
+    # 25 bars with their geometry computed from the goals, plus the peak label
+    # and the tick years. It was hand drawn, so the bars and their tooltips did
+    # not move when a goal was scored and the chart contradicted its own label.
+    rows = tables["years"]
+    peak = max(r["goals"] for r in rows)
+    scale = 140 / peak                      # the tallest bar is 140 units high
+    def trim(x):
+        return f"{x:.1f}".rstrip("0").rstrip(".")
+    bars = []
+    for i, row in enumerate(rows):
+        h = row["goals"] * scale
+        last = i == len(rows) - 1
+        cls = "bar part" if last else ("bar peak" if row["goals"] == peak else "bar")
+        noun = "goal" if row["goals"] == 1 else "goals"
+        tail = " so far" if last else ""
+        bars.append(
+            f'                            <rect class="{cls}" x="{8 + 40 * i}" '
+            f'y="{trim(168 - h)}" width="24" height="{trim(h)}" rx="4">'
+            f'<title>{row["year"]}: {row["goals"]} {noun}{tail}</title></rect>')
+    peak_i = next(i for i, r in enumerate(rows) if r["goals"] == peak)
+    r["svg.spark"] = "\n".join(
+        ['                            <line class="baseline" x1="0" y1="168.5" '
+         'x2="1000" y2="168.5"></line>',
+         f'                            <text class="peak-label" x="{8 + 40 * peak_i + 12}" '
+         f'y="20">{peak}</text>']
+        + bars
+        + [f'                            <text class="tick" x="{8 + 40 * i + 12}" '
+           f'y="188">{rows[i]["year"]}</text>'
+           for i in range(0, len(rows), 4)])
+
     # ---- The dashboard's three share-of-career tables --------------------
     total = int(values["career.goals.raw"])
 
@@ -942,7 +1044,7 @@ def check_pages():
 
 def write_html(data, values, regions, dry_run=False):
     report = {"values": 0, "attrs": 0, "regions": 0, "texts": 0,
-              "missing": set(), "rules": [], "files": []}
+              "missing": set(), "rules": [], "nested": [], "files": []}
     for name in PAGES:
         path = ROOT / name
         if not path.exists():
@@ -1175,6 +1277,10 @@ def main():
     print(f"Rewrote {report['values']} values, {report['attrs']} attributes, "
           f"{report['regions']} table regions and {report['texts']} text rules "
           f"in {len(report['files'])} files: {', '.join(report['files']) or 'none'}")
+    if report["nested"]:
+        print("Markers nested inside another marker, which would erase them:")
+        for line in sorted(set(report["nested"])):
+            print("  " + line)
     if report["rules"]:
         print("Text rules that did not match exactly once:")
         for line in report["rules"]:

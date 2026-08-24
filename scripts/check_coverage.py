@@ -46,6 +46,16 @@ EXEMPT = {
          "the 2013/14 Champions League record, a competition record not a career one"),
         (r"100 points", "Real Madrid's points total in 2011/12, not a Ronaldo figure"),
         (r"all 96 ballots", "the Ballon d'Or vote in 2008"),
+        (r"Ballon d'Or at 23", "his age at the time, fixed by the event"),
+        (r"Serie A's record signing at 33", "his age at the time, fixed by the event"),
+        (r"take him to a record 14 at the Euros",
+         "his Euros total at the end of Euro 2020, quoted as history"),
+        (r"Injured after 25 minutes", "minutes played in the Euro 2016 final"),
+        (r"United pay £12\.24m|rising to 117 million|rising to €117m",
+         "transfer fees, fixed by the event"),
+        (r"100 points and 121 goals, 46 of them",
+         "the 2011/12 league total and Real Madrid's team total that season"),
+        (r"On 23 June 2026|23 June 2026 a brace", "the date of the sixth World Cup"),
         (r"final after 25 minutes", "minutes played in the Euro 2016 final"),
         (r"took him to 14 at European Championships",
          "his Euros total at the end of Euro 2020, quoted as history"),
@@ -89,6 +99,41 @@ def rule_spans(text, page):
         for m in re.finditer(rule[0], text):
             spans.append((m.start(1), m.end(1)))
     return spans
+
+
+def head_gaps(text, page, values, engine_values):
+    """The same question for the head: is every figure in a title, a meta
+    description or a JSON-LD string driven by a text rule? Only the parts a
+    search engine reads are scanned, never the stylesheet."""
+    head = text.split("</head>")[0]
+    spans = []
+    for rule in engine.text_rules().get(page, []):
+        for m in re.finditer(rule[0], head):
+            spans.append((m.start(1), m.end(1)))
+    chars = list(head)
+    for a, b in spans:
+        for i in range(a, b):
+            chars[i] = " "
+    head = "".join(chars)
+
+    # only the machine readable text, not the CSS
+    pieces = re.findall(r'<title>(.*?)</title>', head, re.S)
+    pieces += re.findall(r'<meta (?:name|property)="[^"]*(?:title|description)" content="([^"]*)"', head)
+    pieces += [m for m in re.findall(r'<script type="application/ld\+json">(.*?)</script>', head, re.S)]
+
+    gaps = []
+    for piece in pieces:
+        piece = re.sub(r"\b(19|20)\d\d/\d\d\b", " ", piece)
+        piece = re.sub(r"\b\d{1,2} (?:January|February|March|April|May|June|July|August|"
+                       r"September|October|November|December) \d{4}\b", " ", piece)
+        piece = re.sub(r'"(?:startDate|dateModified|datePublished)": "[^"]*"', " ", piece)
+        for m in re.finditer(r"(?<![\w.\-])(\d[\d,]*(?:\.\d+)?)(?![\w])", piece):
+            n = m.group(1)
+            if n not in engine_values or re.fullmatch(r"(19|20)\d\d", n) or re.fullmatch(r"\d", n):
+                continue
+            ctx = re.sub(r"\s+", " ", piece[max(0, m.start() - 60):m.end() + 30]).strip()
+            gaps.append((n, "head: " + ctx))
+    return gaps
 
 
 def main():
@@ -142,6 +187,20 @@ def main():
                 exempt[reason] += 1
                 continue
             hits.append((n, ctx))
+        # The updated date is a published figure too, and it is easy to miss
+        # because it is not a number the scan would pick up.
+        for m in re.finditer(re.escape(values["meta.updated.long"]), body):
+            if not any(a <= m.start() < b for a, b in spans):
+                ctx = re.sub(r"\s+", " ", body[max(0, m.start() - 70):m.end()])
+                ctx = re.sub(r"<[^>]+>", "", ctx).strip()
+                hits.append((values["meta.updated.long"], "updated date: " + ctx))
+
+        for n, ctx in head_gaps(text, name, values, engine_values):
+            reason = next((why for pat, why in EXEMPT.get(name, []) if re.search(pat, ctx)), None)
+            if reason:
+                exempt[reason] = exempt.get(reason, 0) + 1
+            else:
+                hits.append((n, ctx))
         per_page[name] = hits
         total_uncovered += len(hits)
 
