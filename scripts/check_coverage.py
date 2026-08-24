@@ -129,6 +129,22 @@ def head_gaps(text, page, values, engine_values):
     return gaps
 
 
+def missing_season_rows(values):
+    """The club season table is marked cell by cell rather than generated, so a
+    season added to the dataset has no row until one is written by hand. Without
+    this check the total row simply stops matching the rows above it."""
+    page = (ROOT / "goalsbyseason.html").read_text(encoding="utf-8")
+    data = engine.load()
+    gaps = []
+    for i, row in enumerate(data["seasons"]):
+        if not row.get("in_career", True):
+            continue
+        if f'data-stat="season.{i}.total.goals"' not in page:
+            gaps.append(f"{row['team']} {row['season']} (season.{i}) is in the dataset "
+                        f"but has no row on the season page")
+    return gaps
+
+
 def main():
     values, _, _ = engine.derive(engine.load())
     # the set of figures the engine can produce, as printed
@@ -197,6 +213,13 @@ def main():
         per_page[name] = hits
         total_uncovered += len(hits)
 
+    season_gaps = missing_season_rows(values)
+    if season_gaps:
+        print("season rows in the data with nothing published:")
+        for g in season_gaps:
+            print("  " + g)
+        print()
+
     print("uncovered figures that the engine could otherwise drive")
     for name, hits in per_page.items():
         print(f"  {name:22} {len(hits):>3}")
@@ -210,7 +233,7 @@ def main():
     print(f"\n{total_uncovered} uncovered")
     if not LIST and total_uncovered:
         print("run with --list to see them")
-    return 1 if total_uncovered else 0
+    return 1 if (total_uncovered or season_gaps) else 0
 
 
 if __name__ == "__main__":

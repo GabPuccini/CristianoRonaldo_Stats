@@ -419,6 +419,8 @@ def derive(data):
     out["meta.updated.iso"] = updated.isoformat()
     out["meta.updated.long"] = f"{updated.day} {updated:%B %Y}"
     out["meta.updated.short"] = f"{updated:%B %Y}"
+    # the timeline's key dates list uses an abbreviated month
+    out["meta.updated.compact"] = f"{updated.day} {updated:%b %Y}"
     # The header badge is an inline-flex row with a gap, so marking the date on
     # its own would turn it into a third flex item and widen the pill. The whole
     # label is one marker instead, which keeps the badge exactly as it renders.
@@ -513,11 +515,27 @@ def validate(data, facts):
         if combined > team_goals:
             errors.append(f"set pieces for {tid} ({combined}) exceed that team's {team_goals} goals")
 
-    for name, block in data.get("opponents", {}).items():
+    # Opponent lists are keyed by the group name the dashboard publishes, so map
+    # each one back to the team it belongs to before comparing. Keying by team id
+    # meant the saudi, intl and club groups were never checked at all.
+    group_team = {group: tid for tid, group in OPPONENT_GROUP.items()}
+    for group, block in data.get("opponents", {}).items():
+        if group not in group_team and group != OPPONENT_AGGREGATE:
+            errors.append(f"opponent group {group} is not one the site publishes")
+            continue
         total = sum(block.values())
-        team_goals = facts["club_goals"].get(name, 0)
+        if group == OPPONENT_AGGREGATE:
+            team_goals = sum(v for k, v in facts["club_goals"].items() if k != "portugal")
+        else:
+            team_goals = facts["club_goals"].get(group_team[group], 0)
         if team_goals and total > team_goals:
-            errors.append(f"opponent goals for {name} sum to {total}, above that team's {team_goals}")
+            errors.append(f"opponent goals for {group} sum to {total}, above the {team_goals} available")
+        # Goals are deliberately not compared against appearances here: a hat
+        # trick is three goals in one game, and the Juventus list has several.
+        apps = data.get("opponent_apps", {}).get(group, {})
+        for name in block:
+            if apps and name not in apps:
+                errors.append(f"{group}: {name} has goals recorded but no appearances")
 
     return errors
 
@@ -965,6 +983,24 @@ def build_regions(data, tables, values):
     r["array.dash.portugal_years"] = pairs_block(
         [(row["year"], row["goals"]) for row in tables["portugal_years"]], " " * 16, 6)
 
+    # ---- The dashboard's opponent lists ----------------------------------
+    # Left hand written at first, on the view that they were editorial. They are
+    # not: a goal recorded against a named side moves them, so a hand written
+    # list means the page under reports the opponent it was just told about.
+    blocks = []
+    groups = list(data.get("opponents", {}))
+    for gi, group in enumerate(groups):
+        goals = data["opponents"][group]
+        apps = data.get("opponent_apps", {}).get(group, {})
+        # sort by goals only: Python's sort is stable, so sides level on goals
+        # keep the order the dataset holds, which is the order the page shows
+        pairs = sorted(goals.items(), key=lambda kv: -kv[1])
+        cells = [f"[{js_str(name)}, {n}, {apps.get(name, 0)}]" for name, n in pairs]
+        blocks.append(f"                {group}: [")
+        blocks.append(wrap(cells, " " * 20, 3))
+        blocks.append("                ]" + ("" if gi == len(groups) - 1 else ","))
+    r["array.dash.opponents"] = "\n".join(blocks)
+
     # ---- The home page sparkline ----------------------------------------
     # 25 bars with their geometry computed from the goals, plus the peak label
     # and the tick years. It was hand drawn, so the bars and their tooltips did
@@ -1106,6 +1142,41 @@ def find_season_row(data, team, comp, season):
     return None
 
 
+# The dashboard publishes opponents under group names of its own, not under the
+# team id: Al Nassr's opponents live in "saudi" and Portugal's in "intl". Writing
+# to the team id instead created a group nothing displayed, so the site quietly
+# under reported the opponent it had just been told about.
+OPPONENT_GROUP = {"alnassr": "saudi", "portugal": "intl", "sporting": "sporting",
+                  "manutd": "manutd", "realmadrid": "realmadrid",
+                  "juventus": "juventus"}
+# Clubs also feed the combined all clubs list the dashboard shows by default.
+OPPONENT_AGGREGATE = "club"
+
+
+def record_opponent(data, team, opponent, new_appearance):
+    """Add the goal, and the appearance, to every published list that already
+    names this opponent. These lists are the top sides he has scored against
+    rather than a complete record, so a name that is not on one is reported
+    instead of being added: putting it there would silently reshape the chart."""
+    groups = [OPPONENT_GROUP.get(team, team)]
+    if team != "portugal":
+        groups.append(OPPONENT_AGGREGATE)
+    touched = []
+    for group in groups:
+        goals = data.setdefault("opponents", {}).setdefault(group, {})
+        if opponent not in goals:
+            continue
+        goals[opponent] += 1
+        touched.append(group)
+        if new_appearance:
+            apps = data.setdefault("opponent_apps", {}).setdefault(group, {})
+            apps[opponent] = apps.get(opponent, 0) + 1
+    if not touched:
+        print(f"Note: {opponent} is not on any published opponent list, so no "
+              f"opponent tally moved. Add it to data/ronaldo.json if it belongs.")
+    return touched
+
+
 def apply_goal(data, args):
     team = args.team
     year = args.year or dt.date.today().year
@@ -1154,8 +1225,7 @@ def apply_goal(data, args):
 
     # Opponent
     if args.opponent:
-        block = data.setdefault("opponents", {}).setdefault(team, {})
-        block[args.opponent] = block.get(args.opponent, 0) + 1
+        record_opponent(data, team, args.opponent, args.new_appearance)
 
     # Assists created in the same match
     if args.assists:

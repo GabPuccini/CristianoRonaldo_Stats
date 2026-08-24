@@ -4,10 +4,10 @@
     "competitions is keyed by team, then by the label the site prints on the competitions chart. The career totals are rolled up from these, with the labels in competition_rollup folded into Other cup competitions, so a goal recorded against a team updates the team chart and the overall chart together."
   ],
   "meta": {
-    "updated": "2026-07-26",
+    "updated": "2026-08-24",
     "goal_target": 1000,
     "born": "1985-02-05",
-    "current_season": "2025/26"
+    "current_season": "2026/27"
   },
   "teams": [
     {
@@ -707,6 +707,22 @@
           "goals": 1
         }
       }
+    },
+    {
+      "team": "alnassr",
+      "season": "2026/27",
+      "division": "Saudi Pro League",
+      "in_career": true,
+      "comps": {
+        "league": {
+          "apps": 1,
+          "goals": 1
+        },
+        "cup": null,
+        "lcup": null,
+        "cont": null,
+        "other": null
+      }
     }
   ],
   "years": [
@@ -832,7 +848,7 @@
     },
     {
       "year": 2026,
-      "goals": 19,
+      "goals": 20,
       "age": 41
     }
   ],
@@ -1175,7 +1191,7 @@
       "Other cup competitions": 2
     },
     "alnassr": {
-      "Saudi Pro League": 102,
+      "Saudi Pro League": 103,
       "AFC Champions League": 15,
       "Arab Club Champions Cup": 6,
       "Saudi Super Cup": 3,
@@ -1218,7 +1234,7 @@
       0
     ],
     "alnassr": [
-      86,
+      87,
       26,
       16,
       1
@@ -1277,7 +1293,7 @@
       "Al Hilal": 6,
       "Al Feiha": 6,
       "Al Taee": 5,
-      "Al Riyadh": 5,
+      "Al Riyadh": 6,
       "Al Ahli": 5
     },
     "intl": {
@@ -1368,7 +1384,7 @@
       "Al Hilal": 11,
       "Al Feiha": 8,
       "Al Taee": 3,
-      "Al Riyadh": 5,
+      "Al Riyadh": 6,
       "Al Ahli": 7
     },
     "intl": {
@@ -1433,7 +1449,20 @@
       "Atletico Madrid": 1
     }
   },
-  "log": [],
+  "log": [
+    {
+      "date": "2026-08-24",
+      "event": "goal",
+      "team": "alnassr",
+      "comp": "league",
+      "year": 2026,
+      "body": "right",
+      "type": "openplay",
+      "opponent": "Al Riyadh",
+      "assists": 0,
+      "new_appearance": true
+    }
+  ],
   "competition_rollup": {
     "Arab Club Champions Cup": "Other cup competitions",
     "Saudi Super Cup": "Other cup competitions"
