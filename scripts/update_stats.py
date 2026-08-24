@@ -118,6 +118,13 @@ def derive(data):
     out["career.fillstyle"] = f"width: {pct:.1f}%;"
     out["career.club_goals"] = f"{sum(v for k, v in club_goals.items() if k != 'portugal'):,}"
     out["career.club_apps"] = f"{sum(v for k, v in club_apps.items() if k != 'portugal'):,}"
+    pens_all = sum(data["penalties"].values())
+    fks_all = sum(data["freekicks"].values())
+    out["career.openplay"] = f"{career_goals - pens_all - fks_all:,}"
+    # everything that was not a penalty, i.e. open play plus direct free kicks
+    out["career.nonpenalty"] = f"{career_goals - pens_all:,}"
+    out["career.penalty_pct"] = f"{pens_all / career_goals * 100:.1f}"
+    out["career.openplay_pct"] = f"{(career_goals - pens_all - fks_all) / career_goals * 100:.1f}"
 
     # Per team figures
     for tid, team in teams.items():
@@ -134,8 +141,8 @@ def derive(data):
     for group in ("penalties", "freekicks", "hattricks"):
         block = data[group]
         out[f"{group}.total"] = f"{sum(block.values()):,}"
-        for tid, n in block.items():
-            out[f"{group}.{tid}"] = f"{n:,}"
+        for tid in teams:                       # a team on zero still needs a key
+            out[f"{group}.{tid}"] = f"{block.get(tid, 0):,}"
 
     # Body parts, career and per team
     totals = [0, 0, 0, 0]
@@ -164,6 +171,9 @@ def derive(data):
     out["year.current.year"] = str(year_rows[-1]["year"])
     out["year.count"] = str(len(year_rows))
     out["year.average"] = f"{sum(r['goals'] for r in year_rows) / len(year_rows):.1f}"
+    out["year.first"] = str(year_rows[0]["year"])
+    out["year.last"] = str(year_rows[-1]["year"])
+    out["year.span"] = f"{year_rows[0]['year']} to {year_rows[-1]['year']}"
 
     # Seasons, best club campaign
     season_totals = []
@@ -177,6 +187,7 @@ def derive(data):
     out["season.best.goals"] = str(best_season["goals"])
     out["season.best.season"] = best_season["season"]
     out["season.best.team"] = teams[best_season["team"]]["name"]
+    out["season.best.apps"] = str(best_season["apps"])
 
     # Season table cells, one key per published cell, so the season page can be
     # driven without regenerating any of its markup.
@@ -245,11 +256,22 @@ def derive(data):
     out["season.count"] = str(len({r["season"] for r in data["seasons"] if r.get("in_career", True)}))
     out["career.assist_rate"] = f"{career_apps / career_assists:.1f}" if career_assists else "0.0"
 
+    # Identity, derived from the date of birth so the age never goes stale
+    born = dt.date.fromisoformat(data["meta"]["born"])
+    asof = dt.date.fromisoformat(data["meta"]["updated"])
+    out["person.age"] = str(asof.year - born.year - ((asof.month, asof.day) < (born.month, born.day)))
+    out["person.born.long"] = f"{born.day} {born:%B %Y}"
+    out["person.born.iso"] = born.isoformat()
+
     # Dates
     updated = dt.date.fromisoformat(data["meta"]["updated"])
     out["meta.updated.iso"] = updated.isoformat()
     out["meta.updated.long"] = f"{updated.day} {updated:%B %Y}"
     out["meta.updated.short"] = f"{updated:%B %Y}"
+    # The header badge is an inline-flex row with a gap, so marking the date on
+    # its own would turn it into a third flex item and widen the pill. The whole
+    # label is one marker instead, which keeps the badge exactly as it renders.
+    out["meta.updated.badge"] = f"Updated {updated.day} {updated:%B %Y}"
 
     tables = {
         "years": year_rows,
