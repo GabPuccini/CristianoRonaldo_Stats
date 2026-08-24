@@ -24,7 +24,20 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import update_stats as engine
 
 ROOT = Path(__file__).resolve().parent.parent
-PAGES = {name: (ROOT / name).read_text(encoding="utf-8") for name in engine.PAGES}
+
+
+def without_markers(text):
+    """Phase 3 markers are invisible to a reader, so compare against the page as
+    it renders: unwrap marker only spans, then drop the marker attributes and
+    the region comments."""
+    text = re.sub(r'<span data-stat="[^"]*">([^<]*)</span>', r"\1", text)
+    text = re.sub(r'\s+data-stat(?:-attr)?="[^"]*"', "", text)
+    text = re.sub(r"(?:<!--|//)[ \t]*STATS:(?:BEGIN|END)[ \t]+[\w.]+[ \t]*(?:-->)?\n?", "", text)
+    return text
+
+
+PAGES = {name: without_markers((ROOT / name).read_text(encoding="utf-8"))
+         for name in engine.PAGES}
 
 checks = []          # (page, description, engine value, page value, ok)
 exercised = set()    # engine keys this run actually compared against a page

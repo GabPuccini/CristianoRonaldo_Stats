@@ -1004,9 +1004,9 @@
                 <div class="page-head-main">
                     <span class="eyebrow">Goals by year</span>
                     <h1 class="page-title">Cristiano Ronaldo goals by year</h1>
-                    <p class="page-lead">Cristiano Ronaldo has scored <b>976 goals</b> across 25 calendar years, from 5 in 2002 to <b>19 so far in 2026</b>, as of 26 July 2026. His best year was <b>2013, with 69 goals</b>, and he has reached 40 or more in fourteen separate years.</p>
+                    <p class="page-lead">Cristiano Ronaldo has scored <b><span data-stat="career.goals">976</span> goals</b> across <span data-stat="year.count">25</span> calendar years, from 5 in 2002 to <b><span data-stat="year.current.goals">19</span> so far in <span data-stat="year.current.year">2026</span></b>, as of 26 July 2026. His best year was <b><span data-stat="year.best.year">2013</span>, with <span data-stat="year.best.goals">69</span> goals</b>, and he has reached 40 or more in fourteen separate years.</p>
                     <div style="margin-top:16px">
-                        <span class="updated-badge"><span class="dot"></span> Updated 26 July 2026</span>
+                        <span class="updated-badge"><span class="dot"></span> Updated <span data-stat="meta.updated.long">26 July 2026</span></span>
                     </div>
                 </div>
                 <a href="index.html" class="back-btn">
@@ -1030,19 +1030,19 @@
 
                 <div class="stats-summary">
                     <div class="stat-box">
-                        <div class="stat-value" id="totalGoals">976</div>
+                        <div class="stat-value" id="totalGoals" data-stat="career.goals">976</div>
                         <div class="stat-label">Total goals</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-value" id="yearsScoring">25</div>
+                        <div class="stat-value" id="yearsScoring" data-stat="year.count">25</div>
                         <div class="stat-label">Years scoring</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-value" id="bestYear">69</div>
-                        <div class="stat-label" id="bestYearLabel">Best year (2013)</div>
+                        <div class="stat-value" id="bestYear" data-stat="year.best.goals">69</div>
+                        <div class="stat-label" id="bestYearLabel">Best year (<span data-stat="year.best.year">2013</span>)</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-value" id="avgPerYear">39.0</div>
+                        <div class="stat-value" id="avgPerYear" data-stat="year.average">39.0</div>
                         <div class="stat-label">Average per year</div>
                     </div>
                 </div>
@@ -1067,6 +1067,7 @@
                             </tr>
                         </thead>
                         <tbody>
+<!-- STATS:BEGIN table.years -->
                                 <tr><th scope="row">2002</th><td>5</td><td class="muted">5</td><td class="muted">17</td></tr>
                                 <tr><th scope="row">2003</th><td>1</td><td class="muted">6</td><td class="muted">18</td></tr>
                                 <tr><th scope="row">2004</th><td>13</td><td class="muted">19</td><td class="muted">19</td></tr>
@@ -1092,6 +1093,7 @@
                                 <tr><th scope="row">2024</th><td>43</td><td class="muted">916</td><td class="muted">39</td></tr>
                                 <tr><th scope="row">2025</th><td>41</td><td class="muted">957</td><td class="muted">40</td></tr>
                                 <tr><th scope="row">2026</th><td>19</td><td class="muted">976</td><td class="muted">41</td></tr>
+<!-- STATS:END table.years -->
                         </tbody>
                         <tfoot>
                             <tr>
@@ -1281,9 +1283,11 @@
         // ===== Chart =====
         const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// STATS:BEGIN array.years
         const years = [2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026];
         const goalsPerYear = [5, 1, 13, 15, 25, 34, 35, 30, 48, 60, 63, 69, 61, 57, 55, 53, 49, 39, 44, 47, 16, 54, 43, 41, 19];
         const cumulativeGoals = [5, 6, 19, 34, 59, 93, 128, 158, 206, 266, 329, 398, 459, 516, 571, 624, 673, 712, 756, 803, 819, 873, 916, 957, 976];
+// STATS:END array.years
 
         function getChartColors() {
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark';

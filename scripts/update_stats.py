@@ -117,6 +117,7 @@ def derive(data):
     out["career.progress_label"] = f"{career_goals:,} / {target:,}"
     out["career.fillstyle"] = f"width: {pct:.1f}%;"
     out["career.club_goals"] = f"{sum(v for k, v in club_goals.items() if k != 'portugal'):,}"
+    out["career.club_apps"] = f"{sum(v for k, v in club_apps.items() if k != 'portugal'):,}"
 
     # Per team figures
     for tid, team in teams.items():
@@ -161,6 +162,8 @@ def derive(data):
     out["year.best.year"] = str(best_year["year"])
     out["year.current.goals"] = str(year_rows[-1]["goals"])
     out["year.current.year"] = str(year_rows[-1]["year"])
+    out["year.count"] = str(len(year_rows))
+    out["year.average"] = f"{sum(r['goals'] for r in year_rows) / len(year_rows):.1f}"
 
     # Seasons, best club campaign
     season_totals = []
@@ -258,10 +261,13 @@ VALUE_RE = re.compile(
     re.DOTALL,
 )
 KEY_RE = re.compile(r'\sdata-stat="([^"]+)"')
+# Regions are delimited by an HTML comment in markup, or a // comment inside a
+# script block, where an HTML comment would be legacy syntax.
 REGION_RE = re.compile(
-    r"(?P<open><!--\s*STATS:BEGIN\s+(?P<key>[\w.]+)\s*-->)"
+    # [ \t]* rather than \s*, so the marker never swallows the newline after it
+    r"(?P<open>(?:<!--|//)[ \t]*STATS:BEGIN[ \t]+(?P<key>[\w.]+)[ \t]*(?:-->)?)"
     r"(?P<body>.*?)"
-    r"(?P<close><!--\s*STATS:END\s+(?P=key)\s*-->)",
+    r"(?P<close>(?:<!--|//)[ \t]*STATS:END[ \t]+(?P=key)[ \t]*(?:-->)?)",
     re.DOTALL,
 )
 ATTR_SPEC_RE = re.compile(r'data-stat-attr="([^"]+)"')
@@ -316,15 +322,18 @@ def build_regions(data, tables, values):
     teams = {t["id"]: t for t in data["teams"]}
     r = {}
 
-    # Calendar year table body
+    # Calendar year table body. The markup here must match the page exactly:
+    # the running total and age cells are muted, and the best year is highlighted.
+    best = max(row["goals"] for row in tables["years"])
     rows = []
     for row in tables["years"]:
+        cls = ' class="peak"' if row["goals"] == best else ""
         rows.append(
-            "                            <tr>"
+            f'                                <tr{cls}>'
             f'<th scope="row">{row["year"]}</th>'
             f'<td>{row["goals"]}</td>'
-            f'<td>{row["cumulative"]:,}</td>'
-            f'<td>{row["age"]}</td>'
+            f'<td class="muted">{row["cumulative"]:,}</td>'
+            f'<td class="muted">{row["age"]}</td>'
             "</tr>"
         )
     r["table.years"] = "\n".join(rows)
@@ -362,6 +371,13 @@ def build_regions(data, tables, values):
     r["table.career"] = "\n".join(rows)
 
     # Chart arrays used by the dashboard and the season chart
+    def js_list(items):
+        return "[" + ", ".join(str(x) for x in items) + "]"
+
+    r["array.years"] = (
+        "        const years = " + js_list([row["year"] for row in tables["years"]]) + ";\n"
+        "        const goalsPerYear = " + js_list([row["goals"] for row in tables["years"]]) + ";\n"
+        "        const cumulativeGoals = " + js_list([row["cumulative"] for row in tables["years"]]) + ";")
     r["array.years.labels"] = "                " + json.dumps(
         [row["year"] for row in tables["years"]])
     r["array.years.goals"] = "                " + json.dumps(
