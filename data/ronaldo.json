@@ -1,5 +1,8 @@
 {
-  "_notes": "Single source of truth for every published figure. Built from the site HTML on 22 August 2026. opponents holds goals only, keyed by the dashboard view (club, saudi and intl are aggregate views, the rest are club eras); the parallel opponent_apps map holds the games column for the same rows. Both lists are the top scorers against, not complete sets.",
+  "_notes": [
+    "Single source of truth for every published figure. Built from the site HTML on 22 August 2026. opponents holds goals only, keyed by the dashboard view (club, saudi and intl are aggregate views, the rest are club eras); the parallel opponent_apps map holds the games column for the same rows. Both lists are the top scorers against, not complete sets.",
+    "competitions is keyed by team, then by the label the site prints on the competitions chart. The career totals are rolled up from these, with the labels in competition_rollup folded into Other cup competitions, so a goal recorded against a team updates the team chart and the overall chart together."
+  ],
   "meta": {
     "updated": "2026-07-26",
     "goal_target": 1000,
@@ -11,37 +14,43 @@
       "id": "realmadrid",
       "name": "Real Madrid",
       "years": "2009 to 2018",
-      "assists": 131
+      "assists": 131,
+      "short": "Real Madrid"
     },
     {
       "id": "portugal",
       "name": "Portugal",
       "years": "2003 to present",
-      "assists": 45
+      "assists": 45,
+      "short": "Portugal"
     },
     {
       "id": "manutd",
       "name": "Manchester United",
       "years": "2003 to 2009, 2021 to 2022",
-      "assists": 64
+      "assists": 64,
+      "short": "Man United"
     },
     {
       "id": "alnassr",
       "name": "Al Nassr",
       "years": "2023 to present",
-      "assists": 23
+      "assists": 23,
+      "short": "Al Nassr"
     },
     {
       "id": "juventus",
       "name": "Juventus",
       "years": "2018 to 2021",
-      "assists": 22
+      "assists": 22,
+      "short": "Juventus"
     },
     {
       "id": "sporting",
       "name": "Sporting CP",
       "years": "2002 to 2003",
-      "assists": 6
+      "assists": 6,
+      "short": "Sporting CP"
     }
   ],
   "seasons": [
@@ -950,28 +959,46 @@
     }
   ],
   "competitions": {
-    "La Liga": 311,
-    "Champions League": 140,
-    "Premier League": 103,
-    "Saudi Pro League": 102,
-    "Serie A": 81,
-    "Euro qualifiers": 41,
-    "World Cup qualifiers": 41,
-    "Other cup competitions": 25,
-    "Copa del Rey": 22,
-    "Friendlies": 22,
-    "AFC Champions League": 15,
-    "Nations League": 15,
-    "Euros": 14,
-    "FA Cup": 13,
-    "World Cup": 11,
-    "Coppa Italia": 4,
-    "League Cup": 4,
-    "King's Cup": 3,
-    "Primeira Liga": 3,
-    "Confederations Cup": 2,
-    "Europa League": 2,
-    "Taca de Portugal": 2
+    "realmadrid": {
+      "La Liga": 311,
+      "Champions League": 105,
+      "Copa del Rey": 22,
+      "Other cup competitions": 12
+    },
+    "portugal": {
+      "Euro qualifiers": 41,
+      "World Cup qualifiers": 41,
+      "Friendlies": 22,
+      "Nations League": 15,
+      "Euros": 14,
+      "World Cup": 11,
+      "Confederations Cup": 2
+    },
+    "manutd": {
+      "Premier League": 103,
+      "Champions League": 21,
+      "FA Cup": 13,
+      "League Cup": 4,
+      "Europa League": 2,
+      "Other cup competitions": 2
+    },
+    "alnassr": {
+      "Saudi Pro League": 102,
+      "AFC Champions League": 15,
+      "Arab Club Champions Cup": 6,
+      "Saudi Super Cup": 3,
+      "King's Cup": 3
+    },
+    "juventus": {
+      "Serie A": 81,
+      "Champions League": 14,
+      "Coppa Italia": 4,
+      "Other cup competitions": 2
+    },
+    "sporting": {
+      "Primeira Liga": 3,
+      "Taca de Portugal": 2
+    }
   },
   "bodyparts": {
     "sporting": [
@@ -1214,5 +1241,9 @@
       "Atletico Madrid": 1
     }
   },
-  "log": []
+  "log": [],
+  "competition_rollup": {
+    "Arab Club Champions Cup": "Other cup competitions",
+    "Saudi Super Cup": "Other cup competitions"
+  }
 }

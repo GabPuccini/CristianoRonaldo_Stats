@@ -232,14 +232,49 @@ if all_block != "<NOT FOUND>":
     record("dashboard.html", "DATA.teams all goals", values["career.goals"].replace(",", ""), go, key="career.goals")
     record("dashboard.html", "DATA.teams all assists", values["career.assists"].replace(",", ""), a, key="career.assists")
 
-# Competition table and the DATA.competitions.all array
-for name, n in data["competitions"].items():
+# Competition table and the DATA.competitions arrays. The dataset stores these
+# per team now, so the career figures come from the same rollup the engine uses.
+def js_pair(name):
+    # the JS uses double quotes for labels containing an apostrophe
+    return (r"\['" + re.escape(name) + r"', (\d+)\]" if "'" not in name
+            else r'\["' + re.escape(name) + r'", (\d+)\]')
+
+
+career_comps = engine.career_competitions(data)
+for name, n in career_comps.items():
     cell = find("dashboard.html", r'<tr><th scope="row">' + re.escape(name) + r'</th><td>(\d+)</td>', 1)
     record("dashboard.html", f"competition table {name}", n, cell, key=f"comp.{engine.slug(name)}")
-    # the JS uses double quotes for labels containing an apostrophe
-    arr = find("dashboard.html", r"\['" + re.escape(name) + r"', (\d+)\]"
-               if "'" not in name else r'\["' + re.escape(name) + r'", (\d+)\]', 1)
-    record("dashboard.html", f"DATA competitions {name}", n, arr)
+
+def js_array(text, key):
+    """The arrays hold nested pairs, so a lazy regex stops at the first inner
+    bracket. Match the brackets properly instead."""
+    m = re.search(rf"\b{re.escape(key)}:\s*\[", text)
+    if not m:
+        return ""
+    i = m.end() - 1
+    depth, j = 0, i
+    while j < len(text):
+        if text[j] == "[":
+            depth += 1
+        elif text[j] == "]":
+            depth -= 1
+            if depth == 0:
+                return text[i:j + 1]
+        j += 1
+    return ""
+
+
+dash = PAGES["dashboard.html"]
+comp_block = dash[dash.index("competitions: {"):dash.index("compFootnotes:")]
+for tid, block in data["competitions"].items():
+    body = js_array(comp_block, tid)
+    for name, n in block.items():
+        m = re.search(js_pair(name), body)
+        record("dashboard.html", f"DATA competitions {tid} {name}", n,
+               m.group(1) if m else "<NOT FOUND>", key=f"comp.{tid}.{engine.slug(name)}")
+    record("dashboard.html", f"DATA competitions {tid} total", sum(block.values()),
+           sum(int(x) for x in re.findall(r",\s*(\d+)\s*\]", body)) if body else "<NOT FOUND>",
+           key=f"comp.{tid}.total")
 
 # Body part and finish tables
 for label, slot in [("Right foot", "right"), ("Left foot", "left"), ("Headers", "head"), ("Other", "other")]:

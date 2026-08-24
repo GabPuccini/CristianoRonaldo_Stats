@@ -68,6 +68,27 @@ def save(data):
         fh.write("\n")
 
 
+def dashboard_order(data):
+    """The dashboard lists teams in career order, clubs first by the year he
+    joined and Portugal last, which is how its team picker reads."""
+    clubs = [t for t in data["teams"] if t["id"] != "portugal"]
+    clubs.sort(key=lambda t: int(t["years"][:4]))
+    return [t["id"] for t in clubs] + ["portugal"]
+
+
+def career_competitions(data):
+    """Roll the per team competition tallies up into the labels the overall
+    chart publishes, folding the finer ones into Other cup competitions, and
+    return them in the order the chart shows: most goals first."""
+    rollup = data.get("competition_rollup", {})
+    totals = {}
+    for block in data["competitions"].values():
+        for name, n in block.items():
+            name = rollup.get(name, name)
+            totals[name] = totals.get(name, 0) + n
+    return dict(sorted(totals.items(), key=lambda kv: (-kv[1], kv[0])))
+
+
 # ----------------------------------------------------------------------------
 # Derivation: everything computable is computed, never stored
 # ----------------------------------------------------------------------------
@@ -109,7 +130,9 @@ def derive(data):
     out["career.goals"] = f"{career_goals:,}"
     out["career.goals.raw"] = str(career_goals)
     out["career.apps"] = f"{career_apps:,}"
+    out["career.apps.raw"] = str(career_apps)
     out["career.assists"] = f"{career_assists:,}"
+    out["career.assists.raw"] = str(career_assists)
     out["career.gpg"] = f"{career_goals / career_apps:.2f}"
     out["career.remaining"] = str(remaining)
     out["career.pct"] = f"{pct:.1f}"
@@ -125,6 +148,9 @@ def derive(data):
     out["career.nonpenalty"] = f"{career_goals - pens_all:,}"
     out["career.penalty_pct"] = f"{pens_all / career_goals * 100:.1f}"
     out["career.openplay_pct"] = f"{(career_goals - pens_all - fks_all) / career_goals * 100:.1f}"
+    # the dashboard writes "just over N percent", so it wants the whole number below
+    out["career.openplay_pct_round"] = str(
+        int((career_goals - pens_all - fks_all) / career_goals * 100))
 
     # Per team figures
     for tid, team in teams.items():
@@ -144,6 +170,13 @@ def derive(data):
         for tid in teams:                       # a team on zero still needs a key
             out[f"{group}.{tid}"] = f"{block.get(tid, 0):,}"
 
+    # Open play is whatever is left once the set pieces are taken out
+    for tid in teams:
+        out[f"openplay.{tid}"] = str(
+            club_goals.get(tid, 0)
+            - data["penalties"].get(tid, 0)
+            - data["freekicks"].get(tid, 0))
+
     # Body parts, career and per team
     totals = [0, 0, 0, 0]
     for tid, slots in data["bodyparts"].items():
@@ -154,8 +187,14 @@ def derive(data):
     for i, slot in enumerate(BODY_SLOTS):
         out[f"body.all.{slot}"] = str(totals[i])
 
-    # Competitions
-    for name, n in data["competitions"].items():
+    # Competitions. The dataset stores them per team, with a finer set of labels
+    # than the overall chart publishes, so the career figures are rolled up here
+    # and a goal recorded against a team moves both charts at once.
+    for tid, block in data["competitions"].items():
+        for name, n in block.items():
+            out[f"comp.{tid}.{slug(name)}"] = str(n)
+        out[f"comp.{tid}.total"] = str(sum(block.values()))
+    for name, n in career_competitions(data).items():
         out[f"comp.{slug(name)}"] = str(n)
 
     # Calendar years, with the running career total recomputed every time
@@ -310,9 +349,18 @@ def validate(data, facts):
     if body_sum != cg:
         errors.append(f"body part splits sum to {body_sum}, career goals are {cg}")
 
-    comp_sum = sum(data["competitions"].values())
+    comp_sum = sum(career_competitions(data).values())
     if comp_sum != cg:
         errors.append(f"competitions sum to {comp_sum}, career goals are {cg}")
+
+    # Each team's competitions must also account for exactly that team's goals,
+    # otherwise the dashboard charts drift away from the tables.
+    for tid, block in data["competitions"].items():
+        team_goals = facts["club_goals"].get(tid, 0)
+        if sum(block.values()) != team_goals:
+            errors.append(
+                f"competitions for {tid} sum to {sum(block.values())}, "
+                f"that team has {team_goals} goals")
 
     for tid, slots in data["bodyparts"].items():
         team_goals = facts["club_goals"].get(tid, 0)
@@ -400,7 +448,12 @@ def rewrite_page(text, values, regions, report):
             report["missing"].add("region:" + key)
             return m.group(0)
         report["regions"] += 1
-        return f'{m.group("open")}\n{regions[key]}\n{m.group("close")}'
+        # Put the closing marker back at the same indentation as the opening one,
+        # otherwise every build shunts it to column zero.
+        line_start = text.rfind("\n", 0, m.start("open")) + 1
+        indent = text[line_start:m.start("open")]
+        indent = indent if indent.strip() == "" else ""
+        return f'{m.group("open")}\n{regions[key]}\n{indent}{m.group("close")}'
 
     text = VALUE_RE.sub(value_sub, text)
     text = REGION_RE.sub(region_sub, text)
@@ -480,7 +533,137 @@ def build_regions(data, tables, values):
     for tid in data["bodyparts"]:
         r[f"array.body.{tid}"] = "                " + json.dumps(data["bodyparts"][tid])
 
+    # ---- The dashboard's DATA object -------------------------------------
+    # These are emitted rather than marked, because they are JavaScript object
+    # literals with no element to hang an attribute on. The indentation matches
+    # the page so the region can be diffed by eye.
+    order = dashboard_order(data)
+    career_comps = career_competitions(data)
+    pad = max(len(tid) for tid in order) + 2       # widest "sporting:" style key
+
+    def js_str(s):
+        # match the page: single quotes normally, double when the label has one
+        return f'"{s}"' if "'" in s else "'" + s + "'"
+
+    def wrap(cells, indent, per_line):
+        lines = []
+        for i in range(0, len(cells), per_line):
+            chunk = cells[i:i + per_line]
+            last = i + per_line >= len(cells)
+            lines.append(indent + ", ".join(chunk) + ("" if last else ","))
+        return "\n".join(lines)
+
+    def pairs_block(pairs, indent, per_line):
+        return wrap([f"[{js_str(str(k))}, {v}]" for k, v in pairs], indent, per_line)
+
+    def key(tid):
+        return f"{tid + ':':{pad}}"
+
+    rows = [f"                {key('all')}{{ name: 'All teams',   "
+            f"games: {values['career.apps.raw']}, goals: {values['career.goals.raw']}, "
+            f"assists: {values['career.assists.raw']} }},"]
+    by_id = {t["id"]: t for t in data["teams"]}
+    name_w = max(len(js_str(t["short"])) for t in data["teams"]) + 1
+    # the numeric columns line up with the all row above them, which is widest
+    apps_w = max([len(values["career.apps.raw"])]
+                 + [len(values[f"team.{t}.apps"].replace(",", "")) for t in order]) + 1
+    goals_w = max([len(values["career.goals.raw"])]
+                  + [len(values[f"team.{t}.goals"].replace(",", "")) for t in order]) + 1
+    for i, tid in enumerate(order):
+        tail = "" if i == len(order) - 1 else ","
+        rows.append(
+            f"                {key(tid)}{{ name: {js_str(by_id[tid]['short']) + ',':{name_w}} "
+            f"games: {values[f'team.{tid}.apps'].replace(',', '') + ',':{apps_w}} "
+            f"goals: {values[f'team.{tid}.goals'].replace(',', '') + ',':{goals_w}} "
+            f"assists: {values[f'team.{tid}.assists']} }}{tail}")
+    r["array.dash.teams"] = "\n".join(rows)
+
+    blocks = ["                all: [", pairs_block(career_comps.items(), " " * 20, 3),
+              "                ],"]
+    for i, tid in enumerate(order):
+        tail = "" if i == len(order) - 1 else ","
+        blocks += [f"                {tid}: [",
+                   pairs_block(data["competitions"][tid].items(), " " * 20, 3),
+                   f"                ]{tail}"]
+    r["array.dash.competitions"] = "\n".join(blocks)
+
+    finish = ["openplay", "penalties", "freekicks"]
+    rows = [f"                {key('all')}"
+            + json.dumps([int(values["career.openplay"].replace(",", "")),
+                          int(values["penalties.total"].replace(",", "")),
+                          int(values["freekicks.total"])]) + ","]
+    for i, tid in enumerate(order):
+        tail = "" if i == len(order) - 1 else ","
+        rows.append(f"                {key(tid)}"
+                    + json.dumps([int(values[f"{k}.{tid}"].replace(",", "")) for k in finish]) + tail)
+    r["array.dash.finish"] = "\n".join(rows)
+
+    rows = ["                labels: ['Right foot', 'Left foot', 'Headers', 'Other'],",
+            f"                {key('all')}"
+            + json.dumps([int(values[f"body.all.{s}"]) for s in BODY_SLOTS]) + ","]
+    for i, tid in enumerate(order):
+        tail = "" if i == len(order) - 1 else ","
+        rows.append(f"                {key(tid)}{json.dumps(data['bodyparts'][tid])}{tail}")
+    r["array.dash.bodypart"] = "\n".join(rows)
+
+    rows = []
+    club_ids = [tid for tid in order if tid != "portugal"]
+    for i, tid in enumerate(club_ids):
+        pairs = [(row["season"], sum(c["goals"] for c in row["comps"].values() if c))
+                 for row in data["seasons"]
+                 if row["team"] == tid and row.get("in_career", True)]
+        tail = "" if i == len(club_ids) - 1 else ","
+        rows.append(f"                {key(tid)}"
+                    + "[" + ", ".join(f"['{s}', {g}]" for s, g in pairs) + f"]{tail}")
+    r["array.dash.seasons"] = "\n".join(rows)
+
+    r["array.dash.portugal_years"] = pairs_block(
+        [(row["year"], row["goals"]) for row in tables["portugal_years"]], " " * 16, 6)
+
+    # ---- The dashboard's three share-of-career tables --------------------
+    total = int(values["career.goals.raw"])
+
+    def share_rows(pairs, indent):
+        return "\n".join(
+            f'{indent}<tr><th scope="row">{label}</th><td>{n}</td>'
+            f'<td class="muted">{n / total * 100:.1f}%</td></tr>'
+            for label, n in pairs)
+
+    r["table.dash.competitions"] = share_rows(career_comps.items(), " " * 32)
+    r["table.dash.finish"] = share_rows(
+        [("Open play", int(values["career.openplay"].replace(",", ""))),
+         ("Penalties", int(values["penalties.total"].replace(",", ""))),
+         ("Free kicks", int(values["freekicks.total"]))], " " * 32)
+    r["table.dash.bodypart"] = share_rows(
+        [("Right foot", int(values["body.all.right"])),
+         ("Left foot", int(values["body.all.left"])),
+         ("Headers", int(values["body.all.head"])),
+         ("Other", int(values["body.all.other"]))], " " * 32)
+
     return r
+
+
+LD_RE = re.compile(r'<script type="application/ld\+json">(.*?)</script>', re.DOTALL)
+
+
+def check_pages():
+    """A marker span inside a JSON-LD string breaks the structured data without
+    changing a single visible pixel, so nothing else would catch it. Refuse to
+    let that ship."""
+    errors = []
+    for name in PAGES:
+        path = ROOT / name
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8")
+        for i, m in enumerate(LD_RE.finditer(text)):
+            if "data-stat" in m.group(1):
+                errors.append(f"{name}: JSON-LD block {i} contains a data-stat marker")
+            try:
+                json.loads(m.group(1))
+            except ValueError as exc:
+                errors.append(f"{name}: JSON-LD block {i} does not parse: {exc}")
+    return errors
 
 
 def write_html(data, values, regions, dry_run=False):
@@ -542,9 +725,10 @@ def apply_goal(data, args):
         data["years"].append(yr)
     yr["goals"] += 1
 
-    # Competition tally
+    # Competition tally, recorded against the team so both charts move together
     label = args.competition_label or comp
-    data["competitions"][label] = data["competitions"].get(label, 0) + 1
+    block = data["competitions"].setdefault(team, {})
+    block[label] = block.get(label, 0) + 1
 
     # Body part
     slot = BODY_SLOTS.index(args.body)
@@ -686,7 +870,13 @@ def main():
         sys.exit(1)
 
     if args.cmd == "check":
-        print("All totals reconcile.")
+        page_errors = check_pages()
+        if page_errors:
+            print("PAGE CHECK FAILED:")
+            for e in page_errors:
+                print("  " + e)
+            sys.exit(1)
+        print("All totals reconcile, and every page's JSON-LD still parses.")
         return
 
     if args.cmd == "show":
