@@ -775,7 +775,7 @@
             font-weight: 700;
             color: var(--brand-ink);
         }
-        .link-card span { display: block; margin-top: 6px; font-size: 0.86rem; color: var(--ink-2); }
+        .link-card > span { display: block; margin-top: 6px; font-size: 0.86rem; color: var(--ink-2); }
 
         /* ========== METHOD ========== */
         .method {
@@ -1204,7 +1204,7 @@
                 </article>
                 <article class="qa reveal" style="animation-delay:.10s">
                     <h3>How many Champions Leagues has Ronaldo won?</h3>
-                    <p>He has won the Champions League <b>five times</b>: once with Manchester United in 2007/08 and four times with Real Madrid, in 2013/14, 2015/16, 2016/17 and 2017/18. He was the competition's <a href="index.html">all time top scorer with 140 goals</a> along the way.</p>
+                    <p>He has won the Champions League <b>five times</b>: once with Manchester United in 2007/08 and four times with Real Madrid, in 2013/14, 2015/16, 2016/17 and 2017/18. He was the competition's <a href="index.html">all time top scorer with <span data-stat="comp.championsleague">140</span> goals</a> along the way.</p>
                 </article>
                 <article class="qa reveal" style="animation-delay:.12s">
                     <h3>How many Ballon d'Or awards does Ronaldo have?</h3>
@@ -1232,7 +1232,7 @@
 
             <section class="filter-section reveal" style="animation-delay:.10s">
                 <div class="filter-tabs" role="group" aria-label="Filter achievements">
-                    <button type="button" class="filter-tab active" data-filter="all" aria-pressed="true">All <span class="count">35</span></button>
+                    <button type="button" class="filter-tab active" data-filter="all" aria-pressed="true">All <span class="count" data-stat="honours.total">35</span></button>
                     <button type="button" class="filter-tab" data-filter="club" aria-pressed="false">Club honours <span class="count" data-stat="honours.club">32</span></button>
                     <button type="button" class="filter-tab" data-filter="national" aria-pressed="false">National team <span class="count" data-stat="honours.national">3</span></button>
                     <button type="button" class="filter-tab" data-filter="individual" aria-pressed="false">Individual awards <span class="count" data-stat="award.floor_plus">50+</span></button>
@@ -1541,7 +1541,7 @@
                             </span>
                         </span>
                         <span class="accordion-meta">
-                            <span class="trophy-count">50+</span>
+                            <span class="trophy-count" data-stat="award.floor_plus">50+</span>
                             <svg class="accordion-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
                         </span>
                     </button>
@@ -1554,56 +1554,56 @@
                                         <div class="trophy-name">Ballon d'Or</div>
                                         <div class="trophy-years"><span class="trophy-year">2008</span><span class="trophy-year">2013</span><span class="trophy-year">2014</span><span class="trophy-year">2016</span><span class="trophy-year">2017</span></div>
                                     </div>
-                                    <div class="trophy-count-badge">5</div>
+                                    <div class="trophy-count-badge" data-stat="award.ballondor">5</div>
                                 </div>
                                 <div class="trophy-item award-highlight">
                                     <div class="trophy-info">
                                         <div class="trophy-name">The Best FIFA Men's Player</div>
                                         <div class="trophy-years"><span class="trophy-year">2016</span><span class="trophy-year">2017</span></div>
                                     </div>
-                                    <div class="trophy-count-badge">2</div>
+                                    <div class="trophy-count-badge" data-stat="award.thebestfifamensplayer">2</div>
                                 </div>
                                 <div class="trophy-item award-highlight">
                                     <div class="trophy-info">
                                         <div class="trophy-name">European Golden Shoe</div>
                                         <div class="trophy-years"><span class="trophy-year">2007/08</span><span class="trophy-year">2010/11</span><span class="trophy-year">2013/14</span><span class="trophy-year">2014/15</span></div>
                                     </div>
-                                    <div class="trophy-count-badge">4</div>
+                                    <div class="trophy-count-badge" data-stat="award.europeangoldenshoe">4</div>
                                 </div>
                                 <div class="trophy-item">
                                     <div class="trophy-info">
                                         <div class="trophy-name">UEFA Men's Player of the Year</div>
                                         <div class="trophy-years"><span class="trophy-year">2013/14</span><span class="trophy-year">2015/16</span><span class="trophy-year">2016/17</span></div>
                                     </div>
-                                    <div class="trophy-count-badge">3</div>
+                                    <div class="trophy-count-badge" data-stat="award.uefamensplayeroftheyear">3</div>
                                 </div>
                                 <div class="trophy-item">
                                     <div class="trophy-info">
                                         <div class="trophy-name">UEFA Champions League top scorer</div>
                                         <div class="trophy-years"><span class="trophy-year">07/08</span><span class="trophy-year">12/13</span><span class="trophy-year">13/14</span><span class="trophy-year">14/15</span><span class="trophy-year">15/16</span><span class="trophy-year">16/17</span><span class="trophy-year">17/18</span></div>
                                     </div>
-                                    <div class="trophy-count-badge">7</div>
+                                    <div class="trophy-count-badge" data-stat="award.uefachampionsleaguetopscorer">7</div>
                                 </div>
                                 <div class="trophy-item">
                                     <div class="trophy-info">
                                         <div class="trophy-name">Premier League Player of the Season</div>
                                         <div class="trophy-years"><span class="trophy-year">2006/07</span><span class="trophy-year">2007/08</span></div>
                                     </div>
-                                    <div class="trophy-count-badge">2</div>
+                                    <div class="trophy-count-badge" data-stat="award.premierleagueplayeroftheseason">2</div>
                                 </div>
                                 <div class="trophy-item">
                                     <div class="trophy-info">
                                         <div class="trophy-name">Pichichi Trophy</div>
                                         <div class="trophy-years"><span class="trophy-year">2010/11</span><span class="trophy-year">2013/14</span><span class="trophy-year">2014/15</span></div>
                                     </div>
-                                    <div class="trophy-count-badge">3</div>
+                                    <div class="trophy-count-badge" data-stat="award.pichichitrophy">3</div>
                                 </div>
                                 <div class="trophy-item">
                                     <div class="trophy-info">
                                         <div class="trophy-name">FIFA FIFPro World 11</div>
                                         <div class="trophy-years"><span class="trophy-year">2007 to 2021</span></div>
                                     </div>
-                                    <div class="trophy-count-badge">15</div>
+                                    <div class="trophy-count-badge" data-stat="award.fifafifproworld11">15</div>
                                 </div>
                             </div>
                         </div>
@@ -1617,11 +1617,11 @@
             <section class="faq-grid reveal" style="animation-delay:.16s" aria-label="Frequently asked questions">
                 <div class="faq-item">
                     <h3>Which club has Ronaldo won the most trophies with?</h3>
-                    <p>Real Madrid, with 15 trophies in nine seasons: 4 Champions Leagues, 3 FIFA Club World Cups, 2 La Liga titles, 2 Copas del Rey, 2 Supercopas de Espana and 2 UEFA Super Cups.</p>
+                    <p>Real Madrid, with <span data-stat="honours.realmadrid.count">15</span> trophies in nine seasons: <span data-stat="honours.realmadrid.uefachampionsleague">4</span> Champions Leagues, <span data-stat="honours.realmadrid.fifaclubworldcup">3</span> FIFA Club World Cups, <span data-stat="honours.realmadrid.laliga">2</span> La Liga titles, <span data-stat="honours.realmadrid.copadelrey">2</span> Copas del Rey, <span data-stat="honours.realmadrid.supercopadeespaa">2</span> Supercopas de Espana and <span data-stat="honours.realmadrid.uefasupercup">2</span> UEFA Super Cups.</p>
                 </div>
                 <div class="faq-item">
                     <h3>How many individual awards has Ronaldo won?</h3>
-                    <p>More than 50, including 5 Ballon d'Or awards, 2 The Best FIFA Men's Player awards, 4 European Golden Shoes, 3 UEFA Men's Player of the Year awards and 15 selections in the FIFA FIFPro World 11.</p>
+                    <p>More than <span data-stat="award.floor">50</span>, including <span data-stat="award.ballondor">5</span> Ballon d'Or awards, <span data-stat="award.thebestfifamensplayer">2</span> The Best FIFA Men's Player awards, <span data-stat="award.europeangoldenshoe">4</span> European Golden Shoes, <span data-stat="award.uefamensplayeroftheyear">3</span> UEFA Men's Player of the Year awards and <span data-stat="award.fifafifproworld11">15</span> selections in the FIFA FIFPro World 11.</p>
                 </div>
                 <div class="faq-item">
                     <h3>How many times was Ronaldo the Champions League top scorer?</h3>
@@ -1655,11 +1655,11 @@
             <nav class="link-grid reveal" style="animation-delay:.16s" aria-label="More Cristiano Ronaldo statistics">
                 <a class="link-card" href="index.html">
                     <strong>Career statistics</strong>
-                    <span>976 goals, 291 assists and 1,330 appearances, broken down by club and country.</span>
+                    <span><span data-stat="career.goals">976</span> goals, <span data-stat="career.assists">291</span> assists and <span data-stat="career.apps">1,330</span> appearances, broken down by club and country.</span>
                 </a>
                 <a class="link-card" href="goalsbyyear.html">
                     <strong>Ronaldo goals by year</strong>
-                    <span>Every calendar year from 2002 to 2026 and the cumulative climb to 976.</span>
+                    <span>Every calendar year from <span data-stat="year.span">2002 to 2026</span> and the cumulative climb to <span data-stat="career.goals">976</span>.</span>
                 </a>
                 <a class="link-card" href="goalsbyseason.html">
                     <strong>Ronaldo goals by season</strong>
@@ -1677,7 +1677,7 @@
 
             <section class="method reveal" style="animation-delay:.16s">
                 <h2>How these trophy counts are compiled</h2>
-                <p>The total of 35 counts senior team trophies won as a member of the winning squad for Sporting CP, Manchester United, Real Madrid, Juventus, Al Nassr and Portugal. Individual honours such as the Ballon d'Or, the European Golden Shoe and FIFA FIFPro World 11 selections are counted separately and are not part of the 35, which is why some published totals differ.</p>
+                <p>The total of <span data-stat="honours.total">35</span> counts senior team trophies won as a member of the winning squad for Sporting CP, Manchester United, Real Madrid, Juventus, Al Nassr and Portugal. Individual honours such as the Ballon d'Or, the European Golden Shoe and FIFA FIFPro World 11 selections are counted separately and are not part of the <span data-stat="honours.total">35</span>, which is why some published totals differ.</p>
                 <p>Each competition and year is checked against club and federation records. The most recent addition was the 2025/26 Saudi Pro League, won in May 2026. Last updated 26 July 2026.</p>
             </section>
 

@@ -840,122 +840,314 @@
     {
       "year": 2003,
       "apps": 2,
-      "goals": 0
+      "goals": 0,
+      "competitive": [
+        null,
+        null
+      ],
+      "friendly": [
+        2,
+        0
+      ]
     },
     {
       "year": 2004,
       "apps": 16,
-      "goals": 7
+      "goals": 7,
+      "competitive": [
+        11,
+        7
+      ],
+      "friendly": [
+        5,
+        0
+      ]
     },
     {
       "year": 2005,
       "apps": 11,
-      "goals": 2
+      "goals": 2,
+      "competitive": [
+        7,
+        2
+      ],
+      "friendly": [
+        4,
+        0
+      ]
     },
     {
       "year": 2006,
       "apps": 14,
-      "goals": 6
+      "goals": 6,
+      "competitive": [
+        10,
+        4
+      ],
+      "friendly": [
+        4,
+        2
+      ]
     },
     {
       "year": 2007,
       "apps": 10,
-      "goals": 5
+      "goals": 5,
+      "competitive": [
+        9,
+        5
+      ],
+      "friendly": [
+        1,
+        0
+      ]
     },
     {
       "year": 2008,
       "apps": 8,
-      "goals": 1
+      "goals": 1,
+      "competitive": [
+        5,
+        1
+      ],
+      "friendly": [
+        3,
+        0
+      ]
     },
     {
       "year": 2009,
       "apps": 7,
-      "goals": 1
+      "goals": 1,
+      "competitive": [
+        5,
+        0
+      ],
+      "friendly": [
+        2,
+        1
+      ]
     },
     {
       "year": 2010,
       "apps": 11,
-      "goals": 3
+      "goals": 3,
+      "competitive": [
+        6,
+        3
+      ],
+      "friendly": [
+        5,
+        0
+      ]
     },
     {
       "year": 2011,
       "apps": 8,
-      "goals": 7
+      "goals": 7,
+      "competitive": [
+        6,
+        5
+      ],
+      "friendly": [
+        2,
+        2
+      ]
     },
     {
       "year": 2012,
       "apps": 13,
-      "goals": 5
+      "goals": 5,
+      "competitive": [
+        9,
+        4
+      ],
+      "friendly": [
+        4,
+        1
+      ]
     },
     {
       "year": 2013,
       "apps": 9,
-      "goals": 10
+      "goals": 10,
+      "competitive": [
+        6,
+        7
+      ],
+      "friendly": [
+        3,
+        3
+      ]
     },
     {
       "year": 2014,
       "apps": 9,
-      "goals": 5
+      "goals": 5,
+      "competitive": [
+        5,
+        3
+      ],
+      "friendly": [
+        4,
+        2
+      ]
     },
     {
       "year": 2015,
       "apps": 5,
-      "goals": 3
+      "goals": 3,
+      "competitive": [
+        4,
+        3
+      ],
+      "friendly": [
+        1,
+        0
+      ]
     },
     {
       "year": 2016,
       "apps": 13,
-      "goals": 13
+      "goals": 13,
+      "competitive": [
+        10,
+        10
+      ],
+      "friendly": [
+        3,
+        3
+      ]
     },
     {
       "year": 2017,
       "apps": 11,
-      "goals": 11
+      "goals": 11,
+      "competitive": [
+        10,
+        10
+      ],
+      "friendly": [
+        1,
+        1
+      ]
     },
     {
       "year": 2018,
       "apps": 7,
-      "goals": 6
+      "goals": 6,
+      "competitive": [
+        4,
+        4
+      ],
+      "friendly": [
+        3,
+        2
+      ]
     },
     {
       "year": 2019,
       "apps": 10,
-      "goals": 14
+      "goals": 14,
+      "competitive": [
+        10,
+        14
+      ],
+      "friendly": [
+        null,
+        null
+      ]
     },
     {
       "year": 2020,
       "apps": 6,
-      "goals": 3
+      "goals": 3,
+      "competitive": [
+        4,
+        2
+      ],
+      "friendly": [
+        2,
+        1
+      ]
     },
     {
       "year": 2021,
       "apps": 14,
-      "goals": 13
+      "goals": 13,
+      "competitive": [
+        11,
+        11
+      ],
+      "friendly": [
+        3,
+        2
+      ]
     },
     {
       "year": 2022,
       "apps": 12,
-      "goals": 3
+      "goals": 3,
+      "competitive": [
+        12,
+        3
+      ],
+      "friendly": [
+        null,
+        null
+      ]
     },
     {
       "year": 2023,
       "apps": 9,
-      "goals": 10
+      "goals": 10,
+      "competitive": [
+        9,
+        10
+      ],
+      "friendly": [
+        null,
+        null
+      ]
     },
     {
       "year": 2024,
       "apps": 12,
-      "goals": 7
+      "goals": 7,
+      "competitive": [
+        10,
+        5
+      ],
+      "friendly": [
+        2,
+        2
+      ]
     },
     {
       "year": 2025,
       "apps": 9,
-      "goals": 8
+      "goals": 8,
+      "competitive": [
+        9,
+        8
+      ],
+      "friendly": [
+        0,
+        0
+      ]
     },
     {
       "year": 2026,
       "apps": 7,
-      "goals": 3
+      "goals": 3,
+      "competitive": [
+        5,
+        3
+      ],
+      "friendly": [
+        2,
+        0
+      ]
     }
   ],
   "competitions": {

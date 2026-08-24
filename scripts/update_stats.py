@@ -49,6 +49,12 @@ PAGES = [
 # Body part slots, in the order they are stored and displayed.
 BODY_SLOTS = ["right", "left", "head", "other"]
 
+# Small numbers are spelled out in prose, per the site's writing style.
+WORDS = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven",
+         8: "eight", 9: "nine", 10: "ten", 11: "eleven", 12: "twelve", 13: "thirteen",
+         14: "fourteen", 15: "fifteen", 16: "sixteen", 17: "seventeen", 18: "eighteen",
+         19: "nineteen", 20: "twenty"}
+
 
 # ----------------------------------------------------------------------------
 # Load and save
@@ -224,6 +230,15 @@ def derive(data):
         if t["name"] == "UEFA Champions League"))
     for award in hon.get("individual", []):
         out[f"award.{slug(award['name'])}"] = str(award["count"])
+    # Opponent tallies, so a figure quoted in prose comes off the same lists the
+    # dashboard's opponent card is built from.
+    for group, block in data.get("opponents", {}).items():
+        for name, n in block.items():
+            out[f"opponent.{group}.{slug(name)}.goals"] = str(n)
+    for group, block in data.get("opponent_apps", {}).items():
+        for name, n in block.items():
+            out[f"opponent.{group}.{slug(name)}.apps"] = str(n)
+
     if "individual_floor" in hon:
         out["award.floor"] = str(hon["individual_floor"])
         out["award.floor_plus"] = f"{hon['individual_floor']}+"
@@ -242,8 +257,23 @@ def derive(data):
     out["year.count"] = str(len(year_rows))
     out["year.average"] = f"{sum(r['goals'] for r in year_rows) / len(year_rows):.1f}"
     out["year.first"] = str(year_rows[0]["year"])
+    out["year.first.goals"] = str(year_rows[0]["goals"])
     out["year.last"] = str(year_rows[-1]["year"])
     out["year.span"] = f"{year_rows[0]['year']} to {year_rows[-1]['year']}"
+    # the pages say "40 goals or more in N separate years", both as a figure and
+    # spelled out, so both forms are computed from the same count
+    above40 = sum(1 for r in year_rows if r["goals"] >= 40)
+    out["year.above40"] = str(above40)
+    out["year.above40.word"] = WORDS.get(above40, str(above40))
+    out["year.above40.threshold"] = "40"
+    # The prose ranks his best years, and names the year each round hundred was
+    # passed, so both come off the same rows rather than being remembered.
+    for rank, row in enumerate(sorted(year_rows, key=lambda r: -r["goals"])[:5], start=1):
+        out[f"year.rank{rank}.goals"] = str(row["goals"])
+        out[f"year.rank{rank}.year"] = str(row["year"])
+    for milestone in range(100, career_goals + 1, 100):
+        hit = next(r for r in year_rows if r["cumulative"] >= milestone)
+        out[f"milestone.{milestone}.year"] = str(hit["year"])
 
     # Seasons, best club campaign
     season_totals = []
@@ -258,6 +288,28 @@ def derive(data):
     out["season.best.season"] = best_season["season"]
     out["season.best.team"] = teams[best_season["team"]]["name"]
     out["season.best.apps"] = str(best_season["apps"])
+    # The prose ranks his best campaigns and names his best at each club, so
+    # both come off the season rows rather than being remembered by hand.
+    by_goals = sorted(season_totals, key=lambda r: (-r["goals"], r["season"]))
+    for rank, row in enumerate(by_goals[:8], start=1):
+        out[f"season.rank{rank}.goals"] = str(row["goals"])
+        out[f"season.rank{rank}.season"] = row["season"]
+        out[f"season.rank{rank}.team"] = teams[row["team"]]["name"]
+    league_of = {}
+    for row in data["seasons"]:
+        if not row.get("in_career", True):
+            continue
+        cell = row["comps"].get("league")
+        league_of[(row["team"], row["season"])] = cell["goals"] if cell else 0
+    out["season.best.league_goals"] = str(
+        league_of.get((best_season["team"], best_season["season"]), 0))
+    for tid in teams:
+        rows = [r for r in season_totals if r["team"] == tid]
+        if not rows:
+            continue
+        top = max(rows, key=lambda r: r["goals"])
+        out[f"team.{tid}.bestseason.goals"] = str(top["goals"])
+        out[f"team.{tid}.bestseason.season"] = top["season"]
 
     # Season table cells, one key per published cell, so the season page can be
     # driven without regenerating any of its markup.
@@ -308,11 +360,22 @@ def derive(data):
         out[f"club.total.{slot}.apps"] = f"{club_col[slot][0]:,}"
         out[f"club.total.{slot}.goals"] = f"{club_col[slot][1]:,}"
 
-    # Portugal year rows: only the total columns are modelled, the competitive
-    # and friendly split is not in the dataset yet.
+    # Portugal year rows, competitive and friendly and the totals. A year with
+    # no matches of one kind prints n/a rather than a zero, which is what the
+    # season page already does.
     for row in data["portugal_years"]:
-        out[f"portugal.{row['year']}.apps"] = str(row["apps"])
-        out[f"portugal.{row['year']}.goals"] = str(row["goals"])
+        y = row["year"]
+        out[f"portugal.{y}.apps"] = str(row["apps"])
+        out[f"portugal.{y}.goals"] = str(row["goals"])
+        for kind in ("competitive", "friendly"):
+            cell = row.get(kind) or [None, None]
+            for i, what in enumerate(("apps", "goals")):
+                out[f"portugal.{y}.{kind}.{what}"] = (
+                    "n/a" if cell[i] is None else str(cell[i]))
+    for kind in ("competitive", "friendly"):
+        for i, what in enumerate(("apps", "goals")):
+            out[f"portugal.{kind}.{what}"] = str(sum(
+                (r.get(kind) or [0, 0])[i] or 0 for r in data["portugal_years"]))
 
     # Current season, as quoted on the home page and the season page
     cur = data["meta"]["current_season"]
@@ -411,6 +474,16 @@ def validate(data, facts):
             if len(set(t["years"])) != len(t["years"]):
                 errors.append(f"{tid} trophy {t['name']} repeats a year")
 
+    # The Portugal split must add back up to each year's total, or the season
+    # page's competitive and friendly columns drift away from its total column.
+    for row in data["portugal_years"]:
+        a = sum((row.get(k) or [0, 0])[0] or 0 for k in ("competitive", "friendly"))
+        g = sum((row.get(k) or [0, 0])[1] or 0 for k in ("competitive", "friendly"))
+        if a != row["apps"] or g != row["goals"]:
+            errors.append(
+                f"Portugal {row['year']}: split is {a} apps and {g} goals, "
+                f"the row totals {row['apps']} and {row['goals']}")
+
     pens = sum(data["penalties"].values())
     fks = sum(data["freekicks"].values())
     if pens + fks > cg:
@@ -451,6 +524,164 @@ REGION_RE = re.compile(
     re.DOTALL,
 )
 ATTR_SPEC_RE = re.compile(r'data-stat-attr="([^"]+)"')
+
+# ----------------------------------------------------------------------------
+# Text rules: figures with nowhere to hang a marker
+#
+# Titles, meta descriptions, JSON-LD strings and CSS declarations cannot carry a
+# data-stat attribute, and wrapping them in a span either shows up in the page
+# or breaks the JSON. They are rewritten by pattern instead.
+#
+# Each rule is (pattern, key). The pattern must have exactly one capturing
+# group, which is the text replaced by the key's value. Rules are checked on
+# every build: a pattern that stops matching, or matches more than once, is
+# reported rather than silently skipped, so an edit to the prose cannot quietly
+# strand a figure.
+# ----------------------------------------------------------------------------
+
+def text_rules():
+    G = r"([\d,]+)"                       # a figure, with or without a comma
+    D = r"(\d{1,2} \w+ \d{4})"            # a long date, e.g. 26 July 2026
+    common = [
+        (r'"dateModified": "(\d{4}-\d\d-\d\d)"', "meta.updated.iso"),
+    ]
+    return {
+        "index.html": common + [
+            (r"as of " + D + r"[.,]", "meta.updated.long", 8),
+            (r"has " + G + r" career goals, [\d,]+ assists", "career.goals", 2),
+            (r"career goals, " + G + r" assists and [\d,]+ appearances", "career.assists", 2),
+            (r"assists and " + G + r" appearances as of", "career.apps", 4),
+            (r'content="' + G + r" goals, [\d,]+ assists", "career.goals", 2),
+            (r'content="[\d,]+ goals, ' + G + r" assists", "career.assists", 2),
+            (r'content="[\d,]+ goals, [\d,]+ assists and ' + G + r" appearances", "career.apps", 2),
+            (r"\.progress-fill \{ width: ([\d.]+)% !important; \}", "career.pct"),
+            (r"\.progress-fill \{\n            height: 100%;\n            width: ([\d.]+)%;", "career.pct"),
+        ],
+        "goalsbyyear.html": common + [
+            (r"as of " + D + r"[.,]", "meta.updated.long", 3),
+            (r"Ronaldo Goals by Year: " + G + r" Career Goals", "career.goals", 4),
+            (r"goals by year: " + G + r" in his best year", "year.best.goals", 2),
+            (r"in his best year, " + G + r" so far in", "year.current.goals", 2),
+            (r"so far in \d{4} and " + G + r" in total", "career.goals", 2),
+            (r"cumulative climb to " + G + r", from", "career.goals"),
+            (r"to a best of " + G + r" in \d{4}\. Updated", "year.best.goals"),
+            (r"climb to " + G + r", with a best of", "career.goals"),
+            (r"with a best of " + G + r" goals in", "year.best.goals"),
+        ],
+        "goalsbyseason.html": common + [
+            (r"as of " + D + r"[.,]", "meta.updated.long", 3),
+            (r"season by season: " + G + r" club goals", "career.club_goals", 2),
+            (r"club goals in " + G + r" games and", "career.club_apps", 2),
+            (r"games and " + G + r" for Portugal in", "team.portugal.goals", 2),
+            (r"for Portugal in " + G + r" caps", "team.portugal.apps", 2),
+            (r"year by year: " + G + r" club goals,", "career.club_goals"),
+            (r"club goals, " + G + r" international goals", "team.portugal.goals"),
+            (r"best season of " + G + r" goals in", "season.best.goals"),
+        ],
+        "dashboard.html": common + [
+            (r"as of " + D + r"[.,]", "meta.updated.long", 2),
+            (r"Ronaldo's " + G + r" goals by team", "career.goals", 2),
+            (r"dashboard follows: " + G + r" career goals by competition", "career.goals"),
+            (r'twitter:description" content="' + G + r" career goals by competition", "career.goals"),
+        ],
+        "timeline.html": common + [
+            (r"Updated " + D + r"\.", "meta.updated.long"),
+            (r"debut at \d+ to " + G + r" career goals, milestone by milestone and dated\. Updated", "career.goals"),
+            (r"debut at \d+ to " + G + r" career goals, milestone by milestone and dated\.\"", "career.goals"),
+            (r'"description": "' + G + r' career goals and counting', "career.goals"),
+            (r"The last great number is " + G + r" away\.", "career.remaining"),
+            (r"scored " + G + r" goals in [\d,]+ games\.", "team.realmadrid.goals"),
+            (r"scored [\d,]+ goals in " + G + r" games\.", "team.realmadrid.apps"),
+            (r"As of " + D + r" he has", "meta.updated.long"),
+            (r"he has " + G + r" career goals, [\d,]+ short of", "career.goals"),
+            (r"career goals, " + G + r" short of [\d,]+\.", "career.remaining"),
+            (r"short of " + G + r'\."', "career.target"),
+        ],
+        "achievements.html": common + [
+            (r"as of " + D + r"[.,]", "meta.updated.long", 5),
+            (r"Ronaldo Trophies and Awards: " + G + r" Titles", "honours.total", 4),
+            (r"has won " + G + r" team trophies, including", "honours.total", 2),
+            (r"including " + G + r" Champions Leagues and Euro", "honours.championsleague", 3),
+            (r"Euro 2016, plus " + G + r" Ballon d'Or awards", "award.ballondor", 2),
+            (r"Ballon d'Or and more than " + G + r" individual awards", "award.floor", 2),
+            (r'content="' + G + r" team trophies including", "honours.total"),
+            (r"team trophies including " + G + r" Champions Leagues", "honours.championsleague"),
+            (r'content="' + G + r" team trophies, [\d,]+ Champions Leagues", "honours.total"),
+            (r"team trophies, " + G + r" Champions Leagues, Euro", "honours.championsleague"),
+            (r"Euro 2016, " + G + r" Ballon d'Or and more than", "award.ballondor"),
+            (r'"description": "The ' + G + r" team trophies Cristiano Ronaldo has won", "honours.total"),
+            (r"has won " + G + r" team trophies as of", "honours.total"),
+            (r"team trophies as of \d{1,2} \w+ \d{4}: " + G + r" at club level", "honours.club"),
+            (r"at club level with .*?, and " + G + r" with Portugal\.", "honours.national"),
+            (r"Champions League " + G + r" times: once with Manchester", "honours.championsleague"),
+            (r"has won " + G + r" Ballon d'Or awards, in", "award.ballondor"),
+            (r"has won " + G + r" league titles in four countries", "honours.leagues"),
+        ],
+    }
+
+
+def script_rules():
+    """Prose that lives inside a JavaScript string literal, where neither a
+    marker nor a region fits. Same contract as text_rules, but applied to the
+    body rather than the head."""
+    G = r"([\d,]+)"
+    return {
+        "dashboard.html": [
+            (r"Lists like the " + G + r" against Atletico Madrid", "opponent.club.atleticomadrid.goals", 2),
+            (r"a total such as the " + G + r" against Atletico Madrid", "opponent.club.atleticomadrid.goals"),
+            (r"His " + G + r" World Cup goals include three", "comp.portugal.worldcup"),
+            (r"All " + G + r" across the whole career", "career.goals"),
+        ],
+    }
+
+
+def apply_text_rules(text, page, values, report):
+    """Apply this page's text rules. A rule may be (pattern, key) for a figure
+    that appears once, or (pattern, key, n) for one that is repeated verbatim,
+    typically a title that is also the og and twitter title. The count is an
+    assertion: if the page stops matching it, the build says so rather than
+    leaving the figure behind."""
+    # Rules only ever rewrite the head: the title, the meta descriptions, the
+    # JSON-LD and the stylesheet. The body belongs to the marker mechanism, and
+    # keeping the two apart means they can never fight over the same figure.
+    split = text.find("</head>")
+    if split == -1:
+        return text
+    head, body = text[:split], text[split:]
+    for rule in text_rules().get(page, []):
+        pattern, key = rule[0], rule[1]
+        expected = rule[2] if len(rule) > 2 else 1
+        if key not in values:
+            report["missing"].add(key)
+            continue
+        hits = list(re.finditer(pattern, head))
+        if len(hits) != expected:
+            report["rules"].append(
+                f"{page}: expected {expected} match(es) for {key}, found "
+                f"{len(hits)} <- {pattern}")
+            continue
+        for m in reversed(hits):            # right to left, so offsets hold
+            head = head[:m.start(1)] + values[key] + head[m.end(1):]
+        report["texts"] += len(hits)
+
+    for rule in script_rules().get(page, []):
+        pattern, key = rule[0], rule[1]
+        expected = rule[2] if len(rule) > 2 else 1
+        if key not in values:
+            report["missing"].add(key)
+            continue
+        hits = list(re.finditer(pattern, body))
+        if len(hits) != expected:
+            report["rules"].append(
+                f"{page}: expected {expected} script match(es) for {key}, found "
+                f"{len(hits)} <- {pattern}")
+            continue
+        for m in reversed(hits):
+            body = body[:m.start(1)] + values[key] + body[m.end(1):]
+        report["texts"] += len(hits)
+
+    return head + body
+
 
 
 def rewrite_page(text, values, regions, report):
@@ -710,13 +941,15 @@ def check_pages():
 
 
 def write_html(data, values, regions, dry_run=False):
-    report = {"values": 0, "attrs": 0, "regions": 0, "missing": set(), "files": []}
+    report = {"values": 0, "attrs": 0, "regions": 0, "texts": 0,
+              "missing": set(), "rules": [], "files": []}
     for name in PAGES:
         path = ROOT / name
         if not path.exists():
             continue
         original = path.read_text(encoding="utf-8")
         updated = rewrite_page(original, values, regions, report)
+        updated = apply_text_rules(updated, name, values, report)
         if updated != original:
             report["files"].append(name)
             if not dry_run:
@@ -939,9 +1172,13 @@ def main():
     report = write_html(data, values, regions)
 
     print(f"Goals now {values['career.goals']}, {values['career.remaining']} from 1,000.")
-    print(f"Rewrote {report['values']} values, {report['attrs']} attributes and "
-          f"{report['regions']} table regions in {len(report['files'])} files: "
-          f"{', '.join(report['files']) or 'none'}")
+    print(f"Rewrote {report['values']} values, {report['attrs']} attributes, "
+          f"{report['regions']} table regions and {report['texts']} text rules "
+          f"in {len(report['files'])} files: {', '.join(report['files']) or 'none'}")
+    if report["rules"]:
+        print("Text rules that did not match exactly once:")
+        for line in report["rules"]:
+            print("  " + line)
     if report["missing"]:
         print("Markers with no matching data key (check the migration):")
         for key in sorted(report["missing"]):

@@ -755,7 +755,7 @@
             display: block; font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 0.98rem; font-weight: 700; color: var(--brand-ink);
         }
-        .link-card span { display: block; margin-top: 6px; font-size: 0.86rem; color: var(--ink-2); }
+        .link-card > span { display: block; margin-top: 6px; font-size: 0.86rem; color: var(--ink-2); }
 
         .method {
             margin-top: 40px; padding: 22px 26px;
@@ -1108,11 +1108,11 @@
             <nav class="link-grid reveal" style="animation-delay:.10s" aria-label="More Cristiano Ronaldo statistics">
                 <a class="link-card" href="index.html">
                     <strong>Career statistics</strong>
-                    <span>976 goals, 291 assists and 1,330 appearances, broken down by club and country.</span>
+                    <span><span data-stat="career.goals">976</span> goals, <span data-stat="career.assists">291</span> assists and <span data-stat="career.apps">1,330</span> appearances, broken down by club and country.</span>
                 </a>
                 <a class="link-card" href="goalsbyyear.html">
                     <strong>Ronaldo goals by year</strong>
-                    <span>Every calendar year from 2002 to 2026 and the cumulative climb to 976.</span>
+                    <span>Every calendar year from <span data-stat="year.span">2002 to 2026</span> and the cumulative climb to <span data-stat="career.goals">976</span>.</span>
                 </a>
                 <a class="link-card" href="goalsbyseason.html">
                     <strong>Ronaldo goals by season</strong>
@@ -1124,7 +1124,7 @@
                 </a>
                 <a class="link-card" href="achievements.html">
                     <strong>Achievements and honours</strong>
-                    <span>All 35 team trophies and more than 50 individual awards, club by club.</span>
+                    <span>All <span data-stat="honours.total">35</span> team trophies and more than <span data-stat="award.floor">50</span> individual awards, club by club.</span>
                 </a>
             </nav>
 

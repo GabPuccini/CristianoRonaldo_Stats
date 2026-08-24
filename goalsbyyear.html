@@ -881,7 +881,7 @@
             display: block; font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 0.98rem; font-weight: 700; color: var(--brand-ink);
         }
-        .link-card span { display: block; margin-top: 6px; font-size: 0.86rem; color: var(--ink-2); }
+        .link-card > span { display: block; margin-top: 6px; font-size: 0.86rem; color: var(--ink-2); }
 
         .method {
             margin-top: 40px; padding: 22px 26px;
@@ -1004,7 +1004,7 @@
                 <div class="page-head-main">
                     <span class="eyebrow">Goals by year</span>
                     <h1 class="page-title">Cristiano Ronaldo goals by year</h1>
-                    <p class="page-lead">Cristiano Ronaldo has scored <b><span data-stat="career.goals">976</span> goals</b> across <span data-stat="year.count">25</span> calendar years, from 5 in 2002 to <b><span data-stat="year.current.goals">19</span> so far in <span data-stat="year.current.year">2026</span></b>, as of 26 July 2026. His best year was <b><span data-stat="year.best.year">2013</span>, with <span data-stat="year.best.goals">69</span> goals</b>, and he has reached 40 or more in fourteen separate years.</p>
+                    <p class="page-lead">Cristiano Ronaldo has scored <b><span data-stat="career.goals">976</span> goals</b> across <span data-stat="year.count">25</span> calendar years, from <span data-stat="year.first.goals">5</span> in <span data-stat="year.first">2002</span> to <b><span data-stat="year.current.goals">19</span> so far in <span data-stat="year.current.year">2026</span></b>, as of 26 July 2026. His best year was <b><span data-stat="year.best.year">2013</span>, with <span data-stat="year.best.goals">69</span> goals</b>, and he has reached <span data-stat="year.above40.threshold">40</span> or more in <span data-stat="year.above40.word">fourteen</span> separate years.</p>
                     <div style="margin-top:16px">
                         <span class="updated-badge"><span class="dot"></span> <span data-stat="meta.updated.badge">Updated 26 July 2026</span></span>
                     </div>
@@ -1021,7 +1021,7 @@
             <section class="chart-card reveal" style="animation-delay:.08s">
                 <div class="chart-header">
                     <h2 class="chart-title">How many goals does Ronaldo score each year?</h2>
-                    <p class="chart-subtitle">Goals scored in each calendar year and the cumulative climb to 976</p>
+                    <p class="chart-subtitle">Goals scored in each calendar year and the cumulative climb to <span data-stat="career.goals">976</span></p>
                 </div>
 
                 <div class="chart-wrapper">
@@ -1053,7 +1053,7 @@
                 <h2 class="section-title">Ronaldo goals year by year, 2002 to 2026</h2>
                 <a class="section-link" href="goalsbyseason.html">The same goals by season</a>
             </div>
-            <p class="section-note">The table below carries the same figures as the chart. Ronaldo reached <b>500 career goals during 2015</b> and <b>900 in 2024</b>, and stands on 976 with 19 scored so far in 2026.</p>
+            <p class="section-note">The table below carries the same figures as the chart. Ronaldo reached <b>500 career goals during <span data-stat="milestone.500.year">2015</span></b> and <b>900 in <span data-stat="milestone.900.year">2024</span></b>, and stands on <span data-stat="career.goals">976</span> with <span data-stat="year.current.goals">19</span> scored so far in <span data-stat="year.current.year">2026</span>.</p>
             <section class="data-card reveal" style="animation-delay:.10s">
                 <div class="data-scroll">
                     <table class="data-table">
@@ -1098,9 +1098,9 @@
                         <tfoot>
                             <tr>
                                 <th scope="row">Total</th>
-                                <td>976</td>
-                                <td>976</td>
-                                <td>41</td>
+                                <td data-stat="career.goals">976</td>
+                                <td data-stat="career.goals">976</td>
+                                <td data-stat="person.age">41</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -1112,7 +1112,7 @@
                 <h2 class="section-title">What was Ronaldo's best year?</h2>
                 <a class="section-link" href="dashboard.html">See those goals by competition</a>
             </div>
-            <p class="section-note">Cristiano Ronaldo's best calendar year was <b>2013, when he scored 69 goals</b> for Real Madrid and Portugal. His five highest scoring years all came between 2011 and 2015, at Real Madrid: 69 in 2013, 63 in 2012, 61 in 2014, 60 in 2011 and 57 in 2015. He has scored 40 goals or more in fourteen separate years and has never gone a calendar year without scoring since 2002.</p>
+            <p class="section-note">Cristiano Ronaldo's best calendar year was <b><span data-stat="year.best.year">2013</span>, when he scored <span data-stat="year.best.goals">69</span> goals</b> for Real Madrid and Portugal. His five highest scoring years all came between 2011 and 2015, at Real Madrid: <span data-stat="year.rank1.goals">69</span> in <span data-stat="year.rank1.year">2013</span>, <span data-stat="year.rank2.goals">63</span> in <span data-stat="year.rank2.year">2012</span>, <span data-stat="year.rank3.goals">61</span> in <span data-stat="year.rank3.year">2014</span>, <span data-stat="year.rank4.goals">60</span> in <span data-stat="year.rank4.year">2011</span> and <span data-stat="year.rank5.goals">57</span> in <span data-stat="year.rank5.year">2015</span>. He has scored <span data-stat="year.above40.threshold">40</span> goals or more in <span data-stat="year.above40.word">fourteen</span> separate years and has never gone a calendar year without scoring since 2002.</p>
 
             <div class="section-head">
                 <h2 class="section-title">Explore the full statistics</h2>
@@ -1120,7 +1120,7 @@
             <nav class="link-grid reveal" style="animation-delay:.10s" aria-label="More Cristiano Ronaldo statistics">
                 <a class="link-card" href="index.html">
                     <strong>Career statistics</strong>
-                    <span>976 goals, 291 assists and 1,330 appearances, broken down by club and country.</span>
+                    <span><span data-stat="career.goals">976</span> goals, <span data-stat="career.assists">291</span> assists and <span data-stat="career.apps">1,330</span> appearances, broken down by club and country.</span>
                 </a>
                 <a class="link-card" href="goalsbyseason.html">
                     <strong>Ronaldo goals by season</strong>
@@ -1136,7 +1136,7 @@
                 </a>
                 <a class="link-card" href="achievements.html">
                     <strong>Achievements and honours</strong>
-                    <span>All 35 team trophies and more than 50 individual awards, club by club.</span>
+                    <span>All <span data-stat="honours.total">35</span> team trophies and more than <span data-stat="award.floor">50</span> individual awards, club by club.</span>
                 </a>
             </nav>
 

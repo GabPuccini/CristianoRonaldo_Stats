@@ -968,7 +968,7 @@
             font-weight: 700;
             color: var(--brand-ink);
         }
-        .link-card span {
+        .link-card > span {
             display: block;
             margin-top: 6px;
             font-size: 0.86rem;
@@ -1574,7 +1574,7 @@
                 <h2 class="section-title">How many goals does Ronaldo score each year?</h2>
                 <a class="section-link" href="goalsbyyear.html">Full goals by year chart</a>
             </div>
-            <p class="section-note">Ronaldo has scored in every calendar year since <span data-stat="year.first">2002</span> and reached 40 goals or more in fourteen separate years. His best was <span data-stat="year.best.goals">69</span> goals in <span data-stat="year.best.year">2013</span>.</p>
+            <p class="section-note">Ronaldo has scored in every calendar year since <span data-stat="year.first">2002</span> and reached <span data-stat="year.above40.threshold">40</span> goals or more in <span data-stat="year.above40.word">fourteen</span> separate years. His best was <span data-stat="year.best.goals">69</span> goals in <span data-stat="year.best.year">2013</span>.</p>
             <section class="chart-card reveal" style="animation-delay:.10s">
                 <figure>
                     <div class="spark-wrap">
@@ -1625,10 +1625,10 @@
                 <a class="section-link" href="dashboard.html">Explore by competition</a>
             </div>
             <ul class="record-list reveal" style="animation-delay:.10s">
-                <li><span class="num tnum" data-stat="comp.championsleague">140</span><span><b>Champions League goals</b>, more than any other player in the history of the competition, and 105 of them for Real Madrid.</span></li>
+                <li><span class="num tnum" data-stat="comp.championsleague">140</span><span><b>Champions League goals</b>, more than any other player in the history of the competition, and <span data-stat="comp.realmadrid.championsleague">105</span> of them for Real Madrid.</span></li>
                 <li><span class="num tnum" data-stat="team.portugal.goals">146</span><span><b>Goals in <span data-stat="team.portugal.apps">233</span> caps for Portugal</b>, the most international goals in the history of men's football.</span></li>
                 <li><span class="num tnum" data-stat="comp.laliga">311</span><span><b>La Liga goals for Real Madrid</b> in nine seasons, part of <span data-stat="team.realmadrid.goals">450</span> goals in all competitions for the club.</span></li>
-                <li><span class="num tnum" data-stat="year.best.goals">69</span><span><b>Goals in <span data-stat="year.best.year">2013</span></b>, his best calendar year, from fourteen separate years of 40 goals or more.</span></li>
+                <li><span class="num tnum" data-stat="year.best.goals">69</span><span><b>Goals in <span data-stat="year.best.year">2013</span></b>, his best calendar year, from <span data-stat="year.above40.word">fourteen</span> separate years of <span data-stat="year.above40.threshold">40</span> goals or more.</span></li>
                 <li><span class="num tnum" data-stat="comp.worldcup">11</span><span><b>World Cup goals</b> across six tournaments, the first man to score at six different World Cups.</span></li>
                 <li><span class="num tnum" data-stat="hattricks.total">66</span><span><b>Career hat tricks</b>, and exactly <span data-stat="freekicks.total">66</span> direct free kick goals as well, spread across five clubs and Portugal.</span></li>
             </ul>
@@ -1707,7 +1707,7 @@
                 </div>
                 <div class="faq-item">
                     <h3>How many Champions League goals has Ronaldo scored?</h3>
-                    <p>Ronaldo has scored <span data-stat="comp.championsleague">140</span> Champions League goals, more than any other player in the history of the competition. That is 105 for Real Madrid, 21 for Manchester United and 14 for Juventus.</p>
+                    <p>Ronaldo has scored <span data-stat="comp.championsleague">140</span> Champions League goals, more than any other player in the history of the competition. That is <span data-stat="comp.realmadrid.championsleague">105</span> for Real Madrid, <span data-stat="comp.manutd.championsleague">21</span> for Manchester United and <span data-stat="comp.juventus.championsleague">14</span> for Juventus.</p>
                 </div>
                 <div class="faq-item">
                     <h3>How many international goals has Ronaldo scored?</h3>
@@ -1742,7 +1742,7 @@
             <nav class="link-grid reveal" style="animation-delay:.10s" aria-label="More Cristiano Ronaldo statistics">
                 <a class="link-card" href="goalsbyyear.html">
                     <strong>Ronaldo goals by year</strong>
-                    <span>Every calendar year from 2002 to 2026 and the cumulative climb to 976.</span>
+                    <span>Every calendar year from <span data-stat="year.span">2002 to 2026</span> and the cumulative climb to <span data-stat="career.goals">976</span>.</span>
                 </a>
                 <a class="link-card" href="goalsbyseason.html">
                     <strong>Ronaldo goals by season</strong>
@@ -1758,7 +1758,7 @@
                 </a>
                 <a class="link-card" href="achievements.html">
                     <strong>Achievements and honours</strong>
-                    <span>All 35 team trophies and more than 50 individual awards, club by club.</span>
+                    <span>All <span data-stat="honours.total">35</span> team trophies and more than <span data-stat="award.floor">50</span> individual awards, club by club.</span>
                 </a>
             </nav>
 
