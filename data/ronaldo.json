@@ -1234,8 +1234,8 @@
       0
     ],
     "alnassr": [
-      87,
-      26,
+      86,
+      27,
       16,
       1
     ],
@@ -1456,7 +1456,7 @@
       "team": "alnassr",
       "comp": "league",
       "year": 2026,
-      "body": "right",
+      "body": "left",
       "type": "openplay",
       "opponent": "Al Riyadh",
       "assists": 0,
