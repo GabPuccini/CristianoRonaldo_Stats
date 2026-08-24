@@ -983,6 +983,27 @@ def build_regions(data, tables, values):
     r["array.dash.portugal_years"] = pairs_block(
         [(row["year"], row["goals"]) for row in tables["portugal_years"]], " " * 16, 6)
 
+    # ---- The season chart's label axis -----------------------------------
+    # The chart maps its series over this list, so a season missing here simply
+    # has no column no matter what the data says. It was hand written and stopped
+    # a season short, which is exactly how 2026/27 went unplotted.
+    labels = sorted({row["season"] for row in data["seasons"]
+                     if row.get("in_career", True)})
+    # wrapped to the same line width the page already uses, so the block keeps
+    # its shape as seasons are added
+    cells = [f"'{label}'" for label in labels]
+    lines, line = [], "        const allSeasonLabels = ["
+    for i, cell in enumerate(cells):
+        piece = cell + ("];" if i == len(cells) - 1 else ",")
+        candidate = line + ("" if line.endswith("[") else " ") + piece
+        if len(candidate) > 110 and not line.endswith("["):
+            lines.append(line)
+            line = " " * 12 + piece
+        else:
+            line = candidate
+    lines.append(line)
+    r["array.dash.season_labels"] = "\n".join(lines)
+
     # ---- The dashboard's opponent lists ----------------------------------
     # Left hand written at first, on the view that they were editorial. They are
     # not: a goal recorded against a named side moves them, so a hand written

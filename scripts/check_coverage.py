@@ -145,6 +145,22 @@ def missing_season_rows(values):
     return gaps
 
 
+def unplotted_seasons():
+    """A season can be in the data, have a row on the season page, and still be
+    missing from the dashboard chart, because the chart maps its series over a
+    label axis of its own. That is how 2026/27 went unplotted: the data was
+    right and the axis stopped a season short."""
+    page = (ROOT / "dashboard.html").read_text(encoding="utf-8")
+    axis = re.search(r"const allSeasonLabels = \[(.*?)\];", page, re.S)
+    if not axis:
+        return ["dashboard.html: the season chart's label axis was not found"]
+    plotted = set(re.findall(r"'([^']+)'", axis.group(1)))
+    data = engine.load()
+    wanted = {row["season"] for row in data["seasons"] if row.get("in_career", True)}
+    return [f"{s} is in the data but not on the dashboard chart's axis"
+            for s in sorted(wanted - plotted)]
+
+
 def main():
     values, _, _ = engine.derive(engine.load())
     # the set of figures the engine can produce, as printed
@@ -213,7 +229,7 @@ def main():
         per_page[name] = hits
         total_uncovered += len(hits)
 
-    season_gaps = missing_season_rows(values)
+    season_gaps = missing_season_rows(values) + unplotted_seasons()
     if season_gaps:
         print("season rows in the data with nothing published:")
         for g in season_gaps:
