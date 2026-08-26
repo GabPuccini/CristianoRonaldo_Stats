@@ -100,6 +100,13 @@ opposition, and `--assists N` if he also created goals.
     python scripts/update_stats.py build    # rewrite HTML from current data
     python scripts/update_stats.py undo     # revert the last event
 
+Pass `--opponent "Name"` to `appearance` whenever he names the opposition, the
+same as for a goal. A match with no goal still counts against that side, and
+leaving it out slowly overstates his goals per game against them on the
+dashboard. If the side is not on the published opponent lists the script says so
+and moves nothing, since those lists are the teams he has scored against most
+rather than a complete record.
+
 ### The other scripts
 
     python scripts/verify_against_html.py   # engine against every published figure

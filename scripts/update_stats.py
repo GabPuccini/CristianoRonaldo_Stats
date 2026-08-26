@@ -1184,27 +1184,33 @@ OPPONENT_GROUP = {"alnassr": "saudi", "portugal": "intl", "sporting": "sporting"
 OPPONENT_AGGREGATE = "club"
 
 
-def record_opponent(data, team, opponent, new_appearance):
-    """Add the goal, and the appearance, to every published list that already
-    names this opponent. These lists are the top sides he has scored against
-    rather than a complete record, so a name that is not on one is reported
-    instead of being added: putting it there would silently reshape the chart."""
+def record_opponent(data, team, opponent, goals=0, apps=0):
+    """Add goals and appearances to every published list that already names this
+    opponent. These lists are the top sides he has scored against rather than a
+    complete record, so a name that is not on one is reported instead of being
+    added: putting it there would silently reshape the chart.
+
+    A match with no goal still counts: leaving the appearance out would overstate
+    his goals per game against that side."""
     groups = [OPPONENT_GROUP.get(team, team)]
     if team != "portugal":
         groups.append(OPPONENT_AGGREGATE)
     touched = []
     for group in groups:
-        goals = data.setdefault("opponents", {}).setdefault(group, {})
-        if opponent not in goals:
+        listed = data.setdefault("opponents", {}).setdefault(group, {})
+        if opponent not in listed:
             continue
-        goals[opponent] += 1
+        listed[opponent] += goals
+        if apps:
+            block = data.setdefault("opponent_apps", {}).setdefault(group, {})
+            block[opponent] = block.get(opponent, 0) + apps
         touched.append(group)
-        if new_appearance:
-            apps = data.setdefault("opponent_apps", {}).setdefault(group, {})
-            apps[opponent] = apps.get(opponent, 0) + 1
     if not touched:
-        print(f"Note: {opponent} is not on any published opponent list, so no "
-              f"opponent tally moved. Add it to data/ronaldo.json if it belongs.")
+        what = "goal" if goals else "appearance"
+        print(f"Note: {opponent} is not on any published opponent list, so this "
+              f"{what} moved no opponent tally. Those lists hold the sides he has "
+              f"scored against most; add {opponent} to data/ronaldo.json if it "
+              f"now belongs there.")
     return touched
 
 
@@ -1256,7 +1262,8 @@ def apply_goal(data, args):
 
     # Opponent
     if args.opponent:
-        record_opponent(data, team, args.opponent, args.new_appearance)
+        record_opponent(data, team, args.opponent,
+                        goals=1, apps=1 if args.new_appearance else 0)
 
     # Assists created in the same match
     if args.assists:
@@ -1285,9 +1292,11 @@ def apply_appearance(data, args):
         if row is None:
             sys.exit("No matching season row. Check the team, season and competition.")
         row["comps"][args.comp]["apps"] += 1
+    if getattr(args, "opponent", None):
+        record_opponent(data, args.team, args.opponent, goals=0, apps=1)
     data.setdefault("log", []).append({
         "date": dt.date.today().isoformat(), "event": "appearance",
-        "team": args.team, "comp": args.comp})
+        "team": args.team, "comp": args.comp, "opponent": args.opponent})
     return data
 
 
@@ -1339,6 +1348,9 @@ def main():
     a.add_argument("--comp", default="league")
     a.add_argument("--season")
     a.add_argument("--year", type=int)
+    a.add_argument("--opponent",
+                   help="the side he faced, so his record against them stays "
+                        "right even when he does not score")
 
     s = sub.add_parser("assist", help="record assists")
     s.add_argument("--team", required=True)
