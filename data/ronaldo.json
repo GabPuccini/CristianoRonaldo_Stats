@@ -4,7 +4,7 @@
     "competitions is keyed by team, then by the label the site prints on the competitions chart. The career totals are rolled up from these, with the labels in competition_rollup folded into Other cup competitions, so a goal recorded against a team updates the team chart and the overall chart together."
   ],
   "meta": {
-    "updated": "2026-08-24",
+    "updated": "2026-08-26",
     "goal_target": 1000,
     "born": "1985-02-05",
     "current_season": "2026/27"
@@ -715,7 +715,7 @@
       "in_career": true,
       "comps": {
         "league": {
-          "apps": 1,
+          "apps": 2,
           "goals": 1
         },
         "cup": null,
@@ -1461,6 +1461,12 @@
       "opponent": "Al Riyadh",
       "assists": 0,
       "new_appearance": true
+    },
+    {
+      "date": "2026-08-26",
+      "event": "appearance",
+      "team": "alnassr",
+      "comp": "league"
     }
   ],
   "competition_rollup": {
