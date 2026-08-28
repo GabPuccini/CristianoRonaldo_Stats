@@ -52,6 +52,9 @@ EXEMPT = {
          "his Euros total at the end of Euro 2020, quoted as history"),
         (r"(?:Injured|final) after 25 minutes", "minutes played in the Euro 2016 final"),
         (r"23 June 2026", "the date of the sixth World Cup"),
+        (r"Goals 110 and 111 against Ireland|110th and 111th",
+         "the Portugal goals that passed Ali Daei in 2021, a milestone rather "
+         "than a live figure"),
     ],
     "goalsbyseason.html": [
         (r"Portugal U15|Portugal U17|Portugal U20|Portugal U21",

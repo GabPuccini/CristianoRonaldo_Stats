@@ -4,7 +4,7 @@
     "competitions is keyed by team, then by the label the site prints on the competitions chart. The career totals are rolled up from these, with the labels in competition_rollup folded into Other cup competitions, so a goal recorded against a team updates the team chart and the overall chart together."
   ],
   "meta": {
-    "updated": "2026-08-26",
+    "updated": "2026-08-28",
     "goal_target": 1000,
     "born": "1985-02-05",
     "current_season": "2026/27"
@@ -715,8 +715,8 @@
       "in_career": true,
       "comps": {
         "league": {
-          "apps": 2,
-          "goals": 1
+          "apps": 3,
+          "goals": 2
         },
         "cup": null,
         "lcup": null,
@@ -848,7 +848,7 @@
     },
     {
       "year": 2026,
-      "goals": 20,
+      "goals": 21,
       "age": 41
     }
   ],
@@ -1191,7 +1191,7 @@
       "Other cup competitions": 2
     },
     "alnassr": {
-      "Saudi Pro League": 103,
+      "Saudi Pro League": 104,
       "AFC Champions League": 15,
       "Arab Club Champions Cup": 6,
       "Saudi Super Cup": 3,
@@ -1234,7 +1234,7 @@
       0
     ],
     "alnassr": [
-      86,
+      87,
       27,
       16,
       1
@@ -1467,6 +1467,18 @@
       "event": "appearance",
       "team": "alnassr",
       "comp": "league"
+    },
+    {
+      "date": "2026-08-28",
+      "event": "goal",
+      "team": "alnassr",
+      "comp": "league",
+      "year": 2026,
+      "body": "right",
+      "type": "openplay",
+      "opponent": "Al Taawoun",
+      "assists": 0,
+      "new_appearance": true
     }
   ],
   "competition_rollup": {
