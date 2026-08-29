@@ -650,6 +650,63 @@
             color: var(--ink-3);
         }
         .kpi-card.road .kpi-note b { color: var(--ink); font-weight: 700; }
+
+        /* ========== CALENDAR YEAR PICKER ========== */
+        .year-pick {
+            background: var(--surface);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--r-xl);
+            padding: 22px 24px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 20px;
+        }
+        .year-pick-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .year-pick-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--brand-ink);
+            margin: 0;
+        }
+        .year-pick-control { display: flex; align-items: center; gap: 10px; }
+        .year-pick-control label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--ink-2);
+        }
+        .year-pick select {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--brand-ink);
+            background: var(--brand-soft);
+            border: 1px solid var(--glass-border);
+            border-radius: 999px;
+            padding: 8px 14px;
+            cursor: pointer;
+        }
+        .year-pick select:focus-visible {
+            outline: 2px solid var(--brand);
+            outline-offset: 2px;
+        }
+        .year-pick-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+        @media (max-width: 640px) {
+            .year-pick-grid { grid-template-columns: 1fr; }
+            .year-pick-head { flex-direction: column; align-items: flex-start; }
+        }
         .progress { margin-top: 14px; }
         .progress-head {
             display: flex;
@@ -1575,6 +1632,61 @@
                 <a class="section-link" href="goalsbyyear.html">Full goals by year chart</a>
             </div>
             <p class="section-note">Ronaldo has scored in every calendar year since <span data-stat="year.first">2002</span> and reached <span data-stat="year.above40.threshold">40</span> goals or more in <span data-stat="year.above40.word">fourteen</span> separate years. His best was <span data-stat="year.best.goals">69</span> goals in <span data-stat="year.best.year">2013</span>.</p>
+            <section class="year-pick reveal" style="animation-delay:.08s" aria-labelledby="year-pick-title">
+                <div class="year-pick-head">
+                    <h3 class="year-pick-title" id="year-pick-title">Ronaldo stats by calendar year</h3>
+                    <div class="year-pick-control">
+                        <label for="yearPick">Year</label>
+                        <select id="yearPick" aria-describedby="year-pick-live">
+                            <!-- STATS:BEGIN select.years -->
+                            <option value="2026" selected>2026</option>
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                            <option value="2019">2019</option>
+                            <option value="2018">2018</option>
+                            <option value="2017">2017</option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                            <option value="2014">2014</option>
+                            <option value="2013">2013</option>
+                            <option value="2012">2012</option>
+                            <option value="2011">2011</option>
+                            <option value="2010">2010</option>
+                            <option value="2009">2009</option>
+                            <option value="2008">2008</option>
+                            <option value="2007">2007</option>
+                            <option value="2006">2006</option>
+                            <option value="2005">2005</option>
+                            <option value="2004">2004</option>
+                            <option value="2003">2003</option>
+                            <option value="2002">2002</option>
+                            <!-- STATS:END select.years -->
+                        </select>
+                    </div>
+                </div>
+                <div class="year-pick-grid">
+                    <div class="kpi-card">
+                        <span class="kpi-label">Goals in <span id="ycYearGoals" data-stat="year.current.year">2026</span></span>
+                        <span class="kpi-value" id="ycGoals" data-stat="year.current.goals">21</span>
+                        <span class="kpi-note">Club and country, every competition.</span>
+                    </div>
+                    <div class="kpi-card">
+                        <span class="kpi-label">Appearances in <span id="ycYearApps" data-stat="year.current.year">2026</span></span>
+                        <span class="kpi-value" id="ycApps" data-stat="year.current.apps">32</span>
+                        <span class="kpi-note">Senior first team matches only.</span>
+                    </div>
+                    <div class="kpi-card">
+                        <span class="kpi-label">Goals per game</span>
+                        <span class="kpi-value" id="ycRate" data-stat="year.current.gpg">0.66</span>
+                        <span class="kpi-note">He was <span id="ycAge" data-stat="year.2026.age">41</span> at the end of that year.</span>
+                    </div>
+                </div>
+                <p class="visually-hidden" id="year-pick-live" role="status" aria-live="polite"></p>
+            </section>
             <section class="chart-card reveal" style="animation-delay:.10s">
                 <figure>
                     <div class="spark-wrap">
@@ -1901,6 +2013,64 @@
                     mobileBtn.setAttribute('aria-label', 'Open navigation');
                     document.body.style.overflow = '';
                 }
+            });
+        })();
+
+        /* Calendar year picker. The cards already hold the current year's
+           figures in the markup, so a reader without JavaScript, and any
+           crawler, still sees real numbers. This only swaps them. */
+        (function () {
+            // STATS:BEGIN array.year_stats
+            const YEAR_STATS = {2002: { goals: 5, apps: 16, gpg: "0.31", age: 17 },
+                2003: { goals: 1, apps: 36, gpg: "0.03", age: 18 },
+                2004: { goals: 13, apps: 60, gpg: "0.22", age: 19 },
+                2005: { goals: 15, apps: 64, gpg: "0.23", age: 20 },
+                2006: { goals: 25, apps: 60, gpg: "0.42", age: 21 },
+                2007: { goals: 34, apps: 60, gpg: "0.57", age: 22 },
+                2008: { goals: 35, apps: 58, gpg: "0.60", age: 23 },
+                2009: { goals: 30, apps: 49, gpg: "0.61", age: 24 },
+                2010: { goals: 48, apps: 59, gpg: "0.81", age: 25 },
+                2011: { goals: 60, apps: 60, gpg: "1.00", age: 26 },
+                2012: { goals: 63, apps: 71, gpg: "0.89", age: 27 },
+                2013: { goals: 69, apps: 59, gpg: "1.17", age: 28 },
+                2014: { goals: 61, apps: 60, gpg: "1.02", age: 29 },
+                2015: { goals: 57, apps: 57, gpg: "1.00", age: 30 },
+                2016: { goals: 55, apps: 57, gpg: "0.96", age: 31 },
+                2017: { goals: 53, apps: 60, gpg: "0.88", age: 32 },
+                2018: { goals: 49, apps: 53, gpg: "0.92", age: 33 },
+                2019: { goals: 39, apps: 50, gpg: "0.78", age: 34 },
+                2020: { goals: 44, apps: 45, gpg: "0.98", age: 35 },
+                2021: { goals: 47, apps: 65, gpg: "0.72", age: 36 },
+                2022: { goals: 16, apps: 46, gpg: "0.35", age: 37 },
+                2023: { goals: 54, apps: 59, gpg: "0.92", age: 38 },
+                2024: { goals: 43, apps: 51, gpg: "0.84", age: 39 },
+                2025: { goals: 41, apps: 46, gpg: "0.89", age: 40 },
+                2026: { goals: 21, apps: 32, gpg: "0.66", age: 41 }};
+            // STATS:END array.year_stats
+            const pick = document.getElementById('yearPick');
+            if (!pick || typeof YEAR_STATS === 'undefined') return;
+            const els = {
+                goals: document.getElementById('ycGoals'),
+                apps: document.getElementById('ycApps'),
+                rate: document.getElementById('ycRate'),
+                age: document.getElementById('ycAge'),
+                live: document.getElementById('year-pick-live')
+            };
+            const years = [document.getElementById('ycYearGoals'),
+                           document.getElementById('ycYearApps')];
+            pick.addEventListener('change', function () {
+                const y = pick.value;
+                const row = YEAR_STATS[y];
+                if (!row) return;
+                els.goals.textContent = row.goals;
+                els.apps.textContent = row.apps;
+                els.rate.textContent = row.gpg;
+                els.age.textContent = row.age;
+                years.forEach(el => { if (el) el.textContent = y; });
+                const g = row.goals === 1 ? ' goal in ' : ' goals in ';
+                const a = row.apps === 1 ? ' appearance in ' : ' appearances in ';
+                els.live.textContent = row.goals + g + row.apps + a + y +
+                    ', ' + row.gpg + ' goals per game.';
             });
         })();
     </script>

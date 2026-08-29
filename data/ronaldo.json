@@ -1,7 +1,8 @@
 {
   "_notes": [
     "Single source of truth for every published figure. Built from the site HTML on 22 August 2026. opponents holds goals only, keyed by the dashboard view (club, saudi and intl are aggregate views, the rest are club eras); the parallel opponent_apps map holds the games column for the same rows. Both lists are the top scorers against, not complete sets.",
-    "competitions is keyed by team, then by the label the site prints on the competitions chart. The career totals are rolled up from these, with the labels in competition_rollup folded into Other cup competitions, so a goal recorded against a team updates the team chart and the overall chart together."
+    "competitions is keyed by team, then by the label the site prints on the competitions chart. The career totals are rolled up from these, with the labels in competition_rollup folded into Other cup competitions, so a goal recorded against a team updates the team chart and the overall chart together.",
+    "years rows carry apps as well as goals. Club appearances are stored by season, which straddles two calendar years, so the yearly figure cannot be derived from them and is held here instead. A goal or an appearance banks itself to the calendar year it was played in."
   ],
   "meta": {
     "updated": "2026-08-28",
@@ -729,126 +730,151 @@
     {
       "year": 2002,
       "goals": 5,
+      "apps": 16,
       "age": 17
     },
     {
       "year": 2003,
       "goals": 1,
+      "apps": 36,
       "age": 18
     },
     {
       "year": 2004,
       "goals": 13,
+      "apps": 60,
       "age": 19
     },
     {
       "year": 2005,
       "goals": 15,
+      "apps": 64,
       "age": 20
     },
     {
       "year": 2006,
       "goals": 25,
+      "apps": 60,
       "age": 21
     },
     {
       "year": 2007,
       "goals": 34,
+      "apps": 60,
       "age": 22
     },
     {
       "year": 2008,
       "goals": 35,
+      "apps": 58,
       "age": 23
     },
     {
       "year": 2009,
       "goals": 30,
+      "apps": 49,
       "age": 24
     },
     {
       "year": 2010,
       "goals": 48,
+      "apps": 59,
       "age": 25
     },
     {
       "year": 2011,
       "goals": 60,
+      "apps": 60,
       "age": 26
     },
     {
       "year": 2012,
       "goals": 63,
+      "apps": 71,
       "age": 27
     },
     {
       "year": 2013,
       "goals": 69,
+      "apps": 59,
       "age": 28
     },
     {
       "year": 2014,
       "goals": 61,
+      "apps": 60,
       "age": 29
     },
     {
       "year": 2015,
       "goals": 57,
+      "apps": 57,
       "age": 30
     },
     {
       "year": 2016,
       "goals": 55,
+      "apps": 57,
       "age": 31
     },
     {
       "year": 2017,
       "goals": 53,
+      "apps": 60,
       "age": 32
     },
     {
       "year": 2018,
       "goals": 49,
+      "apps": 53,
       "age": 33
     },
     {
       "year": 2019,
       "goals": 39,
+      "apps": 50,
       "age": 34
     },
     {
       "year": 2020,
       "goals": 44,
+      "apps": 45,
       "age": 35
     },
     {
       "year": 2021,
       "goals": 47,
+      "apps": 65,
       "age": 36
     },
     {
       "year": 2022,
       "goals": 16,
+      "apps": 46,
       "age": 37
     },
     {
       "year": 2023,
       "goals": 54,
+      "apps": 59,
       "age": 38
     },
     {
       "year": 2024,
       "goals": 43,
+      "apps": 51,
       "age": 39
     },
     {
       "year": 2025,
       "goals": 41,
+      "apps": 46,
       "age": 40
     },
     {
       "year": 2026,
       "goals": 21,
+      "apps": 32,
       "age": 41
     }
   ],

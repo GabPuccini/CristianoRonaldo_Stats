@@ -254,12 +254,19 @@ def derive(data):
     out["year.best.year"] = str(best_year["year"])
     out["year.current.goals"] = str(year_rows[-1]["goals"])
     out["year.current.year"] = str(year_rows[-1]["year"])
+    out["year.current.apps"] = str(year_rows[-1].get("apps", 0))
+    _ca = year_rows[-1].get("apps", 0)
+    out["year.current.gpg"] = (f"{year_rows[-1]['goals'] / _ca:.2f}" if _ca else "0.00")
     out["year.count"] = str(len(year_rows))
     out["year.average"] = f"{sum(r['goals'] for r in year_rows) / len(year_rows):.1f}"
     for row in year_rows:
-        out[f"year.{row['year']}.goals"] = str(row["goals"])
-        out[f"year.{row['year']}.cumulative"] = f"{row['cumulative']:,}"
-        out[f"year.{row['year']}.age"] = str(row["age"])
+        y = row["year"]
+        out[f"year.{y}.goals"] = str(row["goals"])
+        out[f"year.{y}.cumulative"] = f"{row['cumulative']:,}"
+        out[f"year.{y}.age"] = str(row["age"])
+        out[f"year.{y}.apps"] = str(row.get("apps", 0))
+        a = row.get("apps", 0)
+        out[f"year.{y}.gpg"] = f"{row['goals'] / a:.2f}" if a else "0.00"
     # the sparkline's aria-label is the only description a screen reader gets,
     # so it is composed here rather than left to drift
     best = max(year_rows, key=lambda r: r["goals"])
@@ -458,6 +465,14 @@ def validate(data, facts):
     year_sum = sum(r["goals"] for r in data["years"])
     if year_sum != cg:
         errors.append(f"calendar years sum to {year_sum}, career goals are {cg}")
+
+    # Every appearance falls in exactly one calendar year, so these rows must
+    # add up to the career total. This is the only check on the yearly figures,
+    # which are held rather than derived, so it is the one that matters.
+    year_apps = sum(r.get("apps", 0) for r in data["years"])
+    if year_apps != facts["career_apps"]:
+        errors.append(f"calendar year appearances sum to {year_apps}, "
+                      f"career appearances are {facts['career_apps']}")
 
     body_sum = sum(facts["body_totals"])
     if body_sum != cg:
@@ -1024,6 +1039,34 @@ def build_regions(data, tables, values):
         blocks.append("                ]" + ("" if gi == len(groups) - 1 else ","))
     r["array.dash.opponents"] = "\n".join(blocks)
 
+    # ---- The home page calendar year picker -------------------------------
+    # Both the options and the figures behind them come from the year rows, so a
+    # new year appears in the picker on the build that first records a goal in it.
+    opts = []
+    for row in reversed(tables["years"]):                  # newest first
+        sel = " selected" if row is tables["years"][-1] else ""
+        opts.append(f'                            <option value="{row["year"]}"{sel}>'
+                    f'{row["year"]}</option>')
+    r["select.years"] = "\n".join(opts)
+
+    rows_js = []
+    for row in tables["years"]:
+        a = row.get("apps", 0)
+        gpg = f"{row['goals'] / a:.2f}" if a else "0.00"
+        rows_js.append(f'{row["year"]}: {{ goals: {row["goals"]}, apps: {a}, '
+                       f'gpg: "{gpg}", age: {row["age"]} }}')
+    lines, line = [], "            const YEAR_STATS = {"
+    for i, cell in enumerate(rows_js):
+        piece = cell + ("};" if i == len(rows_js) - 1 else ",")
+        candidate = line + ("" if line.endswith("{") else " ") + piece
+        if len(candidate) > 110 and not line.endswith("{"):
+            lines.append(line)
+            line = " " * 16 + piece
+        else:
+            line = candidate
+    lines.append(line)
+    r["array.year_stats"] = "\n".join(lines)
+
     # ---- The home page sparkline ----------------------------------------
     # 25 bars with their geometry computed from the goals, plus the peak label
     # and the tick years. It was hand drawn, so the bars and their tooltips did
@@ -1214,6 +1257,19 @@ def record_opponent(data, team, opponent, goals=0, apps=0):
     return touched
 
 
+def year_row(data, year):
+    """The calendar year row for this date, created if he has not played in that
+    year before. Every appearance falls in exactly one calendar year, so these
+    rows must add up to the career total, which validate checks."""
+    row = next((r for r in data["years"] if r["year"] == year), None)
+    if row is None:
+        born = dt.date.fromisoformat(data["meta"]["born"])
+        row = {"year": year, "goals": 0, "apps": 0, "age": year - born.year}
+        data["years"].append(row)
+        data["years"].sort(key=lambda r: r["year"])
+    return row
+
+
 def apply_goal(data, args):
     team = args.team
     year = args.year or dt.date.today().year
@@ -1238,12 +1294,10 @@ def apply_goal(data, args):
             row["comps"][comp]["apps"] += 1
 
     # Calendar year
-    yr = next((r for r in data["years"] if r["year"] == year), None)
-    if yr is None:
-        born = dt.date.fromisoformat(data["meta"]["born"])
-        yr = {"year": year, "goals": 0, "age": year - born.year}
-        data["years"].append(yr)
+    yr = year_row(data, year)
     yr["goals"] += 1
+    if args.new_appearance:
+        yr["apps"] = yr.get("apps", 0) + 1
 
     # Competition tally, recorded against the team so both charts move together
     label = args.competition_label or comp
@@ -1292,6 +1346,7 @@ def apply_appearance(data, args):
         if row is None:
             sys.exit("No matching season row. Check the team, season and competition.")
         row["comps"][args.comp]["apps"] += 1
+    year_row(data, args.year or dt.date.today().year)["apps"] += 1
     if getattr(args, "opponent", None):
         record_opponent(data, args.team, args.opponent, goals=0, apps=1)
     data.setdefault("log", []).append({

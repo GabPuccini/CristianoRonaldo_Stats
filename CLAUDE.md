@@ -13,6 +13,12 @@ directly in an HTML file.** Every published figure is either marked with a
 If you hand edit a number in HTML it will be silently overwritten on the next
 update, and worse, the site will disagree with itself across pages.
 
+The `years` rows carry appearances as well as goals. Club appearances are stored
+by season, and a season straddles two calendar years, so the yearly figure cannot
+be derived and is held instead. A goal or an appearance banks itself to the
+calendar year it was played in, and `check` fails if those rows stop adding up to
+the career total. That is what feeds the year picker on the home page.
+
 `sitemap.xml` is driven too: the `lastmod` of each of the six statistics pages
 tracks the update date, since those pages really do change every time. Only
 `privacy.html` keeps a hand written date, because the script never touches it.
