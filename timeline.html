@@ -438,7 +438,29 @@
             letter-spacing: -0.03em; line-height: 1;
             color: rgba(22, 36, 58, 0.10);
         }
-        .tl-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        /* A photo is shown whole. The empty box keeps its 16:9 shape as a
+           placeholder, but as soon as a real image is in it the box takes the
+           image's own proportions, so nothing is ever cropped. width auto with
+           max-width means an image is never blown up past its natural size
+           either, so it stays as sharp as it was supplied. */
+        .tl-photo.has-img {
+            aspect-ratio: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+        .tl-photo.has-img picture { display: block; max-width: 100%; }
+        .tl-photo img {
+            display: block;
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            /* a guard so one very tall portrait cannot swamp the timeline. It
+               scales the whole image down, it never crops it. */
+            max-height: 560px;
+            margin: 0 auto;
+        }
         .tl-photo.has-img::before, .tl-photo.has-img::after { display: none; }
         .tl-photo[data-era="sporting"] { background: linear-gradient(140deg, rgba(46, 139, 87, 0.16), rgba(46, 139, 87, 0.04)); }
         .tl-photo[data-era="united"] { background: linear-gradient(140deg, rgba(192, 57, 43, 0.14), rgba(192, 57, 43, 0.04)); }

@@ -173,6 +173,13 @@ Note only the first goal of a match carries `--new-appearance`.
   allowed only inside CSS, HTML and code syntax such as attribute names and
   file names. Write "goals per game" and "2002 to 2003", never with a dash.
 * Never render statistics as images. Always real HTML tables.
+* Timeline photos are shown whole. The box takes the image's own proportions
+  rather than forcing a shape onto it, and an image is never scaled up past the
+  size it was supplied at, so it stays as sharp as the file. Drop a new photo in
+  `timeline/` at whatever proportions it has, portrait or landscape, and add it
+  as a `<picture>` with a `webp` source, a `jpg` fallback and the real `width`
+  and `height`. Do not add `object-fit: cover` to it: that is what was cutting
+  the head and feet off the Sporting debut photo.
 * The navigation is duplicated in full on every page on purpose. Do not
   centralise it into a shared include or inject it with JavaScript; static
   markup on every page is deliberate for search engines.
