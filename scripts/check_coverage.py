@@ -52,6 +52,9 @@ EXEMPT = {
          "his Euros total at the end of Euro 2020, quoted as history"),
         (r"(?:Injured|final) after 25 minutes", "minutes played in the Euro 2016 final"),
         (r"23 June 2026", "the date of the sixth World Cup"),
+        (r"All \d+ (?:milestones|career milestones|Ronaldo career milestones)",
+         "the milestone count is how many sections this page has, not a career "
+         "figure; miscounted_milestones checks it separately"),
         (r"Goals 110 and 111 against Ireland|110th and 111th",
          "the Portugal goals that passed Ali Daei in 2021, a milestone rather "
          "than a live figure"),
@@ -148,6 +151,18 @@ def missing_season_rows(values):
     return gaps
 
 
+def miscounted_milestones():
+    """The timeline head says how many milestones the page holds. That is not a
+    career figure, so no engine key can drive it, but it still goes stale the
+    moment a milestone is added. Check it against the page itself."""
+    page = (ROOT / "timeline.html").read_text(encoding="utf-8")
+    actual = len(re.findall(r'class="milestone', page))
+    head = page.split("</head>")[0]
+    claims = {int(n) for n in re.findall(r"All (\d+)(?: Ronaldo)? (?:career )?milestones", head)}
+    return [f"the timeline head claims {c} milestones but the page has {actual}"
+            for c in sorted(claims) if c != actual]
+
+
 def unplotted_seasons():
     """A season can be in the data, have a row on the season page, and still be
     missing from the dashboard chart, because the chart maps its series over a
@@ -232,7 +247,8 @@ def main():
         per_page[name] = hits
         total_uncovered += len(hits)
 
-    season_gaps = missing_season_rows(values) + unplotted_seasons()
+    season_gaps = (missing_season_rows(values) + unplotted_seasons()
+                   + miscounted_milestones())
     if season_gaps:
         print("season rows in the data with nothing published:")
         for g in season_gaps:
