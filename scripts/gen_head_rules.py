@@ -167,16 +167,39 @@ def choose_key(value, candidates, before, after):
     return sorted(plain)[0] if len(plain) == 1 else None
 
 
-DATE_RE = re.compile(r"\d{1,2} (?:January|February|March|April|May|June|July|August|"
-                     r"September|October|November|December) \d{4}|\d{4}-\d\d-\d\d")
+MONTHS = ("January|February|March|April|May|June|July|August|"
+          "September|October|November|December")
+
+# The day is optional because an anchor window can open in the middle of a
+# date, leaving a bare "August 2026" behind. That still moves on every update,
+# so it has to be wildcarded too, or the rule survives only until the month
+# turns over.
+DATE_RE = re.compile(rf"(?:\d{{1,2}} )?(?:{MONTHS}) \d{{4}}|\d{{4}}-\d\d-\d\d")
+
+# The day of a written date is a bare number like any statistic, and sooner or
+# later it equals one: "22 January" was being read as the 22 goals left to
+# reach 1,000. A rule built on it does not go stale, it rewrites the date, so
+# these are never eligible.
+DAY_OF_DATE_RE = re.compile(rf"\s+(?:{MONTHS})\b")
 
 
 def anchor_for(head, pos, end, width):
     """A pattern that pins this figure using the words around it. Digits in the
     context are replaced by a class, so a rule does not break when a neighbouring
     figure moves."""
-    before = head[max(0, pos - width):pos]
-    after = head[end:end + max(8, width // 3)]
+    start = max(0, pos - width)
+    stop = end + max(8, width // 3)
+    before = head[start:pos]
+    after = head[end:stop]
+    # The window is cut at a character offset, so it can open or close inside a
+    # word and leave a fragment such as "ptember". A fragment is a poor anchor
+    # on its own, and it also hides a date from the pattern below, so snap both
+    # ends to a whole word. If that makes the anchor ambiguous the caller simply
+    # tries a wider window.
+    if start > 0 and head[start - 1].isalnum():
+        before = re.sub(r"^\w*", "", before, count=1)
+    if stop < len(head) and head[stop].isalnum():
+        after = re.sub(r"\w*$", "", after, count=1)
     # a date in the anchor moves every time the site is updated, which would
     # break the rule on the very build that needed it
     before = DATE_RE.sub("@", before)
@@ -249,6 +272,8 @@ def main():
                     continue
                 if re.search(r'"(?:startDate|endDate|dateModified|datePublished)": "[^"]*$', lead):
                     continue
+                if DAY_OF_DATE_RE.match(head[end:end + 12]):
+                    continue                      # the day of a written date
                 key = choose_key(n, by_value[n], head[max(0, pos - 120):pos],
                                  head[end:end + 24])
                 if key is None:

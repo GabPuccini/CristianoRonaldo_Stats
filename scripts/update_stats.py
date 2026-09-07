@@ -599,13 +599,18 @@ except ImportError:                                   # generated file not prese
 def text_rules(generated=True):
     G = r"([\d,]+)"                       # a figure, with or without a comma
     D = r"(\d{1,2} \w+ \d{4})"            # a long date, e.g. 26 July 2026
+    # Every way a head stamps the figures with the day they were taken. It has
+    # to cover all of them: a stamp the pattern misses is not reported, it just
+    # sits there going stale, which is how five pages came to advertise an as of
+    # date six weeks behind the numbers beside it.
+    STAMP = r"(?:[Aa]s of|Updated) " + D + r"[.,:]"
     common = [
         (r'"dateModified": "(\d{4}-\d\d-\d\d)"', "meta.updated.iso"),
     ]
     table = {
         "index.html": common + [
             (r"Manchester United \([\d,]+\), Al Nassr \(" + G + r"\)", "team.alnassr.goals"),
-            (r"as of " + D + r"[.,]", "meta.updated.long", 6),
+            (STAMP, "meta.updated.long", 7),
             (r"Cristiano Ronaldo is " + G + r" years old", "person.age"),
             (r"for Real Madrid, " + G + r" for Manchester United and [\d,]+ for Juventus",
              "comp.manutd.championsleague"),
@@ -636,10 +641,10 @@ def text_rules(generated=True):
         "goalsbyyear.html": common + [
             (r"Every one of Ronaldo's " + G + r" scoring years", "year.count", 2),
             (r"All " + G + r" of Ronaldo's scoring years", "year.count", 2),
-            (r"as of " + D + r"[.,]", "meta.updated.long", 3),
+            (STAMP, "meta.updated.long", 4),
         ],
         "goalsbyseason.html": common + [
-            (r"as of " + D + r"[.,]", "meta.updated.long", 3),
+            (STAMP, "meta.updated.long", 4),
             (r"season by season: " + G + r" club goals", "career.club_goals", 2),
             (r"club goals in " + G + r" games and", "career.club_apps", 2),
             (r"games and " + G + r" for Portugal in", "team.portugal.goals", 2),
@@ -651,7 +656,7 @@ def text_rules(generated=True):
         "dashboard.html": common + [
             (r'twitter:description" content="' + G + r" career goals by competition", "career.goals"),
             (r"dashboard follows: " + G + r" career goals by competition", "career.goals"),
-                        (r"as of " + D + r"[.,]", "meta.updated.long", 2),
+            (STAMP, "meta.updated.long", 4),
             (r"Ronaldo's " + G + r" goals by team", "career.goals", 2),
             (r"dashboard follows: " + G + r" career goals by competition", "career.goals"),
             (r"finish type as of [^:]*: " + G + r" in La Liga", "comp.laliga"),
@@ -665,6 +670,7 @@ def text_rules(generated=True):
             (r"scored " + G + r" goals in [\d,]+ games\.", "team.realmadrid.goals"),
             (r"scored [\d,]+ goals in " + G + r" games\.", "team.realmadrid.apps"),
             (r"As of " + D + r" he has", "meta.updated.long"),
+            (STAMP, "meta.updated.long", 3),
             (r"career goals, " + G + r" short of [\d,]+\.", "career.remaining"),
             (r"short of " + G + r'\."', "career.target"),
             (r"At " + G + r" he is still playing", "person.age"),
@@ -675,7 +681,7 @@ def text_rules(generated=True):
             (r"All " + G + r" team trophies and [\d,]+ plus", "honours.total"),
             (r"team trophies and more than " + G + r" individual awards", "award.floor", 3),
             (r"team trophies and " + G + r" plus individual awards", "award.floor"),
-            (r"as of " + D + r"[.,]", "meta.updated.long", 4),
+            (STAMP, "meta.updated.long", 5),
             (r'"description": "The ' + G + r" team trophies Cristiano Ronaldo has won", "honours.total"),
             (r"has won " + G + r" team trophies as of", "honours.total"),
             (r"team trophies as of \d{1,2} \w+ \d{4}: " + G + r" at club level", "honours.club"),
