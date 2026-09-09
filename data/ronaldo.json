@@ -5,7 +5,7 @@
     "years rows carry apps as well as goals. Club appearances are stored by season, which straddles two calendar years, so the yearly figure cannot be derived from them and is held here instead. A goal or an appearance banks itself to the calendar year it was played in."
   ],
   "meta": {
-    "updated": "2026-09-07",
+    "updated": "2026-09-09",
     "goal_target": 1000,
     "born": "1985-02-05",
     "current_season": "2026/27"
@@ -716,8 +716,8 @@
       "in_career": true,
       "comps": {
         "league": {
-          "apps": 4,
-          "goals": 2
+          "apps": 5,
+          "goals": 3
         },
         "cup": null,
         "lcup": null,
@@ -873,8 +873,8 @@
     },
     {
       "year": 2026,
-      "goals": 21,
-      "apps": 33,
+      "goals": 22,
+      "apps": 34,
       "age": 41
     }
   ],
@@ -1217,7 +1217,7 @@
       "Other cup competitions": 2
     },
     "alnassr": {
-      "Saudi Pro League": 104,
+      "Saudi Pro League": 105,
       "AFC Champions League": 15,
       "Arab Club Champions Cup": 6,
       "Saudi Super Cup": 3,
@@ -1262,7 +1262,7 @@
     "alnassr": [
       87,
       27,
-      16,
+      17,
       1
     ],
     "portugal": [
@@ -1512,6 +1512,18 @@
       "team": "alnassr",
       "comp": "league",
       "opponent": "Al Ittihad"
+    },
+    {
+      "date": "2026-09-09",
+      "event": "goal",
+      "team": "alnassr",
+      "comp": "league",
+      "year": 2026,
+      "body": "head",
+      "type": "openplay",
+      "opponent": "Abha",
+      "assists": 0,
+      "new_appearance": true
     }
   ],
   "competition_rollup": {

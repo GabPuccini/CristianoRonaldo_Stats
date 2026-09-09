@@ -38,7 +38,12 @@ EXEMPT = {
         (r"a Serie A record at 33|At 33 he became|Serie A's record signing at 33",
          "his age at the time, fixed by the event"),
         (r"24 year career", "the length of the career so far, written as prose"),
-        (r"£12\.24m|€94m|€117m|€100m|United pay £12\.24m|rising to 117 million",
+        # Fees appear both as symbols and spelled out, and the spelled out form
+        # is a bare number that will sooner or later equal a statistic: the 94
+        # of the Real Madrid fee collided with Al Nassr's open play goals the
+        # day he headed one in against Abha.
+        (r"£12\.24m|€94m|€117m|€100m|United pay £12\.24m"
+         r"|(?:fee of|rising to|paid|pay) [\d.]+ million",
          "transfer fees, fixed by the event"),
         (r"in a 42 goal season|crowning a 42 goal season",
          "the 2007/08 total, quoted as history rather than as a live figure"),
