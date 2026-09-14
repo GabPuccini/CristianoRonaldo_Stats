@@ -19,6 +19,11 @@ be derived and is held instead. A goal or an appearance banks itself to the
 calendar year it was played in, and `check` fails if those rows stop adding up to
 the career total. That is what feeds the year picker on the home page.
 
+`llms.txt` is driven too. It exists to be read by AI assistants, so a stale
+figure there is quoted back as fact rather than being eyeballed by a person,
+which is why every number in it is a rule in `file_rules()` and
+`check_coverage.py` fails if one is added without one.
+
 `sitemap.xml` is driven too: the `lastmod` of each of the five statistics pages
 tracks the update date, since those pages really do change every time. Only
 `privacy.html` keeps a hand written date, because the script never touches it.
@@ -159,7 +164,8 @@ Note only the first goal of a match carries `--new-appearance`.
 1. The script prints the new totals and refuses to write if anything fails to
    reconcile. If it fails, read the error, fix the data, do not force it.
 2. Check `git diff` and confirm only expected numbers moved. One goal touches all
-   five pages plus `sitemap.xml`, so a diff limited to fewer than six files
+   five pages plus `sitemap.xml` and `llms.txt`, so a diff limited to fewer
+   than seven files
    means something is not wired up and should be looked at rather than
    committed.
 3. Commit with a message naming the event, for example

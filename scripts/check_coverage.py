@@ -168,6 +168,37 @@ def miscounted_milestones():
             for c in sorted(claims) if c != actual]
 
 
+def uncovered_text_files(values, engine_values):
+    """The same question as the page scan, for the plain text files. llms.txt is
+    read by AI assistants rather than people, so a figure nobody drives there is
+    both easier to miss and more damaging: it is quoted back as fact."""
+    gaps = []
+    for name in engine.TEXT_FILES:
+        path = ROOT / name
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8")
+        spans = []
+        for rule in engine.file_rules().get(name, []):
+            for m in re.finditer(rule[0], text):
+                spans.append((m.start(1), m.end(1)))
+        chars = list(text)
+        for a, b in spans:
+            for i in range(a, b):
+                chars[i] = " "
+        left = "".join(chars)
+        left = re.sub(r"\b(19|20)\d\d/\d\d\b", " ", left)
+        left = re.sub(r"\b\d{1,2} (?:January|February|March|April|May|June|July|August|"
+                      r"September|October|November|December) \d{4}\b", " ", left)
+        for m in re.finditer(r"(?<![\w.\-/])(\d[\d,]*(?:\.\d+)?)(?![\w])", left):
+            n = m.group(1)
+            if n not in engine_values or re.fullmatch(r"(19|20)\d\d", n) or re.fullmatch(r"\d", n):
+                continue
+            ctx = re.sub(r"\s+", " ", left[max(0, m.start() - 55):m.end() + 25]).strip()
+            gaps.append(f"{name}: {n} is not driven by any rule, in: {ctx}")
+    return gaps
+
+
 def unplotted_seasons():
     """A season can be in the data, have a row on the season page, and still be
     missing from the dashboard chart, because the chart maps its series over a
@@ -253,7 +284,8 @@ def main():
         total_uncovered += len(hits)
 
     season_gaps = (missing_season_rows(values) + unplotted_seasons()
-                   + miscounted_milestones())
+                   + miscounted_milestones()
+                   + uncovered_text_files(values, engine_values))
     if season_gaps:
         print("season rows in the data with nothing published:")
         for g in season_gaps:

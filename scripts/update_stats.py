@@ -45,6 +45,13 @@ PAGES = [
     "achievements.html",
 ]
 
+# Files that are not HTML but still publish figures. They carry no markers and
+# have no head to scope a rule to, so every figure in them is driven by a rule
+# that sees the whole file. llms.txt exists to be read by AI assistants, which
+# makes a stale figure in it worse than one on a page a person can sanity check:
+# it went seven weeks advertising 976 goals before this was wired up.
+TEXT_FILES = ["llms.txt"]
+
 # Body part slots, in the order they are stored and displayed.
 BODY_SLOTS = ["right", "left", "head", "other"]
 
@@ -706,6 +713,65 @@ def text_rules(generated=True):
     return table
 
 
+def file_rules():
+    """Figures published in a plain text file. Same contract as text_rules: a
+    rule is (pattern, key) or (pattern, key, n), the count is an assertion, and
+    a rule that stops matching is reported rather than silently skipped."""
+    G = r"([\d,]+)"
+    D = r"(\d{1,2} \w+ \d{4})"
+    return {
+        "llms.txt": [
+            (r"As of " + D + r" he has", "meta.updated.long"),
+            (r"Headline figures as of " + D, "meta.updated.long"),
+            (r"he has " + G + r" goals,", "career.goals"),
+            (r"goals, " + G + r" assists and", "career.assists"),
+            (r"assists and " + G + r" senior appearances", "career.apps"),
+            (r"- Career goals: " + G, "career.goals"),
+            (r"- Career appearances: " + G + r" \(", "career.apps"),
+            (r"appearances: [\d,]+ \(([\d.]+) goals per game\)", "career.gpg"),
+            (r"- Career assists: " + G, "career.assists"),
+            (r"- Goals in the (\d{4}/\d{2}) season", "season.current.name"),
+            (r"season: " + G + r" for Al Nassr", "season.current.goals"),
+            (r"- Goals in the (\d{4}) calendar year", "year.current.year"),
+            (r"calendar year: " + G + r"\n", "year.current.goals"),
+            (r"- Best calendar year: " + G + r" goals", "year.best.goals"),
+            (r"Best calendar year: [\d,]+ goals in (\d{4})", "year.best.year"),
+            (r"- Best club season: " + G + r" goals", "season.best.goals"),
+            (r"Best club season: [\d,]+ goals in (\d{4}/\d{2})", "season.best.season"),
+            # anchored past the comma: [\d,]+ is greedy and would otherwise
+            # capture "140," and write back "140", eating the punctuation
+            (r"- Champions League goals: " + G + r", the most", "comp.championsleague"),
+            (r"- Portugal goals: " + G + r" in", "team.portugal.goals"),
+            (r"Portugal goals: [\d,]+ in " + G + r" caps", "team.portugal.apps"),
+            (r"- Team trophies: " + G + r",", "honours.total"),
+            (r"including " + G + r" Champions Leagues", "honours.championsleague"),
+            (r"Champions Leagues, " + G + r" league titles", "honours.leagues"),
+            (r"- Ballon d'Or awards: " + G, "award.ballondor"),
+            (r"the cumulative climb to " + G, "year.2026.cumulative"),
+        ],
+    }
+
+
+def apply_file_rules(text, name, values, report):
+    """The text rule mechanism against a whole file rather than a head."""
+    for rule in file_rules().get(name, []):
+        pattern, key = rule[0], rule[1]
+        expected = rule[2] if len(rule) > 2 else 1
+        if key not in values:
+            report["missing"].add(key)
+            continue
+        hits = list(re.finditer(pattern, text))
+        if len(hits) != expected:
+            report["rules"].append(
+                f"{name}: expected {expected} match(es) for {key}, found "
+                f"{len(hits)} <- {pattern}")
+            continue
+        for m in reversed(hits):
+            text = text[:m.start(1)] + str(values[key]) + text[m.end(1):]
+        report["texts"] += len(hits)
+    return text
+
+
 def script_rules():
     """Prose that lives inside a JavaScript string literal, where neither a
     marker nor a region fits. Same contract as text_rules, but applied to the
@@ -1159,6 +1225,17 @@ def write_html(data, values, regions, dry_run=False):
         original = path.read_text(encoding="utf-8")
         updated = rewrite_page(original, values, regions, report)
         updated = apply_text_rules(updated, name, values, report)
+        if updated != original:
+            report["files"].append(name)
+            if not dry_run:
+                path.write_text(updated, encoding="utf-8")
+
+    for name in TEXT_FILES:
+        path = ROOT / name
+        if not path.exists():
+            continue
+        original = path.read_text(encoding="utf-8")
+        updated = apply_file_rules(original, name, values, report)
         if updated != original:
             report["files"].append(name)
             if not dry_run:
