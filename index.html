@@ -35,7 +35,9 @@
     <!-- Security -->
     <meta name="referrer" content="same-origin">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <!-- X-Frame-Options was here as a meta tag. Browsers ignore it in markup and
+         log an error for it: it only works as an HTTP response header, so it was
+         giving no protection at all. Set it in Cloudflare if it is wanted. -->
 
     <!-- Structured data: page -->
     <script type="application/ld+json">
@@ -1897,7 +1899,7 @@
                             <img src="badge-portugal.png" width="20" height="20" loading="lazy" decoding="async" alt="" onerror="this.outerHTML='&lt;span class=&quot;chip-fallback&quot;&gt;POR&lt;/span&gt;'">Portugal
                         </button>
                     </div>
-                    <p class="team-status" id="teamStatus" role="status" aria-live="polite"></p>
+                    <p class="team-status" id="teamStatus" role="status" aria-live="polite">Showing the whole career: <b><span data-stat="career.goals">979</span></b> goals in <b><span data-stat="career.apps">1,336</span></b> games.</p>
                 </section>
 
                 <!-- Summary cards -->
@@ -1919,7 +1921,7 @@
                     <div class="chart-wrapper">
                         <canvas id="compChart" role="img" aria-label="Bar chart of Cristiano Ronaldo goals by competition for the selected team"></canvas>
                     </div>
-                    <p class="chart-footnote" id="compFootnote"></p>
+                    <p class="chart-footnote" id="compFootnote">Other cup competitions covers the Club World Cup, the UEFA Super Cup, domestic super cups, the Arab Club Champions Cup and one Champions League qualifying goal.</p>
                 </section>
 
                 <!-- Goals by season -->
@@ -2374,6 +2376,557 @@
                 els.live.textContent = row.goals + g + row.apps + a + y +
                     ', ' + row.gpg + ' goals per game.';
             });
+        })();
+
+        // ===== Dashboard =====
+        // Chart.js is not in the head on purpose. The home page did not load it
+        // before the dashboard moved here and it must not start paying for it on
+        // every visit, so the library is fetched only when the section is nearly
+        // in view. The three tables below carry the same figures as the charts
+        // and are written into the HTML by scripts/update_stats.py, so if this
+        // never runs, or the CDN is unreachable, the section still reads.
+        (function () {
+            const section = document.getElementById('dashboard');
+            if (!section) return;
+
+            function initDashboard() {
+// ===== Dashboard data =====
+        // Team totals, seasons and competition splits mirror the tables
+        // published on ronaldostats.app, updated September 2026. Opponent and
+        // body part figures come from the MessivsRonaldo.app database,
+        // September 2026, which reconciles exactly with the 979 total here.
+        const DATA = {
+            teams: {
+                // STATS:BEGIN array.dash.teams
+                all:        { name: 'All teams',   games: 1336, goals: 979, assists: 291 },
+                sporting:   { name: 'Sporting CP', games: 31,   goals: 5,   assists: 6 },
+                manutd:     { name: 'Man United',  games: 346,  goals: 145, assists: 64 },
+                realmadrid: { name: 'Real Madrid', games: 438,  goals: 450, assists: 131 },
+                juventus:   { name: 'Juventus',    games: 134,  goals: 101, assists: 22 },
+                alnassr:    { name: 'Al Nassr',    games: 154,  goals: 132, assists: 23 },
+                portugal:   { name: 'Portugal',    games: 233,  goals: 146, assists: 45 }
+                // STATS:END array.dash.teams
+            },
+            competitions: {
+                // STATS:BEGIN array.dash.competitions
+                all: [
+                    ['La Liga', 311], ['Champions League', 140], ['Saudi Pro League', 105],
+                    ['Premier League', 103], ['Serie A', 81], ['Euro qualifiers', 41],
+                    ['World Cup qualifiers', 41], ['Other cup competitions', 25], ['Copa del Rey', 22],
+                    ['Friendlies', 22], ['AFC Champions League', 15], ['Nations League', 15],
+                    ['Euros', 14], ['FA Cup', 13], ['World Cup', 11],
+                    ['Coppa Italia', 4], ['League Cup', 4], ["King's Cup", 3],
+                    ['Primeira Liga', 3], ['Confederations Cup', 2], ['Europa League', 2],
+                    ['Taca de Portugal', 2]
+                ],
+                sporting: [
+                    ['Primeira Liga', 3], ['Taca de Portugal', 2]
+                ],
+                manutd: [
+                    ['Premier League', 103], ['Champions League', 21], ['FA Cup', 13],
+                    ['League Cup', 4], ['Europa League', 2], ['Other cup competitions', 2]
+                ],
+                realmadrid: [
+                    ['La Liga', 311], ['Champions League', 105], ['Copa del Rey', 22],
+                    ['Other cup competitions', 12]
+                ],
+                juventus: [
+                    ['Serie A', 81], ['Champions League', 14], ['Coppa Italia', 4],
+                    ['Other cup competitions', 2]
+                ],
+                alnassr: [
+                    ['Saudi Pro League', 105], ['AFC Champions League', 15], ['Arab Club Champions Cup', 6],
+                    ['Saudi Super Cup', 3], ["King's Cup", 3]
+                ],
+                portugal: [
+                    ['Euro qualifiers', 41], ['World Cup qualifiers', 41], ['Friendlies', 22],
+                    ['Nations League', 15], ['Euros', 14], ['World Cup', 11],
+                    ['Confederations Cup', 2]
+                ]
+                // STATS:END array.dash.competitions
+            },
+            compFootnotes: {
+                all: 'Other cup competitions covers the Club World Cup, the UEFA Super Cup, domestic super cups, the Arab Club Champions Cup and one Champions League qualifying goal.',
+                sporting: 'Five senior goals in the season that earned the move to Manchester.',
+                manutd: 'Both spells combined. Other cup competitions covers the Club World Cup and one Champions League qualifying goal.',
+                realmadrid: 'Other cup competitions covers seven Club World Cup goals, three in the Supercopa and two in the UEFA Super Cup.',
+                juventus: 'Other cup competitions covers the Supercoppa Italiana.',
+                alnassr: 'He was the top scorer as Al Nassr won the 2023 Arab Club Champions Cup.',
+                portugal: 'His 11 World Cup goals include three at the 2026 finals, where he became the first man to score at six World Cups.'
+            },
+            seasons: {
+                // STATS:BEGIN array.dash.seasons
+                sporting:   [['2002/03', 5]],
+                manutd:     [['2003/04', 6], ['2004/05', 9], ['2005/06', 12], ['2006/07', 23], ['2007/08', 42], ['2008/09', 26], ['2021/22', 24], ['2022/23', 3]],
+                realmadrid: [['2009/10', 33], ['2010/11', 53], ['2011/12', 60], ['2012/13', 55], ['2013/14', 51], ['2014/15', 61], ['2015/16', 51], ['2016/17', 42], ['2017/18', 44]],
+                juventus:   [['2018/19', 28], ['2019/20', 37], ['2020/21', 36], ['2021/22', 0]],
+                alnassr:    [['2022/23', 14], ['2023/24', 50], ['2024/25', 35], ['2025/26', 30], ['2026/27', 3]]
+                // STATS:END array.dash.seasons
+            },
+            portugalYears: [
+                // STATS:BEGIN array.dash.portugal_years
+                ['2003', 0], ['2004', 7], ['2005', 2], ['2006', 6], ['2007', 5], ['2008', 1],
+                ['2009', 1], ['2010', 3], ['2011', 7], ['2012', 5], ['2013', 10], ['2014', 5],
+                ['2015', 3], ['2016', 13], ['2017', 11], ['2018', 6], ['2019', 14], ['2020', 3],
+                ['2021', 13], ['2022', 3], ['2023', 10], ['2024', 7], ['2025', 8], ['2026', 3]
+                // STATS:END array.dash.portugal_years
+            ],
+            teamColors: {
+                sporting: 'rgba(46, 139, 87, 0.75)',
+                manutd: 'rgba(192, 57, 43, 0.72)',
+                realmadrid: 'rgba(47, 86, 207, 0.75)',
+                juventus: 'rgba(22, 36, 58, 0.80)',
+                alnassr: 'rgba(214, 158, 46, 0.80)'
+            },
+            finish: {
+                // STATS:BEGIN array.dash.finish
+                all:        [729, 184, 66],
+                sporting:   [5, 0, 0],
+                manutd:     [109, 21, 15],
+                realmadrid: [336, 81, 33],
+                juventus:   [72, 28, 1],
+                alnassr:    [94, 32, 6],
+                portugal:   [113, 22, 11]
+                // STATS:END array.dash.finish
+            },
+            bodyPart: {
+                // STATS:BEGIN array.dash.bodypart
+                labels: ['Right foot', 'Left foot', 'Headers', 'Other'],
+                all:        [632, 186, 158, 3],
+                sporting:   [2, 2, 1, 0],
+                manutd:     [97, 23, 24, 1],
+                realmadrid: [299, 80, 70, 1],
+                juventus:   [62, 21, 18, 0],
+                alnassr:    [87, 27, 17, 1],
+                portugal:   [85, 33, 28, 0]
+                // STATS:END array.dash.bodypart
+            },
+            opponents: {
+                // STATS:BEGIN array.dash.opponents
+                club: [
+                    ['Sevilla', 27, 18], ['Atletico Madrid', 25, 37], ['Getafe', 23, 14],
+                    ['Celta Vigo', 20, 13], ['Barcelona', 20, 34], ['Athletic Bilbao', 17, 18],
+                    ['Malaga', 17, 19], ['Real Sociedad', 15, 11], ['Espanyol', 15, 16],
+                    ['Valencia', 15, 20], ['Villarreal', 15, 21], ['Levante', 14, 14],
+                    ['Tottenham Hotspur', 14, 20]
+                ],
+                saudi: [
+                    ['Al Wehda', 10, 6], ['Damac', 9, 6], ['Al Fateh', 9, 7],
+                    ['Al Shabab', 8, 9], ['Al Khaleej', 7, 8], ['Al Ittihad', 6, 10],
+                    ['Al Hilal', 6, 11], ['Al Feiha', 6, 8], ['Al Riyadh', 6, 6],
+                    ['Al Taee', 5, 3], ['Al Ahli', 5, 7]
+                ],
+                intl: [
+                    ['Luxembourg', 11, 11], ['Hungary', 9, 8], ['Sweden', 7, 7],
+                    ['Lithuania', 7, 3], ['Armenia', 7, 5], ['Andorra', 6, 3],
+                    ['Switzerland', 5, 4], ['Latvia', 5, 4]
+                ],
+                sporting: [
+                    ['Moreirense', 2, 1], ['Boavista', 1, 1], ['Estarreja', 1, 1],
+                    ['FC Oliveira do Hospital', 1, 1]
+                ],
+                manutd: [
+                    ['Tottenham Hotspur', 10, 6], ['Arsenal', 9, 6], ['Aston Villa', 9, 7],
+                    ['Newcastle United', 8, 4], ['Fulham', 7, 5], ['Wigan Athletic', 7, 5],
+                    ['Bolton Wanderers', 6, 4], ['Portsmouth', 6, 4], ['West Ham United', 6, 4],
+                    ['Everton', 6, 5], ['Middlesbrough', 5, 5], ['Norwich City', 4, 2],
+                    ['Reading', 4, 3]
+                ],
+                realmadrid: [
+                    ['Sevilla', 27, 13], ['Getafe', 23, 12], ['Atletico Madrid', 22, 14],
+                    ['Celta Vigo', 20, 10], ['Barcelona', 18, 16], ['Athletic Bilbao', 17, 10],
+                    ['Malaga', 17, 11], ['Espanyol', 15, 7], ['Real Sociedad', 15, 7],
+                    ['Valencia', 15, 11], ['Levante', 14, 9], ['Deportivo La Coruna', 13, 6],
+                    ['Villarreal', 13, 10]
+                ],
+                juventus: [
+                    ['Cagliari', 8, 3], ['Udinese', 7, 4], ['Parma', 6, 3],
+                    ['Sassuolo', 6, 5], ['Genoa', 5, 4], ['Lazio', 5, 4],
+                    ['Roma', 5, 4], ['Sampdoria', 5, 4], ['Inter Milan', 4, 3],
+                    ['AC Milan', 4, 4], ['Napoli', 4, 4], ['Torino', 4, 4],
+                    ['Atletico Madrid', 3, 1]
+                ]
+                // STATS:END array.dash.opponents
+            },
+            oppMeta: {
+                club:       { mode: 'career', name: 'all club opponents', sub: 'Click any bar for his full record against that team.', foot: 'Career records across every competition. Lists like the 25 against Atletico Madrid span more than one of his clubs, so they stay whole.' },
+                saudi:      { mode: 'career', name: 'Saudi opponents in the Al Nassr era', sub: 'Click any bar for his full record against that team.', foot: 'Saudi opponents of the Al Nassr era, every competition included.' },
+                intl:       { mode: 'career', name: 'international opponents', sub: 'Click any bar for his full record against that team.', foot: 'His international victims, every Portugal match included.' },
+                sporting:   { mode: 'era', name: 'Sporting CP opponents', sub: 'Every side he scored against for Sporting CP. Click a bar for details.', foot: 'The complete set: all four sides from his first five senior goals, compiled from the full goal log on Transfermarkt.' },
+                manutd:     { mode: 'era', name: 'Man United opponents', sub: 'His most punished sides for Man United, every competition included.', foot: 'The top of 44 sides he scored against for Man United across both spells, compiled from the full goal log on Transfermarkt.' },
+                realmadrid: { mode: 'era', name: 'Real Madrid opponents', sub: 'His most punished sides for Real Madrid, every competition included.', foot: 'The top of 64 sides he scored against for Real Madrid, compiled from the full goal log on Transfermarkt.' },
+                juventus:   { mode: 'era', name: 'Juventus opponents', sub: 'His most punished sides for Juventus, every competition included.', foot: 'The top of 30 sides he scored against for Juventus, compiled from the full goal log on Transfermarkt.' }
+            }
+        };
+
+        const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const fonts = { body: "'DM Sans', sans-serif", display: "'Plus Jakarta Sans', sans-serif" };
+        const colors = {
+            barBg: 'rgba(47, 86, 207, 0.50)',
+            barBorder: '#2f56cf',
+            gridColor: 'rgba(20, 30, 50, 0.06)',
+            textColor: '#56657f',
+            textPrimary: '#16243a',
+            wheel: ['#1e3a8a', '#2f56cf', '#6f8fe0', '#b9c7ec']
+        };
+        const tooltipStyle = {
+            backgroundColor: 'rgba(22, 36, 58, 0.96)',
+            titleFont: { family: fonts.display, size: 14, weight: 600 },
+            bodyFont: { family: fonts.body, size: 13 },
+            padding: 12,
+            cornerRadius: 10
+        };
+        const axisTicks = { font: { family: fonts.body, size: 12 }, color: colors.textColor };
+        const axisTicksInk = { font: { family: fonts.body, size: 12 }, color: colors.textPrimary };
+
+        let currentTeam = 'all';
+
+        // ===== Team selector =====
+        const teamStatus = document.getElementById('teamStatus');
+        document.querySelectorAll('.team-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                document.querySelectorAll('.team-chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                currentTeam = chip.dataset.team;
+                applyTeam();
+            });
+        });
+
+        function fmt(n) { return n.toLocaleString('en-GB'); }
+
+        function applyTeam() {
+            const t = DATA.teams[currentTeam];
+
+            // Status line
+            if (currentTeam === 'all') {
+                teamStatus.innerHTML = 'Showing the whole career: <b>' + fmt(t.goals) + '</b> goals in <b>' + fmt(t.games) + '</b> games.';
+            } else {
+                teamStatus.innerHTML = 'Showing <b>' + t.name + '</b>: <b>' + fmt(t.goals) + '</b> goals in <b>' + fmt(t.games) + '</b> games.';
+            }
+
+            // Summary cards
+            document.getElementById('sumGames').textContent = fmt(t.games);
+            document.getElementById('sumGoals').textContent = fmt(t.goals);
+            document.getElementById('sumRate').textContent = (t.goals / t.games).toFixed(2);
+            document.getElementById('sumAssists').textContent = fmt(t.assists);
+
+            // Competition chart
+            const comps = DATA.competitions[currentTeam];
+            compChart.data.labels = comps.map(row => row[0]);
+            compChart.data.datasets[0].data = comps.map(row => row[1]);
+            compChart.update();
+            document.getElementById('compSubtitle').textContent = currentTeam === 'all'
+                ? 'Every competition he has scored in, from La Liga to the World Cup.'
+                : 'Every competition he scored in for ' + t.name + '.';
+            document.getElementById('compFootnote').textContent = DATA.compFootnotes[currentTeam];
+
+            // Season chart
+            rebuildSeasonChart();
+
+            // Finish doughnut
+            finishChart.data.datasets[0].data = DATA.finish[currentTeam];
+            finishChart.update();
+            document.getElementById('finishSubtitle').textContent = currentTeam === 'all'
+                ? 'Open play against the dead ball arts, across the whole career.'
+                : 'Open play against the dead ball arts, for ' + t.name + '.';
+
+            // Body part doughnut
+            bodyChart.data.datasets[0].data = DATA.bodyPart[currentTeam];
+            bodyChart.update();
+            document.getElementById('bodySubtitle').textContent = currentTeam === 'all'
+                ? 'All 979 across the whole career, from that famous right boot to the leap.'
+                : 'His ' + fmt(t.goals) + ' for ' + t.name + ' by body part.';
+
+            // The opponents card follows the selected team
+            const oppMap = { all: 'club', sporting: 'sporting', manutd: 'manutd', realmadrid: 'realmadrid', juventus: 'juventus', alnassr: 'saudi', portugal: 'intl' };
+            document.getElementById('oppTabs').hidden = currentTeam !== 'all';
+            setOppList(oppMap[currentTeam]);
+        }
+
+        // ===== Goals by competition =====
+        const compChart = new Chart(document.getElementById('compChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Goals',
+                    data: [],
+                    backgroundColor: colors.barBg,
+                    borderColor: colors.barBorder,
+                    borderWidth: 2,
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: reduceMotion ? false : { duration: 600 },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: Object.assign({}, tooltipStyle, {
+                        callbacks: { label: ctx => ctx.parsed.x + ' goals' }
+                    })
+                },
+                scales: {
+                    x: {
+                        grid: { color: colors.gridColor },
+                        ticks: axisTicks,
+                        title: { display: true, text: 'Goals', font: { family: fonts.body, size: 13, weight: 500 }, color: colors.textColor }
+                    },
+                    y: { grid: { display: false }, ticks: axisTicksInk }
+                }
+            }
+        });
+
+        // ===== Season by season =====
+        let seasonChart = null;
+        // STATS:BEGIN array.dash.season_labels
+        const allSeasonLabels = ['2002/03', '2003/04', '2004/05', '2005/06', '2006/07', '2007/08', '2008/09',
+            '2009/10', '2010/11', '2011/12', '2012/13', '2013/14', '2014/15', '2015/16', '2016/17', '2017/18',
+            '2018/19', '2019/20', '2020/21', '2021/22', '2022/23', '2023/24', '2024/25', '2025/26',
+            '2026/27'];
+        // STATS:END array.dash.season_labels
+
+        function seasonSeries(teamKey) {
+            const map = Object.fromEntries(DATA.seasons[teamKey]);
+            return allSeasonLabels.map(label => map[label] || 0);
+        }
+
+        function rebuildSeasonChart() {
+            if (seasonChart) seasonChart.destroy();
+            const ctx = document.getElementById('seasonChart').getContext('2d');
+            const sub = document.getElementById('seasonSubtitle');
+            const base = {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: reduceMotion ? false : { duration: 600 },
+                plugins: { tooltip: Object.assign({}, tooltipStyle, {}) },
+                scales: {
+                    x: { grid: { display: false }, ticks: Object.assign({}, axisTicks, { maxRotation: 60, minRotation: 45 }) },
+                    y: { grid: { color: colors.gridColor }, ticks: axisTicks,
+                         title: { display: true, text: 'Goals', font: { family: fonts.body, size: 13, weight: 500 }, color: colors.textColor } }
+                }
+            };
+
+            if (currentTeam === 'all') {
+                const datasets = ['sporting', 'manutd', 'realmadrid', 'juventus', 'alnassr'].map(key => ({
+                    label: DATA.teams[key].name,
+                    data: seasonSeries(key),
+                    backgroundColor: DATA.teamColors[key],
+                    borderRadius: 4,
+                    stack: 'club'
+                }));
+                const opts = JSON.parse(JSON.stringify(base));
+                seasonChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: { labels: allSeasonLabels, datasets: datasets },
+                    options: Object.assign(opts, {
+                        plugins: {
+                            legend: { position: 'top', labels: { usePointStyle: true, padding: 16, font: { family: fonts.body, size: 12, weight: 500 }, color: colors.textPrimary } },
+                            tooltip: Object.assign({}, tooltipStyle, { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + ' goals' } })
+                        },
+                        scales: {
+                            x: Object.assign(opts.scales.x, { stacked: true }),
+                            y: Object.assign(opts.scales.y, { stacked: true })
+                        }
+                    })
+                });
+                sub.textContent = 'The whole club career in one skyline, coloured by team. Portugal shows year by year.';
+            } else if (currentTeam === 'portugal') {
+                seasonChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: DATA.portugalYears.map(row => row[0]),
+                        datasets: [{ label: 'Goals', data: DATA.portugalYears.map(row => row[1]), backgroundColor: colors.barBg, borderColor: colors.barBorder, borderWidth: 2, borderRadius: 5 }]
+                    },
+                    options: Object.assign(JSON.parse(JSON.stringify(base)), {
+                        plugins: { legend: { display: false }, tooltip: Object.assign({}, tooltipStyle, { callbacks: { label: ctx => ctx.parsed.y + ' goals' } }) }
+                    })
+                });
+                sub.textContent = 'Portugal goals year by year, from the debut season to the 2026 World Cup.';
+            } else {
+                const rows = DATA.seasons[currentTeam];
+                seasonChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: rows.map(row => row[0]),
+                        datasets: [{ label: 'Goals', data: rows.map(row => row[1]), backgroundColor: colors.barBg, borderColor: colors.barBorder, borderWidth: 2, borderRadius: 5 }]
+                    },
+                    options: Object.assign(JSON.parse(JSON.stringify(base)), {
+                        plugins: { legend: { display: false }, tooltip: Object.assign({}, tooltipStyle, { callbacks: { label: ctx => ctx.parsed.y + ' goals' } }) }
+                    })
+                });
+                sub.textContent = 'Goals per season for ' + DATA.teams[currentTeam].name + '.';
+            }
+        }
+
+        // ===== Favourite opponents =====
+        let currentOppKey = 'club';
+        let currentOppRows = DATA.opponents.club;
+        const spotlight = document.getElementById('spotlight');
+
+        const oppChart = new Chart(document.getElementById('oppChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: currentOppRows.map(row => row[0]),
+                datasets: [{
+                    label: 'Goals',
+                    data: currentOppRows.map(row => row[1]),
+                    backgroundColor: colors.barBg,
+                    borderColor: colors.barBorder,
+                    borderWidth: 2,
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: reduceMotion ? false : { duration: 600 },
+                onClick: (event, elements) => {
+                    if (elements.length) showSpotlight(elements[0].index);
+                },
+                onHover: (event, elements) => {
+                    event.native.target.style.cursor = elements.length ? 'pointer' : 'default';
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: Object.assign({}, tooltipStyle, {
+                        callbacks: {
+                            label: ctx => ctx.parsed.x + ' goals',
+                            afterLabel: () => 'Click for the full record'
+                        }
+                    })
+                },
+                scales: {
+                    x: {
+                        grid: { color: colors.gridColor },
+                        ticks: axisTicks,
+                        title: { display: true, text: 'Goals', font: { family: fonts.body, size: 13, weight: 500 }, color: colors.textColor }
+                    },
+                    y: { grid: { display: false }, ticks: axisTicksInk }
+                }
+            }
+        });
+
+        function showSpotlight(index) {
+            const row = currentOppRows[index];
+            const meta = DATA.oppMeta[currentOppKey];
+            document.getElementById('spotName').textContent = row[0];
+            document.getElementById('spotRank').textContent = 'Number ' + (index + 1) + ' of his ' + meta.name;
+            document.getElementById('spotGoals').textContent = row[1];
+            document.getElementById('spotApps').textContent = row[2];
+            document.getElementById('spotAppsLabel').textContent = meta.mode === 'era' ? 'Scored in' : 'Games';
+            document.getElementById('spotRateWrap').hidden = meta.mode === 'era';
+            document.getElementById('spotRate').textContent = (row[1] / row[2]).toFixed(2);
+            spotlight.classList.add('show');
+        }
+
+        function setOppList(key) {
+            currentOppKey = key;
+            currentOppRows = DATA.opponents[key];
+            const meta = DATA.oppMeta[key];
+            document.getElementById('oppSubtitle').textContent = meta.sub;
+            document.getElementById('oppFootnote').textContent = meta.foot;
+            document.querySelectorAll('[data-opp]').forEach(t => t.classList.toggle('active', t.dataset.opp === key));
+            oppChart.data.labels = currentOppRows.map(row => row[0]);
+            oppChart.data.datasets[0].data = currentOppRows.map(row => row[1]);
+            oppChart.update();
+            spotlight.classList.remove('show');
+        }
+        document.querySelectorAll('[data-opp]').forEach(tab => {
+            tab.addEventListener('click', () => setOppList(tab.dataset.opp));
+        });
+
+        // ===== Doughnuts =====
+        const finishChart = new Chart(document.getElementById('finishChart').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Open play', 'Penalties', 'Free kicks'],
+                datasets: [{
+                    data: DATA.finish.all,
+                    backgroundColor: [colors.wheel[1], colors.wheel[0], colors.wheel[2]],
+                    borderColor: '#ffffff',
+                    borderWidth: 3,
+                    hoverOffset: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '62%',
+                animation: reduceMotion ? false : { duration: 700 },
+                plugins: {
+                    legend: { position: 'bottom', labels: { usePointStyle: true, padding: 16, font: { family: fonts.body, size: 13, weight: 500 }, color: colors.textPrimary } },
+                    tooltip: Object.assign({}, tooltipStyle, {
+                        callbacks: {
+                            label: ctx => {
+                                const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                                const pct = total ? ((ctx.parsed / total) * 100).toFixed(1) : '0.0';
+                                return ctx.parsed + ' goals (' + pct + ' percent)';
+                            }
+                        }
+                    })
+                }
+            }
+        });
+
+        const bodyChart = new Chart(document.getElementById('bodyChart').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: DATA.bodyPart.labels,
+                datasets: [{
+                    data: DATA.bodyPart.all,
+                    backgroundColor: colors.wheel,
+                    borderColor: '#ffffff',
+                    borderWidth: 3,
+                    hoverOffset: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '62%',
+                animation: reduceMotion ? false : { duration: 700 },
+                plugins: {
+                    legend: { position: 'bottom', labels: { usePointStyle: true, padding: 16, font: { family: fonts.body, size: 13, weight: 500 }, color: colors.textPrimary } },
+                    tooltip: Object.assign({}, tooltipStyle, {
+                        callbacks: {
+                            label: ctx => {
+                                const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                                const pct = total ? ((ctx.parsed / total) * 100).toFixed(1) : '0.0';
+                                return ctx.parsed + ' goals (' + pct + ' percent)';
+                            }
+                        }
+                    })
+                }
+            }
+        });
+
+        // First render
+        applyTeam();
+            }
+
+            let started = false;
+            function start() {
+                if (started) return;
+                started = true;
+                const s = document.createElement('script');
+                s.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js';
+                s.async = true;
+                s.onload = initDashboard;
+                document.head.appendChild(s);
+            }
+
+            if ('IntersectionObserver' in window) {
+                const io = new IntersectionObserver(function (entries) {
+                    if (entries.some(e => e.isIntersecting)) { io.disconnect(); start(); }
+                }, { rootMargin: '400px 0px' });
+                io.observe(section);
+            } else {
+                start();
+            }
         })();
     </script>
 </body>

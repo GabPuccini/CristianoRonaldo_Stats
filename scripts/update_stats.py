@@ -710,8 +710,17 @@ def script_rules():
         # are listed while dashboard.html still exists; its entry goes when the
         # page itself does.
         "index.html": [
-            (r"Lists like the " + G + r" against Atletico Madrid", "opponent.club.atleticomadrid.goals"),
+            (r"Lists like the " + G + r" against Atletico Madrid", "opponent.club.atleticomadrid.goals", 2),
             (r"a total such as the " + G + r" against Atletico Madrid", "opponent.club.atleticomadrid.goals"),
+            (r"His " + G + r" World Cup goals include three", "comp.portugal.worldcup"),
+            (r"All " + G + r" across the whole career", "career.goals"),
+            # the provenance comment above DATA quotes the total it reconciles to
+            (r"which reconciles exactly with the " + G + r" total here", "career.goals"),
+            (r"published on ronaldostats\.app, updated ([A-Z][a-z]+ \d{4})", "meta.updated.short"),
+            # the indent is not pinned: the comment moved one level deeper when the
+            # dashboard was wrapped in an init function, and would again if it moves
+            (r"body part figures come from the MessivsRonaldo\.app database,\n"
+             r"\s*// ([A-Z][a-z]+ \d{4}),", "meta.updated.short"),
         ],
         "dashboard.html": [
             (r"Lists like the " + G + r" against Atletico Madrid", "opponent.club.atleticomadrid.goals", 2),
