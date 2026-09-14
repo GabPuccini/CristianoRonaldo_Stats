@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--
+        TEMPORARY BRIDGE, NOT A PAGE.
+
+        The dashboard is a section of the home page now. This file exists only
+        so that /dashboard.html does not return 404 for the people and crawlers
+        that still hold the old link.
+
+        It is the weaker of the two ways to do this. The real fix is a
+        Cloudflare Redirect Rule sending /dashboard.html to
+        https://ronaldostats.app/#dashboard with a 301, which is a genuine HTTP
+        status that passes ranking signals. A meta refresh is only a hint that
+        Google may choose to follow, and slowly.
+
+        Once that rule is live, delete this file. The rule fires at the edge, so
+        the two can coexist safely in the meantime.
+
+        Deliberately no robots noindex here. noindex would tell Google to drop
+        the URL without passing anything to the home page, which is the opposite
+        of consolidating: it would throw away what this page has earned rather
+        than hand it over. The canonical below does the consolidating.
+    -->
+
+    <link rel="canonical" href="https://ronaldostats.app/">
+    <meta http-equiv="refresh" content="0; url=/#dashboard">
+
+    <title>Ronaldo Stats Dashboard has moved to the home page</title>
+    <meta name="description" content="The Cristiano Ronaldo stats dashboard is now a section of the home page, with the same goals by competition, season, opponent and finish type.">
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eaf0f9;
+            color: #16243a;
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            text-align: center;
+            padding: 24px;
+        }
+        p { font-size: 1.05rem; line-height: 1.6; max-width: 46ch; }
+        a { color: #2f56cf; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <p>
+        The Ronaldo stats dashboard is now part of the home page.
+        <br>
+        <a href="/#dashboard">Continue to the dashboard</a>
+    </p>
+</body>
+</html>
