@@ -609,6 +609,21 @@ def text_rules(generated=True):
     ]
     table = {
         "index.html": common + [
+            # The title carries both headline figures. A title advertising 979
+            # over a page that says 1,004 is worse than a title with no number
+            # in it, so these are pinned by hand rather than left to the
+            # generator, which skips a figure whose key it cannot resolve.
+            (r"All " + G + r" Ronaldo Goals and", "career.goals", 3),
+            (r"Goals and " + G + r" Assists by Club", "career.assists", 3),
+            (r"Ronaldo's " + G + r" goals and", "career.goals", 2),
+            (r"goals and " + G + r" assists broken down", "career.assists", 2),
+            (r"All " + G + r" goals and [\d,]+ assists by club", "career.goals"),
+            (r"All [\d,]+ goals and " + G + r" assists by club", "career.assists"),
+            # Real Madrid's Champions League goals reached 105, which is also the
+            # Saudi Pro League total, so the generator can no longer tell the two
+            # apart and drops the rule. Pinned by hand on the sentence it sits in.
+            (r"history of the competition: " + G + r" for Real Madrid",
+             "comp.realmadrid.championsleague"),
             (r"Manchester United \([\d,]+\), Al Nassr \(" + G + r"\)", "team.alnassr.goals"),
             (STAMP, "meta.updated.long", 7),
             (r"Cristiano Ronaldo is " + G + r" years old", "person.age"),
