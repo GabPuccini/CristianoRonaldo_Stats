@@ -41,7 +41,6 @@ PAGES = [
     "index.html",
     "goalsbyyear.html",
     "goalsbyseason.html",
-    "dashboard.html",
     "timeline.html",
     "achievements.html",
 ]
@@ -668,14 +667,6 @@ def text_rules(generated=True):
             (r"club goals, " + G + r" international goals", "team.portugal.goals"),
             (r"best season of " + G + r" goals in", "season.best.goals"),
         ],
-        "dashboard.html": common + [
-            (r'twitter:description" content="' + G + r" career goals by competition", "career.goals"),
-            (r"dashboard follows: " + G + r" career goals by competition", "career.goals"),
-            (STAMP, "meta.updated.long", 4),
-            (r"Ronaldo's " + G + r" goals by team", "career.goals", 2),
-            (r"dashboard follows: " + G + r" career goals by competition", "career.goals"),
-            (r"finish type as of [^:]*: " + G + r" in La Liga", "comp.laliga"),
-        ],
         "timeline.html": common + [
             (r"Portugal\. As of [^\"]*he has " + G + r" career goals", "career.goals"),
             # the timeline's list entries carry the date first, so this is
@@ -721,9 +712,8 @@ def script_rules():
     body rather than the head."""
     G = r"([\d,]+)"
     return {
-        # The dashboard's prose now lives on the home page as well. Both pages
-        # are listed while dashboard.html still exists; its entry goes when the
-        # page itself does.
+        # The dashboard's prose lives on the home page now that the standalone
+        # page is gone.
         "index.html": [
             (r"Lists like the " + G + r" against Atletico Madrid", "opponent.club.atleticomadrid.goals", 2),
             (r"a total such as the " + G + r" against Atletico Madrid", "opponent.club.atleticomadrid.goals"),
@@ -736,17 +726,6 @@ def script_rules():
             # dashboard was wrapped in an init function, and would again if it moves
             (r"body part figures come from the MessivsRonaldo\.app database,\n"
              r"\s*// ([A-Z][a-z]+ \d{4}),", "meta.updated.short"),
-        ],
-        "dashboard.html": [
-            (r"Lists like the " + G + r" against Atletico Madrid", "opponent.club.atleticomadrid.goals", 2),
-            (r"a total such as the " + G + r" against Atletico Madrid", "opponent.club.atleticomadrid.goals"),
-            (r"His " + G + r" World Cup goals include three", "comp.portugal.worldcup"),
-            (r"All " + G + r" across the whole career", "career.goals"),
-            # the provenance comment above DATA quotes the total it reconciles to
-            (r"which reconciles exactly with the " + G + r" total here", "career.goals"),
-            (r"published on ronaldostats\.app, updated ([A-Z][a-z]+ \d{4})", "meta.updated.short"),
-            (r"body part figures come from the MessivsRonaldo\.app database,\n"
-             r"        // ([A-Z][a-z]+ \d{4}),", "meta.updated.short"),
         ],
     }
 

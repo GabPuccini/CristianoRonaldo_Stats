@@ -173,10 +173,10 @@ def unplotted_seasons():
     missing from the dashboard chart, because the chart maps its series over a
     label axis of its own. That is how 2026/27 went unplotted: the data was
     right and the axis stopped a season short."""
-    page = (ROOT / "dashboard.html").read_text(encoding="utf-8")
+    page = (ROOT / "index.html").read_text(encoding="utf-8")
     axis = re.search(r"const allSeasonLabels = \[(.*?)\];", page, re.S)
     if not axis:
-        return ["dashboard.html: the season chart's label axis was not found"]
+        return ["index.html: the season chart's label axis was not found"]
     plotted = set(re.findall(r"'([^']+)'", axis.group(1)))
     data = engine.load()
     wanted = {row["season"] for row in data["seasons"] if row.get("in_career", True)}

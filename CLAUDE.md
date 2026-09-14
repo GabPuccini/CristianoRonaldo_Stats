@@ -19,7 +19,7 @@ be derived and is held instead. A goal or an appearance banks itself to the
 calendar year it was played in, and `check` fails if those rows stop adding up to
 the career total. That is what feeds the year picker on the home page.
 
-`sitemap.xml` is driven too: the `lastmod` of each of the six statistics pages
+`sitemap.xml` is driven too: the `lastmod` of each of the five statistics pages
 tracks the update date, since those pages really do change every time. Only
 `privacy.html` keeps a hand written date, because the script never touches it.
 
@@ -109,7 +109,8 @@ opposition, and `--assists N` if he also created goals.
 Pass `--opponent "Name"` to `appearance` whenever he names the opposition, the
 same as for a goal. A match with no goal still counts against that side, and
 leaving it out slowly overstates his goals per game against them on the
-dashboard. If the side is not on the published opponent lists the script says so
+dashboard section of the home page. If the side is not on the published opponent
+lists the script says so
 and moves nothing, since those lists are the teams he has scored against most
 rather than a complete record.
 
@@ -158,13 +159,27 @@ Note only the first goal of a match carries `--new-appearance`.
 1. The script prints the new totals and refuses to write if anything fails to
    reconcile. If it fails, read the error, fix the data, do not force it.
 2. Check `git diff` and confirm only expected numbers moved. One goal touches all
-   six pages plus `sitemap.xml`, so a diff limited to fewer than seven files
+   five pages plus `sitemap.xml`, so a diff limited to fewer than six files
    means something is not wired up and should be looked at rather than
    committed.
 3. Commit with a message naming the event, for example
    `Goal 977: Al Nassr v Al Hilal, Saudi Pro League`.
 4. Push. Cloudflare serves the new file within a minute or two, and a hard
    refresh with Ctrl Shift R shows it immediately.
+
+## The dashboard
+
+The interactive dashboard is a section of `index.html`, not a page. It lives
+under `<section id="dashboard">` and `/#dashboard` is the link to it. Chart.js
+is fetched only when that section comes within 400px of the viewport, so the
+home page does not pay for it on every visit. The three tables under the charts
+are the content: they are written from the dataset like any other table and
+they read correctly with JavaScript off, so never replace them with canvas only
+charts.
+
+`dashboard.html` was retired in September 2026. `/dashboard.html` must keep
+returning a 301 to `https://ronaldostats.app/#dashboard`, set as a Cloudflare
+Redirect Rule rather than as a file in the repo.
 
 ## Site wide writing rules
 

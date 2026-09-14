@@ -202,35 +202,35 @@ for row in data["portugal_years"]:
     record("goalsbyseason.html", f"Portugal {row['year']} goals", row["goals"], nums[-1])
 
 # ----------------------------------------------------------------- dashboard
-record("dashboard.html", "summary games", values["career.apps"],
-       find("dashboard.html", r'id="sumGames">([^<]+)<'), key="career.apps")
-record("dashboard.html", "summary goals", values["career.goals"],
-       find("dashboard.html", r'id="sumGoals">([^<]+)<'), key="career.goals")
-record("dashboard.html", "summary goals per game", values["career.gpg"],
-       find("dashboard.html", r'id="sumRate">([^<]+)<'), key="career.gpg")
-record("dashboard.html", "summary assists", values["career.assists"],
-       find("dashboard.html", r'id="sumAssists">([^<]+)<'), key="career.assists")
+record("index.html", "summary games", values["career.apps"],
+       find("index.html", r'id="sumGames">([^<]+)<'), key="career.apps")
+record("index.html", "summary goals", values["career.goals"],
+       find("index.html", r'id="sumGoals">([^<]+)<'), key="career.goals")
+record("index.html", "summary goals per game", values["career.gpg"],
+       find("index.html", r'id="sumRate">([^<]+)<'), key="career.gpg")
+record("index.html", "summary assists", values["career.assists"],
+       find("index.html", r'id="sumAssists">([^<]+)<'), key="career.assists")
 
 # DATA.teams block still hard coded in the page script
 for team in data["teams"]:
     tid = team["id"]
     key = {"manutd": "manutd", "realmadrid": "realmadrid", "juventus": "juventus",
            "alnassr": "alnassr", "portugal": "portugal", "sporting": "sporting"}[tid]
-    block = find("dashboard.html", key + r":\s*\{ name: '[^']*',\s*games: (\d+),\s*goals: (\d+),\s*assists: (\d+) \}", 0)
+    block = find("index.html", key + r":\s*\{ name: '[^']*',\s*games: (\d+),\s*goals: (\d+),\s*assists: (\d+) \}", 0)
     if block == "<NOT FOUND>":
-        record("dashboard.html", f"DATA.teams {tid}", "present", "<NOT FOUND>")
+        record("index.html", f"DATA.teams {tid}", "present", "<NOT FOUND>")
         continue
     g, go, a = re.search(r"games: (\d+),\s*goals: (\d+),\s*assists: (\d+)", block).groups()
-    record("dashboard.html", f"DATA.teams {tid} games", values[f"team.{tid}.apps"].replace(",", ""), g, key=f"team.{tid}.apps")
-    record("dashboard.html", f"DATA.teams {tid} goals", values[f"team.{tid}.goals"].replace(",", ""), go, key=f"team.{tid}.goals")
-    record("dashboard.html", f"DATA.teams {tid} assists", values[f"team.{tid}.assists"].replace(",", ""), a, key=f"team.{tid}.assists")
+    record("index.html", f"DATA.teams {tid} games", values[f"team.{tid}.apps"].replace(",", ""), g, key=f"team.{tid}.apps")
+    record("index.html", f"DATA.teams {tid} goals", values[f"team.{tid}.goals"].replace(",", ""), go, key=f"team.{tid}.goals")
+    record("index.html", f"DATA.teams {tid} assists", values[f"team.{tid}.assists"].replace(",", ""), a, key=f"team.{tid}.assists")
 
-all_block = find("dashboard.html", r"all:\s*\{ name: 'All teams',\s*games: (\d+),\s*goals: (\d+),\s*assists: (\d+) \}", 0)
+all_block = find("index.html", r"all:\s*\{ name: 'All teams',\s*games: (\d+),\s*goals: (\d+),\s*assists: (\d+) \}", 0)
 if all_block != "<NOT FOUND>":
     g, go, a = re.search(r"games: (\d+),\s*goals: (\d+),\s*assists: (\d+)", all_block).groups()
-    record("dashboard.html", "DATA.teams all games", values["career.apps"].replace(",", ""), g, key="career.apps")
-    record("dashboard.html", "DATA.teams all goals", values["career.goals"].replace(",", ""), go, key="career.goals")
-    record("dashboard.html", "DATA.teams all assists", values["career.assists"].replace(",", ""), a, key="career.assists")
+    record("index.html", "DATA.teams all games", values["career.apps"].replace(",", ""), g, key="career.apps")
+    record("index.html", "DATA.teams all goals", values["career.goals"].replace(",", ""), go, key="career.goals")
+    record("index.html", "DATA.teams all assists", values["career.assists"].replace(",", ""), a, key="career.assists")
 
 # Competition table and the DATA.competitions arrays. The dataset stores these
 # per team now, so the career figures come from the same rollup the engine uses.
@@ -242,8 +242,8 @@ def js_pair(name):
 
 career_comps = engine.career_competitions(data)
 for name, n in career_comps.items():
-    cell = find("dashboard.html", r'<tr><th scope="row">' + re.escape(name) + r'</th><td>(\d+)</td>', 1)
-    record("dashboard.html", f"competition table {name}", n, cell, key=f"comp.{engine.slug(name)}")
+    cell = find("index.html", r'<tr><th scope="row">' + re.escape(name) + r'</th><td>(\d+)</td>', 1)
+    record("index.html", f"competition table {name}", n, cell, key=f"comp.{engine.slug(name)}")
 
 def js_array(text, key):
     """The arrays hold nested pairs, so a lazy regex stops at the first inner
@@ -264,15 +264,15 @@ def js_array(text, key):
     return ""
 
 
-dash = PAGES["dashboard.html"]
+dash = PAGES["index.html"]
 comp_block = dash[dash.index("competitions: {"):dash.index("compFootnotes:")]
 for tid, block in data["competitions"].items():
     body = js_array(comp_block, tid)
     for name, n in block.items():
         m = re.search(js_pair(name), body)
-        record("dashboard.html", f"DATA competitions {tid} {name}", n,
+        record("index.html", f"DATA competitions {tid} {name}", n,
                m.group(1) if m else "<NOT FOUND>", key=f"comp.{tid}.{engine.slug(name)}")
-    record("dashboard.html", f"DATA competitions {tid} total", sum(block.values()),
+    record("index.html", f"DATA competitions {tid} total", sum(block.values()),
            sum(int(x) for x in re.findall(r",\s*(\d+)\s*\]", body)) if body else "<NOT FOUND>",
            key=f"comp.{tid}.total")
 
@@ -325,21 +325,21 @@ for key in ("honours.total", "honours.leagues", "honours.championsleague", "awar
 
 # Body part and finish tables
 for label, slot in [("Right foot", "right"), ("Left foot", "left"), ("Headers", "head"), ("Other", "other")]:
-    record("dashboard.html", f"body part table {label}", values[f"body.all.{slot}"],
-           find("dashboard.html", r'<tr><th scope="row">' + label + r'</th><td>(\d+)</td>', 1),
+    record("index.html", f"body part table {label}", values[f"body.all.{slot}"],
+           find("index.html", r'<tr><th scope="row">' + label + r'</th><td>(\d+)</td>', 1),
            key=f"body.all.{slot}")
-record("dashboard.html", "finish table penalties", values["penalties.total"],
-       find("dashboard.html", r'<tr><th scope="row">Penalties</th><td>(\d+)</td>', 1), key="penalties.total")
-record("dashboard.html", "finish table free kicks", values["freekicks.total"],
-       find("dashboard.html", r'<tr><th scope="row">Free kicks</th><td>(\d+)</td>', 1), key="freekicks.total")
+record("index.html", "finish table penalties", values["penalties.total"],
+       find("index.html", r'<tr><th scope="row">Penalties</th><td>(\d+)</td>', 1), key="penalties.total")
+record("index.html", "finish table free kicks", values["freekicks.total"],
+       find("index.html", r'<tr><th scope="row">Free kicks</th><td>(\d+)</td>', 1), key="freekicks.total")
 open_play = str(int(values["career.goals"].replace(",", ""))
                 - int(values["penalties.total"]) - int(values["freekicks.total"]))
-record("dashboard.html", "finish table open play", open_play,
-       find("dashboard.html", r'<tr><th scope="row">Open play</th><td>(\d+)</td>', 1))
-record("dashboard.html", "DATA bodyPart all",
+record("index.html", "finish table open play", open_play,
+       find("index.html", r'<tr><th scope="row">Open play</th><td>(\d+)</td>', 1))
+record("index.html", "DATA bodyPart all",
        ", ".join(values[f"body.all.{s}"] for s in engine.BODY_SLOTS),
-       ", ".join(x.strip() for x in find("dashboard.html", r"all:\s*\[([\d, ]+)\],\s*\n\s*sporting:\s*\[[\d, ]+\],\s*\n\s*manutd:\s*\[97", 1).split(","))
-       if find("dashboard.html", r"bodyPart: \{", 0) != "<NOT FOUND>" else "<NOT FOUND>")
+       ", ".join(x.strip() for x in find("index.html", r"all:\s*\[([\d, ]+)\],\s*\n\s*sporting:\s*\[[\d, ]+\],\s*\n\s*manutd:\s*\[97", 1).split(","))
+       if find("index.html", r"bodyPart: \{", 0) != "<NOT FOUND>" else "<NOT FOUND>")
 
 # ------------------------------------------------- figures inside sentences
 prose = [
@@ -357,9 +357,9 @@ prose = [
      r'<b>[\d,]+ club goals in ([\d,]+) games</b>'),
     ("goalsbyyear.html", "lead career goals", values["career.goals"],
      r'Cristiano Ronaldo has scored <b>([\d,]+) goals</b> across'),
-    ("dashboard.html", "lead goals", values["career.goals"],
+    ("index.html", "lead goals", values["career.goals"],
      r'has scored <b>([\d,]+) goals in [\d,]+ games</b>'),
-    ("dashboard.html", "lead games", values["career.apps"],
+    ("index.html", "lead games", values["career.apps"],
      r'has scored <b>[\d,]+ goals in ([\d,]+) games</b>'),
 ]
 for page, what, expected, pattern in prose:
@@ -374,12 +374,12 @@ for page in PAGES:
 
 # ------------------------------------- keys the checks above did not exercise
 # Per team body part arrays, still hard coded in the dashboard script
-body_block = find("dashboard.html", r"bodyPart: \{(.*?)\n            \}", 1)
+body_block = find("index.html", r"bodyPart: \{(.*?)\n            \}", 1)
 for tid in data["bodyparts"]:
     m = re.search(tid + r":\s*\[([\d, ]+)\]", body_block)
     got = ", ".join(x.strip() for x in m.group(1).split(",")) if m else "<NOT FOUND>"
     want = ", ".join(values[f"body.{tid}.{slot}"] for slot in engine.BODY_SLOTS)
-    record("dashboard.html", f"DATA bodyPart {tid}", want, got)
+    record("index.html", f"DATA bodyPart {tid}", want, got)
     for slot in engine.BODY_SLOTS:      # mark each key as exercised by this row
         exercised.add(f"body.{tid}.{slot}")
 
