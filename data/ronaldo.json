@@ -5,7 +5,7 @@
     "years rows carry apps as well as goals. Club appearances are stored by season, which straddles two calendar years, so the yearly figure cannot be derived from them and is held here instead. A goal or an appearance banks itself to the calendar year it was played in."
   ],
   "meta": {
-    "updated": "2026-09-09",
+    "updated": "2026-09-14",
     "goal_target": 1000,
     "born": "1985-02-05",
     "current_season": "2026/27"
@@ -716,7 +716,7 @@
       "in_career": true,
       "comps": {
         "league": {
-          "apps": 5,
+          "apps": 6,
           "goals": 3
         },
         "cup": null,
@@ -874,7 +874,7 @@
     {
       "year": 2026,
       "goals": 22,
-      "apps": 34,
+      "apps": 35,
       "age": 41
     }
   ],
@@ -1405,7 +1405,7 @@
       "Damac": 6,
       "Al Fateh": 7,
       "Al Shabab": 9,
-      "Al Khaleej": 7,
+      "Al Khaleej": 8,
       "Al Ittihad": 10,
       "Al Hilal": 11,
       "Al Feiha": 8,
@@ -1524,6 +1524,13 @@
       "opponent": "Abha",
       "assists": 0,
       "new_appearance": true
+    },
+    {
+      "date": "2026-09-14",
+      "event": "appearance",
+      "team": "alnassr",
+      "comp": "league",
+      "opponent": "Al Khaleej"
     }
   ],
   "competition_rollup": {
