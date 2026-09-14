@@ -1148,6 +1148,73 @@
         }
         @keyframes rise { to { opacity: 1; transform: translateY(0); } }
 
+
+
+        /* ================================================================
+           DASHBOARD
+           Merged in from the standalone dashboard page. Rules that the home
+           page already had are not repeated. Where a class existed in both
+           and differed, the dashboard's version is renamed with a dash-
+           prefix so the home page's own appearance cannot be affected:
+           .data-table -> .dash-table and .chart-card -> .dash-chart-card.
+           The dashboard's prose link rule is scoped to #dashboard for the
+           same reason: unscoped it would underline every link on the page.
+           ================================================================ */
+        .team-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+        .team-chip { display: inline-flex; align-items: center; gap: 10px; padding: 9px 16px 9px 10px; cursor: pointer; background: var(--surface); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--glass-border); border-radius: 999px; font-family: inherit; font-size: 0.86rem; font-weight: 600; color: var(--ink-2); box-shadow: var(--shadow-sm); transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+        .team-chip:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); color: var(--ink); }
+        .team-chip.active { background: var(--brand); border-color: var(--brand); color: #fff; box-shadow: var(--shadow-md); }
+        .team-chip img { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; background: #fff; }
+        .team-chip .chip-fallback { width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: var(--brand-soft); color: var(--brand-ink); font-size: 0.6rem; font-weight: 800; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .team-chip.active .chip-fallback { background: rgba(255, 255, 255, 0.22); color: #fff; }
+        .team-chip.all-chip { padding: 9px 16px; }
+        .team-status { font-size: 0.9rem; color: var(--ink-2); margin-bottom: 22px; min-height: 1.4em; }
+        .team-status b { color: var(--brand-ink); font-weight: 700; }
+        .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+        .summary-card { background: var(--surface); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--glass-border); border-radius: var(--r-md); padding: 22px 20px; text-align: center; box-shadow: var(--shadow-sm); transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .summary-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .summary-value { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.7rem, 3vw, 2.1rem); font-weight: 800; line-height: 1; color: var(--brand-ink); font-variant-numeric: tabular-nums; }
+        .summary-label { font-size: 0.74rem; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 8px; font-weight: 600; }
+        .dash-chart-card { background: var(--surface); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid var(--glass-border); border-radius: var(--r-xl); padding: 28px 30px; margin-bottom: 24px; box-shadow: var(--shadow-md); }
+        .chart-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; flex-wrap: wrap; margin-bottom: 20px; }
+        .chart-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.2rem, 2.2vw, 1.45rem); font-weight: 700; letter-spacing: -0.01em; color: var(--ink); }
+        .chart-subtitle { color: var(--ink-2); font-size: 0.9rem; margin-top: 5px; max-width: 60ch; }
+        .chart-wrapper { position: relative; height: 500px; width: 100%; }
+        .chart-wrapper.mid { height: 360px; }
+        .chart-wrapper.short { height: 300px; }
+        .chart-footnote { font-size: 0.8rem; color: var(--ink-3); margin-top: 14px; }
+        .filter-tabs[hidden] { display: none; }
+        .filter-tabs { display: inline-flex; gap: 6px; background: var(--surface); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); padding: 6px; border-radius: var(--r-md); border: 1px solid var(--glass-border); box-shadow: var(--shadow-sm); max-width: 100%; }
+        .filter-tab { padding: 9px 16px; border: none; background: transparent; color: var(--ink-2); font-family: inherit; font-size: 0.84rem; font-weight: 600; border-radius: var(--r-sm); cursor: pointer; transition: background 0.2s ease, color 0.2s ease; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+        .filter-tab:hover { color: var(--ink); }
+        .filter-tab.active { background: var(--surface-strong); color: var(--ink); box-shadow: var(--shadow-sm); }
+        .spotlight { display: none; margin-top: 18px; padding: 18px 22px; background: var(--brand-soft); border: 1px solid var(--brand); border-radius: var(--r-md); align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+        .spotlight.show { display: flex; }
+        .spotlight-name { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--ink); }
+        .spotlight-rank { font-size: 0.8rem; color: var(--ink-2); margin-top: 2px; }
+        .spotlight-stats { display: flex; gap: 26px; flex-wrap: wrap; }
+        .spotlight-stat { text-align: center; }
+        .spotlight-stat .v { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--brand-ink); line-height: 1; font-variant-numeric: tabular-nums; }
+        .spotlight-stat .l { font-size: 0.68rem; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; margin-top: 5px; }
+        .duo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+        .duo-grid .dash-chart-card { margin-bottom: 0; }
+        #dashboard p a, #dashboard li a { color: var(--brand-ink); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+        #dashboard p a:hover, #dashboard li a:hover { text-decoration-thickness: 2px; }
+        .section-note b { color: var(--ink); font-weight: 700; }
+        .data-card { background: var(--surface); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid var(--glass-border); border-radius: var(--r-xl); padding: 26px 30px; box-shadow: var(--shadow-md); }
+        .data-scroll { overflow-x: auto; }
+        .dash-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums lining-nums; }
+        .dash-table caption { caption-side: top; text-align: left; font-size: 0.88rem; color: var(--ink-2); margin-bottom: 16px; max-width: 78ch; }
+        .dash-table thead th { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); text-align: right; padding: 0 0 12px 14px; border-bottom: 1px solid var(--line-strong); white-space: nowrap; }
+        .dash-table thead th.left { text-align: left; padding-left: 0; }
+        .dash-table tbody th { text-align: left; font-weight: 600; color: var(--ink); font-size: 0.9rem; padding: 10px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+        .dash-table tbody td { text-align: right; font-size: 0.9rem; font-weight: 700; color: var(--brand-ink); padding: 10px 0 10px 14px; border-bottom: 1px solid var(--line); }
+        .dash-table tbody td.muted { font-weight: 500; color: var(--ink-2); }
+        .dash-table tbody tr.peak th, .dash-table tbody tr.peak td { background: var(--brand-soft); }
+        .dash-table tfoot th { text-align: left; font-size: 0.78rem; font-weight: 800; color: var(--ink); padding: 14px 0 0; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
+        .dash-table tfoot td { text-align: right; font-size: 0.95rem; font-weight: 800; color: var(--ink); padding: 14px 0 0 14px; }
+        .data-note { font-size: 0.82rem; color: var(--ink-3); margin-top: 16px; }
+
         @media (prefers-reduced-motion: reduce) {
             * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
             .reveal { opacity: 1 !important; transform: none !important; }
@@ -1159,6 +1226,11 @@
             .kpi-grid { grid-template-columns: repeat(4, 1fr); }
             .kpi-card.road { grid-column: span 4; }
         }
+        @media (max-width: 1080px) {
+            .duo-grid { grid-template-columns: 1fr; }
+            .summary-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
 
         @media (max-width: 900px) {
             .trophy-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1227,12 +1299,29 @@
 
             .cookie-banner { flex-direction: column; text-align: center; }
             .cookie-buttons { width: 100%; justify-content: center; }
-        }
+        
+            /* dashboard */
+            .summary-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .summary-card { padding: 16px; }
+            .data-card { padding: 20px 18px; }
+            .dash-table thead th { font-size: 0.64rem; letter-spacing: 0.03em; white-space: normal; }
+            .dash-table thead th, .dash-table tbody td, .dash-table tfoot td { padding-left: 8px; }
+            .dash-chart-card { padding: 20px 18px; }
+            .chart-wrapper { height: 430px; }
+            .chart-wrapper.mid { height: 300px; }
+            .chart-wrapper.short { height: 260px; }
+            .filter-tabs { width: 100%; overflow-x: auto; display: flex; flex-wrap: nowrap; }
+            .filter-tab { padding: 8px 13px; flex-shrink: 0; }
+            .spotlight-stats { gap: 18px; }
+}
 
         @media (max-width: 460px) {
             .identity-photo { width: 52px; height: 52px; }
             .trophy-grid { gap: 12px; }
-        }
+        
+            /* dashboard */
+            .chart-wrapper { height: 380px; }
+}
 
         /* ========== MOBILE NAVIGATION DRAWER ========== */
         /* On desktop the header is transparent to layout, so the rail is unchanged */
