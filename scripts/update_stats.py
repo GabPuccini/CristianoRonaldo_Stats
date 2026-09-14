@@ -706,6 +706,13 @@ def script_rules():
     body rather than the head."""
     G = r"([\d,]+)"
     return {
+        # The dashboard's prose now lives on the home page as well. Both pages
+        # are listed while dashboard.html still exists; its entry goes when the
+        # page itself does.
+        "index.html": [
+            (r"Lists like the " + G + r" against Atletico Madrid", "opponent.club.atleticomadrid.goals"),
+            (r"a total such as the " + G + r" against Atletico Madrid", "opponent.club.atleticomadrid.goals"),
+        ],
         "dashboard.html": [
             (r"Lists like the " + G + r" against Atletico Madrid", "opponent.club.atleticomadrid.goals", 2),
             (r"a total such as the " + G + r" against Atletico Madrid", "opponent.club.atleticomadrid.goals"),

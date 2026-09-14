@@ -1867,6 +1867,251 @@
                 <p class="table-note">Penalties are <span data-stat="career.penalty_pct">18.8</span> percent of his <span data-stat="career.goals">979</span> goals. The other <span data-stat="career.nonpenalty">795</span> came from open play and free kicks.</p>
             </section>
 
+            <!-- ==================== Dashboard, merged in from dashboard.html ==================== -->
+            <section id="dashboard" aria-labelledby="dashboard-title">
+                <div class="section-head">
+                    <h2 class="section-title" id="dashboard-title">Cristiano Ronaldo stats dashboard</h2>
+                </div>
+                <p class="page-lead">Cristiano Ronaldo has scored <b><span data-stat="career.goals">979</span> goals in <span data-stat="career.apps">1,336</span> games</b> for six teams as of <span data-stat="meta.updated.long">14 September 2026</span>. <b><span data-stat="comp.laliga">311</span> came in La Liga</b> and <b><span data-stat="comp.championsleague">140</span> in the Champions League</b>, more than any other player in that competition, ahead of <span data-stat="comp.premierleague">103</span> in the Premier League and <span data-stat="comp.saudiproleague">105</span> in the Saudi Pro League. Pick a team below and every chart follows.</p>
+
+                <!-- Team selector -->
+                <section class="reveal" style="animation-delay:.06s" aria-label="Team selector">
+                    <div class="team-row" role="group" aria-label="Choose a team to filter the dashboard">
+                        <button type="button" class="team-chip all-chip active" data-team="all">All teams</button>
+                        <button type="button" class="team-chip" data-team="sporting">
+                            <img src="badge-sporting.png" width="20" height="20" loading="lazy" decoding="async" alt="" onerror="this.outerHTML='&lt;span class=&quot;chip-fallback&quot;&gt;SCP&lt;/span&gt;'">Sporting CP
+                        </button>
+                        <button type="button" class="team-chip" data-team="manutd">
+                            <img src="badge-manchesterunited.png" width="20" height="20" loading="lazy" decoding="async" alt="" onerror="this.outerHTML='&lt;span class=&quot;chip-fallback&quot;&gt;MU&lt;/span&gt;'">Man United
+                        </button>
+                        <button type="button" class="team-chip" data-team="realmadrid">
+                            <img src="badge-realmadrid.png" width="20" height="20" loading="lazy" decoding="async" alt="" onerror="this.outerHTML='&lt;span class=&quot;chip-fallback&quot;&gt;RM&lt;/span&gt;'">Real Madrid
+                        </button>
+                        <button type="button" class="team-chip" data-team="juventus">
+                            <img src="badge-juventus.png" width="20" height="20" loading="lazy" decoding="async" alt="" onerror="this.outerHTML='&lt;span class=&quot;chip-fallback&quot;&gt;JUV&lt;/span&gt;'">Juventus
+                        </button>
+                        <button type="button" class="team-chip" data-team="alnassr">
+                            <img src="badge-alnassr.png" width="20" height="20" loading="lazy" decoding="async" alt="" onerror="this.outerHTML='&lt;span class=&quot;chip-fallback&quot;&gt;ALN&lt;/span&gt;'">Al Nassr
+                        </button>
+                        <button type="button" class="team-chip" data-team="portugal">
+                            <img src="badge-portugal.png" width="20" height="20" loading="lazy" decoding="async" alt="" onerror="this.outerHTML='&lt;span class=&quot;chip-fallback&quot;&gt;POR&lt;/span&gt;'">Portugal
+                        </button>
+                    </div>
+                    <p class="team-status" id="teamStatus" role="status" aria-live="polite"></p>
+                </section>
+
+                <!-- Summary cards -->
+                <section class="summary-grid reveal" style="animation-delay:.10s" aria-label="Summary for the selected team">
+                    <div class="summary-card"><div class="summary-value" id="sumGames" data-stat="career.apps">1,336</div><div class="summary-label">Games</div></div>
+                    <div class="summary-card"><div class="summary-value" id="sumGoals" data-stat="career.goals">979</div><div class="summary-label">Goals</div></div>
+                    <div class="summary-card"><div class="summary-value" id="sumRate" data-stat="career.gpg">0.73</div><div class="summary-label">Goals per game</div></div>
+                    <div class="summary-card"><div class="summary-value" id="sumAssists" data-stat="career.assists">291</div><div class="summary-label">Assists</div></div>
+                </section>
+
+                <!-- Goals by competition -->
+                <section class="dash-chart-card reveal" style="animation-delay:.14s">
+                    <div class="chart-head">
+                        <div>
+                            <h3 class="chart-title">Which competitions has Ronaldo scored in most?</h3>
+                            <p class="chart-subtitle" id="compSubtitle">Every competition he has scored in, from La Liga to the World Cup.</p>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="compChart" role="img" aria-label="Bar chart of Cristiano Ronaldo goals by competition for the selected team"></canvas>
+                    </div>
+                    <p class="chart-footnote" id="compFootnote"></p>
+                </section>
+
+                <!-- Goals by season -->
+                <section class="dash-chart-card reveal" style="animation-delay:.18s">
+                    <div class="chart-head">
+                        <div>
+                            <h3 class="chart-title">How has Ronaldo's scoring changed season by season?</h3>
+                            <p class="chart-subtitle" id="seasonSubtitle">The whole club career in one skyline, coloured by team. Portugal shows year by year.</p>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper mid">
+                        <canvas id="seasonChart" role="img" aria-label="Bar chart of Cristiano Ronaldo goals season by season for the selected team"></canvas>
+                    </div>
+                </section>
+
+                <!-- Favourite opponents -->
+                <section class="dash-chart-card reveal" style="animation-delay:.22s">
+                    <div class="chart-head">
+                        <div>
+                            <h3 class="chart-title">Who does Ronaldo score against most?</h3>
+                            <p class="chart-subtitle" id="oppSubtitle">Click any bar for his full record against that team.</p>
+                        </div>
+                        <div class="filter-tabs" id="oppTabs" role="group" aria-label="Filter favourite opponents">
+                            <button type="button" class="filter-tab active" data-opp="club">All club</button>
+                            <button type="button" class="filter-tab" data-opp="saudi">Al Nassr era</button>
+                            <button type="button" class="filter-tab" data-opp="intl">Portugal</button>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="oppChart" role="img" aria-label="Bar chart of the opponents Cristiano Ronaldo has scored against most, click a bar for details"></canvas>
+                    </div>
+                    <div class="spotlight" id="spotlight" role="status" aria-live="polite">
+                        <div>
+                            <div class="spotlight-name" id="spotName"></div>
+                            <div class="spotlight-rank" id="spotRank"></div>
+                        </div>
+                        <div class="spotlight-stats">
+                            <div class="spotlight-stat"><div class="v" id="spotGoals"></div><div class="l">Goals</div></div>
+                            <div class="spotlight-stat"><div class="v" id="spotApps"></div><div class="l" id="spotAppsLabel">Games</div></div>
+                            <div class="spotlight-stat" id="spotRateWrap"><div class="v" id="spotRate"></div><div class="l">Per game</div></div>
+                        </div>
+                    </div>
+                    <p class="chart-footnote" id="oppFootnote">Career records across every competition. Lists like the 25 against Atletico Madrid span more than one of his clubs, so they stay whole.</p>
+                </section>
+
+                <!-- How the goals go in -->
+                <div class="duo-grid">
+                    <section class="dash-chart-card reveal" style="animation-delay:.26s">
+                        <div class="chart-head">
+                            <div>
+                                <h3 class="chart-title" id="finishTitle">Open play, penalties or free kicks?</h3>
+                                <p class="chart-subtitle" id="finishSubtitle">Open play against the dead ball arts, for the selected team.</p>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper short">
+                            <canvas id="finishChart" role="img" aria-label="Doughnut chart of Cristiano Ronaldo goals by finish type for the selected team"></canvas>
+                        </div>
+                        <p class="chart-footnote" id="finishFootnote">The penalty and free kick totals match the tables on the home page.</p>
+                    </section>
+
+                    <section class="dash-chart-card reveal" style="animation-delay:.30s">
+                        <div class="chart-head">
+                            <div>
+                                <h3 class="chart-title">Which foot does Ronaldo score with?</h3>
+                                <p class="chart-subtitle" id="bodySubtitle">All <span data-stat="career.goals">979</span> across the whole career, from that famous right boot to the leap.</p>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper short">
+                            <canvas id="bodyChart" role="img" aria-label="Doughnut chart of Cristiano Ronaldo goals by body part for the selected team"></canvas>
+                        </div>
+                        <p class="chart-footnote">The splits reconcile exactly with the totals on this site. His <span data-stat="body.all.head">158</span> career headers alone would win most golden boots.</p>
+                    </section>
+                </div>
+
+
+                <div class="section-head">
+                    <h3 class="section-title">Career totals behind these charts</h3>
+                    <a class="section-link" href="/">Totals by club and country</a>
+                </div>
+                <p class="section-note">The tables below are the full career figures for every team combined, so they stay the same whichever team is selected above. All three reconcile exactly to <b><span data-stat="career.goals">979</span> goals</b>.</p>
+
+                <section class="data-card reveal" style="animation-delay:.10s">
+                    <div class="data-scroll">
+                        <table class="dash-table">
+                            <caption>Cristiano Ronaldo career goals by competition, as of <span data-stat="meta.updated.long">14 September 2026</span>. His <span data-stat="comp.championsleague">140</span> Champions League goals are the most in the history of the competition, and his <span data-stat="comp.laliga">311</span> La Liga goals all came for Real Madrid.</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="left">Competition</th>
+                                    <th scope="col">Goals</th>
+                                    <th scope="col">Share of career</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <!-- STATS:BEGIN table.dash.competitions -->
+                                <tr><th scope="row">La Liga</th><td>311</td><td class="muted">31.8%</td></tr>
+                                <tr><th scope="row">Champions League</th><td>140</td><td class="muted">14.3%</td></tr>
+                                <tr><th scope="row">Saudi Pro League</th><td>105</td><td class="muted">10.7%</td></tr>
+                                <tr><th scope="row">Premier League</th><td>103</td><td class="muted">10.5%</td></tr>
+                                <tr><th scope="row">Serie A</th><td>81</td><td class="muted">8.3%</td></tr>
+                                <tr><th scope="row">Euro qualifiers</th><td>41</td><td class="muted">4.2%</td></tr>
+                                <tr><th scope="row">World Cup qualifiers</th><td>41</td><td class="muted">4.2%</td></tr>
+                                <tr><th scope="row">Other cup competitions</th><td>25</td><td class="muted">2.6%</td></tr>
+                                <tr><th scope="row">Copa del Rey</th><td>22</td><td class="muted">2.2%</td></tr>
+                                <tr><th scope="row">Friendlies</th><td>22</td><td class="muted">2.2%</td></tr>
+                                <tr><th scope="row">AFC Champions League</th><td>15</td><td class="muted">1.5%</td></tr>
+                                <tr><th scope="row">Nations League</th><td>15</td><td class="muted">1.5%</td></tr>
+                                <tr><th scope="row">Euros</th><td>14</td><td class="muted">1.4%</td></tr>
+                                <tr><th scope="row">FA Cup</th><td>13</td><td class="muted">1.3%</td></tr>
+                                <tr><th scope="row">World Cup</th><td>11</td><td class="muted">1.1%</td></tr>
+                                <tr><th scope="row">Coppa Italia</th><td>4</td><td class="muted">0.4%</td></tr>
+                                <tr><th scope="row">League Cup</th><td>4</td><td class="muted">0.4%</td></tr>
+                                <tr><th scope="row">King's Cup</th><td>3</td><td class="muted">0.3%</td></tr>
+                                <tr><th scope="row">Primeira Liga</th><td>3</td><td class="muted">0.3%</td></tr>
+                                <tr><th scope="row">Confederations Cup</th><td>2</td><td class="muted">0.2%</td></tr>
+                                <tr><th scope="row">Europa League</th><td>2</td><td class="muted">0.2%</td></tr>
+                                <tr><th scope="row">Taca de Portugal</th><td>2</td><td class="muted">0.2%</td></tr>
+                                    <!-- STATS:END table.dash.competitions -->
+                            </tbody>
+                            <tfoot>
+                                <tr><th scope="row">Total</th><td data-stat="career.goals">979</td><td>100%</td></tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <p class="data-note">Other cup competitions covers the Club World Cup, the UEFA Super Cup, domestic super cups, the Arab Club Champions Cup and one Champions League qualifying goal.</p>
+                </section>
+
+                <div class="section-head">
+                    <h3 class="section-title">How does Ronaldo score his goals?</h3>
+                    <a class="section-link" href="goalsbyseason.html">Season by season detail</a>
+                </div>
+                <p class="section-note">Just over <b><span data-stat="career.openplay_pct_round">74</span> percent of his goals come from open play</b>, and nearly two thirds are struck with his right foot. His <b><span data-stat="body.all.head">158</span> headers</b> alone would be a strong career for most forwards.</p>
+
+                <div class="duo-grid">
+                    <section class="data-card reveal" style="animation-delay:.10s">
+                        <div class="data-scroll">
+                            <table class="dash-table">
+                                <caption>Goals by finish type, career totals as of <span data-stat="meta.updated.long">14 September 2026</span>.</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="left">Finish</th>
+                                        <th scope="col">Goals</th>
+                                        <th scope="col">Share</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- STATS:BEGIN table.dash.finish -->
+                                <tr><th scope="row">Open play</th><td>729</td><td class="muted">74.5%</td></tr>
+                                <tr><th scope="row">Penalties</th><td>184</td><td class="muted">18.8%</td></tr>
+                                <tr><th scope="row">Free kicks</th><td>66</td><td class="muted">6.7%</td></tr>
+                                    <!-- STATS:END table.dash.finish -->
+                                </tbody>
+                                <tfoot>
+                                    <tr><th scope="row">Total</th><td data-stat="career.goals">979</td><td>100%</td></tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section class="data-card reveal" style="animation-delay:.10s">
+                        <div class="data-scroll">
+                            <table class="dash-table">
+                                <caption>Goals by body part, career totals as of <span data-stat="meta.updated.long">14 September 2026</span>.</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="left">Body part</th>
+                                        <th scope="col">Goals</th>
+                                        <th scope="col">Share</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- STATS:BEGIN table.dash.bodypart -->
+                                <tr><th scope="row">Right foot</th><td>632</td><td class="muted">64.6%</td></tr>
+                                <tr><th scope="row">Left foot</th><td>186</td><td class="muted">19.0%</td></tr>
+                                <tr><th scope="row">Headers</th><td>158</td><td class="muted">16.1%</td></tr>
+                                <tr><th scope="row">Other</th><td>3</td><td class="muted">0.3%</td></tr>
+                                    <!-- STATS:END table.dash.bodypart -->
+                                </tbody>
+                                <tfoot>
+                                    <tr><th scope="row">Total</th><td data-stat="career.goals">979</td><td>100%</td></tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+
+                    <section class="method reveal" style="animation-delay:.10s">
+                    <h3>How these numbers are compiled</h3>
+                    <p>Every split on this page is drawn from the same own compiled tally as the rest of the site: official senior first team matches only, in all league, domestic cup, continental and international competitions, with youth and reserve football excluded. Competition, finish type and body part splits each add up to <span data-stat="career.goals">979</span>, so no goal is counted twice or left out.</p>
+                    <p>Opponent records span whole careers rather than single spells, so a total such as the 25 against Atletico Madrid covers more than one of his clubs. Figures are updated after every match Ronaldo features in. Last updated <span data-stat="meta.updated.long">14 September 2026</span>.</p>
+                </section>
+            </section>
+
             <!-- FAQ -->
             <div class="section-head">
                 <h2 class="section-title">Frequently asked questions</h2>
