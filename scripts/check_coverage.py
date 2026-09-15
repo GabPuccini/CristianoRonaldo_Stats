@@ -156,6 +156,34 @@ def missing_season_rows(values):
     return gaps
 
 
+def mismatched_season_slots():
+    """A competition slot opens the first time he plays in it that season, and
+    the season table marks an unplayed slot with class="na". The two are kept in
+    step by hand, so a slot can be open in the data while its cell still says
+    n/a, or the reverse. The engine writes the figure either way, so nothing
+    fails: the cell just sits there greyed out with a real number in it, or
+    shows a live looking zero for a competition he has not played."""
+    page = (ROOT / "goalsbyseason.html").read_text(encoding="utf-8")
+    data = engine.load()
+    gaps = []
+    for i, row in enumerate(data["seasons"]):
+        if not row.get("in_career", True):
+            continue
+        for slot, comp in (row.get("comps") or {}).items():
+            for half in ("apps", "goals"):
+                key = f"season.{i}.{slot}.{half}"
+                m = re.search(r'<td([^>]*)data-stat="' + re.escape(key) + r'"', page)
+                if not m:
+                    continue
+                marked_na = "na" in m.group(1)
+                if comp is None and not marked_na:
+                    gaps.append(f'{key} is null in the data but its cell is not marked n/a')
+                elif comp is not None and marked_na:
+                    gaps.append(f'{key} has figures in the data but its cell is still '
+                                f'marked n/a, so it renders greyed out')
+    return gaps
+
+
 def miscounted_milestones():
     """The timeline head says how many milestones the page holds. That is not a
     career figure, so no engine key can drive it, but it still goes stale the
@@ -285,7 +313,8 @@ def main():
 
     season_gaps = (missing_season_rows(values) + unplotted_seasons()
                    + miscounted_milestones()
-                   + uncovered_text_files(values, engine_values))
+                   + uncovered_text_files(values, engine_values)
+                   + mismatched_season_slots())
     if season_gaps:
         print("season rows in the data with nothing published:")
         for g in season_gaps:

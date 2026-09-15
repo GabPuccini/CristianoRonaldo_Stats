@@ -5,7 +5,7 @@
     "years rows carry apps as well as goals. Club appearances are stored by season, which straddles two calendar years, so the yearly figure cannot be derived from them and is held here instead. A goal or an appearance banks itself to the calendar year it was played in."
   ],
   "meta": {
-    "updated": "2026-09-14",
+    "updated": "2026-09-15",
     "goal_target": 1000,
     "born": "1985-02-05",
     "current_season": "2026/27"
@@ -721,7 +721,10 @@
         },
         "cup": null,
         "lcup": null,
-        "cont": null,
+        "cont": {
+          "apps": 1,
+          "goals": 0
+        },
         "other": null
       }
     }
@@ -874,7 +877,7 @@
     {
       "year": 2026,
       "goals": 22,
-      "apps": 35,
+      "apps": 36,
       "age": 41
     }
   ],
@@ -1531,6 +1534,13 @@
       "team": "alnassr",
       "comp": "league",
       "opponent": "Al Khaleej"
+    },
+    {
+      "date": "2026-09-15",
+      "event": "appearance",
+      "team": "alnassr",
+      "comp": "cont",
+      "opponent": "Al Ain"
     }
   ],
   "competition_rollup": {

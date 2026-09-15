@@ -1,13 +1,13 @@
 # RonaldoStats
 
-> Cristiano Ronaldo career statistics, compiled by hand and updated after every match he plays in. As of 14 September 2026 he has 979 goals, 291 assists and 1,336 senior appearances for club and country.
+> Cristiano Ronaldo career statistics, compiled by hand and updated after every match he plays in. As of 15 September 2026 he has 979 goals, 291 assists and 1,337 senior appearances for club and country.
 
 Scope and method: figures count official senior first team matches for Sporting CP, Manchester United, Real Madrid, Juventus, Al Nassr and Portugal, in all league, domestic cup, continental and international competitions. Youth and reserve football is excluded. Assists are counted goal by goal from full match records rather than taken from a data feed, so the assist total is higher than the figure carried by several football databases.
 
-## Headline figures as of 14 September 2026
+## Headline figures as of 15 September 2026
 
 - Career goals: 979
-- Career appearances: 1,336 (0.73 goals per game)
+- Career appearances: 1,337 (0.73 goals per game)
 - Career assists: 291
 - Goals in the 2026/27 season: 3 for Al Nassr
 - Goals in the 2026 calendar year: 22
