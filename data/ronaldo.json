@@ -1221,7 +1221,8 @@
     },
     "alnassr": {
       "Saudi Pro League": 105,
-      "AFC Champions League": 15,
+      "AFC Champions League": 14,
+      "AFC Champions League Two": 1,
       "Arab Club Champions Cup": 6,
       "Saudi Super Cup": 3,
       "King's Cup": 3
@@ -1545,7 +1546,8 @@
   ],
   "competition_rollup": {
     "Arab Club Champions Cup": "Other cup competitions",
-    "Saudi Super Cup": "Other cup competitions"
+    "Saudi Super Cup": "Other cup competitions",
+    "AFC Champions League Two": "Other cup competitions"
   },
   "honours": {
     "_note": "Team trophies, by team, each with the years it was won. The counts on every page are the length of these year lists, so a new trophy is added in one place. Individual awards are separate and are not part of the 35.",

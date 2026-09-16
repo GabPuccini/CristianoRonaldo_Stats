@@ -59,6 +59,7 @@ shown on the competitions chart. Common pairs:
 | Saudi Pro League, the league | `league` | `Saudi Pro League` |
 | King's Cup | `cup` | `King's Cup` |
 | AFC Champions League | `cont` | `AFC Champions League` |
+| AFC Champions League Two, ACL2 | `cont` | `AFC Champions League Two` |
 | Saudi Super Cup, Arab Club Champions Cup, Club World Cup, super cups | `other` | `Other cup competitions` |
 | World Cup qualifier | `league` | `World Cup qualifiers` |
 | Euro qualifier | `league` | `Euro qualifiers` |
@@ -73,7 +74,7 @@ For Portugal the `--comp` slot is ignored, only the label matters.
 already publishes on the competitions chart, and `--competition-label` is used
 as a dictionary key: an unrecognised label does not fail, it quietly adds a
 second row, so `Euro qualifying` alongside `Euro qualifiers` would split one
-tally into two and the chart would show both. The 22 valid labels are:
+tally into two and the chart would show both. The 23 valid labels are:
 
     La Liga                 Champions League        Premier League
     Saudi Pro League        Serie A                 Euro qualifiers
@@ -82,11 +83,20 @@ tally into two and the chart would show both. The 22 valid labels are:
     Euros                   FA Cup                  World Cup
     Coppa Italia            League Cup              King's Cup
     Primeira Liga           Confederations Cup      Europa League
-    Taca de Portugal
+    Taca de Portugal        AFC Champions League Two
 
 Anything that is not on that list belongs in `Other cup competitions`, which is
 how the chart already groups the Club World Cup, the UEFA Super Cup, domestic
-super cups and the Arab Club Champions Cup. Only add a genuinely new label when
+super cups and the Arab Club Champions Cup.
+
+Some labels are stored under their real name and grouped only for display, via
+`competition_rollup` in the dataset. The Arab Club Champions Cup, the Saudi
+Super Cup and the AFC Champions League Two are all kept that way: filter the
+dashboard to Al Nassr and each gets its own bar, while the career chart folds
+them into `Other cup competitions`. Use the real name when recording a goal and
+the rollup takes care of the rest. The AFC Champions League Two in particular is
+a separate competition from the AFC Champions League and must never be added to
+it. Only add a genuinely new label when
 Ronaldo plays a competition he has never played before, and expect a new bar to
 appear on the chart when you do.
 
