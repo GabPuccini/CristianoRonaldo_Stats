@@ -30,7 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Hero image -->
-    <link rel="preload" as="image" href="/ronaldo-avatar-124.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="/ronaldo-avatar-170.jpg" fetchpriority="high">
 
     <!-- Security -->
     <meta name="referrer" content="same-origin">
@@ -628,8 +628,9 @@
         }
         .identity-photo {
             /* 96px is the size this photo was before the home page was rebuilt.
-               The file is only 124px square, so at 96px it is no longer a 2x
-               image: swap in a 192px crop if a sharper source turns up. */
+               The file is 170px square, so at 96px it is 1.77x rather than a
+               full 2x. Close enough that it reads sharp; a 192px crop of the
+               same frame would finish the job. */
             width: 96px; height: 96px;
             flex-shrink: 0;
             border-radius: 50%;
@@ -1656,7 +1657,7 @@
             <!-- Identity strip -->
             <section class="identity reveal" style="animation-delay:.06s" aria-label="Player profile">
                 <div class="identity-photo">
-                    <img src="ronaldo-avatar-124.jpg" alt="Cristiano Ronaldo kissing the Ballon d'Or trophy" width="96" height="96" loading="eager" decoding="async" fetchpriority="high">
+                    <img src="ronaldo-avatar-170.jpg" alt="Cristiano Ronaldo kissing the Ballon d'Or trophy" width="96" height="96" loading="eager" decoding="async" fetchpriority="high">
                 </div>
                 <div class="identity-main">
                     <p class="identity-name">Cristiano Ronaldo <span class="jersey" aria-label="Shirt number 7">7</span></p>
