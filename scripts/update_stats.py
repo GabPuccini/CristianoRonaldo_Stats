@@ -41,7 +41,6 @@ PAGES = [
     "index.html",
     "goalsbyyear.html",
     "goalsbyseason.html",
-    "timeline.html",
     "achievements.html",
 ]
 
@@ -619,35 +618,34 @@ def text_rules(generated=True):
             # over a page that says 1,004 is worse than a title with no number
             # in it, so these are pinned by hand rather than left to the
             # generator, which skips a figure whose key it cannot resolve.
-            (r"All " + G + r" Ronaldo Goals and", "career.goals", 3),
-            (r"Goals and " + G + r" Assists by Club", "career.assists", 3),
-            (r"Ronaldo's " + G + r" goals and", "career.goals", 2),
-            (r"goals and " + G + r" assists broken down", "career.assists", 2),
+            (r"All " + G + r" Ronaldo Goals and", "career.goals", 4),
+            (r"Goals and " + G + r" Assists by Club", "career.assists", 4),
+            (r"Ronaldo's " + G + r" goals and", "career.goals", 3),
+            (r"goals and " + G + r" assists broken down", "career.assists", 3),
             (r"All " + G + r" goals and [\d,]+ assists by club", "career.goals"),
             (r"All [\d,]+ goals and " + G + r" assists by club", "career.assists"),
             # Real Madrid's Champions League goals reached 105, which is also the
             # Saudi Pro League total, so the generator can no longer tell the two
             # apart and drops the rule. Pinned by hand on the sentence it sits in.
-            (r"history of the competition: " + G + r" for Real Madrid",
+            (r"history of the competition\. That is " + G + r" for Real Madrid",
              "comp.realmadrid.championsleague"),
-            (r"Manchester United \([\d,]+\), Al Nassr \(" + G + r"\)", "team.alnassr.goals"),
-            (STAMP, "meta.updated.long", 7),
+            (STAMP, "meta.updated.long", 6),
             (r"Cristiano Ronaldo is " + G + r" years old", "person.age"),
+            # came across with the timeline's "Where is he now" answer
+            (r"At " + G + r" he is still playing", "person.age"),
             (r"for Real Madrid, " + G + r" for Manchester United and [\d,]+ for Juventus",
              "comp.manutd.championsleague"),
-            (r"history of the competition: [\d,]+ for Real Madrid, [\d,]+ for Manchester "
-             r"United and " + G + r" for Juventus", "comp.juventus.championsleague"),
+            (r"That is [\d,]+ for Real Madrid, [\d,]+ for Manchester United and "
+             + G + r" for Juventus", "comp.juventus.championsleague"),
             (r"free kick goals: [\d,]+ for Real Madrid, [\d,]+ for Manchester United, "
              r"[\d,]+ for Portugal, [\d,]+ for Al Nassr and " + G + r" for Juventus",
              "freekicks.juventus"),
             (r"[\d,]+ for Portugal, " + G + r" for Al Nassr and [\d,]+ for Juventus",
              "freekicks.alnassr"),
-            (r"hat tricks, [\d,]+ of them for Real Madrid, [\d,]+ for Portugal, [\d,]+ for "
-             r"Al Nassr, [\d,]+ for Manchester United and " + G + r" for Juventus",
-             "hattricks.juventus"),
+            (r"He also has [\d,]+ for Portugal, [\d,]+ for Al Nassr, [\d,]+ for "
+             r"Manchester United and " + G + r" for Juventus", "hattricks.juventus"),
             (r"hat tricks, " + G + r" of them for Real Madrid", "hattricks.realmadrid"),
-            (r"of them for Real Madrid, " + G + r" for Portugal, [\d,]+ for Al Nassr",
-             "hattricks.portugal"),
+            (r"He also has " + G + r" for Portugal", "hattricks.portugal"),
             (r"for Portugal, " + G + r" for Al Nassr, [\d,]+ for Manchester United",
              "hattricks.alnassr"),
             (r"for Al Nassr, " + G + r" for Manchester United and [\d,]+ for Juventus\.",
@@ -673,20 +671,6 @@ def text_rules(generated=True):
             (r"year by year: " + G + r" club goals,", "career.club_goals"),
             (r"club goals, " + G + r" international goals", "team.portugal.goals"),
             (r"best season of " + G + r" goals in", "season.best.goals"),
-        ],
-        "timeline.html": common + [
-            (r"Portugal\. As of [^\"]*he has " + G + r" career goals", "career.goals"),
-            # the timeline's list entries carry the date first, so this is
-            # anchored on the words rather than on the start of the string
-            (r"" + G + r" career goals and counting", "career.goals"),
-            (r"The last great number is " + G + r" away\.", "career.remaining"),
-            (r"scored " + G + r" goals in [\d,]+ games\.", "team.realmadrid.goals"),
-            (r"scored [\d,]+ goals in " + G + r" games\.", "team.realmadrid.apps"),
-            (r"As of " + D + r" he has", "meta.updated.long"),
-            (STAMP, "meta.updated.long", 3),
-            (r"career goals, " + G + r" short of [\d,]+\.", "career.remaining"),
-            (r"short of " + G + r'\."', "career.target"),
-            (r"At " + G + r" he is still playing", "person.age"),
         ],
         "achievements.html": common + [
             (r"All " + G + r" Ronaldo Trophies Listed", "honours.total", 4),

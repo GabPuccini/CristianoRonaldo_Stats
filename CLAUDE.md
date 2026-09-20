@@ -24,7 +24,7 @@ figure there is quoted back as fact rather than being eyeballed by a person,
 which is why every number in it is a rule in `file_rules()` and
 `check_coverage.py` fails if one is added without one.
 
-`sitemap.xml` is driven too: the `lastmod` of each of the five statistics pages
+`sitemap.xml` is driven too: the `lastmod` of each of the four statistics pages
 tracks the update date, since those pages really do change every time. Only
 `privacy.html` keeps a hand written date, because the script never touches it.
 
@@ -174,8 +174,8 @@ Note only the first goal of a match carries `--new-appearance`.
 1. The script prints the new totals and refuses to write if anything fails to
    reconcile. If it fails, read the error, fix the data, do not force it.
 2. Check `git diff` and confirm only expected numbers moved. One goal touches all
-   five pages plus `sitemap.xml` and `llms.txt`, so a diff limited to fewer
-   than seven files
+   four pages plus `sitemap.xml` and `llms.txt`, so a diff limited to fewer
+   than six files
    means something is not wired up and should be looked at rather than
    committed.
 3. Commit with a message naming the event, for example
@@ -196,6 +196,21 @@ charts.
 `dashboard.html` was retired in September 2026. `/dashboard.html` must keep
 returning a 301 to `https://ronaldostats.app/#dashboard`, set as a Cloudflare
 Redirect Rule rather than as a file in the repo.
+
+## The timeline
+
+The career timeline is a section of `index.html` too, under
+`<section id="timeline">`, reached at `/#timeline`. It sits below the dashboard
+and above the quick answers. Photos live in `timeline/` as a jpg and webp pair
+named for the slot they fill, and the rules for them are in the writing rules
+below.
+
+`timeline.html` was retired in September 2026 and needs the same 301 to
+`https://ronaldostats.app/#timeline`.
+
+Both retired pages currently have a stub file in the repo holding a canonical
+and a meta refresh, which is the weaker stand in. Delete each stub once its
+Cloudflare rule is live.
 
 ## Site wide writing rules
 

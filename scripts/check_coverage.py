@@ -31,7 +31,10 @@ LIST = "--list" in sys.argv
 # is a pattern matched against the surrounding text, with the reason it is
 # exempt. Anything here is a decision on the record, not an oversight.
 EXEMPT = {
-    "timeline.html": [
+    # The timeline moved onto the home page, so every reason recorded for it
+    # applies there too: ages at the time, transfer fees and one off season
+    # figures quoted as history rather than as live totals.
+    "index.html": [
         (r"debut at 17|At 17 he broke", "his age at the time, fixed by the event"),
         (r"aged 19|At 19 he scored", "his age at the time, fixed by the event"),
         (r"Ballon d'Or at 23", "his age at the time, fixed by the event"),
@@ -185,10 +188,11 @@ def mismatched_season_slots():
 
 
 def miscounted_milestones():
-    """The timeline head says how many milestones the page holds. That is not a
+    """The head says how many milestones the timeline holds. That is not a
     career figure, so no engine key can drive it, but it still goes stale the
-    moment a milestone is added. Check it against the page itself."""
-    page = (ROOT / "timeline.html").read_text(encoding="utf-8")
+    moment a milestone is added. Check it against the page itself. The timeline
+    lives on the home page now, so that is where both are read from."""
+    page = (ROOT / "index.html").read_text(encoding="utf-8")
     actual = len(re.findall(r'class="milestone', page))
     head = page.split("</head>")[0]
     claims = {int(n) for n in re.findall(r"All (\d+)(?: Ronaldo)? (?:career )?milestones", head)}
