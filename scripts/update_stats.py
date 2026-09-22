@@ -39,7 +39,6 @@ BACKUP = ROOT / "data" / "ronaldo.backup.json"
 
 PAGES = [
     "index.html",
-    "goalsbyyear.html",
     "goalsbyseason.html",
     "achievements.html",
 ]
@@ -629,7 +628,7 @@ def text_rules(generated=True):
             # apart and drops the rule. Pinned by hand on the sentence it sits in.
             (r"history of the competition\. That is " + G + r" for Real Madrid",
              "comp.realmadrid.championsleague"),
-            (STAMP, "meta.updated.long", 6),
+            (STAMP, "meta.updated.long", 7),
             (r"Cristiano Ronaldo is " + G + r" years old", "person.age"),
             # came across with the timeline's "Where is he now" answer
             (r"At " + G + r" he is still playing", "person.age"),
@@ -656,11 +655,6 @@ def text_rules(generated=True):
              "freekicks.portugal"),
             (r"\.progress-fill \{ width: ([\d.]+)% !important; \}", "career.pct"),
             (r"\.progress-fill \{\n            height: 100%;\n            width: ([\d.]+)%;", "career.pct"),
-        ],
-        "goalsbyyear.html": common + [
-            (r"Every one of Ronaldo's " + G + r" scoring years", "year.count", 2),
-            (r"All " + G + r" of Ronaldo's scoring years", "year.count", 2),
-            (STAMP, "meta.updated.long", 4),
         ],
         "goalsbyseason.html": common + [
             (STAMP, "meta.updated.long", 4),

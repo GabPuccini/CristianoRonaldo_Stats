@@ -131,38 +131,38 @@ record("index.html", "set piece totals hat tricks", values["hattricks.total"],
        find("index.html", r'<th scope="row">Career total</th>\s*<td>\d+</td>\s*<td>\d+</td>\s*<td>(\d+)</td>'), key="hattricks.total")
 
 # ------------------------------------------------------------ goals by year
-record("goalsbyyear.html", "summary total goals", values["career.goals"],
-       find("goalsbyyear.html", r'id="totalGoals">([^<]+)<'), key="career.goals")
-record("goalsbyyear.html", "summary years scoring", str(len(tables["years"])),
-       find("goalsbyyear.html", r'id="yearsScoring">([^<]+)<'))
-record("goalsbyyear.html", "summary best year goals", values["year.best.goals"],
-       find("goalsbyyear.html", r'id="bestYear">([^<]+)<'), key="year.best.goals")
-record("goalsbyyear.html", "summary best year label", f'Best year ({values["year.best.year"]})',
-       find("goalsbyyear.html", r'id="bestYearLabel">([^<]+)<'), key="year.best.year")
-record("goalsbyyear.html", "summary average per year",
+record("index.html", "summary total goals", values["career.goals"],
+       find("index.html", r'id="totalGoals">([^<]+)<'), key="career.goals")
+record("index.html", "summary years scoring", str(len(tables["years"])),
+       find("index.html", r'id="yearsScoring">([^<]+)<'))
+record("index.html", "summary best year goals", values["year.best.goals"],
+       find("index.html", r'id="bestYear">([^<]+)<'), key="year.best.goals")
+record("index.html", "summary best year label", f'Best year ({values["year.best.year"]})',
+       find("index.html", r'id="bestYearLabel">([^<]+)<'), key="year.best.year")
+record("index.html", "summary average per year",
        f'{sum(r["goals"] for r in tables["years"]) / len(tables["years"]):.1f}',
-       find("goalsbyyear.html", r'id="avgPerYear">([^<]+)<'))
+       find("index.html", r'id="avgPerYear">([^<]+)<'))
 
 # Every row of the year table, against the engine's own cumulative maths
 for row in tables["years"]:
-    cell = find("goalsbyyear.html",
+    cell = find("index.html",
                 r'<tr[^>]*><th scope="row">' + str(row["year"]) +
                 r'</th><td>(\d+)</td><td class="muted">([\d,]+)</td><td class="muted">(\d+)</td></tr>', 0)
     if cell == "<NOT FOUND>":
-        record("goalsbyyear.html", f"year table {row['year']}", "row present", "<NOT FOUND>")
+        record("index.html", f"year table {row['year']}", "row present", "<NOT FOUND>")
         continue
     g, cum, age = re.search(r'<td>(\d+)</td><td class="muted">([\d,]+)</td><td class="muted">(\d+)</td>', cell).groups()
-    record("goalsbyyear.html", f"year {row['year']} goals", row["goals"], g)
-    record("goalsbyyear.html", f"year {row['year']} cumulative", f'{row["cumulative"]:,}', cum)
-    record("goalsbyyear.html", f"year {row['year']} age", row["age"], age)
+    record("index.html", f"year {row['year']} goals", row["goals"], g)
+    record("index.html", f"year {row['year']} cumulative", f'{row["cumulative"]:,}', cum)
+    record("index.html", f"year {row['year']} age", row["age"], age)
 
 # The Chart.js arrays still hard coded in the page
-chart_goals = find("goalsbyyear.html", r'const goalsPerYear = \[([^\]]+)\]')
-record("goalsbyyear.html", "chart goalsPerYear array",
+chart_goals = find("index.html", r'const goalsPerYear = \[([^\]]+)\]')
+record("index.html", "chart goalsPerYear array",
        ", ".join(str(r["goals"]) for r in tables["years"]),
        ", ".join(x.strip() for x in chart_goals.split(",")) if chart_goals != "<NOT FOUND>" else chart_goals)
-chart_cum = find("goalsbyyear.html", r'const cumulativeGoals = \[([^\]]+)\]')
-record("goalsbyyear.html", "chart cumulativeGoals array",
+chart_cum = find("index.html", r'const cumulativeGoals = \[([^\]]+)\]')
+record("index.html", "chart cumulativeGoals array",
        ", ".join(str(r["cumulative"]) for r in tables["years"]),
        ", ".join(x.strip() for x in chart_cum.split(",")) if chart_cum != "<NOT FOUND>" else chart_cum)
 
@@ -355,7 +355,7 @@ prose = [
      r'<b>([\d,]+) club goals in [\d,]+ games</b>'),
     ("goalsbyseason.html", "lead club appearances", f"{club_apps:,}",
      r'<b>[\d,]+ club goals in ([\d,]+) games</b>'),
-    ("goalsbyyear.html", "lead career goals", values["career.goals"],
+    ("index.html", "lead career goals", values["career.goals"],
      r'Cristiano Ronaldo has scored <b>([\d,]+) goals</b> across'),
     ("index.html", "lead goals", values["career.goals"],
      r'has scored <b>([\d,]+) goals in [\d,]+ games</b>'),
@@ -411,10 +411,10 @@ record("index.html", "best season team", values["season.best.team"],
        find("index.html", r'<b>\d{4}/\d{2} at (Real Madrid)</b>'), key="season.best.team")
 
 # Current year, quoted in the goals by year lead
-record("goalsbyyear.html", "current year goals", values["year.current.goals"],
-       find("goalsbyyear.html", r'<b>(\d+) so far in \d{4}</b>'), key="year.current.goals")
-record("goalsbyyear.html", "current year", values["year.current.year"],
-       find("goalsbyyear.html", r'<b>\d+ so far in (\d{4})</b>'), key="year.current.year")
+record("index.html", "current year goals", values["year.current.goals"],
+       find("index.html", r'<b>(\d+) so far in \d{4}</b>'), key="year.current.goals")
+record("index.html", "current year", values["year.current.year"],
+       find("index.html", r'<b>\d+ so far in (\d{4})</b>'), key="year.current.year")
 
 # Team names and year spans, as printed in the home page career table
 printed = dict(re.findall(r'<span class="club-name">([^<]+)<small>([^<]+)</small>', PAGES["index.html"]))

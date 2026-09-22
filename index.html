@@ -414,6 +414,143 @@
     <script type="application/ld+json">
 {
       "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Cristiano Ronaldo goals by calendar year",
+      "description": "Goals scored by Cristiano Ronaldo in every calendar year from 2002 to 2026, totalling 979 as of 15 September 2026.",
+      "itemListOrder": "https://schema.org/ItemListOrderAscending",
+      "numberOfItems": 25,
+      "itemListElement": [
+            {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "2002: 5 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "2003: 1 goal"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": "2004: 13 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 4,
+                  "name": "2005: 15 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 5,
+                  "name": "2006: 25 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 6,
+                  "name": "2007: 34 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 7,
+                  "name": "2008: 35 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 8,
+                  "name": "2009: 30 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 9,
+                  "name": "2010: 48 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 10,
+                  "name": "2011: 60 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 11,
+                  "name": "2012: 63 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 12,
+                  "name": "2013: 69 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 13,
+                  "name": "2014: 61 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 14,
+                  "name": "2015: 57 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 15,
+                  "name": "2016: 55 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 16,
+                  "name": "2017: 53 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 17,
+                  "name": "2018: 49 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 18,
+                  "name": "2019: 39 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 19,
+                  "name": "2020: 44 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 20,
+                  "name": "2021: 47 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 21,
+                  "name": "2022: 16 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 22,
+                  "name": "2023: 54 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 23,
+                  "name": "2024: 43 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 24,
+                  "name": "2025: 41 goals"
+            },
+            {
+                  "@type": "ListItem",
+                  "position": 25,
+                  "name": "2026: 22 goals so far"
+            }
+      ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+      "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
             {
@@ -1252,20 +1389,6 @@
             padding: 26px 30px;
             box-shadow: var(--shadow-md);
         }
-        .spark-wrap { overflow-x: auto; }
-        .spark {
-            display: block;
-            width: 100%;
-            min-width: 540px;
-            height: auto;
-        }
-        .spark .bar { fill: rgba(47, 86, 207, 0.55); transition: fill 0.2s ease; }
-        .spark .bar:hover { fill: var(--brand); }
-        .spark .bar.peak { fill: #2f56cf; }
-        .spark .bar.part { fill: rgba(47, 86, 207, 0.26); }
-        .spark .tick { font-family: 'DM Sans', sans-serif; font-size: 13px; fill: #8593a8; text-anchor: middle; }
-        .spark .peak-label { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 700; fill: #2f56cf; text-anchor: middle; }
-        .spark .baseline { stroke: rgba(20, 30, 50, 0.12); stroke-width: 1; }
         .chart-caption { font-size: 0.88rem; color: var(--ink-2); margin-top: 18px; max-width: 78ch; }
 
         /* ========== RECORDS ========== */
@@ -1665,6 +1788,23 @@
             to { opacity: 1; transform: none; }
         }
 
+
+        /* ================================================================
+           GOALS BY YEAR
+           Merged in from goalsbyyear.html. Its table and chart card reuse
+           the .dash- classes already on the page, which they matched almost
+           exactly, so no third set of near identical rules was added.
+           ================================================================ */
+        .chart-header { text-align: center; margin-bottom: 26px; }
+        .stats-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 28px; padding-top: 28px; border-top: 1px solid var(--line); }
+        .stat-box { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 20px; text-align: center; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .stat-box:hover { transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+        .stat-value { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.7rem, 3vw, 2.1rem); font-weight: 800; line-height: 1; color: var(--brand-ink); font-variant-numeric: tabular-nums; }
+        .stat-label { font-size: 0.74rem; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 8px; font-weight: 600; }
+        @media (max-width: 1024px) {
+            .stats-summary { grid-template-columns: repeat(2, 1fr); }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
             .reveal { opacity: 1 !important; transform: none !important; }
@@ -1761,10 +1901,6 @@
             .club-cell { gap: 8px; }
             .club-cell img { width: 22px; height: 22px; }
 
-            /* Keep the sparkline labels legible on a narrow screen */
-            .spark { min-width: 620px; }
-            .spark .tick { font-size: 20px; }
-            .spark .peak-label { font-size: 22px; }
             .faq-grid { padding: 6px 20px 20px; }
             .method { padding: 18px; }
 
@@ -1795,6 +1931,10 @@
             .tl-body { padding: 18px 18px 20px; }
             .keydates { padding: 6px 20px 16px; }
             .keydates li { grid-template-columns: 1fr; gap: 4px; }
+
+            /* goals by year */
+            .stats-summary { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .stat-box { padding: 16px; }
 }
 
         @media (max-width: 460px) {
@@ -1942,7 +2082,7 @@
                     </svg>
                     <span class="nav-label">Home</span>
                 </a>
-                <a href="goalsbyyear.html" class="nav-item">
+                <a href="/#goalsbyyear" class="nav-item">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <line x1="18" y1="20" x2="18" y2="10"></line>
                         <line x1="12" y1="20" x2="12" y2="4"></line>
@@ -2137,7 +2277,7 @@
             <!-- Goals per year -->
             <div class="section-head">
                 <h2 class="section-title">How many goals does Ronaldo score each year?</h2>
-                <a class="section-link" href="goalsbyyear.html">Full goals by year chart</a>
+                <a class="section-link" href="/#goalsbyyear">Full goals by year chart</a>
             </div>
             <p class="section-note">Ronaldo has scored in every calendar year since <span data-stat="year.first">2002</span> and reached <span data-stat="year.above40.threshold">40</span> goals or more in <span data-stat="year.above40.word">fourteen</span> separate years. His best was <span data-stat="year.best.goals">69</span> goals in <span data-stat="year.best.year">2013</span>.</p>
             <section class="year-pick reveal" style="animation-delay:.08s" aria-labelledby="year-pick-title">
@@ -2195,50 +2335,110 @@
                 </div>
                 <p class="visually-hidden" id="year-pick-live" role="status" aria-live="polite"></p>
             </section>
-            <section class="chart-card reveal" style="animation-delay:.10s">
-                <figure>
-                    <div class="spark-wrap">
-                        <svg class="spark" viewBox="0 0 1000 196" role="img" aria-label="Bar chart of Cristiano Ronaldo goals in each calendar year from 2002 to 2026, peaking at 69 goals in 2013 and standing at 22 goals so far in 2026" data-stat-attr="aria-label:spark.label">
-                            <!-- STATS:BEGIN svg.spark -->
-                            <line class="baseline" x1="0" y1="168.5" x2="1000" y2="168.5"></line>
-                            <text class="peak-label" x="460" y="20">69</text>
-                            <rect class="bar" x="8" y="157.9" width="24" height="10.1" rx="4"><title>2002: 5 goals</title></rect>
-                            <rect class="bar" x="48" y="166" width="24" height="2" rx="4"><title>2003: 1 goal</title></rect>
-                            <rect class="bar" x="88" y="141.6" width="24" height="26.4" rx="4"><title>2004: 13 goals</title></rect>
-                            <rect class="bar" x="128" y="137.6" width="24" height="30.4" rx="4"><title>2005: 15 goals</title></rect>
-                            <rect class="bar" x="168" y="117.3" width="24" height="50.7" rx="4"><title>2006: 25 goals</title></rect>
-                            <rect class="bar" x="208" y="99" width="24" height="69" rx="4"><title>2007: 34 goals</title></rect>
-                            <rect class="bar" x="248" y="97" width="24" height="71" rx="4"><title>2008: 35 goals</title></rect>
-                            <rect class="bar" x="288" y="107.1" width="24" height="60.9" rx="4"><title>2009: 30 goals</title></rect>
-                            <rect class="bar" x="328" y="70.6" width="24" height="97.4" rx="4"><title>2010: 48 goals</title></rect>
-                            <rect class="bar" x="368" y="46.3" width="24" height="121.7" rx="4"><title>2011: 60 goals</title></rect>
-                            <rect class="bar" x="408" y="40.2" width="24" height="127.8" rx="4"><title>2012: 63 goals</title></rect>
-                            <rect class="bar peak" x="448" y="28" width="24" height="140" rx="4"><title>2013: 69 goals</title></rect>
-                            <rect class="bar" x="488" y="44.2" width="24" height="123.8" rx="4"><title>2014: 61 goals</title></rect>
-                            <rect class="bar" x="528" y="52.3" width="24" height="115.7" rx="4"><title>2015: 57 goals</title></rect>
-                            <rect class="bar" x="568" y="56.4" width="24" height="111.6" rx="4"><title>2016: 55 goals</title></rect>
-                            <rect class="bar" x="608" y="60.5" width="24" height="107.5" rx="4"><title>2017: 53 goals</title></rect>
-                            <rect class="bar" x="648" y="68.6" width="24" height="99.4" rx="4"><title>2018: 49 goals</title></rect>
-                            <rect class="bar" x="688" y="88.9" width="24" height="79.1" rx="4"><title>2019: 39 goals</title></rect>
-                            <rect class="bar" x="728" y="78.7" width="24" height="89.3" rx="4"><title>2020: 44 goals</title></rect>
-                            <rect class="bar" x="768" y="72.6" width="24" height="95.4" rx="4"><title>2021: 47 goals</title></rect>
-                            <rect class="bar" x="808" y="135.5" width="24" height="32.5" rx="4"><title>2022: 16 goals</title></rect>
-                            <rect class="bar" x="848" y="58.4" width="24" height="109.6" rx="4"><title>2023: 54 goals</title></rect>
-                            <rect class="bar" x="888" y="80.8" width="24" height="87.2" rx="4"><title>2024: 43 goals</title></rect>
-                            <rect class="bar" x="928" y="84.8" width="24" height="83.2" rx="4"><title>2025: 41 goals</title></rect>
-                            <rect class="bar part" x="968" y="123.4" width="24" height="44.6" rx="4"><title>2026: 22 goals so far</title></rect>
-                            <text class="tick" x="20" y="188">2002</text>
-                            <text class="tick" x="180" y="188">2006</text>
-                            <text class="tick" x="340" y="188">2010</text>
-                            <text class="tick" x="500" y="188">2014</text>
-                            <text class="tick" x="660" y="188">2018</text>
-                            <text class="tick" x="820" y="188">2022</text>
-                            <text class="tick" x="980" y="188">2026</text>
-                            <!-- STATS:END svg.spark -->
-                        </svg>
+            <!-- ==================== Goals by year, merged in from goalsbyyear.html ==================== -->
+            <section id="goalsbyyear" aria-label="Ronaldo goals in every calendar year">
+                <p class="page-lead">Cristiano Ronaldo has scored <b><span data-stat="career.goals">979</span> goals</b> across <span data-stat="year.count">25</span> calendar years, from <span data-stat="year.first.goals">5</span> in <span data-stat="year.first">2002</span> to <b><span data-stat="year.current.goals">22</span> so far in <span data-stat="year.current.year">2026</span></b>, as of <span data-stat="meta.updated.long">15 September 2026</span>. His best year was <b><span data-stat="year.best.year">2013</span>, with <span data-stat="year.best.goals">69</span> goals</b>, and he has reached <span data-stat="year.above40.threshold">40</span> or more in <span data-stat="year.above40.word">fourteen</span> separate years.</p>
+
+                <section class="dash-chart-card reveal" style="animation-delay:.08s">
+                    <div class="chart-header">
+                        <p class="chart-subtitle">Goals scored in each calendar year and the cumulative climb to <span data-stat="career.goals">979</span></p>
                     </div>
-                    <figcaption class="chart-caption">Goals in every calendar year from <span data-stat="year.span">2002 to 2026</span>. The tallest bar is <span data-stat="year.best.year">2013</span>, his best year with <span data-stat="year.best.goals">69</span> goals. The faded bar is <span data-stat="year.current.year">2026</span>, still in progress with <span data-stat="year.current.goals">22</span> goals. The full interactive chart, including the cumulative climb to <span data-stat="career.goals">979</span>, is on the <a href="goalsbyyear.html">goals by year page</a>.</figcaption>
-                </figure>
+
+                    <div class="chart-wrapper">
+                        <canvas id="goalsChart" aria-label="Line and bar chart of Cristiano Ronaldo goals per year and cumulative goals from 2002 to 2026" role="img"></canvas>
+                    </div>
+
+                    <div class="stats-summary">
+                        <div class="stat-box">
+                            <div class="stat-value" id="totalGoals" data-stat="career.goals">979</div>
+                            <div class="stat-label">Total goals</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value" id="yearsScoring" data-stat="year.count">25</div>
+                            <div class="stat-label">Years scoring</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value" id="bestYear" data-stat="year.best.goals">69</div>
+                            <div class="stat-label" id="bestYearLabel">Best year (<span data-stat="year.best.year">2013</span>)</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value" id="avgPerYear" data-stat="year.average">39.2</div>
+                            <div class="stat-label">Average per year</div>
+                        </div>
+                    </div>
+                </section>
+
+
+                <div class="section-head">
+                    <h3 class="section-title">Ronaldo goals year by year, 2002 to 2026</h3>
+                    <a class="section-link" href="goalsbyseason.html">The same goals by season</a>
+                </div>
+                <p class="section-note">The table below carries the same figures as the chart. Ronaldo reached <b>500 career goals during <span data-stat="milestone.500.year">2015</span></b> and <b>900 in <span data-stat="milestone.900.year">2024</span></b>, and stands on <span data-stat="career.goals">979</span> with <span data-stat="year.current.goals">22</span> scored so far in <span data-stat="year.current.year">2026</span>.</p>
+                <section class="data-card reveal" style="animation-delay:.10s">
+                    <div class="data-scroll">
+                        <table class="dash-table">
+                            <caption>Cristiano Ronaldo goals in every calendar year for club and country, with the running career total and his age at the end of each year, as of <span data-stat="meta.updated.long">15 September 2026</span>. The <span data-stat="year.current.year">2026</span> row is still in progress. Club splits are on the <a href="/">career statistics page</a>.</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="left">Year</th>
+                                    <th scope="col">Goals</th>
+                                    <th scope="col">Career total</th>
+                                    <th scope="col">Age</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+    <!-- STATS:BEGIN table.years -->
+                                <tr><th scope="row">2002</th><td>5</td><td class="muted">5</td><td class="muted">17</td></tr>
+                                <tr><th scope="row">2003</th><td>1</td><td class="muted">6</td><td class="muted">18</td></tr>
+                                <tr><th scope="row">2004</th><td>13</td><td class="muted">19</td><td class="muted">19</td></tr>
+                                <tr><th scope="row">2005</th><td>15</td><td class="muted">34</td><td class="muted">20</td></tr>
+                                <tr><th scope="row">2006</th><td>25</td><td class="muted">59</td><td class="muted">21</td></tr>
+                                <tr><th scope="row">2007</th><td>34</td><td class="muted">93</td><td class="muted">22</td></tr>
+                                <tr><th scope="row">2008</th><td>35</td><td class="muted">128</td><td class="muted">23</td></tr>
+                                <tr><th scope="row">2009</th><td>30</td><td class="muted">158</td><td class="muted">24</td></tr>
+                                <tr><th scope="row">2010</th><td>48</td><td class="muted">206</td><td class="muted">25</td></tr>
+                                <tr><th scope="row">2011</th><td>60</td><td class="muted">266</td><td class="muted">26</td></tr>
+                                <tr><th scope="row">2012</th><td>63</td><td class="muted">329</td><td class="muted">27</td></tr>
+                                <tr class="peak"><th scope="row">2013</th><td>69</td><td class="muted">398</td><td class="muted">28</td></tr>
+                                <tr><th scope="row">2014</th><td>61</td><td class="muted">459</td><td class="muted">29</td></tr>
+                                <tr><th scope="row">2015</th><td>57</td><td class="muted">516</td><td class="muted">30</td></tr>
+                                <tr><th scope="row">2016</th><td>55</td><td class="muted">571</td><td class="muted">31</td></tr>
+                                <tr><th scope="row">2017</th><td>53</td><td class="muted">624</td><td class="muted">32</td></tr>
+                                <tr><th scope="row">2018</th><td>49</td><td class="muted">673</td><td class="muted">33</td></tr>
+                                <tr><th scope="row">2019</th><td>39</td><td class="muted">712</td><td class="muted">34</td></tr>
+                                <tr><th scope="row">2020</th><td>44</td><td class="muted">756</td><td class="muted">35</td></tr>
+                                <tr><th scope="row">2021</th><td>47</td><td class="muted">803</td><td class="muted">36</td></tr>
+                                <tr><th scope="row">2022</th><td>16</td><td class="muted">819</td><td class="muted">37</td></tr>
+                                <tr><th scope="row">2023</th><td>54</td><td class="muted">873</td><td class="muted">38</td></tr>
+                                <tr><th scope="row">2024</th><td>43</td><td class="muted">916</td><td class="muted">39</td></tr>
+                                <tr><th scope="row">2025</th><td>41</td><td class="muted">957</td><td class="muted">40</td></tr>
+                                <tr><th scope="row">2026</th><td>22</td><td class="muted">979</td><td class="muted">41</td></tr>
+    <!-- STATS:END table.years -->
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th scope="row">Total</th>
+                                    <td data-stat="career.goals">979</td>
+                                    <td data-stat="career.goals">979</td>
+                                    <td data-stat="person.age">41</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <p class="data-note">The highlighted row is 2013, his best calendar year. Ages are his age on 31 December of that year.</p>
+                </section>
+
+                <div class="section-head">
+                    <h3 class="section-title">What was Ronaldo's best year?</h3>
+                    <a class="section-link" href="/#dashboard">See those goals by competition</a>
+                </div>
+                <p class="section-note">Cristiano Ronaldo's best calendar year was <b><span data-stat="year.best.year">2013</span>, when he scored <span data-stat="year.best.goals">69</span> goals</b> for Real Madrid and Portugal. His five highest scoring years all came between 2011 and 2015, at Real Madrid: <span data-stat="year.rank1.goals">69</span> in <span data-stat="year.rank1.year">2013</span>, <span data-stat="year.rank2.goals">63</span> in <span data-stat="year.rank2.year">2012</span>, <span data-stat="year.rank3.goals">61</span> in <span data-stat="year.rank3.year">2014</span>, <span data-stat="year.rank4.goals">60</span> in <span data-stat="year.rank4.year">2011</span> and <span data-stat="year.rank5.goals">57</span> in <span data-stat="year.rank5.year">2015</span>. He has scored <span data-stat="year.above40.threshold">40</span> goals or more in <span data-stat="year.above40.word">fourteen</span> separate years and has never gone a calendar year without scoring since 2002.</p>
+
+                    <section class="method reveal" style="animation-delay:.10s">
+                    <h3>How these numbers are compiled</h3>
+                    <p>Goals are counted by calendar year rather than by season, so a figure covers 1 January to 31 December and mixes two club campaigns with any Portugal matches played in between. Only official senior first team matches count, in all league, domestic cup, continental and international competitions, and youth and reserve football is excluded.</p>
+                    <p>Every year is an own compiled tally, counted goal by goal from full match records and checked against club and competition sources. The 2026 total is updated after every match Ronaldo features in. Last updated <span data-stat="meta.updated.long">15 September 2026</span>.</p>
+                </section>
             </section>
 
             <!-- Records -->
@@ -2918,7 +3118,7 @@
             <section class="qa-grid" aria-label="Quick answers about Cristiano Ronaldo">
                 <article class="qa reveal" style="animation-delay:.10s">
                     <h3>How many goals has Cristiano Ronaldo scored?</h3>
-                    <p>Cristiano Ronaldo has scored <b><span data-stat="career.goals">979</span> career goals</b> in <span data-stat="career.apps">1,337</span> senior appearances for club and country as of <span data-stat="meta.updated.long">15 September 2026</span>, a rate of <span data-stat="career.gpg">0.73</span> goals per game. See the full <a href="goalsbyyear.html">breakdown of his goals by year</a>.</p>
+                    <p>Cristiano Ronaldo has scored <b><span data-stat="career.goals">979</span> career goals</b> in <span data-stat="career.apps">1,337</span> senior appearances for club and country as of <span data-stat="meta.updated.long">15 September 2026</span>, a rate of <span data-stat="career.gpg">0.73</span> goals per game. See the full <a href="/#goalsbyyear">breakdown of his goals by year</a>.</p>
                 </article>
                 <article class="qa reveal" style="animation-delay:.13s">
                     <h3>How many goals has Ronaldo scored this season?</h3>
@@ -3014,7 +3214,7 @@
                 <h2 class="section-title">Explore the full statistics</h2>
             </div>
             <nav class="link-grid reveal" style="animation-delay:.10s" aria-label="More Cristiano Ronaldo statistics">
-                <a class="link-card" href="goalsbyyear.html">
+                <a class="link-card" href="/#goalsbyyear">
                     <strong>Ronaldo goals by year</strong>
                     <span>Every calendar year from <span data-stat="year.span">2002 to 2026</span> and the cumulative climb to <span data-stat="career.goals">979</span>.</span>
                 </a>
@@ -3234,17 +3434,41 @@
             });
         })();
 
-        // ===== Dashboard =====
-        // Chart.js is not in the head on purpose. The home page did not load it
-        // before the dashboard moved here and it must not start paying for it on
-        // every visit, so the library is fetched only when the section is nearly
-        // in view. The three tables below carry the same figures as the charts
-        // and are written into the HTML by scripts/update_stats.py, so if this
-        // never runs, or the CDN is unreachable, the section still reads.
-        (function () {
-            const section = document.getElementById('dashboard');
-            if (!section) return;
+        // ===== Chart.js, fetched once and only when a chart is nearly in view =====
+        // Two sections want it now, the goals by year chart and the dashboard, so
+        // whichever the reader reaches first pays for it and the other waits on the
+        // same request. It is deliberately not in the head: the home page did not
+        // load it before these merged in and must not start paying on every visit.
+        // The tables under both are written into the HTML by update_stats.py, so if
+        // this never runs, or the CDN is unreachable, both sections still read.
+        const chartsReady = (function () {
+            const waiting = [];
+            let state = 'idle';
+            return function (cb) {
+                if (state === 'ready') return cb();
+                waiting.push(cb);
+                if (state !== 'idle') return;
+                state = 'loading';
+                const el = document.createElement('script');
+                el.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js';
+                el.async = true;
+                el.onload = function () { state = 'ready'; waiting.splice(0).forEach(function (fn) { fn(); }); };
+                document.head.appendChild(el);
+            };
+        })();
 
+        function whenNearlyVisible(id, cb) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            if (!('IntersectionObserver' in window)) return cb();
+            const io = new IntersectionObserver(function (entries) {
+                if (entries.some(function (e) { return e.isIntersecting; })) { io.disconnect(); cb(); }
+            }, { rootMargin: '400px 0px' });
+            io.observe(el);
+        }
+
+        // ===== Dashboard =====
+        (function () {
             function initDashboard() {
 // ===== Dashboard data =====
         // Team totals, seasons and competition splits mirror the tables
@@ -3764,25 +3988,7 @@
         applyTeam();
             }
 
-            let started = false;
-            function start() {
-                if (started) return;
-                started = true;
-                const s = document.createElement('script');
-                s.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js';
-                s.async = true;
-                s.onload = initDashboard;
-                document.head.appendChild(s);
-            }
-
-            if ('IntersectionObserver' in window) {
-                const io = new IntersectionObserver(function (entries) {
-                    if (entries.some(e => e.isIntersecting)) { io.disconnect(); start(); }
-                }, { rootMargin: '400px 0px' });
-                io.observe(section);
-            } else {
-                start();
-            }
+            whenNearlyVisible('dashboard', function () { chartsReady(initDashboard); });
         })();
 
         // ===== Timeline motion: JavaScript path only when the CSS feature is missing =====
@@ -3821,6 +4027,166 @@
             window.addEventListener('scroll', onScroll, { passive: true });
             window.addEventListener('resize', onScroll, { passive: true });
             paint();
+        })();
+
+        // ===== Goals by year =====
+        (function () {
+            function initGoalsByYear() {
+
+        // ===== Chart =====
+        const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// STATS:BEGIN array.years
+        const years = [2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026];
+        const goalsPerYear = [5, 1, 13, 15, 25, 34, 35, 30, 48, 60, 63, 69, 61, 57, 55, 53, 49, 39, 44, 47, 16, 54, 43, 41, 22];
+        const cumulativeGoals = [5, 6, 19, 34, 59, 93, 128, 158, 206, 266, 329, 398, 459, 516, 571, 624, 673, 712, 756, 803, 819, 873, 916, 957, 979];
+// STATS:END array.years
+
+        function getChartColors() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            return {
+                barBg: isDark ? 'rgba(111, 151, 240, 0.45)' : 'rgba(47, 86, 207, 0.50)',
+                barBorder: isDark ? '#6f97f0' : '#2f56cf',
+                lineColor: isDark ? '#bcd0fa' : '#1e3a8a',
+                lineFill: isDark ? 'rgba(111, 151, 240, 0.15)' : 'rgba(30, 58, 138, 0.08)',
+                gridColor: isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(20, 30, 50, 0.06)',
+                textColor: isDark ? '#a6b3c6' : '#56657f',
+                textPrimary: isDark ? '#e9eef6' : '#16243a'
+            };
+        }
+
+        let colors = getChartColors();
+        const ctx = document.getElementById('goalsChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: [
+                    {
+                        label: 'Goals per year',
+                        data: goalsPerYear,
+                        type: 'bar',
+                        backgroundColor: colors.barBg,
+                        borderColor: colors.barBorder,
+                        borderWidth: 2,
+                        borderRadius: 6,
+                        yAxisID: 'y',
+                        order: 2
+                    },
+                    {
+                        label: 'Cumulative goals',
+                        data: cumulativeGoals,
+                        type: 'line',
+                        borderColor: colors.lineColor,
+                        backgroundColor: colors.lineFill,
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.3,
+                        yAxisID: 'y1',
+                        order: 1,
+                        pointRadius: 4,
+                        pointHoverRadius: 7,
+                        pointBackgroundColor: colors.lineColor,
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: reduceMotion ? false : { duration: 900 },
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 20,
+                            font: { family: "'DM Sans', sans-serif", size: 13, weight: 500 },
+                            color: colors.textPrimary
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(22, 36, 58, 0.96)',
+                        titleFont: { family: "'Plus Jakarta Sans', sans-serif", size: 14, weight: 600 },
+                        bodyFont: { family: "'DM Sans', sans-serif", size: 13 },
+                        padding: 12,
+                        cornerRadius: 10,
+                        callbacks: {
+                            afterLabel: function (context) {
+                                if (context.dataset.label === 'Goals per year') {
+                                    return 'Age: ' + (context.label - 1985);
+                                }
+                                return '';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { family: "'DM Sans', sans-serif", size: 12 }, color: colors.textColor },
+                        title: { display: true, text: 'Year', font: { family: "'DM Sans', sans-serif", size: 13, weight: 500 }, color: colors.textColor }
+                    },
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        grid: { drawOnChartArea: false },
+                        ticks: { font: { family: "'DM Sans', sans-serif", size: 12 }, color: colors.textColor, stepSize: 10 },
+                        title: { display: true, text: 'Goals per year', font: { family: "'DM Sans', sans-serif", size: 13, weight: 500 }, color: colors.textColor },
+                        max: 80
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        grid: { color: colors.gridColor },
+                        ticks: { font: { family: "'DM Sans', sans-serif", size: 12 }, color: colors.textColor, stepSize: 100 },
+                        title: { display: true, text: 'Cumulative goals', font: { family: "'DM Sans', sans-serif", size: 13, weight: 500 }, color: colors.textColor },
+                        max: 1000
+                    }
+                }
+            }
+        });
+
+        function updateChartColors() {
+            colors = getChartColors();
+            chart.data.datasets[0].backgroundColor = colors.barBg;
+            chart.data.datasets[0].borderColor = colors.barBorder;
+            chart.data.datasets[1].borderColor = colors.lineColor;
+            chart.data.datasets[1].backgroundColor = colors.lineFill;
+            chart.data.datasets[1].pointBackgroundColor = colors.lineColor;
+            chart.options.scales.x.ticks.color = colors.textColor;
+            chart.options.scales.x.title.color = colors.textColor;
+            chart.options.scales.y.ticks.color = colors.textColor;
+            chart.options.scales.y.title.color = colors.textColor;
+            chart.options.scales.y1.ticks.color = colors.textColor;
+            chart.options.scales.y1.title.color = colors.textColor;
+            chart.options.scales.y1.grid.color = colors.gridColor;
+            chart.options.plugins.legend.labels.color = colors.textPrimary;
+            chart.update();
+        }
+
+
+        updateChartColors();
+
+        // ===== Dynamic stats =====
+        const totalGoals = goalsPerYear.reduce((sum, g) => sum + g, 0);
+        const yearsWithGoals = goalsPerYear.length;
+        const averageGoals = (totalGoals / yearsWithGoals).toFixed(1);
+        const bestGoals = Math.max(...goalsPerYear);
+        const bestYear = years[goalsPerYear.indexOf(bestGoals)];
+
+        document.getElementById('totalGoals').textContent = totalGoals.toLocaleString();
+        document.getElementById('yearsScoring').textContent = yearsWithGoals;
+        document.getElementById('bestYear').textContent = bestGoals;
+        document.getElementById('bestYearLabel').textContent = `Best year (${bestYear})`;
+        document.getElementById('avgPerYear').textContent = averageGoals;
+            }
+
+            whenNearlyVisible('goalsbyyear', function () { chartsReady(initGoalsByYear); });
         })();
     </script>
 </body>

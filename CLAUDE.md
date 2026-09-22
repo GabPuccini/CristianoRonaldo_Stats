@@ -24,7 +24,7 @@ figure there is quoted back as fact rather than being eyeballed by a person,
 which is why every number in it is a rule in `file_rules()` and
 `check_coverage.py` fails if one is added without one.
 
-`sitemap.xml` is driven too: the `lastmod` of each of the four statistics pages
+`sitemap.xml` is driven too: the `lastmod` of each of the three statistics pages
 tracks the update date, since those pages really do change every time. Only
 `privacy.html` keeps a hand written date, because the script never touches it.
 
@@ -174,8 +174,8 @@ Note only the first goal of a match carries `--new-appearance`.
 1. The script prints the new totals and refuses to write if anything fails to
    reconcile. If it fails, read the error, fix the data, do not force it.
 2. Check `git diff` and confirm only expected numbers moved. One goal touches all
-   four pages plus `sitemap.xml` and `llms.txt`, so a diff limited to fewer
-   than six files
+   three pages plus `sitemap.xml` and `llms.txt`, so a diff limited to fewer
+   than five files
    means something is not wired up and should be looked at rather than
    committed.
 3. Commit with a message naming the event, for example
@@ -208,9 +208,27 @@ below.
 `timeline.html` was retired in September 2026 and needs the same 301 to
 `https://ronaldostats.app/#timeline`.
 
-Both retired pages currently have a stub file in the repo holding a canonical
-and a meta refresh, which is the weaker stand in. Delete each stub once its
-Cloudflare rule is live.
+Each retired page currently has a stub file in the repo holding a canonical and
+a meta refresh, which is the weaker stand in. Delete each stub once its
+Cloudflare rule is live. Three are outstanding: dashboard, timeline and goals
+by year.
+
+## Goals by year
+
+Goals in every calendar year are a section of `index.html` as well, under
+`<section id="goalsbyyear">`, reached at `/#goalsbyyear`. It sits directly
+below the year picker, where a small sparkline used to be: that sparkline was
+removed when the full chart and table arrived, since it said the same thing
+less well.
+
+`goalsbyyear.html` was retired in September 2026 and needs a 301 to
+`https://ronaldostats.app/#goalsbyyear`.
+
+Chart.js is shared. `chartsReady()` fetches it once and hands it to whichever
+sections asked, and `whenNearlyVisible(id, cb)` is what triggers them, so the
+goals chart and the dashboard charts cost one request between them and only
+when a reader actually reaches one. Add any future chart the same way rather
+than loading the library again.
 
 ## Site wide writing rules
 
