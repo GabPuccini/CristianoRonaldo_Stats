@@ -73,14 +73,6 @@ record("index.html", "KPI appearances", values["career.apps"],
        find("index.html", r'<span class="kpi-label">Appearances</span>\s*<span class="kpi-value">([^<]+)</span>'), key="career.apps")
 record("index.html", "KPI assists", values["career.assists"],
        find("index.html", r'<span class="kpi-label">Assists</span>\s*<span class="kpi-value">([^<]+)</span>'), key="career.assists")
-record("index.html", "road to 1,000 goals to go", values["career.remaining"],
-       find("index.html", r'<span class="big">(\d+)</span>\s*<span class="of">goals to go</span>'), key="career.remaining")
-record("index.html", "progress label", values["career.progress_label"],
-       text_of(find("index.html", r'<span class="goal tnum">([^<]+)</span>')), key="career.progress_label")
-record("index.html", "progress aria-valuenow", values["career.goals.raw"],
-       find("index.html", r'aria-valuenow="(\d+)"'), key="career.goals.raw")
-record("index.html", "progress bar width", values["career.pct"] + "%",
-       find("index.html", r'\.progress-fill \{[^}]*?width: ([\d.]+%);', 1), key="career.pct")
 
 # Career table, one row per team plus the totals row
 for team in engine.load()["teams"]:
@@ -371,15 +363,10 @@ for tid in data["bodyparts"]:
     for slot in engine.BODY_SLOTS:      # mark each key as exercised by this row
         exercised.add(f"body.{tid}.{slot}")
 
-# Club goals total, and the 1,000 goal target inside the progress label
+# Club goals total
 record("index.html", "club goals total", values["career.club_goals"],
        find("index.html", r'<div class="summary-value">([\d,]+)</div><div class="summary-label">Club goals</div>'),
        key="career.club_goals")
-record("index.html", "goal target in the progress label", values["career.target"],
-       find("index.html", r'<span class="goal tnum">[\d,]+ / ([\d,]+)</span>'), key="career.target")
-record("index.html", "progress fill CSS declaration", values["career.fillstyle"],
-       "width: " + find("index.html", r'\.progress-fill \{[^}]*?width: ([\d.]+%);', 1) + ";",
-       key="career.fillstyle")
 
 # The machine readable date, on every page that carries a dateModified
 for page in PAGES:

@@ -661,8 +661,6 @@ def text_rules(generated=True):
              "freekicks.manutd"),
             (r"for Manchester United, " + G + r" for Portugal, [\d,]* ?for Al Nassr",
              "freekicks.portugal"),
-            (r"\.progress-fill \{ width: ([\d.]+)% !important; \}", "career.pct"),
-            (r"\.progress-fill \{\n            height: 100%;\n            width: ([\d.]+)%;", "career.pct"),
         ],
     }
     # The rest of the head is generated: see scripts/gen_head_rules.py. The

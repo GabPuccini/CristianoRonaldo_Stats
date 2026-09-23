@@ -1294,7 +1294,7 @@
         /* ========== KPI STRIP ========== */
         .kpi-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 16px;
         }
         .kpi-card {
@@ -1332,41 +1332,6 @@
             color: var(--ink-2);
             line-height: 1.45;
         }
-        .kpi-card.road {
-            grid-column: span 2;
-            background: var(--surface-strong);
-            position: relative;
-            overflow: hidden;
-        }
-        .kpi-card.road::after {
-            content: '';
-            position: absolute;
-            top: -55%; right: -18%;
-            width: 260px; height: 260px;
-            background: radial-gradient(circle, var(--brand-soft), transparent 65%);
-            pointer-events: none;
-        }
-        .road-value {
-            display: flex;
-            align-items: baseline;
-            gap: 10px;
-            margin: 10px 0 8px;
-        }
-        .road-value .big {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: clamp(2.1rem, 3.4vw, 2.7rem);
-            font-weight: 800;
-            line-height: 1;
-            letter-spacing: -0.03em;
-            color: var(--brand-ink);
-            font-variant-numeric: tabular-nums lining-nums;
-        }
-        .road-value .of {
-            font-size: 0.86rem;
-            font-weight: 600;
-            color: var(--ink-3);
-        }
-        .kpi-card.road .kpi-note b { color: var(--ink); font-weight: 700; }
 
         /* ========== CALENDAR YEAR PICKER ========== */
         .year-pick {
@@ -1424,32 +1389,6 @@
             .year-pick-grid { grid-template-columns: 1fr; }
             .year-pick-head { flex-direction: column; align-items: flex-start; }
         }
-        .progress { margin-top: 14px; }
-        .progress-head {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            font-size: 0.76rem;
-            font-weight: 600;
-            color: var(--ink-3);
-            margin-bottom: 8px;
-        }
-        .progress-head .goal { color: var(--ink); }
-        .progress-track {
-            height: 10px;
-            border-radius: 999px;
-            background: var(--brand-soft);
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            width: 97.9%;
-            border-radius: 999px;
-            background: var(--hero-grad);
-            box-shadow: 0 0 14px rgba(47, 86, 207, 0.35);
-            animation: grow 1.2s cubic-bezier(.2,.7,.2,1) 0.25s both;
-        }
-        @keyframes grow { from { width: 0; } }
 
         /* ========== QUICK ANSWERS ========== */
         .qa-grid {
@@ -2270,7 +2209,6 @@
         @media (prefers-reduced-motion: reduce) {
             * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
             .reveal { opacity: 1 !important; transform: none !important; }
-            .progress-fill { width: 97.9% !important; }
         
             /* timeline: it animates on a scroll timeline, so the blanket
                animation reset above leaves these at their start state */
@@ -2286,8 +2224,7 @@
 
         /* ========== RESPONSIVE ========== */
         @media (max-width: 1180px) {
-            .kpi-grid { grid-template-columns: repeat(4, 1fr); }
-            .kpi-card.road { grid-column: span 4; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 1080px) {
             .duo-grid { grid-template-columns: 1fr; }
@@ -2346,7 +2283,6 @@
             .identity { padding: 16px; gap: 14px; }
             .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
             .kpi-card { padding: 16px; }
-            .kpi-card.road { grid-column: span 2; }
 
             .section-head { margin: 34px 0 14px; }
             .table-card, .chart-card { padding: 20px 18px; }
@@ -2625,24 +2561,7 @@
                     <span class="kpi-label">Goals in <span data-stat="season.current.name">2026/27</span></span>
                     <span class="kpi-value" data-stat="season.current.goals">3</span>
                     <span class="kpi-note">For Al Nassr, <span data-stat="season.current.league_goals">3</span> of them in the Saudi Pro League.</span>
-                </div>
-
-                <div class="kpi-card road reveal" style="animation-delay:.22s">
-                    <span class="kpi-label">Road to <span data-stat="career.target">1,000</span></span>
-                    <span class="road-value">
-                        <span class="big" data-stat="career.remaining">21</span>
-                        <span class="of">goals to go</span>
-                    </span>
-                    <span class="kpi-note">On <b><span data-stat="career.goals">979</span> career goals</b> and closing on a historic <span data-stat="career.target">1,000</span>, with <span data-stat="year.current.goals">22</span> already scored in <span data-stat="year.current.year">2026</span>.</span>
-                    <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="979" data-stat-attr="aria-valuenow:career.goals.raw" aria-label="Career goals progress toward 1,000">
-                        <div class="progress-head">
-                            <span>Progress</span>
-                            <span class="goal tnum" data-stat="career.progress_label">979 / 1,000</span>
-                        </div>
-                        <div class="progress-track"><div class="progress-fill"></div></div>
-                    </div>
-                </div>
-            </section>
+                </div>            </section>
 
             <!-- Career at a glance -->
             <div class="section-head">
