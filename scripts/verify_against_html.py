@@ -174,32 +174,32 @@ club_goals = sum(c["goals"] for r in data["seasons"] if r.get("in_career", True)
 por_apps = sum(r["apps"] for r in data["portugal_years"])
 por_goals = sum(r["goals"] for r in data["portugal_years"])
 
-record("goalsbyseason.html", "summary club goals", f"{club_goals:,}",
-       find("goalsbyseason.html", r'<div class="summary-value">([\d,]+)</div><div class="summary-label">Club goals</div>'))
-record("goalsbyseason.html", "summary club appearances", f"{club_apps:,}",
-       find("goalsbyseason.html", r'<div class="summary-value">([\d,]+)</div><div class="summary-label">Club appearances</div>'))
-record("goalsbyseason.html", "summary international goals", f"{por_goals:,}",
-       find("goalsbyseason.html", r'<div class="summary-value">([\d,]+)</div><div class="summary-label">International goals</div>'))
-record("goalsbyseason.html", "summary international caps", f"{por_apps:,}",
-       find("goalsbyseason.html", r'<div class="summary-value">([\d,]+)</div><div class="summary-label">International caps</div>'))
+record("index.html", "summary club goals", f"{club_goals:,}",
+       find("index.html", r'<div class="summary-value">([\d,]+)</div><div class="summary-label">Club goals</div>'))
+record("index.html", "summary club appearances", f"{club_apps:,}",
+       find("index.html", r'<div class="summary-value">([\d,]+)</div><div class="summary-label">Club appearances</div>'))
+record("index.html", "summary international goals", f"{por_goals:,}",
+       find("index.html", r'<div class="summary-value">([\d,]+)</div><div class="summary-label">International goals</div>'))
+record("index.html", "summary international caps", f"{por_apps:,}",
+       find("index.html", r'<div class="summary-value">([\d,]+)</div><div class="summary-label">International caps</div>'))
 
-career_row = find("goalsbyseason.html", r'<tr class="career-total-row">(.*?)</tr>', 1)
+career_row = find("index.html", r'<tr class="career-total-row">(.*?)</tr>', 1)
 if career_row != "<NOT FOUND>":
     nums = re.findall(r"<td[^>]*>([\d,]+)</td>", career_row)
-    record("goalsbyseason.html", "club table total apps", f"{club_apps:,}", nums[-2] if len(nums) >= 2 else "?")
-    record("goalsbyseason.html", "club table total goals", f"{club_goals:,}", nums[-1] if nums else "?")
+    record("index.html", "club table total apps", f"{club_apps:,}", nums[-2] if len(nums) >= 2 else "?")
+    record("index.html", "club table total goals", f"{club_goals:,}", nums[-1] if nums else "?")
 
 # Every Portugal year row
 for row in data["portugal_years"]:
-    cell = find("goalsbyseason.html",
+    cell = find("index.html",
                 r'Portugal</div></td><td class="season-cell">' + str(row["year"]) +
                 r'</td>(.*?)</tr>', 1)
     if cell == "<NOT FOUND>":
-        record("goalsbyseason.html", f"Portugal {row['year']}", "row present", "<NOT FOUND>")
+        record("index.html", f"Portugal {row['year']}", "row present", "<NOT FOUND>")
         continue
     nums = re.findall(r'<td[^>]*>(\d+|n/a)</td>', cell)
-    record("goalsbyseason.html", f"Portugal {row['year']} apps", row["apps"], nums[-2])
-    record("goalsbyseason.html", f"Portugal {row['year']} goals", row["goals"], nums[-1])
+    record("index.html", f"Portugal {row['year']} apps", row["apps"], nums[-2])
+    record("index.html", f"Portugal {row['year']} goals", row["goals"], nums[-1])
 
 # ----------------------------------------------------------------- dashboard
 record("index.html", "summary games", values["career.apps"],
@@ -281,11 +281,11 @@ for tid, block in data["competitions"].items():
 ACC_ID = {"sporting": "acc-sporting-cp", "manutd": "acc-manchester-united",
           "realmadrid": "acc-real-madrid", "juventus": "acc-juventus",
           "alnassr": "acc-al-nassr", "portugal": "acc-portugal-national-team"}
-ach = PAGES["achievements.html"]
+ach = PAGES["index.html"]
 for tid, trophies in data.get("honours", {}).get("teams", {}).items():
     block = re.search(rf'aria-controls="{ACC_ID[tid]}".*?<span class="trophy-count">(\d+)</span>',
                       ach, re.S)
-    record("achievements.html", f"accordion count {tid}", values[f"honours.{tid}.count"],
+    record("index.html", f"accordion count {tid}", values[f"honours.{tid}.count"],
            block.group(1) if block else "<NOT FOUND>", key=f"honours.{tid}.count")
     # scope the trophy lookups to this team's accordion, since several clubs won
     # the same competition and a page wide search would find the wrong block
@@ -294,20 +294,20 @@ for tid, trophies in data.get("honours", {}).get("teams", {}).items():
     for t in trophies:
         cell = re.search(r'<div class="trophy-name">' + re.escape(t["name"])
                          + r'</div>.*?<div class="trophy-count-badge">(\d+)</div>', panel, re.S)
-        record("achievements.html", f"{tid} {t['name']}", len(t["years"]),
+        record("index.html", f"{tid} {t['name']}", len(t["years"]),
                cell.group(1) if cell else "<NOT FOUND>",
                key=f"honours.{tid}.{engine.slug(t['name'])}")
         for year in t["years"]:
             shown = f'<span class="trophy-year">{year}</span>' in panel
-            record("achievements.html", f"{tid} {t['name']} {year} listed", True, shown)
+            record("index.html", f"{tid} {t['name']} {year} listed", True, shown)
 
 for key, pattern, page in [
-    ("honours.total", r'<div class="counter-value"[^>]*>(\d+)</div>\s*<div class="counter-label">Total trophies', "achievements.html"),
-    ("honours.leagues", r'<div class="counter-value"[^>]*>(\d+)</div>\s*<div class="counter-label">League titles', "achievements.html"),
-    ("honours.championsleague", r'<div class="counter-value"[^>]*>(\d+)</div>\s*<div class="counter-label">Champions League', "achievements.html"),
-    ("award.ballondor", r'<div class="counter-value"[^>]*>(\d+)</div>\s*<div class="counter-label">Ballon', "achievements.html"),
-    ("honours.club", r'Club honours <span class="count"[^>]*>(\d+)</span>', "achievements.html"),
-    ("honours.national", r'National team <span class="count"[^>]*>(\d+)</span>', "achievements.html"),
+    ("honours.total", r'<div class="counter-value"[^>]*>(\d+)</div>\s*<div class="counter-label">Total trophies', "index.html"),
+    ("honours.leagues", r'<div class="counter-value"[^>]*>(\d+)</div>\s*<div class="counter-label">League titles', "index.html"),
+    ("honours.championsleague", r'<div class="counter-value"[^>]*>(\d+)</div>\s*<div class="counter-label">Champions League', "index.html"),
+    ("award.ballondor", r'<div class="counter-value"[^>]*>(\d+)</div>\s*<div class="counter-label">Ballon', "index.html"),
+    ("honours.club", r'Club honours <span class="count"[^>]*>(\d+)</span>', "index.html"),
+    ("honours.national", r'National team <span class="count"[^>]*>(\d+)</span>', "index.html"),
     ("honours.total", r'<div class="trophy-value"[^>]*>(\d+)</div>\s*<div class="trophy-label">Team trophies', "index.html"),
     ("honours.leagues", r'<div class="trophy-value"[^>]*>(\d+)</div>\s*<div class="trophy-label">League titles', "index.html"),
     ("honours.championsleague", r'<div class="trophy-value"[^>]*>(\d+)</div>\s*<div class="trophy-label">Champions League', "index.html"),
@@ -320,7 +320,7 @@ for key, pattern, page in [
 for key in ("honours.total", "honours.leagues", "honours.championsleague", "award.ballondor"):
     pair = [find(p, r'<div class="(?:counter|trophy)-value" data-stat="'
                  + re.escape(key) + r'">(\d+)</div>', 1)
-            for p in ("index.html", "achievements.html")]
+            for p in ("index.html", "index.html")]
     record("index.html", f"{key} agrees with achievements", pair[1], pair[0])
 
 # Body part and finish tables
@@ -351,9 +351,9 @@ prose = [
      r'with <b>([\d,]+) assists</b>'),
     ("index.html", "lead sentence goals to go", values["career.remaining"],
      r'He is (\d+) goals short of 1,000'),
-    ("goalsbyseason.html", "lead club goals", f"{club_goals:,}",
+    ("index.html", "lead club goals", f"{club_goals:,}",
      r'<b>([\d,]+) club goals in [\d,]+ games</b>'),
-    ("goalsbyseason.html", "lead club appearances", f"{club_apps:,}",
+    ("index.html", "lead club appearances", f"{club_apps:,}",
      r'<b>[\d,]+ club goals in ([\d,]+) games</b>'),
     ("index.html", "lead career goals", values["career.goals"],
      r'Cristiano Ronaldo has scored <b>([\d,]+) goals</b> across'),
@@ -384,8 +384,8 @@ for tid in data["bodyparts"]:
         exercised.add(f"body.{tid}.{slot}")
 
 # Club goals total, and the 1,000 goal target inside the progress label
-record("goalsbyseason.html", "club goals total", values["career.club_goals"],
-       find("goalsbyseason.html", r'<div class="summary-value">([\d,]+)</div><div class="summary-label">Club goals</div>'),
+record("index.html", "club goals total", values["career.club_goals"],
+       find("index.html", r'<div class="summary-value">([\d,]+)</div><div class="summary-label">Club goals</div>'),
        key="career.club_goals")
 record("index.html", "goal target in the progress label", values["career.target"],
        find("index.html", r'<span class="goal tnum">[\d,]+ / ([\d,]+)</span>'), key="career.target")

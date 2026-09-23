@@ -22,10 +22,10 @@ Scope and method: figures count official senior first team matches for Sporting 
 
 - [Career statistics](https://ronaldostats.app/): headline totals, goals by club and country, records, trophies and answers to the most common Ronaldo statistics questions.
 - [Goals by year](https://ronaldostats.app/#goalsbyyear): goals in every calendar year from 2002 to 2026 and the cumulative climb to 979.
-- [Goals by season](https://ronaldostats.app/goalsbyseason.html): club and country tables with league, cup and continental splits for every season.
+- [Goals by season](https://ronaldostats.app/#goalsbyseason): club and country tables with league, cup and continental splits for every season.
 - [Interactive dashboard](https://ronaldostats.app/#dashboard): goals by competition, season, opponent, finish type and body part, filtered by team. It is a section of the home page.
 - [Through the years](https://ronaldostats.app/#timeline): the career story from the Sporting CP debut to the 2026 World Cup.
-- [Achievements](https://ronaldostats.app/achievements.html): every team trophy and major individual award, club by club.
+- [Achievements](https://ronaldostats.app/#achievements): every team trophy and major individual award, club by club.
 
 ## Contact
 

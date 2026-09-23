@@ -35,6 +35,12 @@ EXEMPT = {
     # applies there too: ages at the time, transfer fees and one off season
     # figures quoted as history rather than as live totals.
     "index.html": [
+        (r"FIFA FIFPro World 11", "the 11 is part of the award's name, not a count"),
+        (r"Portugal U15|Portugal U17|Portugal U20|Portugal U21",
+         "youth international football, excluded from every career total by design"),
+        (r"International career total",
+         "this row adds the youth caps to the senior ones, so it is deliberately "
+         "outside the career dataset"),
         (r"debut at 17|At 17 he broke", "his age at the time, fixed by the event"),
         (r"aged 19|At 19 he scored", "his age at the time, fixed by the event"),
         (r"Ballon d'Or at 23", "his age at the time, fixed by the event"),
@@ -66,16 +72,6 @@ EXEMPT = {
         (r"Goals 110 and 111 against Ireland|110th and 111th",
          "the Portugal goals that passed Ali Daei in 2021, a milestone rather "
          "than a live figure"),
-    ],
-    "goalsbyseason.html": [
-        (r"Portugal U15|Portugal U17|Portugal U20|Portugal U21",
-         "youth international football, excluded from every career total by design"),
-        (r"International career total",
-         "this row adds the youth caps to the senior ones, so it is deliberately "
-         "outside the career dataset"),
-    ],
-    "achievements.html": [
-        (r"FIFA FIFPro World 11", "the 11 is part of the award's name, not a count"),
     ],
 }
 
@@ -147,7 +143,7 @@ def missing_season_rows(values):
     """The club season table is marked cell by cell rather than generated, so a
     season added to the dataset has no row until one is written by hand. Without
     this check the total row simply stops matching the rows above it."""
-    page = (ROOT / "goalsbyseason.html").read_text(encoding="utf-8")
+    page = (ROOT / "index.html").read_text(encoding="utf-8")
     data = engine.load()
     gaps = []
     for i, row in enumerate(data["seasons"]):
@@ -166,7 +162,7 @@ def mismatched_season_slots():
     n/a, or the reverse. The engine writes the figure either way, so nothing
     fails: the cell just sits there greyed out with a real number in it, or
     shows a live looking zero for a competition he has not played."""
-    page = (ROOT / "goalsbyseason.html").read_text(encoding="utf-8")
+    page = (ROOT / "index.html").read_text(encoding="utf-8")
     data = engine.load()
     gaps = []
     for i, row in enumerate(data["seasons"]):

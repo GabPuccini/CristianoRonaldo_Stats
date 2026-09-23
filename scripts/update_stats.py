@@ -39,8 +39,6 @@ BACKUP = ROOT / "data" / "ronaldo.backup.json"
 
 PAGES = [
     "index.html",
-    "goalsbyseason.html",
-    "achievements.html",
 ]
 
 # Files that are not HTML but still publish figures. They carry no markers and
@@ -628,7 +626,13 @@ def text_rules(generated=True):
             # apart and drops the rule. Pinned by hand on the sentence it sits in.
             (r"history of the competition\. That is " + G + r" for Real Madrid",
              "comp.realmadrid.championsleague"),
-            (STAMP, "meta.updated.long", 7),
+            (STAMP, "meta.updated.long", 10),
+            # 15 is Real Madrid's trophy count, the Nations League total, a
+            # free kick tally and a FIFPro selection count all at once, so the
+            # generator cannot resolve it and these are pinned by hand
+            (r'"name": "Real Madrid: ' + G + r" trophies", "honours.realmadrid.count"),
+            (r"Real Madrid, with " + G + r" trophies in nine seasons", "honours.realmadrid.count"),
+            (r"awards and " + G + r" selections in the FIFA", "award.fifafifproworld11"),
             (r"Cristiano Ronaldo is " + G + r" years old", "person.age"),
             # came across with the timeline's "Where is he now" answer
             (r"At " + G + r" he is still playing", "person.age"),
@@ -655,33 +659,6 @@ def text_rules(generated=True):
              "freekicks.portugal"),
             (r"\.progress-fill \{ width: ([\d.]+)% !important; \}", "career.pct"),
             (r"\.progress-fill \{\n            height: 100%;\n            width: ([\d.]+)%;", "career.pct"),
-        ],
-        "goalsbyseason.html": common + [
-            (STAMP, "meta.updated.long", 4),
-            (r"season by season: " + G + r" club goals", "career.club_goals", 2),
-            (r"club goals in " + G + r" games and", "career.club_apps", 2),
-            (r"games and " + G + r" for Portugal in", "team.portugal.goals", 2),
-            (r"for Portugal in " + G + r" caps", "team.portugal.apps", 2),
-            (r"year by year: " + G + r" club goals,", "career.club_goals"),
-            (r"club goals, " + G + r" international goals", "team.portugal.goals"),
-            (r"best season of " + G + r" goals in", "season.best.goals"),
-        ],
-        "achievements.html": common + [
-            (r"All " + G + r" Ronaldo Trophies Listed", "honours.total", 4),
-            (r"All " + G + r" team trophies and more than", "honours.total", 3),
-            (r"All " + G + r" team trophies and [\d,]+ plus", "honours.total"),
-            (r"team trophies and more than " + G + r" individual awards", "award.floor", 3),
-            (r"team trophies and " + G + r" plus individual awards", "award.floor"),
-            (STAMP, "meta.updated.long", 5),
-            (r'"description": "The ' + G + r" team trophies Cristiano Ronaldo has won", "honours.total"),
-            (r"has won " + G + r" team trophies as of", "honours.total"),
-            (r"team trophies as of \d{1,2} \w+ \d{4}: " + G + r" at club level", "honours.club"),
-            (r"at club level with .*?, and " + G + r" with Portugal\.", "honours.national"),
-            (r"Champions League " + G + r" times: once with Manchester", "honours.championsleague"),
-            (r"has won " + G + r" league titles in four countries", "honours.leagues"),
-            (r'"Real Madrid: ' + G + r" trophies, including", "honours.realmadrid.count"),
-            (r"Real Madrid, with " + G + r" trophies in nine seasons", "honours.realmadrid.count"),
-            (r"of the Year awards and " + G + r" selections in the FIFA", "award.fifafifproworld11"),
         ],
     }
     # The rest of the head is generated: see scripts/gen_head_rules.py. The

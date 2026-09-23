@@ -24,9 +24,9 @@ figure there is quoted back as fact rather than being eyeballed by a person,
 which is why every number in it is a rule in `file_rules()` and
 `check_coverage.py` fails if one is added without one.
 
-`sitemap.xml` is driven too: the `lastmod` of each of the three statistics pages
-tracks the update date, since those pages really do change every time. Only
-`privacy.html` keeps a hand written date, because the script never touches it.
+`sitemap.xml` is driven too: `index.html` is the only statistics page left, so
+its `lastmod` tracks the update date. Only `privacy.html` keeps a hand written
+date, because the script never touches it.
 
 ## When Rambo says Ronaldo scored
 
@@ -174,8 +174,8 @@ Note only the first goal of a match carries `--new-appearance`.
 1. The script prints the new totals and refuses to write if anything fails to
    reconcile. If it fails, read the error, fix the data, do not force it.
 2. Check `git diff` and confirm only expected numbers moved. One goal touches all
-   three pages plus `sitemap.xml` and `llms.txt`, so a diff limited to fewer
-   than five files
+   `index.html` plus `sitemap.xml` and `llms.txt`, so a diff of fewer than
+   three files
    means something is not wired up and should be looked at rather than
    committed.
 3. Commit with a message naming the event, for example
@@ -229,6 +229,29 @@ sections asked, and `whenNearlyVisible(id, cb)` is what triggers them, so the
 goals chart and the dashboard charts cost one request between them and only
 when a reader actually reaches one. Add any future chart the same way rather
 than loading the library again.
+
+## The whole site is one page
+
+Every statistics page has been folded into `index.html`: goals by year, goals
+by season, the dashboard, the timeline and the achievements, each a section
+with its own id and reached at `/#goalsbyyear`, `/#goalsbyseason`,
+`/#dashboard`, `/#timeline` and `/#achievements`. Only `privacy.html` is still
+a page of its own. `PAGES` in the engine is a single entry as a result.
+
+Five stub files sit in the repo holding a canonical and a meta refresh, one per
+retired URL. Each is the weaker stand in for a Cloudflare 301 and should be
+deleted once its rule is live.
+
+Two classes carry an `ach-` prefix because the name was already taken when
+achievements merged in: `.ach-filter-tab`, since the dashboard owns
+`.filter-tab`, and `.ach-trophy-grid`, since the home page's own trophy section
+owns `.trophy-grid`. Tables merged from the old pages reuse `.dash-table`,
+which they already matched.
+
+There is one "how these numbers are compiled" section, at the foot of the page.
+Each merged page brought its own and they said the same thing four times over,
+so the clauses that were genuinely different were folded into that one block
+and the rest deleted. Do not add another: put anything new in the single block.
 
 ## Site wide writing rules
 
