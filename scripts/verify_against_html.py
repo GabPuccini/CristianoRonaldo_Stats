@@ -374,7 +374,7 @@ for page in PAGES:
         record(page, "schema dateModified", values["meta.updated.iso"],
                find(page, r'"dateModified": "([^"]+)"'), key="meta.updated.iso")
 record("index.html", "visible updated date", values["meta.updated.long"],
-       find("index.html", r'<span class="dot"></span> Updated ([^<]+)</span>'), key="meta.updated.long")
+       find("index.html", r'<span class="updated-badge">Updated ([^<]+)</span>'), key="meta.updated.long")
 exercised.add("meta.updated.short")   # only ever rendered as part of the long form today
 
 # Best season, quoted on the home page and the season page
