@@ -670,7 +670,7 @@
                   "name": "How many goals has Ronaldo scored this season?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Ronaldo scored 3 goals for Al Nassr in the 2026/27 season, 3 of them in the Saudi Pro League, and he has 22 goals in the 2026 calendar year. Every campaign is listed on the goals by season page."
+                        "text": "Ronaldo scored 3 goals for Al Nassr in the 2026/27 season, 3 of them in the Saudi Pro League, and he has 22 goals in the 2026 calendar year. Every campaign is listed in the goals by season section."
                   }
             },
             {
@@ -678,7 +678,7 @@
                   "name": "Which club has Ronaldo scored the most goals for?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Real Madrid, by a distance: 450 goals in 438 games between 2009 and 2018, a rate of 1.03 per game. See how those nine seasons broke down on the goals by season page."
+                        "text": "Real Madrid, by a distance: 450 goals in 438 games between 2009 and 2018, a rate of 1.03 per game. See how those nine seasons broke down in the goals by season section."
                   }
             },
             {
@@ -694,7 +694,7 @@
                   "name": "How old is Cristiano Ronaldo?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Cristiano Ronaldo is 41 years old. He was born on 5 February 1985 in Funchal, Madeira, and is still playing for Al Nassr and Portugal. His career is told chapter by chapter on the through the years page."
+                        "text": "Cristiano Ronaldo is 41 years old. He was born on 5 February 1985 in Funchal, Madeira, and is still playing for Al Nassr and Portugal. His career is told chapter by chapter in the through the years section."
                   }
             },
             {
@@ -766,7 +766,7 @@
                   "name": "When did Cristiano Ronaldo join Real Madrid?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "On 6 July 2009, for a then world record fee of €94m. He stayed nine seasons and scored 450 goals in 438 games, the details of which are on the goals by season page."
+                        "text": "On 6 July 2009, for a then world record fee of €94m. He stayed nine seasons and scored 450 goals in 438 games, the details of which are in the goals by season section."
                   }
             },
             {
@@ -782,7 +782,7 @@
                   "name": "When did Ronaldo win his first Ballon d'Or?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "On 2 December 2008, at 23, when he was named on all 96 ballots. He won five in total, in 2008, 2013, 2014, 2016 and 2017. Every award is listed on the achievements page."
+                        "text": "On 2 December 2008, at 23, when he was named on all 96 ballots. He won five in total, in 2008, 2013, 2014, 2016 and 2017. Every award is listed in the achievements section."
                   }
             },
             {
@@ -822,7 +822,7 @@
                   "name": "Where is Cristiano Ronaldo now?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "At 41 he is still playing for Al Nassr and Portugal. As of 15 September 2026 he has 979 career goals, 21 short of 1,000, tracked on the career statistics page."
+                        "text": "At 41 he is still playing for Al Nassr and Portugal. As of 15 September 2026 he has 979 career goals, 21 short of 1,000, and every total on this page is updated after each match he plays."
                   }
             },
             {
@@ -846,7 +846,7 @@
                   "name": "How many league titles has Ronaldo won?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "He has won 8 league titles in four countries: 3 Premier Leagues, 2 La Liga titles, 2 Serie A titles and the 2025/26 Saudi Pro League. The season by season goal record behind them is on the goals by season page."
+                        "text": "He has won 8 league titles in four countries: 3 Premier Leagues, 2 La Liga titles, 2 Serie A titles and the 2025/26 Saudi Pro League. The season by season goal record behind them is in the goals by season section."
                   }
             },
             {
@@ -854,7 +854,7 @@
                   "name": "What has Ronaldo won with Portugal?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Three trophies: Euro 2016 and the UEFA Nations League in 2018/19 and 2024/25. Those nights are told in full on the through the years page."
+                        "text": "Three trophies: Euro 2016 and the UEFA Nations League in 2018/19 and 2024/25. Those nights are told in full in the through the years section."
                   }
             },
             {
@@ -998,8 +998,7 @@
 
         body {
             font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(150deg, var(--bg-start) 0%, var(--bg-end) 100%);
-            background-attachment: fixed;
+            background: var(--bg-start);
             min-height: 100vh;
             color: var(--ink);
             line-height: 1.5;
@@ -1678,37 +1677,6 @@
             color: var(--ink-2);
         }
 
-        /* ========== LINK GRID ========== */
-        .link-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(206px, 1fr));
-            gap: 14px;
-        }
-        .link-card {
-            display: block;
-            text-decoration: none;
-            background: var(--surface);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--r-lg);
-            padding: 18px 20px;
-            box-shadow: var(--shadow-sm);
-            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-        }
-        .link-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--brand); }
-        .link-card strong {
-            display: block;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.98rem;
-            font-weight: 700;
-            color: var(--brand-ink);
-        }
-        .link-card > span {
-            display: block;
-            margin-top: 6px;
-            font-size: 0.86rem;
-            color: var(--ink-2);
-        }
-
         /* ========== METHOD ========== */
         .method {
             margin-top: 40px;
@@ -1933,7 +1901,7 @@
         .timeline, .era-items { list-style: none; }
         .timeline > li { position: relative; }
         .era-mark { position: sticky; top: 14px; z-index: 20; display: flex; justify-content: flex-start; margin: 0 0 26px 52px; pointer-events: none; }
-        .era-mark span { display: inline-flex; align-items: center; gap: 9px; background: var(--surface-strong); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid var(--glass-border); box-shadow: var(--shadow-sm); border-radius: 999px; padding: 8px 18px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--ink); }
+        .era-mark > span { display: inline-flex; align-items: center; gap: 9px; background: var(--surface-strong); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid var(--glass-border); box-shadow: var(--shadow-sm); border-radius: 999px; padding: 8px 18px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--ink); }
         .era-badge { width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 1px solid var(--line); overflow: hidden; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .era-badge img { width: 100%; height: 100%; object-fit: cover; }
         .era-badge.fallback { background: var(--brand); }
@@ -2050,12 +2018,7 @@
            with different values, the dashboard's .filter-tab and the home
            page's .trophy-grid, so this page's versions carry an ach- prefix.
            ================================================================ */
-        .counter-value, .trophy-count, .trophy-count-badge, .count { font-variant-numeric: tabular-nums lining-nums; }
-        .counter-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 24px; }
-        .counter-card { background: var(--surface); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--glass-border); border-radius: var(--r-lg); padding: 26px 22px; text-align: center; box-shadow: var(--shadow-sm); transition: transform 0.25s ease, box-shadow 0.25s ease; }
-        .counter-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-        .counter-value { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(2rem, 3.6vw, 2.5rem); font-weight: 800; line-height: 1; letter-spacing: -0.02em; color: var(--brand-ink); }
-        .counter-label { font-size: 0.74rem; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.07em; font-weight: 600; margin-top: 10px; }
+        .trophy-count, .trophy-count-badge, .count { font-variant-numeric: tabular-nums lining-nums; }
         .filter-section { margin-bottom: 22px; }
         .ach-filter-tab { padding: 10px 18px; border: none; background: transparent; color: var(--ink-2); font-family: inherit; font-size: 0.86rem; font-weight: 600; border-radius: var(--r-sm); cursor: pointer; transition: background 0.2s ease, color 0.2s ease; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
         .ach-filter-tab:hover { color: var(--ink); }
@@ -2092,12 +2055,7 @@
         .trophy-year { background: var(--surface-strong); color: var(--ink-2); border: 1px solid var(--line); padding: 3px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; }
         .trophy-count-badge { background: var(--brand); color: #fff; min-width: 32px; height: 32px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.875rem; flex-shrink: 0; padding: 0 10px; }
         .award-highlight { background: var(--brand-soft); border-color: var(--brand); }
-        @media (max-width: 1024px) {
-            .counter-grid { grid-template-columns: repeat(2, 1fr); }
-        }
         @media (max-width: 768px) {
-            .counter-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-            .counter-card { padding: 22px 18px; }
             .ach-filter-tab { padding: 8px 14px; flex-shrink: 0; }
             .accordion-header { padding: 16px 18px; }
             .club-badge { width: 42px; height: 42px; }
@@ -2105,6 +2063,208 @@
             .accordion-title { font-size: 1rem; }
             .accordion-meta { gap: 10px; }
             .ach-trophy-grid { grid-template-columns: 1fr; }
+        }
+
+
+        /* ================================================================
+           POLISH
+           Visual refinements made after every page merged into this one.
+           Kept together so they read as one change and override the older
+           rules above by source order rather than by specificity.
+           ================================================================ */
+
+        /* Timeline milestone titles. They were h4 on the old timeline page and
+           became h5 when it merged in, so the rule that sized them stopped
+           matching and they fell back to the browser's small default. */
+        .tl-card h5 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+            color: var(--ink);
+            margin: 0 0 8px;
+        }
+        .milestone.feature .tl-card h5 { font-size: 1.5rem; }
+
+        /* A milestone without a photo used to carry a large era tinted box
+           with its year faded to ten percent, which read as a missing image.
+           It is a slim strip in the club's colour now: the era still shows,
+           the date is already in the card, and each one is about 180px
+           shorter. */
+        .tl-photo:not(.has-img),
+        .milestone.feature .tl-photo:not(.has-img) { aspect-ratio: auto; height: 5px; }
+        .tl-photo:not(.has-img)::before,
+        .tl-photo:not(.has-img)::after { display: none; }
+        .tl-photo[data-era="sporting"]:not(.has-img) { background: #1f8a4c; }
+        .tl-photo[data-era="united"]:not(.has-img)   { background: #c7302a; }
+        .tl-photo[data-era="madrid"]:not(.has-img)   { background: linear-gradient(90deg, #2f56cf, #d6b250); }
+        .tl-photo[data-era="juventus"]:not(.has-img) { background: #16243a; }
+        .tl-photo[data-era="alnassr"]:not(.has-img)  { background: linear-gradient(90deg, #f2b705, #1e3a8a); }
+
+        /* A feature milestone spans the full width, so the spine ran straight
+           through it. It sits above the spine on a near opaque surface now. */
+        .milestone.feature { z-index: 2; }
+        .milestone.feature .tl-card { background: var(--surface-strong); }
+
+        /* The page gradient sits on its own fixed layer. It used
+           background-attachment: fixed, which iOS Safari ignores, so on a
+           phone the gradient stretched over the whole length of the page and
+           read as flat. Two faint glows, brand blue and Madrid gold, give the
+           glass cards something to frost. */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(1100px 620px at 88% -8%, rgba(47, 86, 207, 0.13), transparent 62%),
+                radial-gradient(900px 560px at -6% 104%, rgba(214, 178, 80, 0.10), transparent 60%),
+                linear-gradient(150deg, var(--bg-start) 0%, var(--bg-end) 100%);
+        }
+        ::selection { background: rgba(47, 86, 207, 0.18); }
+
+        .page-title { font-size: clamp(2rem, 1.35rem + 2.3vw, 3rem); letter-spacing: -0.03em; }
+
+        /* Section headings. With every page folded into this one the h2s
+           are the chapters, so they are larger than the h3s inside them,
+           carry a short brand rule above, and get more air before them. */
+        .main h2.section-title {
+            font-size: clamp(1.32rem, 1.05rem + 0.75vw, 1.62rem);
+            font-weight: 800;
+            letter-spacing: -0.022em;
+            line-height: 1.22;
+        }
+        .main h2.section-title::before {
+            content: '';
+            display: block;
+            width: 34px;
+            height: 4px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #1e3a8a, #2f56cf 55%, #8aa4ea);
+            margin-bottom: 12px;
+        }
+        .section-head:has(> h2) { margin-top: 64px; }
+
+        /* Anchored sections stop clear of the top edge, and on a phone clear
+           of the floating menu button as well. */
+        .main [id] { scroll-margin-top: 24px; }
+
+        /* The lead paragraph of each merged section sat flush against the
+           card or chips beneath it. */
+        .main section[id] > .page-lead { margin: 12px 0 26px; }
+        #goalsbyyear > .page-lead { margin-top: 30px; }
+        #goalsbyyear .chart-header { text-align: left; margin-bottom: 8px; }
+        #goalsbyyear .chart-subtitle { margin-top: 0; }
+
+        /* On this page */
+        .jump-nav {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin: 20px 0 0;
+        }
+        .jump-label {
+            flex-shrink: 0;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--ink-3);
+        }
+        .jump-nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+        .jump-nav li a {
+            display: inline-flex;
+            align-items: center;
+            min-height: 36px;
+            padding: 0 15px;
+            border-radius: 999px;
+            background: var(--surface);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-sm);
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--ink-2);
+            text-decoration: none;
+            white-space: nowrap;
+            transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .jump-nav li a:hover {
+            color: var(--brand-ink);
+            border-color: rgba(47, 86, 207, 0.35);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+            text-decoration: none;
+        }
+
+        /* Back to top */
+        .to-top {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 900;
+            width: 46px;
+            height: 46px;
+            border: 0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--hero-grad);
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 10px 26px rgba(31, 58, 138, 0.32);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px);
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s, box-shadow 0.25s ease;
+        }
+        .to-top svg { width: 20px; height: 20px; }
+        .to-top.show { opacity: 1; visibility: visible; transform: none; }
+        .to-top.show:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(31, 58, 138, 0.4); }
+
+        @media (max-width: 768px) {
+            .main [id] { scroll-margin-top: 80px; }
+            .section-head:has(> h2) { margin-top: 48px; }
+            .jump-nav { flex-direction: column; align-items: stretch; gap: 8px; }
+            .jump-nav ul {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                scrollbar-width: none;
+                margin: 0 -18px;
+                padding: 2px 18px 8px;
+            }
+            .jump-nav ul::-webkit-scrollbar { display: none; }
+            .jump-nav li { flex: 0 0 auto; }
+            .to-top { right: 16px; bottom: 16px; width: 44px; height: 44px; }
+            /* the cookie banner spans the foot of a phone screen */
+            .cookie-banner:not(.hidden) ~ .to-top { opacity: 0; visibility: hidden; }
+        }
+        @media (max-width: 640px) {
+            /* The year picker's three cards stacked about 400px tall on a
+               phone. As rows, with the figure on the right, they take half. */
+            .year-pick-grid { gap: 10px; }
+            .year-pick .kpi-card {
+                display: grid;
+                grid-template-columns: 1fr auto;
+                grid-template-areas: "label value" "note value";
+                column-gap: 14px;
+                row-gap: 4px;
+                align-items: center;
+                padding: 14px 16px;
+            }
+            .year-pick .kpi-label { grid-area: label; }
+            .year-pick .kpi-note { grid-area: note; }
+            .year-pick .kpi-value { grid-area: value; margin: 0; font-size: 1.9rem; }
+        }
+        /* The key dates grid asked for columns of at least 330px, wider than
+           the whole content area of a 360px phone, so it ran off the edge. */
+        .keydates { grid-template-columns: repeat(auto-fit, minmax(min(330px, 100%), 1fr)); }
+        @media (max-width: 480px) {
+            .keydates li { grid-template-columns: 1fr; gap: 3px; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -2424,6 +2584,21 @@
                 </div>
             </section>
 
+            <!-- On this page -->
+            <nav class="jump-nav reveal" style="animation-delay:.08s" aria-label="On this page">
+                <span class="jump-label">On this page</span>
+                <ul>
+                    <li><a class="plain" href="/#clubs">Clubs</a></li>
+                    <li><a class="plain" href="/#goalsbyyear">Goals by year</a></li>
+                    <li><a class="plain" href="/#goalsbyseason">Goals by season</a></li>
+                    <li><a class="plain" href="/#records">Records</a></li>
+                    <li><a class="plain" href="/#dashboard">Dashboard</a></li>
+                    <li><a class="plain" href="/#timeline">Through the years</a></li>
+                    <li><a class="plain" href="/#achievements">Achievements</a></li>
+                    <li><a class="plain" href="/#faq">FAQ</a></li>
+                </ul>
+            </nav>
+
             <!-- KPI strip -->
             <div class="section-head">
                 <h2 class="section-title">Ronaldo career stats at a glance</h2>
@@ -2471,13 +2646,13 @@
 
             <!-- Career at a glance -->
             <div class="section-head">
-                <h2 class="section-title">Career at a glance: goals by club and country</h2>
+                <h2 class="section-title" id="clubs">Career at a glance: goals by club and country</h2>
                 <a class="section-link" href="/#goalsbyseason">Season by season detail</a>
             </div>
             <section class="table-card reveal" style="animation-delay:.10s">
                 <div class="table-scroll">
                     <table class="data-table">
-                        <caption>Appearances, goals and assists for every senior team Cristiano Ronaldo has played for, as of <span data-stat="meta.updated.long">15 September 2026</span>. Full competition splits are on the <a href="/#goalsbyseason">goals by season page</a>.</caption>
+                        <caption>Appearances, goals and assists for every senior team Cristiano Ronaldo has played for, as of <span data-stat="meta.updated.long">15 September 2026</span>. Full competition splits are in the <a href="/#goalsbyseason">goals by season section</a>.</caption>
                         <thead>
                             <tr>
                                 <th scope="col" class="left">Team and years</th>
@@ -2548,7 +2723,6 @@
             <!-- Goals per year -->
             <div class="section-head">
                 <h2 class="section-title">How many goals does Ronaldo score each year?</h2>
-                <a class="section-link" href="/#goalsbyyear">Full goals by year chart</a>
             </div>
             <p class="section-note">Ronaldo has scored in every calendar year since <span data-stat="year.first">2002</span> and reached <span data-stat="year.above40.threshold">40</span> goals or more in <span data-stat="year.above40.word">fourteen</span> separate years. His best was <span data-stat="year.best.goals">69</span> goals in <span data-stat="year.best.year">2013</span>.</p>
             <section class="year-pick reveal" style="animation-delay:.08s" aria-labelledby="year-pick-title">
@@ -2608,7 +2782,7 @@
             </section>
             <!-- ==================== Goals by year, merged in from goalsbyyear.html ==================== -->
             <section id="goalsbyyear" aria-label="Ronaldo goals in every calendar year">
-                <p class="page-lead">Cristiano Ronaldo has scored <b><span data-stat="career.goals">979</span> goals</b> across <span data-stat="year.count">25</span> calendar years, from <span data-stat="year.first.goals">5</span> in <span data-stat="year.first">2002</span> to <b><span data-stat="year.current.goals">22</span> so far in <span data-stat="year.current.year">2026</span></b>, as of <span data-stat="meta.updated.long">15 September 2026</span>. His best year was <b><span data-stat="year.best.year">2013</span>, with <span data-stat="year.best.goals">69</span> goals</b>, and he has reached <span data-stat="year.above40.threshold">40</span> or more in <span data-stat="year.above40.word">fourteen</span> separate years.</p>
+                <p class="page-lead">Cristiano Ronaldo has scored <b><span data-stat="career.goals">979</span> goals</b> across <span data-stat="year.count">25</span> calendar years, from <span data-stat="year.first.goals">5</span> in <span data-stat="year.first">2002</span> to <b><span data-stat="year.current.goals">22</span> so far in <span data-stat="year.current.year">2026</span></b>, as of <span data-stat="meta.updated.long">15 September 2026</span>. The chart and table below give every one of those years, with the running total alongside.</p>
 
                 <section class="dash-chart-card reveal" style="animation-delay:.08s">
                     <div class="chart-header">
@@ -2648,7 +2822,7 @@
                 <section class="data-card reveal" style="animation-delay:.10s">
                     <div class="data-scroll">
                         <table class="dash-table">
-                            <caption>Cristiano Ronaldo goals in every calendar year for club and country, with the running career total and his age at the end of each year, as of <span data-stat="meta.updated.long">15 September 2026</span>. The <span data-stat="year.current.year">2026</span> row is still in progress. Club splits are on the <a href="/">career statistics page</a>.</caption>
+                            <caption>Cristiano Ronaldo goals in every calendar year for club and country, with the running career total and his age at the end of each year, as of <span data-stat="meta.updated.long">15 September 2026</span>. The <span data-stat="year.current.year">2026</span> row is still in progress. Club by club totals are in the <a href="/#clubs">career at a glance table</a>.</caption>
                             <thead>
                                 <tr>
                                     <th scope="col" class="left">Year</th>
@@ -2703,7 +2877,7 @@
                     <h3 class="section-title">What was Ronaldo's best year?</h3>
                     <a class="section-link" href="/#dashboard">See those goals by competition</a>
                 </div>
-                <p class="section-note">Cristiano Ronaldo's best calendar year was <b><span data-stat="year.best.year">2013</span>, when he scored <span data-stat="year.best.goals">69</span> goals</b> for Real Madrid and Portugal. His five highest scoring years all came between 2011 and 2015, at Real Madrid: <span data-stat="year.rank1.goals">69</span> in <span data-stat="year.rank1.year">2013</span>, <span data-stat="year.rank2.goals">63</span> in <span data-stat="year.rank2.year">2012</span>, <span data-stat="year.rank3.goals">61</span> in <span data-stat="year.rank3.year">2014</span>, <span data-stat="year.rank4.goals">60</span> in <span data-stat="year.rank4.year">2011</span> and <span data-stat="year.rank5.goals">57</span> in <span data-stat="year.rank5.year">2015</span>. He has scored <span data-stat="year.above40.threshold">40</span> goals or more in <span data-stat="year.above40.word">fourteen</span> separate years and has never gone a calendar year without scoring since 2002.</p>
+                <p class="section-note">Cristiano Ronaldo's best calendar year was <b><span data-stat="year.best.year">2013</span>, when he scored <span data-stat="year.best.goals">69</span> goals</b> for Real Madrid and Portugal. His five highest scoring years all came between 2011 and 2015, at Real Madrid: <span data-stat="year.rank1.goals">69</span> in <span data-stat="year.rank1.year">2013</span>, <span data-stat="year.rank2.goals">63</span> in <span data-stat="year.rank2.year">2012</span>, <span data-stat="year.rank3.goals">61</span> in <span data-stat="year.rank3.year">2014</span>, <span data-stat="year.rank4.goals">60</span> in <span data-stat="year.rank4.year">2011</span> and <span data-stat="year.rank5.goals">57</span> in <span data-stat="year.rank5.year">2015</span>.</p>
             </section>
 
             <!-- ==================== Goals by season, merged in from goalsbyseason.html ==================== -->
@@ -2722,7 +2896,7 @@
 
                 <section class="table-card reveal" style="animation-delay:.10s">
                     <div class="table-header">
-                        <h3 class="table-title">How many goals did Ronaldo score each season?</h3>
+                        <h3 class="table-title">Club goals and appearances, season by season</h3>
                         <p class="table-subtitle">Every club season from <span data-stat="season.span">2002/03 to 2026/27</span>, split by competition</p>
                     </div>
                     <div class="table-wrapper">
@@ -2833,7 +3007,7 @@
 
             <!-- Records -->
             <div class="section-head">
-                <h2 class="section-title">What records does Cristiano Ronaldo hold?</h2>
+                <h2 class="section-title" id="records">What records does Cristiano Ronaldo hold?</h2>
                 <a class="section-link" href="/#dashboard">Explore by competition</a>
             </div>
             <ul class="record-list reveal" style="animation-delay:.10s">
@@ -2868,7 +3042,7 @@
                     <div class="trophy-label">Ballon d'Or</div>
                 </div>
             </section>
-            <p class="section-note after">Ronaldo has won <span data-stat="honours.total">35</span> team trophies in four countries: <span data-stat="honours.manutd.premierleague">3</span> Premier Leagues, <span data-stat="honours.realmadrid.laliga">2</span> La Liga titles, <span data-stat="honours.juventus.seriea">2</span> Serie A titles and the 2025/26 Saudi Pro League, plus <span data-stat="honours.championsleague">5</span> Champions Leagues, Euro 2016 and two Nations League titles with Portugal. The club by club list, with every year, is on the <a href="/#achievements">achievements page</a>.</p>
+            <p class="section-note after">Ronaldo has won <span data-stat="honours.total">35</span> team trophies in four countries: <span data-stat="honours.manutd.premierleague">3</span> Premier Leagues, <span data-stat="honours.realmadrid.laliga">2</span> La Liga titles, <span data-stat="honours.juventus.seriea">2</span> Serie A titles and the 2025/26 Saudi Pro League, plus <span data-stat="honours.championsleague">5</span> Champions Leagues, Euro 2016 and two Nations League titles with Portugal. The club by club list, with every year, is in the <a href="/#achievements">achievements section</a>.</p>
 
             <!-- More statistics -->
             <div class="section-head">
@@ -3018,7 +3192,7 @@
                         <div class="chart-wrapper short">
                             <canvas id="finishChart" role="img" aria-label="Doughnut chart of Cristiano Ronaldo goals by finish type for the selected team"></canvas>
                         </div>
-                        <p class="chart-footnote" id="finishFootnote">The penalty and free kick totals match the tables on the home page.</p>
+                        <p class="chart-footnote" id="finishFootnote">The penalty and free kick totals match the free kicks, penalties and hat tricks table above.</p>
                     </section>
 
                     <section class="dash-chart-card reveal" style="animation-delay:.30s">
@@ -3496,30 +3670,6 @@
                 </div>
                 <p class="page-lead">Cristiano Ronaldo has won <b><span data-stat="honours.total">35</span> team trophies</b> and more than <b><span data-stat="award.floor">50</span> individual awards</b> as of <span data-stat="meta.updated.long">15 September 2026</span>, including <b><span data-stat="honours.championsleague">5</span> Champions Leagues</b>, <b><span data-stat="honours.leagues">8</span> league titles</b> in four countries, Euro 2016 with Portugal and <b><span data-stat="award.ballondor">5</span> Ballon d'Or</b> awards. Every trophy is listed below, club by club, with the year it was won.</p>
 
-                <div class="section-head tight" style="margin-top:4px">
-                    <h3 class="section-title">Ronaldo trophies at a glance</h3>
-                    <a class="section-link" href="/">Career goals and assists</a>
-                </div>
-
-                <section class="counter-grid reveal" style="animation-delay:.06s" aria-label="Trophy summary">
-                    <div class="counter-card">
-                        <div class="counter-value" data-stat="honours.total">35</div>
-                        <div class="counter-label">Total trophies</div>
-                    </div>
-                    <div class="counter-card">
-                        <div class="counter-value" data-stat="honours.leagues">8</div>
-                        <div class="counter-label">League titles</div>
-                    </div>
-                    <div class="counter-card">
-                        <div class="counter-value" data-stat="honours.championsleague">5</div>
-                        <div class="counter-label">Champions League</div>
-                    </div>
-                    <div class="counter-card">
-                        <div class="counter-value" data-stat="award.ballondor">5</div>
-                        <div class="counter-label">Ballon d'Or</div>
-                    </div>
-                </section>
-
                 <div class="section-head">
                     <h3 class="section-title">Every trophy, club by club</h3>
                     <a class="section-link" href="/#timeline">See the story behind them</a>
@@ -3919,11 +4069,11 @@
                 </article>
                 <article class="qa reveal" style="animation-delay:.13s">
                     <h3>How many goals has Ronaldo scored this season?</h3>
-                    <p>Ronaldo scored <b><span data-stat="season.current.goals">3</span> goals</b> for Al Nassr in the <span data-stat="season.current.name">2026/27</span> season, <span data-stat="season.current.league_goals">3</span> of them in the Saudi Pro League, and he has <span data-stat="year.current.goals">22</span> goals in the <span data-stat="year.current.year">2026</span> calendar year. Every campaign is listed on the <a href="/#goalsbyseason">goals by season page</a>.</p>
+                    <p>Ronaldo scored <b><span data-stat="season.current.goals">3</span> goals</b> for Al Nassr in the <span data-stat="season.current.name">2026/27</span> season, <span data-stat="season.current.league_goals">3</span> of them in the Saudi Pro League, and he has <span data-stat="year.current.goals">22</span> goals in the <span data-stat="year.current.year">2026</span> calendar year. Every campaign is listed in the <a href="/#goalsbyseason">goals by season section</a>.</p>
                 </article>
                 <article class="qa reveal" style="animation-delay:.16s">
                     <h3>Which club has Ronaldo scored the most goals for?</h3>
-                    <p>Real Madrid, by a distance: <b><span data-stat="team.realmadrid.goals">450</span> goals in <span data-stat="team.realmadrid.apps">438</span> games</b> between 2009 and 2018, a rate of <span data-stat="team.realmadrid.gpg">1.03</span> per game. See how those nine seasons broke down on the <a href="/#goalsbyseason">goals by season page</a>.</p>
+                    <p>Real Madrid, by a distance: <b><span data-stat="team.realmadrid.goals">450</span> goals in <span data-stat="team.realmadrid.apps">438</span> games</b> between 2009 and 2018, a rate of <span data-stat="team.realmadrid.gpg">1.03</span> per game. See how those nine seasons broke down in the <a href="/#goalsbyseason">goals by season section</a>.</p>
                 </article>
                 <article class="qa reveal" style="animation-delay:.19s">
                     <h3>How many Ballon d'Or awards does Ronaldo have?</h3>
@@ -3931,7 +4081,7 @@
                 </article>
                 <article class="qa reveal" style="animation-delay:.22s">
                     <h3>How old is Cristiano Ronaldo?</h3>
-                    <p>Cristiano Ronaldo is <b><span data-stat="person.age">41</span> years old</b>. He was born on <span data-stat="person.born.long">5 February 1985</span> in Funchal, Madeira, and is still playing for Al Nassr and Portugal. His career is told chapter by chapter on the <a href="/#timeline">through the years page</a>.</p>
+                    <p>Cristiano Ronaldo is <b><span data-stat="person.age">41</span> years old</b>. He was born on <span data-stat="person.born.long">5 February 1985</span> in Funchal, Madeira, and is still playing for Al Nassr and Portugal. His career is told chapter by chapter in the <a href="/#timeline">through the years section</a>.</p>
                 </article>
                 <article class="qa reveal" style="animation-delay:.25s">
                     <h3>What was Ronaldo's best season?</h3>
@@ -3941,7 +4091,7 @@
 
             <!-- FAQ -->
             <div class="section-head">
-                <h2 class="section-title">Frequently asked questions</h2>
+                <h2 class="section-title" id="faq">Frequently asked questions</h2>
             </div>
             <section class="faq-grid reveal" style="animation-delay:.10s" aria-label="Frequently asked questions">
                 <div class="faq-item">
@@ -3974,7 +4124,7 @@
                 </div>
                 <div class="faq-item">
                     <h3>When did Cristiano Ronaldo join Real Madrid?</h3>
-                    <p>On 6 July 2009, for a then world record fee of €94m. He stayed nine seasons and scored <span data-stat="team.realmadrid.goals">450</span> goals in <span data-stat="team.realmadrid.apps">438</span> games, the details of which are on the <a href="/#goalsbyseason">goals by season page</a>.</p>
+                    <p>On 6 July 2009, for a then world record fee of €94m. He stayed nine seasons and scored <span data-stat="team.realmadrid.goals">450</span> goals in <span data-stat="team.realmadrid.apps">438</span> games, the details of which are in the <a href="/#goalsbyseason">goals by season section</a>.</p>
                 </div>
                 <div class="faq-item">
                     <h3>How much did Ronaldo cost when he joined Juventus?</h3>
@@ -3982,7 +4132,7 @@
                 </div>
                 <div class="faq-item">
                     <h3>When did Ronaldo win his first Ballon d'Or?</h3>
-                    <p>On 2 December 2008, at 23, when he was named on all 96 ballots. He won five in total, in 2008, 2013, 2014, 2016 and 2017. Every award is listed on the <a href="/#achievements">achievements page</a>.</p>
+                    <p>On 2 December 2008, at 23, when he was named on all 96 ballots. He won five in total, in 2008, 2013, 2014, 2016 and 2017. Every award is listed in the <a href="/#achievements">achievements section</a>.</p>
                 </div>
                 <div class="faq-item">
                     <h3>When did Ronaldo score his 900th goal?</h3>
@@ -4002,7 +4152,7 @@
                 </div>
                 <div class="faq-item">
                     <h3>Where is Cristiano Ronaldo now?</h3>
-                    <p>At <span data-stat="person.age">41</span> he is still playing for Al Nassr and Portugal. As of <span data-stat="meta.updated.long">15 September 2026</span> he has <span data-stat="career.goals">979</span> career goals, <span data-stat="career.remaining">21</span> short of <span data-stat="career.target">1,000</span>, tracked on the <a href="/">career statistics page</a>.</p>
+                    <p>At <span data-stat="person.age">41</span> he is still playing for Al Nassr and Portugal. As of <span data-stat="meta.updated.long">15 September 2026</span> he has <span data-stat="career.goals">979</span> career goals, <span data-stat="career.remaining">21</span> short of <span data-stat="career.target">1,000</span>, and every total on this page is updated after each match he plays.</p>
                 </div>
                 <div class="faq-item">
                     <h3>How many trophies has Cristiano Ronaldo won?</h3>
@@ -4014,11 +4164,11 @@
                 </div>
                 <div class="faq-item">
                     <h3>How many league titles has Ronaldo won?</h3>
-                    <p>He has won <b>8 league titles</b> in four countries: 3 Premier Leagues, 2 La Liga titles, 2 Serie A titles and the 2025/26 Saudi Pro League. The season by season goal record behind them is on the <a href="/#goalsbyseason">goals by season page</a>.</p>
+                    <p>He has won <b>8 league titles</b> in four countries: 3 Premier Leagues, 2 La Liga titles, 2 Serie A titles and the 2025/26 Saudi Pro League. The season by season goal record behind them is in the <a href="/#goalsbyseason">goals by season section</a>.</p>
                 </div>
                 <div class="faq-item">
                     <h3>What has Ronaldo won with Portugal?</h3>
-                    <p>Three trophies: <b>Euro 2016</b> and the <b>UEFA Nations League</b> in 2018/19 and 2024/25. Those nights are told in full on the <a href="/#timeline">through the years page</a>.</p>
+                    <p>Three trophies: <b>Euro 2016</b> and the <b>UEFA Nations League</b> in 2018/19 and 2024/25. Those nights are told in full in the <a href="/#timeline">through the years section</a>.</p>
                 </div>
                 <div class="faq-item">
                     <h3>Has Ronaldo won the World Cup?</h3>
@@ -4053,33 +4203,6 @@
                     <p>Four, in 2007/08, 2010/11, 2013/14 and 2014/15, awarded to the top scorer across Europe's leagues.</p>
                 </div>
             </section>
-
-            <!-- Explore -->
-            <div class="section-head">
-                <h2 class="section-title">Explore the full statistics</h2>
-            </div>
-            <nav class="link-grid reveal" style="animation-delay:.10s" aria-label="More Cristiano Ronaldo statistics">
-                <a class="link-card" href="/#goalsbyyear">
-                    <strong>Ronaldo goals by year</strong>
-                    <span>Every calendar year from <span data-stat="year.span">2002 to 2026</span> and the cumulative climb to <span data-stat="career.goals">979</span>.</span>
-                </a>
-                <a class="link-card" href="/#goalsbyseason">
-                    <strong>Ronaldo goals by season</strong>
-                    <span>Club and country tables with league, cup and continental splits for every season.</span>
-                </a>
-                <a class="link-card" href="/#dashboard">
-                    <strong>Interactive stats dashboard</strong>
-                    <span>Further down this page: pick a team and see goals by competition, favourite opponents and finish types.</span>
-                </a>
-                <a class="link-card" href="/#timeline">
-                    <strong>Through the years</strong>
-                    <span>The career story from the Sporting CP debut to the 2026 World Cup.</span>
-                </a>
-                <a class="link-card" href="/#achievements">
-                    <strong>Achievements and honours</strong>
-                    <span>All <span data-stat="honours.total">35</span> team trophies and more than <span data-stat="award.floor">50</span> individual awards, club by club.</span>
-                </a>
-            </nav>
 
             <!-- Sourcing and methodology -->
             <section class="method reveal" style="animation-delay:.10s">
@@ -4128,6 +4251,10 @@
             <button class="cookie-btn cookie-accept" onclick="acceptCookies()">Accept</button>
         </div>
     </div>
+
+    <button type="button" class="to-top" id="toTop" aria-label="Back to top" tabindex="-1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 15 12 9 18 15"></polyline></svg>
+    </button>
 
     <script>
         // ===== Cookie banner =====
@@ -4220,6 +4347,54 @@
                     mobileBtn.setAttribute('aria-label', 'Open navigation');
                     document.body.style.overflow = '';
                 }
+            });
+        })();
+
+        /* The whole site is one page, so the sidebar follows the reader: the
+           link for whichever section crosses the upper third of the screen is
+           highlighted, and Home everywhere in between. The back to top button
+           appears once the reader is well down the page. */
+        (function () {
+            const links = Array.prototype.slice.call(document.querySelectorAll('.sidebar-nav .nav-item'));
+            const home = links[0];
+            const targets = links.slice(1).map(link => {
+                const id = (link.getAttribute('href') || '').split('#')[1];
+                return { link: link, el: id ? document.getElementById(id) : null };
+            }).filter(t => t.el);
+            const toTop = document.getElementById('toTop');
+            const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            let current = null, shown = false, queued = false;
+
+            function update() {
+                queued = false;
+                const line = window.innerHeight * 0.3;
+                let hit = null;
+                targets.forEach(t => {
+                    const r = t.el.getBoundingClientRect();
+                    if (r.top <= line && r.bottom > line) hit = t.link;
+                });
+                const next = hit || home;
+                if (next !== current) {
+                    links.forEach(l => l.classList.toggle('active', l === next));
+                    current = next;
+                }
+                const show = window.scrollY > 1400;
+                if (toTop && show !== shown) {
+                    toTop.classList.toggle('show', show);
+                    toTop.tabIndex = show ? 0 : -1;
+                    shown = show;
+                }
+            }
+            window.addEventListener('scroll', () => {
+                if (!queued) { queued = true; window.requestAnimationFrame(update); }
+            }, { passive: true });
+            window.addEventListener('resize', update);
+            update();
+
+            if (toTop) toTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+                const title = document.querySelector('.page-title');
+                if (title) { title.setAttribute('tabindex', '-1'); title.focus({ preventScroll: true }); }
             });
         })();
 
@@ -4491,6 +4666,7 @@
         const colors = {
             barBg: 'rgba(47, 86, 207, 0.50)',
             barBorder: '#2f56cf',
+            barHover: '#1e3a8a',
             gridColor: 'rgba(20, 30, 50, 0.06)',
             textColor: '#56657f',
             textPrimary: '#16243a',
@@ -4504,6 +4680,27 @@
             cornerRadius: 10
         };
         const axisTicks = { font: { family: fonts.body, size: 12 }, color: colors.textColor };
+        // Bars shade from a light blue at the base to brand navy at the far end of
+        // the axis, so a longer bar reads darker as well as longer. The gradient
+        // spans the whole plot area and is rebuilt only when that area resizes.
+        function barGradient(axis) {
+            let cache = null, key = '';
+            return context => {
+                const area = context.chart.chartArea;
+                if (!area) return colors.barBg;
+                const k = area.left + ',' + area.top + ',' + area.right + ',' + area.bottom;
+                if (k !== key) {
+                    const c = context.chart.ctx;
+                    cache = axis === 'x' ? c.createLinearGradient(area.left, 0, area.right, 0)
+                                         : c.createLinearGradient(0, area.bottom, 0, area.top);
+                    cache.addColorStop(0, '#8aa4ea');
+                    cache.addColorStop(0.55, '#2f56cf');
+                    cache.addColorStop(1, '#1e3a8a');
+                    key = k;
+                }
+                return cache;
+            };
+        }
         const axisTicksInk = { font: { family: fonts.body, size: 12 }, color: colors.textPrimary };
 
         let currentTeam = 'all';
@@ -4578,10 +4775,12 @@
                 datasets: [{
                     label: 'Goals',
                     data: [],
-                    backgroundColor: colors.barBg,
-                    borderColor: colors.barBorder,
-                    borderWidth: 2,
-                    borderRadius: 6
+                    backgroundColor: barGradient('x'),
+                    hoverBackgroundColor: colors.barHover,
+                    borderWidth: 0,
+                    borderRadius: 6,
+                    borderSkipped: false,
+                    maxBarThickness: 22
                 }]
             },
             options: {
@@ -4665,7 +4864,7 @@
                     type: 'bar',
                     data: {
                         labels: DATA.portugalYears.map(row => row[0]),
-                        datasets: [{ label: 'Goals', data: DATA.portugalYears.map(row => row[1]), backgroundColor: colors.barBg, borderColor: colors.barBorder, borderWidth: 2, borderRadius: 5 }]
+                        datasets: [{ label: 'Goals', data: DATA.portugalYears.map(row => row[1]), backgroundColor: barGradient('y'), hoverBackgroundColor: colors.barHover, borderWidth: 0, borderRadius: 5, maxBarThickness: 34 }]
                     },
                     options: Object.assign(JSON.parse(JSON.stringify(base)), {
                         plugins: { legend: { display: false }, tooltip: Object.assign({}, tooltipStyle, { callbacks: { label: ctx => ctx.parsed.y + ' goals' } }) }
@@ -4678,7 +4877,7 @@
                     type: 'bar',
                     data: {
                         labels: rows.map(row => row[0]),
-                        datasets: [{ label: 'Goals', data: rows.map(row => row[1]), backgroundColor: colors.barBg, borderColor: colors.barBorder, borderWidth: 2, borderRadius: 5 }]
+                        datasets: [{ label: 'Goals', data: rows.map(row => row[1]), backgroundColor: barGradient('y'), hoverBackgroundColor: colors.barHover, borderWidth: 0, borderRadius: 5, maxBarThickness: 34 }]
                     },
                     options: Object.assign(JSON.parse(JSON.stringify(base)), {
                         plugins: { legend: { display: false }, tooltip: Object.assign({}, tooltipStyle, { callbacks: { label: ctx => ctx.parsed.y + ' goals' } }) }
@@ -4700,10 +4899,12 @@
                 datasets: [{
                     label: 'Goals',
                     data: currentOppRows.map(row => row[1]),
-                    backgroundColor: colors.barBg,
-                    borderColor: colors.barBorder,
-                    borderWidth: 2,
-                    borderRadius: 6
+                    backgroundColor: barGradient('x'),
+                    hoverBackgroundColor: colors.barHover,
+                    borderWidth: 0,
+                    borderRadius: 6,
+                    borderSkipped: false,
+                    maxBarThickness: 22
                 }]
             },
             options: {
@@ -4891,8 +5092,12 @@
 
         function getChartColors() {
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            // the best year is picked out in solid brand blue, every other year sits
+            // behind the cumulative line in a lighter tint
+            const soft = isDark ? 'rgba(111, 151, 240, 0.40)' : 'rgba(47, 86, 207, 0.30)';
+            const strong = isDark ? '#6f97f0' : '#2f56cf';
             return {
-                barBg: isDark ? 'rgba(111, 151, 240, 0.45)' : 'rgba(47, 86, 207, 0.50)',
+                barBg: context => context.dataIndex === bestYearIndex ? strong : soft,
                 barBorder: isDark ? '#6f97f0' : '#2f56cf',
                 lineColor: isDark ? '#bcd0fa' : '#1e3a8a',
                 lineFill: isDark ? 'rgba(111, 151, 240, 0.15)' : 'rgba(30, 58, 138, 0.08)',
@@ -4902,6 +5107,7 @@
             };
         }
 
+        const bestYearIndex = goalsPerYear.indexOf(Math.max(...goalsPerYear));
         let colors = getChartColors();
         const ctx = document.getElementById('goalsChart').getContext('2d');
         const chart = new Chart(ctx, {
@@ -4914,9 +5120,11 @@
                         data: goalsPerYear,
                         type: 'bar',
                         backgroundColor: colors.barBg,
-                        borderColor: colors.barBorder,
-                        borderWidth: 2,
+                        hoverBackgroundColor: colors.barBorder,
+                        borderWidth: 0,
                         borderRadius: 6,
+                        borderSkipped: 'bottom',
+                        maxBarThickness: 30,
                         yAxisID: 'y',
                         order: 2
                     },
@@ -4931,8 +5139,8 @@
                         tension: 0.3,
                         yAxisID: 'y1',
                         order: 1,
-                        pointRadius: 4,
-                        pointHoverRadius: 7,
+                        pointRadius: 0,
+                        pointHoverRadius: 6,
                         pointBackgroundColor: colors.lineColor,
                         pointBorderColor: '#fff',
                         pointBorderWidth: 2
@@ -4992,7 +5200,7 @@
                         grid: { color: colors.gridColor },
                         ticks: { font: { family: "'DM Sans', sans-serif", size: 12 }, color: colors.textColor, stepSize: 100 },
                         title: { display: true, text: 'Cumulative goals', font: { family: "'DM Sans', sans-serif", size: 13, weight: 500 }, color: colors.textColor },
-                        max: 1000
+                        suggestedMax: 1000
                     }
                 }
             }
@@ -5001,7 +5209,7 @@
         function updateChartColors() {
             colors = getChartColors();
             chart.data.datasets[0].backgroundColor = colors.barBg;
-            chart.data.datasets[0].borderColor = colors.barBorder;
+            chart.data.datasets[0].hoverBackgroundColor = colors.barBorder;
             chart.data.datasets[1].borderColor = colors.lineColor;
             chart.data.datasets[1].backgroundColor = colors.lineFill;
             chart.data.datasets[1].pointBackgroundColor = colors.lineColor;

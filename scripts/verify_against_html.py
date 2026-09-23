@@ -276,8 +276,8 @@ for tid, block in data["competitions"].items():
            sum(int(x) for x in re.findall(r",\s*(\d+)\s*\]", body)) if body else "<NOT FOUND>",
            key=f"comp.{tid}.total")
 
-# Trophies. Every count on the achievements page is checked against the year
-# lists in the dataset, and the counters shared with the home page too.
+# Trophies. Every count in the achievements section is checked against the
+# year lists in the dataset, and so are the trophy cards above it.
 ACC_ID = {"sporting": "acc-sporting-cp", "manutd": "acc-manchester-united",
           "realmadrid": "acc-real-madrid", "juventus": "acc-juventus",
           "alnassr": "acc-al-nassr", "portugal": "acc-portugal-national-team"}
@@ -302,10 +302,6 @@ for tid, trophies in data.get("honours", {}).get("teams", {}).items():
             record("index.html", f"{tid} {t['name']} {year} listed", True, shown)
 
 for key, pattern, page in [
-    ("honours.total", r'<div class="counter-value"[^>]*>(\d+)</div>\s*<div class="counter-label">Total trophies', "index.html"),
-    ("honours.leagues", r'<div class="counter-value"[^>]*>(\d+)</div>\s*<div class="counter-label">League titles', "index.html"),
-    ("honours.championsleague", r'<div class="counter-value"[^>]*>(\d+)</div>\s*<div class="counter-label">Champions League', "index.html"),
-    ("award.ballondor", r'<div class="counter-value"[^>]*>(\d+)</div>\s*<div class="counter-label">Ballon', "index.html"),
     ("honours.club", r'Club honours <span class="count"[^>]*>(\d+)</span>', "index.html"),
     ("honours.national", r'National team <span class="count"[^>]*>(\d+)</span>', "index.html"),
     ("honours.total", r'<div class="trophy-value"[^>]*>(\d+)</div>\s*<div class="trophy-label">Team trophies', "index.html"),
@@ -314,14 +310,6 @@ for key, pattern, page in [
     ("award.ballondor", r'<div class="trophy-value"[^>]*>(\d+)</div>\s*<div class="trophy-label">Ballon', "index.html"),
 ]:
     record(page, f"{key} counter", values[key], find(page, pattern, 1), key=key)
-
-# The two pages must publish the same trophy totals, which is the drift this
-# whole exercise exists to stop.
-for key in ("honours.total", "honours.leagues", "honours.championsleague", "award.ballondor"):
-    pair = [find(p, r'<div class="(?:counter|trophy)-value" data-stat="'
-                 + re.escape(key) + r'">(\d+)</div>', 1)
-            for p in ("index.html", "index.html")]
-    record("index.html", f"{key} agrees with achievements", pair[1], pair[0])
 
 # Body part and finish tables
 for label, slot in [("Right foot", "right"), ("Left foot", "left"), ("Headers", "head"), ("Other", "other")]:

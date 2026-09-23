@@ -112,13 +112,25 @@
 
         body {
             font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(150deg, var(--bg-start) 0%, var(--bg-end) 100%);
-            background-attachment: fixed;
+            background: var(--bg-start);
             min-height: 100vh;
             color: var(--ink);
             line-height: 1.5;
             transition: background 0.4s ease, color 0.3s ease;
             overflow-x: hidden;
+        }
+        /* the same fixed gradient layer as the home page, which iOS Safari
+           honours where it ignored background-attachment: fixed */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(1100px 620px at 88% -8%, rgba(47, 86, 207, 0.13), transparent 62%),
+                radial-gradient(900px 560px at -6% 104%, rgba(214, 178, 80, 0.10), transparent 60%),
+                linear-gradient(150deg, var(--bg-start) 0%, var(--bg-end) 100%);
         }
         a { color: inherit; }
 

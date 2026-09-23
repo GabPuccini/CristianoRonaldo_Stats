@@ -248,6 +248,18 @@ achievements merged in: `.ach-filter-tab`, since the dashboard owns
 owns `.trophy-grid`. Tables merged from the old pages reuse `.dash-table`,
 which they already matched.
 
+Under the profile card an "On this page" row of pills links to every chapter:
+`#clubs`, `#goalsbyyear`, `#goalsbyseason`, `#records`, `#dashboard`,
+`#timeline`, `#achievements` and `#faq`. Add a pill there whenever a section is
+added, and give its links `class="plain"`, which is what opts a link inside a
+list out of the underline body links carry. The sidebar highlights the section
+being read as the page scrolls, and a back to top button appears once the reader
+is well down the page, so neither needs touching when content moves.
+
+Links between sections say "section", never "page": "in the goals by season
+section", not "on the goals by season page". The FAQ answers are duplicated in
+the FAQPage JSON-LD, so change the wording in both places together.
+
 There is one "how these numbers are compiled" section, at the foot of the page.
 Each merged page brought its own and they said the same thing four times over,
 so the clauses that were genuinely different were folded into that one block
