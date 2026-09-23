@@ -2199,6 +2199,19 @@
             .keydates li { grid-template-columns: 1fr; gap: 3px; }
         }
 
+        /* The career cards at the top carry a label and a figure only, so
+           each is sized to exactly that: no room left over for a note. */
+        .kpi-grid .kpi-card { padding: 20px 22px 22px; justify-content: center; }
+        .kpi-grid .kpi-value {
+            margin: 12px 0 0;
+            line-height: 1;
+            font-size: clamp(2.2rem, 3.4vw, 2.8rem);
+        }
+        @media (max-width: 768px) {
+            .kpi-grid .kpi-card { padding: 16px 18px 18px; }
+            .kpi-grid .kpi-value { margin-top: 10px; font-size: 2.1rem; }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
             .reveal { opacity: 1 !important; transform: none !important; }
@@ -2538,7 +2551,6 @@
                 <div class="kpi-card reveal" style="animation-delay:.10s">
                     <span class="kpi-label">Career goals</span>
                     <span class="kpi-value" data-stat="career.goals">979</span>
-                    <span class="kpi-note"><span data-stat="career.gpg">0.73</span> goals per game across <span data-stat="season.count">25</span> seasons.</span>
                 </div>
                 <div class="kpi-card reveal" style="animation-delay:.13s">
                     <span class="kpi-label">Appearances</span>
@@ -2551,7 +2563,6 @@
                 <div class="kpi-card reveal" style="animation-delay:.19s">
                     <span class="kpi-label">Goals in <span data-stat="season.current.name">2026/27</span></span>
                     <span class="kpi-value" data-stat="season.current.goals">3</span>
-                    <span class="kpi-note">For Al Nassr.</span>
                 </div>
             </section>
 
