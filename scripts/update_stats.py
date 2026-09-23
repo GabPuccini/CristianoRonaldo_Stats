@@ -281,6 +281,10 @@ def derive(data):
     out["year.first.goals"] = str(year_rows[0]["goals"])
     out["year.last"] = str(year_rows[-1]["year"])
     out["year.span"] = f"{year_rows[0]['year']} to {year_rows[-1]['year']}"
+    # the same thing for club seasons. The season table caption said "to
+    # 2025/26" for a month after 2026/27 opened, because nothing drove it.
+    club_seasons = [r["season"] for r in data["seasons"] if r.get("in_career", True)]
+    out["season.span"] = f"{club_seasons[0]} to {club_seasons[-1]}"
     # the pages say "40 goals or more in N separate years", both as a figure and
     # spelled out, so both forms are computed from the same count
     above40 = sum(1 for r in year_rows if r["goals"] >= 40)

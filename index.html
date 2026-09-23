@@ -985,6 +985,10 @@
             --r-md: 16px;
             --r-lg: 22px;
             --r-xl: 30px;
+            /* the season tables: a solid head and two faint row washes */
+            --table-head: #1e3a8a;
+            --table-row-alt: rgba(47, 86, 207, 0.045);
+            --table-row-hover: rgba(47, 86, 207, 0.09);
         }
 
         /* ========== RESET ========== */
@@ -2020,7 +2024,7 @@
         .table-subtitle { color: var(--ink-2); font-size: 0.9rem; margin-top: 5px; }
         .table-wrapper { overflow-x: auto; overflow-y: hidden; border-radius: var(--r-md); border: 1px solid var(--line); }
         .stats-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 900px; font-variant-numeric: tabular-nums; }
-        .stats-table thead { background: var(--table-head); }
+        .stats-table thead { background: var(--hero-grad); }   /* matches the career total row at the foot */
         .stats-table thead th { color: #fff; font-weight: 600; padding: 14px 12px; text-align: center; font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
         .stats-table thead th:first-child { text-align: left; }
         .stats-table tbody tr { transition: background 0.18s ease; }
@@ -2761,7 +2765,7 @@
                 <section class="table-card reveal" style="animation-delay:.10s">
                     <div class="table-header">
                         <h3 class="table-title">How many goals did Ronaldo score each season?</h3>
-                        <p class="table-subtitle">Every club season from 2002/03 to 2025/26, split by competition</p>
+                        <p class="table-subtitle">Every club season from <span data-stat="season.span">2002/03 to 2026/27</span>, split by competition</p>
                     </div>
                     <div class="table-wrapper">
                         <table class="stats-table">
