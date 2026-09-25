@@ -2257,8 +2257,8 @@
         }
 
         /* Ballon d'Or. The trophy sits on a faint gold glow beside the case
-           for the nominations, then the table: wins tinted gold with a gold
-           pill, second and third in silver and bronze, the rest as text. */
+           for the nominations, then the table. Every finish is plain text;
+           a win is set in bold on a faintly tinted row. */
         .bd-feature {
             display: grid;
             grid-template-columns: minmax(170px, 240px) 1fr;
@@ -2312,20 +2312,8 @@
         .bd-table tbody td.bd-winner { color: var(--ink-2); }
         .bd-table tbody td.bd-winner b { color: var(--ink); font-weight: 700; }
         .bd-table tr.bd-won > * { background: rgba(214, 178, 80, 0.12); }
-        .bd-pill {
-            display: inline-flex;
-            align-items: center;
-            padding: 3px 11px;
-            border-radius: 999px;
-            font-size: 0.78rem;
-            font-weight: 800;
-            letter-spacing: 0.02em;
-            white-space: nowrap;
-        }
-        .bd-pill.gold { background: linear-gradient(135deg, #f7dd8c, #d6a93a); color: #4a3200; box-shadow: 0 2px 8px rgba(214, 169, 58, 0.35); }
-        .bd-pill.silver { background: linear-gradient(135deg, #f1f3f7, #c6cdd9); color: #2c3647; }
-        .bd-pill.bronze { background: linear-gradient(135deg, #f2d6ba, #c98a55); color: #4a2a10; }
         .bd-pos { color: var(--ink-2); font-weight: 600; white-space: nowrap; }
+        .bd-pos.first { color: var(--ink); font-weight: 700; }
         .bd-table tfoot th { padding-left: 12px; }
         .bd-table tfoot td { text-align: left; }
         @media (max-width: 768px) {
@@ -2346,7 +2334,6 @@
             .bd-table thead th:first-child,
             .bd-table tbody th { padding-left: 8px; }
             .bd-table tbody th small { white-space: normal; font-size: 0.64rem; }
-            .bd-pill { padding: 2px 8px; font-size: 0.72rem; }
         }
 
         /* On a phone five columns cannot fit, so each move becomes a small
@@ -2697,7 +2684,7 @@
                     <span class="updated-badge"><span data-stat="meta.updated.badge">Updated 25 September 2026</span></span>
                 </p>
                 <h1 class="page-title">Cristiano Ronaldo career statistics</h1>
-                <p class="page-lead">Cristiano Ronaldo has scored <b><span data-stat="career.goals">979</span> goals</b> in <b><span data-stat="career.apps">1,338</span> senior appearances</b> for club and country, with <b><span data-stat="career.assists">291</span> assists</b>, as of <span data-stat="meta.updated.long">25 September 2026</span>. No man has scored more goals in official football, and at <span data-stat="person.age">41</span> he is still adding to the total for Al Nassr and Portugal, <span data-stat="career.remaining">21</span> short of <span data-stat="career.target">1,000</span>. Every figure on this page is counted match by match rather than lifted from a data feed.</p>
+                <p class="page-lead">Cristiano Ronaldo has scored <b><span data-stat="career.goals">979</span> goals</b> in <b><span data-stat="career.apps">1,338</span> senior appearances</b> for club and country, with <b><span data-stat="career.assists">291</span> assists</b>, as of <span data-stat="meta.updated.long">25 September 2026</span>. No man has scored more goals in official football, and at <span data-stat="person.age">41</span> he is still adding to the total for Al Nassr and Portugal, <span data-stat="career.remaining">21</span> short of <span data-stat="career.target">1,000</span>. The figures are gathered from several sources, from club and competition records to specialist football databases, and checked against one another.</p>
             </header>
 
             <!-- Identity strip -->
@@ -3472,19 +3459,19 @@
                             <tr><th scope="row">2004</th><td class="bd-club"><span class="club-cell"><img src="badge-manchesterunited.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Manchester United</span></span></td><td class="bd-finish"><span class="bd-pos">Joint 12th</span></td><td class="bd-winner">Andriy Shevchenko</td></tr>
                             <tr><th scope="row">2005</th><td class="bd-club"><span class="club-cell"><img src="badge-manchesterunited.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Manchester United</span></span></td><td class="bd-finish"><span class="bd-pos">Joint 20th</span></td><td class="bd-winner">Ronaldinho</td></tr>
                             <tr><th scope="row">2006</th><td class="bd-club"><span class="club-cell"><img src="badge-manchesterunited.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Manchester United</span></span></td><td class="bd-finish"><span class="bd-pos">14th</span></td><td class="bd-winner">Fabio Cannavaro</td></tr>
-                            <tr><th scope="row">2007</th><td class="bd-club"><span class="club-cell"><img src="badge-manchesterunited.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Manchester United</span></span></td><td class="bd-finish"><span class="bd-pill silver">2nd</span></td><td class="bd-winner">Kaká</td></tr>
-                            <tr class="bd-won"><th scope="row">2008</th><td class="bd-club"><span class="club-cell"><img src="badge-manchesterunited.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Manchester United</span></span></td><td class="bd-finish"><span class="bd-pill gold">Winner</span></td><td class="bd-winner"><b>Cristiano Ronaldo</b></td></tr>
-                            <tr><th scope="row">2009</th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pill silver">2nd</span></td><td class="bd-winner">Lionel Messi</td></tr>
+                            <tr><th scope="row">2007</th><td class="bd-club"><span class="club-cell"><img src="badge-manchesterunited.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Manchester United</span></span></td><td class="bd-finish"><span class="bd-pos">2nd</span></td><td class="bd-winner">Kaká</td></tr>
+                            <tr class="bd-won"><th scope="row">2008</th><td class="bd-club"><span class="club-cell"><img src="badge-manchesterunited.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Manchester United</span></span></td><td class="bd-finish"><span class="bd-pos first">1st</span></td><td class="bd-winner"><b>Cristiano Ronaldo</b></td></tr>
+                            <tr><th scope="row">2009</th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pos">2nd</span></td><td class="bd-winner">Lionel Messi</td></tr>
                             <tr><th scope="row">2010<small>FIFA Ballon d'Or</small></th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pos">6th</span></td><td class="bd-winner">Lionel Messi</td></tr>
-                            <tr><th scope="row">2011<small>FIFA Ballon d'Or</small></th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pill silver">2nd</span></td><td class="bd-winner">Lionel Messi</td></tr>
-                            <tr><th scope="row">2012<small>FIFA Ballon d'Or</small></th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pill silver">2nd</span></td><td class="bd-winner">Lionel Messi</td></tr>
-                            <tr class="bd-won"><th scope="row">2013<small>FIFA Ballon d'Or</small></th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pill gold">Winner</span></td><td class="bd-winner"><b>Cristiano Ronaldo</b></td></tr>
-                            <tr class="bd-won"><th scope="row">2014<small>FIFA Ballon d'Or</small></th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pill gold">Winner</span></td><td class="bd-winner"><b>Cristiano Ronaldo</b></td></tr>
-                            <tr><th scope="row">2015<small>FIFA Ballon d'Or</small></th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pill silver">2nd</span></td><td class="bd-winner">Lionel Messi</td></tr>
-                            <tr class="bd-won"><th scope="row">2016</th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pill gold">Winner</span></td><td class="bd-winner"><b>Cristiano Ronaldo</b></td></tr>
-                            <tr class="bd-won"><th scope="row">2017</th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pill gold">Winner</span></td><td class="bd-winner"><b>Cristiano Ronaldo</b></td></tr>
-                            <tr><th scope="row">2018</th><td class="bd-club"><span class="club-cell"><img src="badge-juventus.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Juventus</span></span></td><td class="bd-finish"><span class="bd-pill silver">2nd</span></td><td class="bd-winner">Luka Modrić</td></tr>
-                            <tr><th scope="row">2019</th><td class="bd-club"><span class="club-cell"><img src="badge-juventus.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Juventus</span></span></td><td class="bd-finish"><span class="bd-pill bronze">3rd</span></td><td class="bd-winner">Lionel Messi</td></tr>
+                            <tr><th scope="row">2011<small>FIFA Ballon d'Or</small></th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pos">2nd</span></td><td class="bd-winner">Lionel Messi</td></tr>
+                            <tr><th scope="row">2012<small>FIFA Ballon d'Or</small></th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pos">2nd</span></td><td class="bd-winner">Lionel Messi</td></tr>
+                            <tr class="bd-won"><th scope="row">2013<small>FIFA Ballon d'Or</small></th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pos first">1st</span></td><td class="bd-winner"><b>Cristiano Ronaldo</b></td></tr>
+                            <tr class="bd-won"><th scope="row">2014<small>FIFA Ballon d'Or</small></th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pos first">1st</span></td><td class="bd-winner"><b>Cristiano Ronaldo</b></td></tr>
+                            <tr><th scope="row">2015<small>FIFA Ballon d'Or</small></th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pos">2nd</span></td><td class="bd-winner">Lionel Messi</td></tr>
+                            <tr class="bd-won"><th scope="row">2016</th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pos first">1st</span></td><td class="bd-winner"><b>Cristiano Ronaldo</b></td></tr>
+                            <tr class="bd-won"><th scope="row">2017</th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pos first">1st</span></td><td class="bd-winner"><b>Cristiano Ronaldo</b></td></tr>
+                            <tr><th scope="row">2018</th><td class="bd-club"><span class="club-cell"><img src="badge-juventus.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Juventus</span></span></td><td class="bd-finish"><span class="bd-pos">2nd</span></td><td class="bd-winner">Luka Modrić</td></tr>
+                            <tr><th scope="row">2019</th><td class="bd-club"><span class="club-cell"><img src="badge-juventus.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Juventus</span></span></td><td class="bd-finish"><span class="bd-pos">3rd</span></td><td class="bd-winner">Lionel Messi</td></tr>
                             <tr><th scope="row">2021</th><td class="bd-club"><span class="club-cell"><img src="badge-manchesterunited.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Manchester United</span></span></td><td class="bd-finish"><span class="bd-pos">6th</span></td><td class="bd-winner">Lionel Messi</td></tr>
                             <tr><th scope="row">2022</th><td class="bd-club"><span class="club-cell"><img src="badge-manchesterunited.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Manchester United</span></span></td><td class="bd-finish"><span class="bd-pos">20th</span></td><td class="bd-winner">Karim Benzema</td></tr>
                             <!-- STATS:END table.ballondor -->

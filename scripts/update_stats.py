@@ -111,9 +111,7 @@ def ordinal(n):
 
 
 def ballon_finish(row):
-    """How a finishing position is printed: Winner, 2nd, Joint 12th."""
-    if row["position"] == 1:
-        return "Winner"
+    """How a finishing position is printed: 1st, 2nd, Joint 12th."""
     return ("Joint " if row.get("joint") else "") + ordinal(row["position"])
 
 
@@ -1247,16 +1245,15 @@ def build_regions(data, tables, values):
             "</tr>")
     r["table.transfers"] = "\n".join(rows)
 
-    # Ballon d'Or table body, oldest first. Wins carry a gold pill and a tinted
-    # row; second and third a silver and a bronze pill; anything lower is text.
-    pill = {1: "gold", 2: "silver", 3: "bronze"}
+    # Ballon d'Or table body, oldest first. Every finish is plain text; a win
+    # is bold, on a faintly tinted row.
     rows = []
     for b in data.get("ballon_dor", []):
         c = clubs[b["club"]]
         award = f'<small>{b["award"]}</small>' if b.get("award") else ""
         finish = values[f"ballondor.{b['year']}.finish"]
-        finish = (f'<span class="bd-pill {pill[b["position"]]}">{finish}</span>'
-                  if b["position"] in pill else f'<span class="bd-pos">{finish}</span>')
+        first = " first" if b["position"] == 1 else ""
+        finish = f'<span class="bd-pos{first}">{finish}</span>'
         winner = f'<b>{b["winner"]}</b>' if b["position"] == 1 else b["winner"]
         won_cls = ' class="bd-won"' if b["position"] == 1 else ""
         rows.append(

@@ -363,14 +363,14 @@ for tid in data["bodyparts"]:
     for slot in engine.BODY_SLOTS:      # mark each key as exercised by this row
         exercised.add(f"body.{tid}.{slot}")
 
-# Ballon d'Or: one row per nomination, the gold pills matching the wins, and
+# Ballon d'Or: one row per nomination, the first places matching the wins, and
 # the trophy total quoted beneath the table
 _bd = re.search(r'<table class="data-table bd-table">.*?</table>', PAGES["index.html"], re.S)
 _bd = _bd.group(0) if _bd else ""
 record("index.html", "Ballon d'Or table rows", values["ballondor.nominations"],
        str(len(re.findall(r'<th scope="row">\d{4}', _bd))))
 record("index.html", "Ballon d'Or table wins", values["award.ballondor"],
-       str(_bd.count('<span class="bd-pill gold">Winner</span>')), key="award.ballondor")
+       str(_bd.count('<span class="bd-pos first">1st</span>')), key="award.ballondor")
 record("index.html", "Ballon d'Or total line", f'{values["ballondor.nominations"]} nominations, {values["ballondor.wins"]} wins',
        text_of(find("index.html", r'<th scope="row">Total</th>\s*<td colspan="3">(.*?)</td>')))
 
