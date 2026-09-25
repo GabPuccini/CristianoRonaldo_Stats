@@ -101,6 +101,11 @@ def career_competitions(data):
 # Derivation: everything computable is computed, never stored
 # ----------------------------------------------------------------------------
 
+def euros(millions):
+    """A fee in millions of euros as the site prints it: €94m, €12.5m."""
+    return f"€{millions:g}m"
+
+
 def derive(data):
     """Return a flat dict of stat keys to display values, plus table payloads."""
     teams = {t["id"]: t for t in data["teams"]}
@@ -450,6 +455,20 @@ def derive(data):
     # label is one marker instead, which keeps the badge exactly as it renders.
     out["meta.updated.badge"] = f"Updated {updated.day} {updated:%B %Y}"
 
+    # Transfer history. Fees and market values are millions of euros, printed
+    # the way the site writes money elsewhere: "€94m", "€117m".
+    moves = data.get("transfers", [])
+    paid = [t for t in moves if t.get("fee")]
+    out["transfers.fees.total"] = euros(sum(t["fee"] for t in paid))
+    out["transfers.paid.count"] = str(len(paid))
+    out["transfers.paid.word"] = WORDS.get(len(paid), str(len(paid)))
+    if paid:
+        out["transfers.record.fee"] = euros(max(t["fee"] for t in paid))
+    for t in moves:
+        y = t["date"][:4]
+        out[f"transfer.{y}.fee"] = euros(t["fee"]) if t.get("fee") else t.get("fee_text", "n/a")
+        out[f"transfer.{y}.mv"] = euros(t["market_value"]) if t.get("market_value") else "n/a"
+
     tables = {
         "years": year_rows,
         "seasons": data["seasons"],
@@ -478,6 +497,21 @@ def slug(name):
 def validate(data, facts):
     errors = []
     cg = facts["career_goals"]
+
+    # Transfers are keyed by the year of the move in the published figures, so
+    # two moves in one calendar year would overwrite each other's fee.
+    clubs = data.get("transfer_clubs", {})
+    seen = set()
+    for t in data.get("transfers", []):
+        y = t["date"][:4]
+        if y in seen:
+            errors.append(f"two transfers in {y}: the transfer.{y} keys would collide")
+        seen.add(y)
+        for end in ("from", "to"):
+            if t.get(end) is not None and t[end] not in clubs:
+                errors.append(f"transfer on {t['date']}: {end} club {t[end]!r} is not in transfer_clubs")
+        if not t.get("fee") and not t.get("fee_text"):
+            errors.append(f"transfer on {t['date']} has no fee and no fee_text to print instead")
 
     year_sum = sum(r["goals"] for r in data["years"])
     if year_sum != cg:
@@ -1137,6 +1171,37 @@ def build_regions(data, tables, values):
             f'{indent}<tr><th scope="row">{label}</th><td>{n}</td>'
             f'<td class="muted">{n / total * 100:.1f}%</td></tr>'
             for label, n in pairs)
+
+    # Transfer history table body, newest move first. The roles restate the
+    # table's semantics, because on a phone each row is laid out as a grid
+    # card and some screen readers stop treating restyled cells as a table.
+    clubs = data.get("transfer_clubs", {})
+
+    def club_cell(cid):
+        if cid is None:
+            return ('<span class="club-cell"><span class="club-none" aria-hidden="true"></span>'
+                    '<span class="club-name">Without club</span></span>')
+        c = clubs[cid]
+        return (f'<span class="club-cell"><img src="{c["badge"]}" alt="" width="26" height="26" '
+                f'loading="lazy" decoding="async"><span class="club-name">{c["name"]}'
+                f'<small>{c["country"]}</small></span></span>')
+
+    rows = []
+    for t in sorted(data.get("transfers", []), key=lambda t: t["date"], reverse=True):
+        when = dt.date.fromisoformat(t["date"])
+        y = t["date"][:4]
+        fee_cls = "tr-fee" if t.get("fee") else "tr-fee none"
+        mv_cls = "tr-mv" if t.get("market_value") else "tr-mv none"
+        rows.append(
+            f'{" " * 28}<tr role="row">'
+            f'<th scope="row" role="rowheader"><span class="tr-date">{when.day} {when:%b %Y}</span>'
+            f'<small>{t["season"]}</small></th>'
+            f'<td class="tr-club tr-left" role="cell" data-label="Left">{club_cell(t["from"])}</td>'
+            f'<td class="tr-club tr-joined" role="cell" data-label="Joined">{club_cell(t["to"])}</td>'
+            f'<td class="{mv_cls}" role="cell" data-label="Market value">{values[f"transfer.{y}.mv"]}</td>'
+            f'<td class="{fee_cls}" role="cell" data-label="Fee">{values[f"transfer.{y}.fee"]}</td>'
+            "</tr>")
+    r["table.transfers"] = "\n".join(rows)
 
     r["table.dash.competitions"] = share_rows(career_comps.items(), " " * 32)
     r["table.dash.finish"] = share_rows(

@@ -363,6 +363,15 @@ for tid in data["bodyparts"]:
     for slot in engine.BODY_SLOTS:      # mark each key as exercised by this row
         exercised.add(f"body.{tid}.{slot}")
 
+# Transfer history: the total under the table, and every fee in the rows
+# adding back up to it, so a hand edited row cannot hide.
+record("index.html", "transfer fees total", values["transfers.fees.total"],
+       find("index.html", r'<th scope="row" colspan="4" role="rowheader">Total fees</th>\s*<td role="cell">([^<]+)</td>'),
+       key="transfers.fees.total")
+_fees = re.findall(r'<td class="tr-fee" role="cell" data-label="Fee">€([\d.]+)m</td>', PAGES["index.html"])
+record("index.html", "transfer fees in the rows add up", values["transfers.fees.total"],
+       f"€{sum(float(f) for f in _fees):g}m")
+
 # Club goals total
 record("index.html", "club goals total", values["career.club_goals"],
        find("index.html", r'<div class="summary-value">([\d,]+)</div><div class="summary-label">Club goals</div>'),
@@ -392,7 +401,11 @@ record("index.html", "current year", values["year.current.year"],
        find("index.html", r'<b>\d+ so far in (\d{4})</b>'), key="year.current.year")
 
 # Team names and year spans, as printed in the home page career table
-printed = dict(re.findall(r'<span class="club-name">([^<]+)<small>([^<]+)</small>', PAGES["index.html"]))
+# Scoped to that table: the transfer table below it uses the same markup, with
+# the club's country where this one has the years.
+_career = re.search(r'id="clubs".*?</table>', PAGES["index.html"], re.S)
+printed = dict(re.findall(r'<span class="club-name">([^<]+)<small>([^<]+)</small>',
+                          _career.group(0) if _career else ""))
 for team in data["teams"]:
     tid = team["id"]
     record("index.html", f"career table name {tid}", values[f"team.{tid}.name"],

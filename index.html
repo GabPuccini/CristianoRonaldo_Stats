@@ -2212,6 +2212,87 @@
             .kpi-grid .kpi-value { margin-top: 10px; font-size: 2.1rem; }
         }
 
+        /* Transfer history. Laid out like the career table above it, with the
+           clubs left aligned beside their badges, the fee in brand blue and the
+           market value quieter, since it is an estimate rather than a price. */
+        .transfer-table tbody th { vertical-align: middle; }
+        .transfer-table .tr-date { display: block; font-weight: 700; }
+        .transfer-table tbody th small {
+            display: block;
+            margin-top: 2px;
+            font-size: 0.76rem;
+            font-weight: 500;
+            color: var(--ink-3);
+        }
+        .transfer-table td.tr-club {
+            text-align: left;
+            color: var(--ink);
+            font-weight: 600;
+        }
+        .transfer-table td.tr-mv { color: var(--ink-2); font-weight: 600; }
+        .transfer-table td.tr-fee { font-weight: 800; font-size: 0.98rem; }
+        .transfer-table td.none { color: var(--ink-3); font-weight: 600; font-size: 0.86rem; }
+        .club-none {
+            width: 26px; height: 26px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            border: 1.5px dashed var(--line-strong);
+            background: rgba(255, 255, 255, 0.6);
+        }
+        .transfer-table tfoot th { text-align: left; }
+        /* the club columns' headings start where their badges do */
+        .transfer-table thead th.left + th.left { padding-left: 18px; }
+        @media (max-width: 768px) {
+            .transfer-table thead th.left + th.left { padding-left: 8px; }
+        }
+
+        /* On a phone five columns cannot fit, so each move becomes a small
+           card: date and fee along the top, the two clubs side by side, the
+           market value underneath. The roles in the markup keep it a table
+           for screen readers. */
+        @media (max-width: 640px) {
+            .transfer-table thead {
+                position: absolute;
+                width: 1px; height: 1px;
+                overflow: hidden;
+                clip: rect(0 0 0 0);
+                white-space: nowrap;
+            }
+            .transfer-table tbody tr {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-areas: "when fee" "left joined" "mv mv";
+                gap: 10px 14px;
+                padding: 16px 0;
+                border-bottom: 1px solid var(--line);
+            }
+            .transfer-table tbody tr > th,
+            .transfer-table tbody tr > td { display: block; padding: 0; border: 0; }
+            .transfer-table tbody th { grid-area: when; }
+            .transfer-table td.tr-fee { grid-area: fee; text-align: right; font-size: 1.1rem; }
+            .transfer-table td.tr-fee.none { font-size: 0.86rem; }
+            .transfer-table td.tr-left { grid-area: left; }
+            .transfer-table td.tr-joined { grid-area: joined; }
+            .transfer-table td.tr-mv { grid-area: mv; text-align: left; font-size: 0.84rem; }
+            .transfer-table td.tr-club::before,
+            .transfer-table td.tr-mv::before {
+                content: attr(data-label);
+                display: block;
+                margin-bottom: 6px;
+                font-size: 0.66rem;
+                font-weight: 700;
+                letter-spacing: 0.07em;
+                text-transform: uppercase;
+                color: var(--ink-3);
+            }
+            .transfer-table td.tr-mv::before { display: inline; margin: 0 8px 0 0; }
+            .transfer-table .club-name { font-size: 0.86rem; }
+            .transfer-table .club-none { width: 22px; height: 22px; }
+            .transfer-table tfoot tr { display: flex; justify-content: space-between; align-items: baseline; }
+            .transfer-table tfoot th,
+            .transfer-table tfoot td { display: block; }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
             .reveal { opacity: 1 !important; transform: none !important; }
@@ -2531,6 +2612,7 @@
                 <span class="jump-label">On this page</span>
                 <ul>
                     <li><a class="plain" href="/#clubs">Clubs</a></li>
+                    <li><a class="plain" href="/#transfers">Transfers</a></li>
                     <li><a class="plain" href="/#goalsbyyear">Goals by year</a></li>
                     <li><a class="plain" href="/#goalsbyseason">Goals by season</a></li>
                     <li><a class="plain" href="/#records">Records</a></li>
@@ -2640,6 +2722,46 @@
                     </table>
                 </div>
                 <p class="table-note">Senior first team matches only, in every competition. Youth and reserve football is excluded.</p>
+            </section>
+
+            <!-- Transfer history -->
+            <div class="section-head">
+                <h2 class="section-title" id="transfers">Cristiano Ronaldo transfer history</h2>
+                <a class="section-link" href="/#timeline">The story behind each move</a>
+            </div>
+            <p class="section-note">Clubs have paid a combined <b><span data-stat="transfers.fees.total">€247m</span></b> in transfer fees for Cristiano Ronaldo, across <span data-stat="transfers.paid.word">four</span> transfers in his senior career. The largest was the <b><span data-stat="transfer.2018.fee">€117m</span></b> Juventus paid Real Madrid in July 2018, and the <span data-stat="transfer.2009.fee">€94m</span> Real Madrid paid Manchester United in 2009 was a world record at the time. He joined Al Nassr on a free transfer in January 2023.</p>
+            <section class="table-card reveal" style="animation-delay:.10s">
+                <div class="table-scroll">
+                    <table class="data-table transfer-table" role="table">
+                        <caption>Every move of Cristiano Ronaldo's senior career, newest first, with the fee paid and his market value at the time, as of <span data-stat="meta.updated.long">25 September 2026</span>.</caption>
+                        <thead role="rowgroup">
+                            <tr role="row">
+                                <th scope="col" class="left" role="columnheader">Date</th>
+                                <th scope="col" class="left" role="columnheader">Left</th>
+                                <th scope="col" class="left" role="columnheader">Joined</th>
+                                <th scope="col" role="columnheader">Market value</th>
+                                <th scope="col" role="columnheader">Fee</th>
+                            </tr>
+                        </thead>
+                        <tbody role="rowgroup">
+                            <!-- STATS:BEGIN table.transfers -->
+                            <tr role="row"><th scope="row" role="rowheader"><span class="tr-date">1 Jan 2023</span><small>2022/23</small></th><td class="tr-club tr-left" role="cell" data-label="Left"><span class="club-cell"><span class="club-none" aria-hidden="true"></span><span class="club-name">Without club</span></span></td><td class="tr-club tr-joined" role="cell" data-label="Joined"><span class="club-cell"><img src="badge-alnassr.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Al Nassr<small>Saudi Arabia</small></span></span></td><td class="tr-mv" role="cell" data-label="Market value">€20m</td><td class="tr-fee none" role="cell" data-label="Fee">Free transfer</td></tr>
+                            <tr role="row"><th scope="row" role="rowheader"><span class="tr-date">22 Nov 2022</span><small>2022/23</small></th><td class="tr-club tr-left" role="cell" data-label="Left"><span class="club-cell"><img src="badge-manchesterunited.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Manchester United<small>England</small></span></span></td><td class="tr-club tr-joined" role="cell" data-label="Joined"><span class="club-cell"><span class="club-none" aria-hidden="true"></span><span class="club-name">Without club</span></span></td><td class="tr-mv" role="cell" data-label="Market value">€20m</td><td class="tr-fee none" role="cell" data-label="Fee">Released</td></tr>
+                            <tr role="row"><th scope="row" role="rowheader"><span class="tr-date">31 Aug 2021</span><small>2021/22</small></th><td class="tr-club tr-left" role="cell" data-label="Left"><span class="club-cell"><img src="badge-juventus.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Juventus<small>Italy</small></span></span></td><td class="tr-club tr-joined" role="cell" data-label="Joined"><span class="club-cell"><img src="badge-manchesterunited.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Manchester United<small>England</small></span></span></td><td class="tr-mv" role="cell" data-label="Market value">€45m</td><td class="tr-fee" role="cell" data-label="Fee">€17m</td></tr>
+                            <tr role="row"><th scope="row" role="rowheader"><span class="tr-date">10 Jul 2018</span><small>2018/19</small></th><td class="tr-club tr-left" role="cell" data-label="Left"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid<small>Spain</small></span></span></td><td class="tr-club tr-joined" role="cell" data-label="Joined"><span class="club-cell"><img src="badge-juventus.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Juventus<small>Italy</small></span></span></td><td class="tr-mv" role="cell" data-label="Market value">€100m</td><td class="tr-fee" role="cell" data-label="Fee">€117m</td></tr>
+                            <tr role="row"><th scope="row" role="rowheader"><span class="tr-date">6 Jul 2009</span><small>2009/10</small></th><td class="tr-club tr-left" role="cell" data-label="Left"><span class="club-cell"><img src="badge-manchesterunited.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Manchester United<small>England</small></span></span></td><td class="tr-club tr-joined" role="cell" data-label="Joined"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid<small>Spain</small></span></span></td><td class="tr-mv" role="cell" data-label="Market value">€60m</td><td class="tr-fee" role="cell" data-label="Fee">€94m</td></tr>
+                            <tr role="row"><th scope="row" role="rowheader"><span class="tr-date">12 Aug 2003</span><small>2003/04</small></th><td class="tr-club tr-left" role="cell" data-label="Left"><span class="club-cell"><img src="badge-sporting.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Sporting CP<small>Portugal</small></span></span></td><td class="tr-club tr-joined" role="cell" data-label="Joined"><span class="club-cell"><img src="badge-manchesterunited.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Manchester United<small>England</small></span></span></td><td class="tr-mv none" role="cell" data-label="Market value">n/a</td><td class="tr-fee" role="cell" data-label="Fee">€19m</td></tr>
+                            <!-- STATS:END table.transfers -->
+                        </tbody>
+                        <tfoot role="rowgroup">
+                            <tr role="row">
+                                <th scope="row" colspan="4" role="rowheader">Total fees</th>
+                                <td role="cell" data-stat="transfers.fees.total">€247m</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <p class="table-note">Fees and market values are Transfermarkt's figures, in euros. A market value is its estimate of what he was worth on the day of the move, and none was published when he left Sporting CP.</p>
             </section>
 
             <!-- Goals per year -->

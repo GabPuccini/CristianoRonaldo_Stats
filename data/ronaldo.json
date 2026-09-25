@@ -2,7 +2,8 @@
   "_notes": [
     "Single source of truth for every published figure. Built from the site HTML on 22 August 2026. opponents holds goals only, keyed by the dashboard view (club, saudi and intl are aggregate views, the rest are club eras); the parallel opponent_apps map holds the games column for the same rows. Both lists are the top scorers against, not complete sets.",
     "competitions is keyed by team, then by the label the site prints on the competitions chart. The career totals are rolled up from these, with the labels in competition_rollup folded into Other cup competitions, so a goal recorded against a team updates the team chart and the overall chart together.",
-    "years rows carry apps as well as goals. Club appearances are stored by season, which straddles two calendar years, so the yearly figure cannot be derived from them and is held here instead. A goal or an appearance banks itself to the calendar year it was played in."
+    "years rows carry apps as well as goals. Club appearances are stored by season, which straddles two calendar years, so the yearly figure cannot be derived from them and is held here instead. A goal or an appearance banks itself to the calendar year it was played in.",
+    "transfers lists every move of the senior career, oldest first, as Transfermarkt publishes it. fee and market_value are millions of euros; null means none was paid or none was published, and fee_text then says why. from and to are keys of transfer_clubs, or null for a spell without a club."
   ],
   "meta": {
     "updated": "2026-09-25",
@@ -1862,6 +1863,85 @@
         1,
         1
       ]
+    }
+  ],
+  "transfer_clubs": {
+    "sporting": {
+      "name": "Sporting CP",
+      "country": "Portugal",
+      "badge": "badge-sporting.png"
+    },
+    "manutd": {
+      "name": "Manchester United",
+      "country": "England",
+      "badge": "badge-manchesterunited.png"
+    },
+    "realmadrid": {
+      "name": "Real Madrid",
+      "country": "Spain",
+      "badge": "badge-realmadrid.png"
+    },
+    "juventus": {
+      "name": "Juventus",
+      "country": "Italy",
+      "badge": "badge-juventus.png"
+    },
+    "alnassr": {
+      "name": "Al Nassr",
+      "country": "Saudi Arabia",
+      "badge": "badge-alnassr.png"
+    }
+  },
+  "transfers": [
+    {
+      "season": "2003/04",
+      "date": "2003-08-12",
+      "from": "sporting",
+      "to": "manutd",
+      "market_value": null,
+      "fee": 19
+    },
+    {
+      "season": "2009/10",
+      "date": "2009-07-06",
+      "from": "manutd",
+      "to": "realmadrid",
+      "market_value": 60,
+      "fee": 94
+    },
+    {
+      "season": "2018/19",
+      "date": "2018-07-10",
+      "from": "realmadrid",
+      "to": "juventus",
+      "market_value": 100,
+      "fee": 117
+    },
+    {
+      "season": "2021/22",
+      "date": "2021-08-31",
+      "from": "juventus",
+      "to": "manutd",
+      "market_value": 45,
+      "fee": 17
+    },
+    {
+      "season": "2022/23",
+      "date": "2022-11-22",
+      "from": "manutd",
+      "to": null,
+      "market_value": 20,
+      "fee": null,
+      "fee_text": "Released"
+    },
+    {
+      "season": "2022/23",
+      "date": "2023-01-01",
+      "from": null,
+      "to": "alnassr",
+      "market_value": 20,
+      "fee": null,
+      "fee_text": "Free transfer"
     }
   ]
 }
