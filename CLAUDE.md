@@ -261,8 +261,8 @@ owns `.trophy-grid`. Tables merged from the old pages reuse `.dash-table`,
 which they already matched.
 
 Under the profile card an "On this page" row of pills links to every chapter:
-`#clubs`, `#transfers`, `#goalsbyyear`, `#goalsbyseason`, `#records`, `#dashboard`,
-`#timeline`, `#achievements` and `#faq`. Add a pill there whenever a section is
+`#clubs`, `#transfers`, `#goalsbyyear`, `#goalsbyseason`, `#records`,
+`#dashboard`, `#timeline`, `#achievements`, `#ballondor` and `#faq`. Add a pill there whenever a section is
 added, and give its links `class="plain"`, which is what opts a link inside a
 list out of the underline body links carry. The sidebar highlights the section
 being read as the page scrolls, and a back to top button appears once the reader
@@ -292,6 +292,23 @@ for needs a line in `transfer_clubs` with its name, country and badge file.
 `check` refuses two moves in the same calendar year, since each move's figures
 are keyed by its year.
 
+## Ballon d'Or
+
+The Ballon d'Or section follows the achievements, at `/#ballondor`: the trophy
+(`ballondor.webp` with a `ballondor.png` fallback, both cut out onto a
+transparent background), a short case for what his nominations show, and a
+table of every edition he was shortlisted for. The table is built from
+`ballon_dor` in the dataset, one row per edition with his final position,
+`joint` for a shared place, his club when the award was presented and the
+winner. The 2010 to 2015 rows carry `award: "FIFA Ballon d'Or"`.
+
+The page calls his 18 nominations the most of any player, so the next highest
+is held in `ballon_dor_next_most` and `check` fails if it ever reaches his total.
+When the shortlist is announced each year, update that entry if the player
+named there is on it, and add a row to `ballon_dor` if Ronaldo is. `check` also
+fails if the winning years in the table stop matching the Ballon d'Or entry
+under individual honours.
+
 ## Site wide writing rules
 
 * British English.
@@ -304,7 +321,10 @@ are keyed by its year.
   size it was supplied at, so it stays as sharp as the file. Drop a new photo in
   `timeline/` at whatever proportions it has, portrait or landscape, and add it
   as a `<picture>` with a `webp` source, a `jpg` fallback and the real `width`
-  and `height`. Do not add `object-fit: cover` to it: that is what was cutting
+  and `height`. Give the `<picture>` a `style="--w: Npx"`, where N is the
+  photo's width or the width at which it would be 560px tall, whichever is
+  smaller. That sizes the box before the file loads; without it the page grows
+  as photos arrive and the jump links land short. Do not add `object-fit: cover` to it: that is what was cutting
   the head and feet off the Sporting debut photo.
 * The navigation is duplicated in full on every page on purpose. Do not
   centralise it into a shared include or inject it with JavaScript; static

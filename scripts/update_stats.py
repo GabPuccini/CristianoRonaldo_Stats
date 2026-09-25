@@ -101,6 +101,21 @@ def career_competitions(data):
 # Derivation: everything computable is computed, never stored
 # ----------------------------------------------------------------------------
 
+def ordinal(n):
+    """2 -> 2nd, 12 -> 12th, 21 -> 21st."""
+    if 10 <= n % 100 <= 20:
+        return f"{n}th"
+    suffix = {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
+    return f"{n}{suffix}"
+
+
+def ballon_finish(row):
+    """How a finishing position is printed: Winner, 2nd, Joint 12th."""
+    if row["position"] == 1:
+        return "Winner"
+    return ("Joint " if row.get("joint") else "") + ordinal(row["position"])
+
+
 def euros(millions):
     """A fee in millions of euros as the site prints it: €94m, €12.5m."""
     return f"€{millions:g}m"
@@ -469,6 +484,28 @@ def derive(data):
         out[f"transfer.{y}.fee"] = euros(t["fee"]) if t.get("fee") else t.get("fee_text", "n/a")
         out[f"transfer.{y}.mv"] = euros(t["market_value"]) if t.get("market_value") else "n/a"
 
+    # Ballon d'Or history: every edition he was shortlisted for
+    bd = data.get("ballon_dor", [])
+    counts = {
+        "nominations": len(bd),
+        "wins": sum(1 for r in bd if r["position"] == 1),
+        "runnerup": sum(1 for r in bd if r["position"] == 2),
+        "podiums": sum(1 for r in bd if r["position"] <= 3),
+        "topten": sum(1 for r in bd if r["position"] <= 10),
+    }
+    for name, n in counts.items():
+        out[f"ballondor.{name}"] = str(n)
+        out[f"ballondor.{name}.word"] = WORDS.get(n, str(n))
+    if bd:
+        out["ballondor.first"] = str(bd[0]["year"])
+        out["ballondor.last"] = str(bd[-1]["year"])
+    for r in bd:
+        out[f"ballondor.{r['year']}.finish"] = ballon_finish(r)
+    nxt = data.get("ballon_dor_next_most")
+    if nxt:
+        out["ballondor.next.player"] = nxt["player"]
+        out["ballondor.next.nominations"] = str(nxt["nominations"])
+
     tables = {
         "years": year_rows,
         "seasons": data["seasons"],
@@ -497,6 +534,26 @@ def slug(name):
 def validate(data, facts):
     errors = []
     cg = facts["career_goals"]
+
+    # The Ballon d'Or table has to agree with the honours list about which years
+    # he won, and the page calls his nomination total a record, so the next
+    # player must stay below it.
+    bd = data.get("ballon_dor", [])
+    won = sorted(str(r["year"]) for r in bd if r["position"] == 1)
+    listed = next((a["years"] for a in data["honours"]["individual"] if a["name"] == "Ballon d'Or"), [])
+    if bd and won != sorted(listed):
+        errors.append(f"Ballon d'Or wins in ballon_dor {won} differ from honours {sorted(listed)}")
+    if len({r["year"] for r in bd}) != len(bd):
+        errors.append("ballon_dor lists a year twice")
+    for r in bd:
+        if r["club"] not in data.get("transfer_clubs", {}):
+            errors.append(f"Ballon d'Or {r['year']}: club {r['club']!r} is not in transfer_clubs")
+        if not isinstance(r["position"], int) or r["position"] < 1:
+            errors.append(f"Ballon d'Or {r['year']}: position must be a whole number from 1")
+    nxt = data.get("ballon_dor_next_most")
+    if bd and nxt and nxt["nominations"] >= len(bd):
+        errors.append(f"{nxt['player']} has {nxt['nominations']} Ballon d'Or nominations, not fewer "
+                      f"than Ronaldo's {len(bd)}: the page's record claim needs rewording")
 
     # Transfers are keyed by the year of the move in the published figures, so
     # two moves in one calendar year would overwrite each other's fee.
@@ -749,6 +806,11 @@ def file_rules():
             (r"including " + G + r" Champions Leagues", "honours.championsleague"),
             (r"Champions Leagues, " + G + r" league titles", "honours.leagues"),
             (r"- Ballon d'Or awards: " + G, "award.ballondor"),
+            # (\d+) and not G, which would take the comma after the figure with it
+            (r"- Ballon d'Or nominations: (\d+), from", "ballondor.nominations"),
+            (r"Ballon d'Or nominations: \d+, from (\d{4}) to", "ballondor.first"),
+            (r"Ballon d'Or nominations: \d+, from \d{4} to (\d{4}),", "ballondor.last"),
+            (r"ahead of Lionel Messi's (\d+)", "ballondor.next.nominations"),
             (r"the cumulative climb to " + G, "year.2026.cumulative"),
         ],
     }
@@ -1202,6 +1264,28 @@ def build_regions(data, tables, values):
             f'<td class="{fee_cls}" role="cell" data-label="Fee">{values[f"transfer.{y}.fee"]}</td>'
             "</tr>")
     r["table.transfers"] = "\n".join(rows)
+
+    # Ballon d'Or table body, oldest first. Wins carry a gold pill and a tinted
+    # row; second and third a silver and a bronze pill; anything lower is text.
+    pill = {1: "gold", 2: "silver", 3: "bronze"}
+    rows = []
+    for b in data.get("ballon_dor", []):
+        c = clubs[b["club"]]
+        award = f'<small>{b["award"]}</small>' if b.get("award") else ""
+        finish = values[f"ballondor.{b['year']}.finish"]
+        finish = (f'<span class="bd-pill {pill[b["position"]]}">{finish}</span>'
+                  if b["position"] in pill else f'<span class="bd-pos">{finish}</span>')
+        winner = f'<b>{b["winner"]}</b>' if b["position"] == 1 else b["winner"]
+        won_cls = ' class="bd-won"' if b["position"] == 1 else ""
+        rows.append(
+            f'{" " * 28}<tr{won_cls}>'
+            f'<th scope="row">{b["year"]}{award}</th>'
+            f'<td class="bd-club"><span class="club-cell"><img src="{c["badge"]}" alt="" width="26" height="26" '
+            f'loading="lazy" decoding="async"><span class="club-name">{c["name"]}</span></span></td>'
+            f'<td class="bd-finish">{finish}</td>'
+            f'<td class="bd-winner">{winner}</td>'
+            "</tr>")
+    r["table.ballondor"] = "\n".join(rows)
 
     r["table.dash.competitions"] = share_rows(career_comps.items(), " " * 32)
     r["table.dash.finish"] = share_rows(

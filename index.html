@@ -2034,6 +2034,16 @@
         .tl-photo[data-era="juventus"]:not(.has-img) { background: #16243a; }
         .tl-photo[data-era="alnassr"]:not(.has-img)  { background: linear-gradient(90deg, #f2b705, #1e3a8a); }
 
+        /* Timeline photos were width and height auto, so each took no room
+           until it loaded and the page grew by thousands of pixels as a
+           reader scrolled, which made the jump links land short. Each
+           picture now carries its display width in --w: its own width,
+           or the width at which it is 560px tall if that is less. The box
+           is sized before the file arrives, keeps the photo's proportions
+           and never shows it larger than it was supplied. */
+        .tl-photo.has-img picture { width: min(100%, var(--w, 100%)); }
+        .tl-photo.has-img img { width: 100%; height: auto; max-height: none; }
+
         /* A feature milestone spans the full width, so the spine ran straight
            through it. It sits above the spine on a near opaque surface now. */
         .milestone.feature { z-index: 2; }
@@ -2244,6 +2254,99 @@
         .transfer-table thead th.left + th.left { padding-left: 18px; }
         @media (max-width: 768px) {
             .transfer-table thead th.left + th.left { padding-left: 8px; }
+        }
+
+        /* Ballon d'Or. The trophy sits on a faint gold glow beside the case
+           for the nominations, then the table: wins tinted gold with a gold
+           pill, second and third in silver and bronze, the rest as text. */
+        .bd-feature {
+            display: grid;
+            grid-template-columns: minmax(170px, 240px) 1fr;
+            gap: 40px;
+            align-items: center;
+            padding: 30px 36px;
+            margin-bottom: 24px;
+            border-radius: var(--r-xl);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-md);
+            background:
+                radial-gradient(360px 300px at 14% 50%, rgba(214, 178, 80, 0.22), transparent 70%),
+                var(--surface);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+        .bd-trophy { margin: 0; }
+        .bd-trophy img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-width: 240px;
+            margin: 0 auto;
+            filter: drop-shadow(0 18px 26px rgba(120, 84, 10, 0.28));
+        }
+        .bd-case h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            margin-bottom: 10px;
+        }
+        .bd-case p { color: var(--ink-2); font-size: 1rem; line-height: 1.72; max-width: 68ch; }
+
+        .bd-table thead th.left + th.left { padding-left: 18px; }
+        .bd-table thead th:first-child,
+        .bd-table tbody th { padding-left: 12px; }
+        .bd-table tbody th { font-weight: 700; }
+        .bd-table tbody th,
+        .bd-table tbody td { vertical-align: middle; }
+        .bd-table tbody th small {
+            display: block;
+            margin-top: 2px;
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--ink-3);
+            white-space: nowrap;
+        }
+        .bd-table tbody td { text-align: left; color: var(--ink); font-weight: 600; }
+        .bd-table tbody td.bd-winner { color: var(--ink-2); }
+        .bd-table tbody td.bd-winner b { color: var(--ink); font-weight: 700; }
+        .bd-table tr.bd-won > * { background: rgba(214, 178, 80, 0.12); }
+        .bd-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 3px 11px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+        .bd-pill.gold { background: linear-gradient(135deg, #f7dd8c, #d6a93a); color: #4a3200; box-shadow: 0 2px 8px rgba(214, 169, 58, 0.35); }
+        .bd-pill.silver { background: linear-gradient(135deg, #f1f3f7, #c6cdd9); color: #2c3647; }
+        .bd-pill.bronze { background: linear-gradient(135deg, #f2d6ba, #c98a55); color: #4a2a10; }
+        .bd-pos { color: var(--ink-2); font-weight: 600; white-space: nowrap; }
+        .bd-table tfoot th { padding-left: 12px; }
+        .bd-table tfoot td { text-align: left; }
+        @media (max-width: 768px) {
+            .bd-table thead th.left + th.left { padding-left: 8px; }
+        }
+        @media (max-width: 640px) {
+            .bd-feature { grid-template-columns: 1fr; gap: 18px; padding: 22px 20px; }
+            .bd-trophy img { max-width: 150px; }
+            .bd-case p { font-size: 0.95rem; }
+            /* the badge alone names the club on a phone; the name stays for screen readers */
+            .bd-table .bd-club .club-name {
+                position: absolute;
+                width: 1px; height: 1px;
+                overflow: hidden;
+                clip: rect(0 0 0 0);
+                white-space: nowrap;
+            }
+            .bd-table thead th:first-child,
+            .bd-table tbody th { padding-left: 8px; }
+            .bd-table tbody th small { white-space: normal; font-size: 0.64rem; }
+            .bd-pill { padding: 2px 8px; font-size: 0.72rem; }
         }
 
         /* On a phone five columns cannot fit, so each move becomes a small
@@ -2619,6 +2722,7 @@
                     <li><a class="plain" href="/#dashboard">Dashboard</a></li>
                     <li><a class="plain" href="/#timeline">Through the years</a></li>
                     <li><a class="plain" href="/#achievements">Achievements</a></li>
+                    <li><a class="plain" href="/#ballondor">Ballon d'Or</a></li>
                     <li><a class="plain" href="/#faq">FAQ</a></li>
                 </ul>
             </nav>
@@ -3415,7 +3519,7 @@
                                 <li class="milestone tl-reveal">
                                     <span class="node" aria-hidden="true"></span>
                                     <article class="tl-card">
-                                        <figure class="tl-photo has-img" data-era="sporting" data-year="2002" data-photo="timeline/sporting-debut"><picture><source srcset="/timeline/sporting-debut.webp" type="image/webp"><img src="/timeline/sporting-debut.jpg" alt="A teenage Cristiano Ronaldo on the ball for Sporting CP against Manchester United" width="399" height="501" loading="lazy" decoding="async"></picture></figure>
+                                        <figure class="tl-photo has-img" data-era="sporting" data-year="2002" data-photo="timeline/sporting-debut"><picture style="--w: 399px"><source srcset="/timeline/sporting-debut.webp" type="image/webp"><img src="/timeline/sporting-debut.jpg" alt="A teenage Cristiano Ronaldo on the ball for Sporting CP against Manchester United" width="399" height="501" loading="lazy" decoding="async"></picture></figure>
                                         <div class="tl-body">
                                             <time class="tl-time" datetime="2002-08-14">August 2002</time>
                                             <h5>The boy from Madeira</h5>
@@ -3433,7 +3537,7 @@
                                 <li class="milestone tl-reveal">
                                     <span class="node" aria-hidden="true"></span>
                                     <article class="tl-card">
-                                        <figure class="tl-photo has-img" data-era="united" data-year="2003" data-photo="timeline/united-debut"><picture><source srcset="/timeline/united-debut.webp" type="image/webp"><img src="/timeline/united-debut.jpg" alt="Cristiano Ronaldo wheeling away in the number 7 shirt to celebrate a goal for Manchester United at Old Trafford" width="896" height="1120" loading="lazy" decoding="async"></picture></figure>
+                                        <figure class="tl-photo has-img" data-era="united" data-year="2003" data-photo="timeline/united-debut"><picture style="--w: 448px"><source srcset="/timeline/united-debut.webp" type="image/webp"><img src="/timeline/united-debut.jpg" alt="Cristiano Ronaldo wheeling away in the number 7 shirt to celebrate a goal for Manchester United at Old Trafford" width="896" height="1120" loading="lazy" decoding="async"></picture></figure>
                                         <div class="tl-body">
                                             <time class="tl-time" datetime="2003-08-16">16 August 2003</time>
                                             <h5>Old Trafford calls</h5>
@@ -3455,7 +3559,7 @@
                                 <li class="milestone tl-reveal">
                                     <span class="node" aria-hidden="true"></span>
                                     <article class="tl-card">
-                                        <figure class="tl-photo has-img" data-era="united" data-year="2004" data-photo="timeline/euro-2004"><picture><source srcset="/timeline/euro-2004.webp" type="image/webp"><img src="/timeline/euro-2004.jpg" alt="A teenage Cristiano Ronaldo in the number 17 Portugal shirt at Euro 2004" width="801" height="1120" loading="lazy" decoding="async"></picture></figure>
+                                        <figure class="tl-photo has-img" data-era="united" data-year="2004" data-photo="timeline/euro-2004"><picture style="--w: 400px"><source srcset="/timeline/euro-2004.webp" type="image/webp"><img src="/timeline/euro-2004.jpg" alt="A teenage Cristiano Ronaldo in the number 17 Portugal shirt at Euro 2004" width="801" height="1120" loading="lazy" decoding="async"></picture></figure>
                                         <div class="tl-body">
                                             <time class="tl-time" datetime="2004-06-12">12 June 2004</time>
                                             <h5>First for Portugal</h5>
@@ -3466,7 +3570,7 @@
                                 <li class="milestone tl-reveal">
                                     <span class="node" aria-hidden="true"></span>
                                     <article class="tl-card">
-                                        <figure class="tl-photo has-img" data-era="united" data-year="2008" data-photo="timeline/moscow-2008"><picture><source srcset="/timeline/moscow-2008.webp" type="image/webp"><img src="/timeline/moscow-2008.jpg" alt="Cristiano Ronaldo lifting the Champions League trophy in the Moscow rain after Manchester United beat Chelsea" width="1200" height="876" loading="lazy" decoding="async"></picture></figure>
+                                        <figure class="tl-photo has-img" data-era="united" data-year="2008" data-photo="timeline/moscow-2008"><picture style="--w: 767px"><source srcset="/timeline/moscow-2008.webp" type="image/webp"><img src="/timeline/moscow-2008.jpg" alt="Cristiano Ronaldo lifting the Champions League trophy in the Moscow rain after Manchester United beat Chelsea" width="1200" height="876" loading="lazy" decoding="async"></picture></figure>
                                         <div class="tl-body">
                                             <time class="tl-time" datetime="2008-05-21">21 May 2008</time>
                                             <h5>King of Europe in Moscow</h5>
@@ -3495,7 +3599,7 @@
                                 <li class="milestone tl-reveal">
                                     <span class="node" aria-hidden="true"></span>
                                     <article class="tl-card">
-                                        <figure class="tl-photo has-img" data-era="madrid" data-year="2009" data-photo="timeline/bernabeu-2009"><picture><source srcset="/timeline/bernabeu-2009.webp" type="image/webp"><img src="/timeline/bernabeu-2009.jpg" alt="Cristiano Ronaldo walking out to a packed Bernabeu to be presented as a Real Madrid player" width="1200" height="675" loading="lazy" decoding="async"></picture></figure>
+                                        <figure class="tl-photo has-img" data-era="madrid" data-year="2009" data-photo="timeline/bernabeu-2009"><picture style="--w: 996px"><source srcset="/timeline/bernabeu-2009.webp" type="image/webp"><img src="/timeline/bernabeu-2009.jpg" alt="Cristiano Ronaldo walking out to a packed Bernabeu to be presented as a Real Madrid player" width="1200" height="675" loading="lazy" decoding="async"></picture></figure>
                                         <div class="tl-body">
                                             <time class="tl-time" datetime="2009-07-06">6 July 2009</time>
                                             <h5>The €94m Galactico</h5>
@@ -3506,7 +3610,7 @@
                                 <li class="milestone tl-reveal">
                                     <span class="node" aria-hidden="true"></span>
                                     <article class="tl-card">
-                                        <figure class="tl-photo has-img" data-era="madrid" data-year="2012" data-photo="timeline/la-liga-2012"><picture><source srcset="/timeline/la-liga-2012.webp" type="image/webp"><img src="/timeline/la-liga-2012.jpg" alt="Cristiano Ronaldo striking the ball for Real Madrid at the Bernabeu in the record breaking 2011/12 season" width="987" height="658" loading="lazy" decoding="async"></picture></figure>
+                                        <figure class="tl-photo has-img" data-era="madrid" data-year="2012" data-photo="timeline/la-liga-2012"><picture style="--w: 840px"><source srcset="/timeline/la-liga-2012.webp" type="image/webp"><img src="/timeline/la-liga-2012.jpg" alt="Cristiano Ronaldo striking the ball for Real Madrid at the Bernabeu in the record breaking 2011/12 season" width="987" height="658" loading="lazy" decoding="async"></picture></figure>
                                         <div class="tl-body">
                                             <time class="tl-time" datetime="2012-05-02">2 May 2012</time>
                                             <h5>The league of records</h5>
@@ -3539,7 +3643,7 @@
                                 <li class="milestone tl-reveal">
                                     <span class="node" aria-hidden="true"></span>
                                     <article class="tl-card">
-                                        <figure class="tl-photo has-img" data-era="madrid" data-year="2017" data-photo="timeline/ballon-dor-five"><picture><source srcset="/timeline/ballon-dor-five.webp" type="image/webp"><img src="/timeline/ballon-dor-five.jpg" alt="Cristiano Ronaldo standing behind his five Ballon d'Or trophies" width="1024" height="871" loading="lazy" decoding="async"></picture></figure>
+                                        <figure class="tl-photo has-img" data-era="madrid" data-year="2017" data-photo="timeline/ballon-dor-five"><picture style="--w: 658px"><source srcset="/timeline/ballon-dor-five.webp" type="image/webp"><img src="/timeline/ballon-dor-five.jpg" alt="Cristiano Ronaldo standing behind his five Ballon d'Or trophies" width="1024" height="871" loading="lazy" decoding="async"></picture></figure>
                                         <div class="tl-body">
                                             <time class="tl-time" datetime="2017-12-07">7 December 2017</time>
                                             <h5>Five Ballon d'Ors</h5>
@@ -3579,7 +3683,7 @@
                                 <li class="milestone tl-reveal">
                                     <span class="node" aria-hidden="true"></span>
                                     <article class="tl-card">
-                                        <figure class="tl-photo has-img" data-era="juventus" data-year="2018" data-photo="timeline/juventus-move"><picture><source srcset="/timeline/juventus-move.webp" type="image/webp"><img src="/timeline/juventus-move.jpg" alt="Cristiano Ronaldo celebrates in the Juventus number 7 shirt in front of a full stadium" width="1200" height="675" loading="lazy" decoding="async"></picture></figure>
+                                        <figure class="tl-photo has-img" data-era="juventus" data-year="2018" data-photo="timeline/juventus-move"><picture style="--w: 996px"><source srcset="/timeline/juventus-move.webp" type="image/webp"><img src="/timeline/juventus-move.jpg" alt="Cristiano Ronaldo celebrates in the Juventus number 7 shirt in front of a full stadium" width="1200" height="675" loading="lazy" decoding="async"></picture></figure>
                                         <div class="tl-body">
                                             <time class="tl-time" datetime="2018-07-10">10 July 2018</time>
                                             <h5>The €117m Juventus move</h5>
@@ -3590,7 +3694,7 @@
                                 <li class="milestone tl-reveal">
                                     <span class="node" aria-hidden="true"></span>
                                     <article class="tl-card">
-                                        <figure class="tl-photo has-img" data-era="juventus" data-year="2021" data-photo="timeline/euro-2020"><picture><source srcset="/timeline/euro-2020.webp" type="image/webp"><img src="/timeline/euro-2020.jpg" alt="Cristiano Ronaldo celebrating for Portugal in the captain's armband at Euro 2020" width="1200" height="600" loading="lazy" decoding="async"></picture></figure>
+                                        <figure class="tl-photo has-img" data-era="juventus" data-year="2021" data-photo="timeline/euro-2020"><picture style="--w: 1120px"><source srcset="/timeline/euro-2020.webp" type="image/webp"><img src="/timeline/euro-2020.jpg" alt="Cristiano Ronaldo celebrating for Portugal in the captain's armband at Euro 2020" width="1200" height="600" loading="lazy" decoding="async"></picture></figure>
                                         <div class="tl-body">
                                             <time class="tl-time" datetime="2021-07-11">Summer 2021</time>
                                             <h5>King of the Euros</h5>
@@ -3619,7 +3723,7 @@
                                 <li class="milestone tl-reveal">
                                     <span class="node" aria-hidden="true"></span>
                                     <article class="tl-card">
-                                        <figure class="tl-photo has-img" data-era="united" data-year="2021" data-photo="timeline/united-return"><picture><source srcset="/timeline/united-return.webp" type="image/webp"><img src="/timeline/united-return.jpg" alt="Cristiano Ronaldo slides on his knees celebrating a goal for Manchester United" width="1200" height="800" loading="lazy" decoding="async"></picture></figure>
+                                        <figure class="tl-photo has-img" data-era="united" data-year="2021" data-photo="timeline/united-return"><picture style="--w: 840px"><source srcset="/timeline/united-return.webp" type="image/webp"><img src="/timeline/united-return.jpg" alt="Cristiano Ronaldo slides on his knees celebrating a goal for Manchester United" width="1200" height="800" loading="lazy" decoding="async"></picture></figure>
                                         <div class="tl-body">
                                             <time class="tl-time" datetime="2021-09-11">11 September 2021</time>
                                             <h5>Home again</h5>
@@ -3648,7 +3752,7 @@
                                 <li class="milestone tl-reveal">
                                     <span class="node" aria-hidden="true"></span>
                                     <article class="tl-card">
-                                        <figure class="tl-photo has-img" data-era="alnassr" data-year="2024" data-photo="timeline/goal-900"><picture><source srcset="/timeline/goal-900.webp" type="image/webp"><img src="/timeline/goal-900.jpg" alt="Cristiano Ronaldo celebrating in heavy rain for Portugal on the night he reached 900 career goals" width="735" height="890" loading="lazy" decoding="async"></picture></figure>
+                                        <figure class="tl-photo has-img" data-era="alnassr" data-year="2024" data-photo="timeline/goal-900"><picture style="--w: 462px"><source srcset="/timeline/goal-900.webp" type="image/webp"><img src="/timeline/goal-900.jpg" alt="Cristiano Ronaldo celebrating in heavy rain for Portugal on the night he reached 900 career goals" width="735" height="890" loading="lazy" decoding="async"></picture></figure>
                                         <div class="tl-body">
                                             <time class="tl-time" datetime="2024-09-05">5 September 2024</time>
                                             <h5>Goal 900</h5>
@@ -4100,6 +4204,72 @@
                         </div>
                     </div>
                 </div>
+            </section>
+
+            <!-- ==================== Ballon d'Or ==================== -->
+            <section id="ballondor" aria-labelledby="ballondor-title">
+                <div class="section-head">
+                    <h2 class="section-title" id="ballondor-title">Ballon d'Or</h2>
+                </div>
+                <p class="page-lead">Cristiano Ronaldo has won the Ballon d'Or <b><span data-stat="ballondor.wins.word">five</span> times</b> and been runner up <span data-stat="ballondor.runnerup.word">six</span> times. He was shortlisted at <b>all <span data-stat="ballondor.nominations.word">eighteen</span> editions</b> held from <span data-stat="ballondor.first">2004</span> to <span data-stat="ballondor.last">2022</span>, the most nominations of any player in the award's history, with <span data-stat="ballondor.next.player">Lionel Messi</span> next on <span data-stat="ballondor.next.nominations">17</span>.</p>
+
+                <div class="bd-feature reveal" style="animation-delay:.06s">
+                    <figure class="bd-trophy">
+                        <picture>
+                            <source srcset="/ballondor.webp" type="image/webp">
+                            <img src="/ballondor.png" width="438" height="597" alt="The Ballon d'Or trophy, a golden football on a rocky base" loading="lazy" decoding="async">
+                        </picture>
+                    </figure>
+                    <div class="bd-case">
+                        <h3>What the nominations show</h3>
+                        <p>A Ballon d'Or is settled by one vote about one year, and one year can turn on a great deal besides football: a strong summer tournament, the story a season told, which league a voter happens to watch, how hard a club campaigns for its man. Reasonable people still argue about several winners. The shortlist is a different test. It is drawn up before a single vote is cast, and a player earns his place on it only by having been, across the whole year, among the best footballers in the world. Ronaldo passed that test <span data-stat="ballondor.nominations.word">eighteen</span> editions in a row, at three clubs in three countries, first as a teenage winger at Manchester United and last as a centre forward in his late thirties. Wins record who caught the voters in a particular year. A run of nominations that long records who was never out of the argument, and it is that consistency, more than any single trophy, that makes the case for him as the greatest of all time.</p>
+                    </div>
+                </div>
+
+                <section class="table-card reveal" style="animation-delay:.10s">
+                    <div class="table-scroll">
+                        <table class="data-table bd-table">
+                            <caption>Cristiano Ronaldo's finishing position at every Ballon d'Or he was nominated for, with his club and that year's winner.</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="left">Year</th>
+                                    <th scope="col" class="left">Club</th>
+                                    <th scope="col" class="left">Finish</th>
+                                    <th scope="col" class="left">Winner</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <!-- STATS:BEGIN table.ballondor -->
+                            <tr><th scope="row">2004</th><td class="bd-club"><span class="club-cell"><img src="badge-manchesterunited.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Manchester United</span></span></td><td class="bd-finish"><span class="bd-pos">Joint 12th</span></td><td class="bd-winner">Andriy Shevchenko</td></tr>
+                            <tr><th scope="row">2005</th><td class="bd-club"><span class="club-cell"><img src="badge-manchesterunited.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Manchester United</span></span></td><td class="bd-finish"><span class="bd-pos">Joint 20th</span></td><td class="bd-winner">Ronaldinho</td></tr>
+                            <tr><th scope="row">2006</th><td class="bd-club"><span class="club-cell"><img src="badge-manchesterunited.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Manchester United</span></span></td><td class="bd-finish"><span class="bd-pos">14th</span></td><td class="bd-winner">Fabio Cannavaro</td></tr>
+                            <tr><th scope="row">2007</th><td class="bd-club"><span class="club-cell"><img src="badge-manchesterunited.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Manchester United</span></span></td><td class="bd-finish"><span class="bd-pill silver">2nd</span></td><td class="bd-winner">Kaká</td></tr>
+                            <tr class="bd-won"><th scope="row">2008</th><td class="bd-club"><span class="club-cell"><img src="badge-manchesterunited.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Manchester United</span></span></td><td class="bd-finish"><span class="bd-pill gold">Winner</span></td><td class="bd-winner"><b>Cristiano Ronaldo</b></td></tr>
+                            <tr><th scope="row">2009</th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pill silver">2nd</span></td><td class="bd-winner">Lionel Messi</td></tr>
+                            <tr><th scope="row">2010<small>FIFA Ballon d'Or</small></th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pos">6th</span></td><td class="bd-winner">Lionel Messi</td></tr>
+                            <tr><th scope="row">2011<small>FIFA Ballon d'Or</small></th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pill silver">2nd</span></td><td class="bd-winner">Lionel Messi</td></tr>
+                            <tr><th scope="row">2012<small>FIFA Ballon d'Or</small></th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pill silver">2nd</span></td><td class="bd-winner">Lionel Messi</td></tr>
+                            <tr class="bd-won"><th scope="row">2013<small>FIFA Ballon d'Or</small></th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pill gold">Winner</span></td><td class="bd-winner"><b>Cristiano Ronaldo</b></td></tr>
+                            <tr class="bd-won"><th scope="row">2014<small>FIFA Ballon d'Or</small></th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pill gold">Winner</span></td><td class="bd-winner"><b>Cristiano Ronaldo</b></td></tr>
+                            <tr><th scope="row">2015<small>FIFA Ballon d'Or</small></th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pill silver">2nd</span></td><td class="bd-winner">Lionel Messi</td></tr>
+                            <tr class="bd-won"><th scope="row">2016</th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pill gold">Winner</span></td><td class="bd-winner"><b>Cristiano Ronaldo</b></td></tr>
+                            <tr class="bd-won"><th scope="row">2017</th><td class="bd-club"><span class="club-cell"><img src="badge-realmadrid.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Real Madrid</span></span></td><td class="bd-finish"><span class="bd-pill gold">Winner</span></td><td class="bd-winner"><b>Cristiano Ronaldo</b></td></tr>
+                            <tr><th scope="row">2018</th><td class="bd-club"><span class="club-cell"><img src="badge-juventus.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Juventus</span></span></td><td class="bd-finish"><span class="bd-pill silver">2nd</span></td><td class="bd-winner">Luka Modrić</td></tr>
+                            <tr><th scope="row">2019</th><td class="bd-club"><span class="club-cell"><img src="badge-juventus.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Juventus</span></span></td><td class="bd-finish"><span class="bd-pill bronze">3rd</span></td><td class="bd-winner">Lionel Messi</td></tr>
+                            <tr><th scope="row">2021</th><td class="bd-club"><span class="club-cell"><img src="badge-manchesterunited.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Manchester United</span></span></td><td class="bd-finish"><span class="bd-pos">6th</span></td><td class="bd-winner">Lionel Messi</td></tr>
+                            <tr><th scope="row">2022</th><td class="bd-club"><span class="club-cell"><img src="badge-manchesterunited.png" alt="" width="26" height="26" loading="lazy" decoding="async"><span class="club-name">Manchester United</span></span></td><td class="bd-finish"><span class="bd-pos">20th</span></td><td class="bd-winner">Karim Benzema</td></tr>
+                            <!-- STATS:END table.ballondor -->
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th scope="row">Total</th>
+                                    <td colspan="3"><span data-stat="ballondor.nominations">18</span> nominations, <span data-stat="ballondor.wins">5</span> wins</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <p class="table-note">Finish is his final place in the vote. The 2010 to 2015 editions were the FIFA Ballon d'Or, run jointly with FIFA, and there was no award in 2020. Club is the one he played for when each award was presented.</p>
+                </section>
             </section>
 
             <!-- Quick answers -->

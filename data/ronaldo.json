@@ -3,7 +3,8 @@
     "Single source of truth for every published figure. Built from the site HTML on 22 August 2026. opponents holds goals only, keyed by the dashboard view (club, saudi and intl are aggregate views, the rest are club eras); the parallel opponent_apps map holds the games column for the same rows. Both lists are the top scorers against, not complete sets.",
     "competitions is keyed by team, then by the label the site prints on the competitions chart. The career totals are rolled up from these, with the labels in competition_rollup folded into Other cup competitions, so a goal recorded against a team updates the team chart and the overall chart together.",
     "years rows carry apps as well as goals. Club appearances are stored by season, which straddles two calendar years, so the yearly figure cannot be derived from them and is held here instead. A goal or an appearance banks itself to the calendar year it was played in.",
-    "transfers lists every move of the senior career, oldest first, as Transfermarkt publishes it. fee and market_value are millions of euros; null means none was paid or none was published, and fee_text then says why. from and to are keys of transfer_clubs, or null for a spell without a club."
+    "transfers lists every move of the senior career, oldest first, as Transfermarkt publishes it. fee and market_value are millions of euros; null means none was paid or none was published, and fee_text then says why. from and to are keys of transfer_clubs, or null for a spell without a club.",
+    "ballon_dor lists every edition at which Ronaldo was on the shortlist, with his final position (joint marks a shared place), his club when the award was presented, and the winner. The 2010 to 2015 editions were the FIFA Ballon d'Or. There was no award in 2020. ballon_dor_next_most is the player with the next most nominations; check fails if that ever reaches Ronaldo's total, because the page calls his total a record."
   ],
   "meta": {
     "updated": "2026-09-25",
@@ -1943,5 +1944,128 @@
       "fee": null,
       "fee_text": "Free transfer"
     }
-  ]
+  ],
+  "ballon_dor": [
+    {
+      "year": 2004,
+      "position": 12,
+      "club": "manutd",
+      "winner": "Andriy Shevchenko",
+      "joint": true
+    },
+    {
+      "year": 2005,
+      "position": 20,
+      "club": "manutd",
+      "winner": "Ronaldinho",
+      "joint": true
+    },
+    {
+      "year": 2006,
+      "position": 14,
+      "club": "manutd",
+      "winner": "Fabio Cannavaro"
+    },
+    {
+      "year": 2007,
+      "position": 2,
+      "club": "manutd",
+      "winner": "Kaká"
+    },
+    {
+      "year": 2008,
+      "position": 1,
+      "club": "manutd",
+      "winner": "Cristiano Ronaldo"
+    },
+    {
+      "year": 2009,
+      "position": 2,
+      "club": "realmadrid",
+      "winner": "Lionel Messi"
+    },
+    {
+      "year": 2010,
+      "position": 6,
+      "club": "realmadrid",
+      "winner": "Lionel Messi",
+      "award": "FIFA Ballon d'Or"
+    },
+    {
+      "year": 2011,
+      "position": 2,
+      "club": "realmadrid",
+      "winner": "Lionel Messi",
+      "award": "FIFA Ballon d'Or"
+    },
+    {
+      "year": 2012,
+      "position": 2,
+      "club": "realmadrid",
+      "winner": "Lionel Messi",
+      "award": "FIFA Ballon d'Or"
+    },
+    {
+      "year": 2013,
+      "position": 1,
+      "club": "realmadrid",
+      "winner": "Cristiano Ronaldo",
+      "award": "FIFA Ballon d'Or"
+    },
+    {
+      "year": 2014,
+      "position": 1,
+      "club": "realmadrid",
+      "winner": "Cristiano Ronaldo",
+      "award": "FIFA Ballon d'Or"
+    },
+    {
+      "year": 2015,
+      "position": 2,
+      "club": "realmadrid",
+      "winner": "Lionel Messi",
+      "award": "FIFA Ballon d'Or"
+    },
+    {
+      "year": 2016,
+      "position": 1,
+      "club": "realmadrid",
+      "winner": "Cristiano Ronaldo"
+    },
+    {
+      "year": 2017,
+      "position": 1,
+      "club": "realmadrid",
+      "winner": "Cristiano Ronaldo"
+    },
+    {
+      "year": 2018,
+      "position": 2,
+      "club": "juventus",
+      "winner": "Luka Modrić"
+    },
+    {
+      "year": 2019,
+      "position": 3,
+      "club": "juventus",
+      "winner": "Lionel Messi"
+    },
+    {
+      "year": 2021,
+      "position": 6,
+      "club": "manutd",
+      "winner": "Lionel Messi"
+    },
+    {
+      "year": 2022,
+      "position": 20,
+      "club": "manutd",
+      "winner": "Karim Benzema"
+    }
+  ],
+  "ballon_dor_next_most": {
+    "player": "Lionel Messi",
+    "nominations": 17,
+    "as_of": 2026
+  }
 }
