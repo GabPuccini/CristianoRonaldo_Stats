@@ -2257,8 +2257,7 @@
         }
 
         /* Feedback, at the foot of the page: a short invitation to suggest
-           what should be added, with the address as a link in the sentence
-           and a button that opens an email with the subject filled in. */
+           what should be added, with the address as a link in the sentence. */
         .feedback {
             margin-top: 26px;
             padding: 22px 26px;
@@ -2284,27 +2283,8 @@
             margin-bottom: 6px;
         }
         .feedback p { font-size: 0.92rem; color: var(--ink-2); max-width: 66ch; }
-        .feedback-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 9px;
-            min-height: 44px;
-            padding: 0 20px;
-            border-radius: 999px;
-            background: var(--hero-grad);
-            color: #fff;
-            font-size: 0.9rem;
-            font-weight: 700;
-            text-decoration: none;
-            white-space: nowrap;
-            box-shadow: 0 8px 20px rgba(31, 58, 138, 0.25);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .feedback-btn:hover { transform: translateY(-1px); box-shadow: 0 12px 26px rgba(31, 58, 138, 0.32); }
-        .feedback-btn svg { width: 17px; height: 17px; flex-shrink: 0; }
         @media (max-width: 640px) {
             .feedback { padding: 20px 18px; }
-            .feedback-btn { width: 100%; justify-content: center; }
         }
 
         /* Ballon d'Or. The trophy sits on a faint gold glow beside the case
@@ -4479,13 +4459,6 @@
                     <h2 id="feedback-title">What would you like to see on the site?</h2>
                     <p>A statistic that is missing, a chart that would make something clearer, or any other improvement: email me at <a href="mailto:ronaldostats@pm.me">ronaldostats@pm.me</a>.</p>
                 </div>
-                <a class="feedback-btn" href="mailto:ronaldostats@pm.me?subject=Suggestion%20for%20RonaldoStats.app">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-                    Send a suggestion
-                </a>
             </section>
 
             <footer class="footer reveal" style="animation-delay:.12s">
