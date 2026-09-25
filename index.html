@@ -1814,7 +1814,6 @@
         .dash-table tbody th { text-align: left; font-weight: 600; color: var(--ink); font-size: 0.9rem; padding: 10px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
         .dash-table tbody td { text-align: right; font-size: 0.9rem; font-weight: 700; color: var(--brand-ink); padding: 10px 0 10px 14px; border-bottom: 1px solid var(--line); }
         .dash-table tbody td.muted { font-weight: 500; color: var(--ink-2); }
-        .dash-table tbody tr.peak th, .dash-table tbody tr.peak td { background: var(--brand-soft); }
         .dash-table tfoot th { text-align: left; font-size: 0.78rem; font-weight: 800; color: var(--ink); padding: 14px 0 0; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
         .dash-table tfoot td { text-align: right; font-size: 0.95rem; font-weight: 800; color: var(--ink); padding: 14px 0 0 14px; }
         .data-note { font-size: 0.82rem; color: var(--ink-3); margin-top: 16px; }
@@ -2976,7 +2975,7 @@
                                 <tr><th scope="row">2010</th><td>48</td><td class="muted">206</td><td class="muted">25</td></tr>
                                 <tr><th scope="row">2011</th><td>60</td><td class="muted">266</td><td class="muted">26</td></tr>
                                 <tr><th scope="row">2012</th><td>63</td><td class="muted">329</td><td class="muted">27</td></tr>
-                                <tr class="peak"><th scope="row">2013</th><td>69</td><td class="muted">398</td><td class="muted">28</td></tr>
+                                <tr><th scope="row">2013</th><td>69</td><td class="muted">398</td><td class="muted">28</td></tr>
                                 <tr><th scope="row">2014</th><td>61</td><td class="muted">459</td><td class="muted">29</td></tr>
                                 <tr><th scope="row">2015</th><td>57</td><td class="muted">516</td><td class="muted">30</td></tr>
                                 <tr><th scope="row">2016</th><td>55</td><td class="muted">571</td><td class="muted">31</td></tr>
@@ -3002,7 +3001,7 @@
                             </tfoot>
                         </table>
                     </div>
-                    <p class="data-note">The highlighted row is <span data-stat="year.best.year">2013</span>, his best calendar year. Age is his age on 31 December of that year.</p>
+                    <p class="data-note">Age is his age on 31 December of each year.</p>
                 </section>
 
                 <div class="section-head">
@@ -5358,12 +5357,10 @@
 
         function getChartColors() {
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            // the best year is picked out in solid brand blue, every other year sits
-            // behind the cumulative line in a lighter tint
-            const soft = isDark ? 'rgba(111, 151, 240, 0.40)' : 'rgba(47, 86, 207, 0.30)';
-            const strong = isDark ? '#6f97f0' : '#2f56cf';
+            // every year in the same tint, so the bars sit behind the cumulative
+            // line without any one of them singled out
             return {
-                barBg: context => context.dataIndex === bestYearIndex ? strong : soft,
+                barBg: isDark ? 'rgba(111, 151, 240, 0.42)' : 'rgba(47, 86, 207, 0.38)',
                 barBorder: isDark ? '#6f97f0' : '#2f56cf',
                 lineColor: isDark ? '#bcd0fa' : '#1e3a8a',
                 lineFill: isDark ? 'rgba(111, 151, 240, 0.15)' : 'rgba(30, 58, 138, 0.08)',
@@ -5373,7 +5370,6 @@
             };
         }
 
-        const bestYearIndex = goalsPerYear.indexOf(Math.max(...goalsPerYear));
         let colors = getChartColors();
         const ctx = document.getElementById('goalsChart').getContext('2d');
         const chart = new Chart(ctx, {

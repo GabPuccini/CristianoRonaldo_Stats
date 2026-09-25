@@ -952,13 +952,11 @@ def build_regions(data, tables, values):
     r = {}
 
     # Calendar year table body. The markup here must match the page exactly:
-    # the running total and age cells are muted, and the best year is highlighted.
-    best = max(row["goals"] for row in tables["years"])
+    # the running total and age cells are muted, and no year is highlighted.
     rows = []
     for row in tables["years"]:
-        cls = ' class="peak"' if row["goals"] == best else ""
         rows.append(
-            f'                                <tr{cls}>'
+            f'                                <tr>'
             f'<th scope="row">{row["year"]}</th>'
             f'<td>{row["goals"]}</td>'
             f'<td class="muted">{row["cumulative"]:,}</td>'
