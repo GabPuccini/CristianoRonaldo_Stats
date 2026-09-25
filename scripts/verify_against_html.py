@@ -330,7 +330,7 @@ prose = [
     ("index.html", "lead sentence assists", values["career.assists"],
      r'with <b>([\d,]+) assists</b>'),
     ("index.html", "lead sentence goals to go", values["career.remaining"],
-     r'He is (\d+) goals short of 1,000'),
+     r'Portugal, (\d+) short of 1,000'),
     ("index.html", "lead club goals", f"{club_goals:,}",
      r'<b>([\d,]+) club goals in [\d,]+ games</b>'),
     ("index.html", "lead club appearances", f"{club_apps:,}",
@@ -338,9 +338,9 @@ prose = [
     ("index.html", "lead career goals", values["career.goals"],
      r'Cristiano Ronaldo has scored <b>([\d,]+) goals</b> across'),
     ("index.html", "lead goals", values["career.goals"],
-     r'has scored <b>([\d,]+) goals in [\d,]+ games</b>'),
+     r'takes the same <b>([\d,]+) goals in [\d,]+ games</b>'),
     ("index.html", "lead games", values["career.apps"],
-     r'has scored <b>[\d,]+ goals in ([\d,]+) games</b>'),
+     r'takes the same <b>[\d,]+ goals in ([\d,]+) games</b>'),
 ]
 for page, what, expected, pattern in prose:
     record(page, what, expected, find(page, pattern, 1))
@@ -399,7 +399,7 @@ exercised.add("meta.updated.short")   # only ever rendered as part of the long f
 
 # Best season, quoted on the home page and the season page
 record("index.html", "best season goals", values["season.best.goals"],
-       find("index.html", r'with (\d+) goals in 54 games'), key="season.best.goals")
+       find("index.html", r'at Real Madrid</b>: (\d+) goals in \d+ games'), key="season.best.goals")
 record("index.html", "best season name", values["season.best.season"],
        find("index.html", r'<b>(\d{4}/\d{2}) at Real Madrid</b>'), key="season.best.season")
 record("index.html", "best season team", values["season.best.team"],

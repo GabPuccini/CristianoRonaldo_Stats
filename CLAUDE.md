@@ -269,8 +269,24 @@ being read as the page scrolls, and a back to top button appears once the reader
 is well down the page, so neither needs touching when content moves.
 
 Links between sections say "section", never "page": "in the goals by season
-section", not "on the goals by season page". The FAQ answers are duplicated in
-the FAQPage JSON-LD, so change the wording in both places together.
+section", not "on the goals by season page".
+
+The FAQPage JSON-LD is written from the page on every build: `sync_faq_schema`
+reads each question and answer in the quick answers and the FAQ and rewrites the
+block from them, figures included. Edit only the visible answer, never the JSON.
+A question needs an `<h3>` followed directly by a single `<p>` answer to be
+picked up. The head text rules skip that block, so none of them may point into
+it, and `gen_head_rules.py` and `check_coverage.py` skip it too.
+
+## House style for the copy
+
+The site is written the way the Ballon d'Or section is: the answer first, with
+the figure, then the context that makes the figure mean something, in plain
+sentences of varied length. No marketing adjectives, no stock phrases, no
+rhetorical questions. Say what a number shows rather than calling it
+impressive. Every figure is either marked or, if it is fixed history such as an
+age at the time or a transfer fee, exempted in `check_coverage.py` with its
+reason.
 
 There is one "how these numbers are compiled" section, at the foot of the page.
 Each merged page brought its own and they said the same thing four times over,

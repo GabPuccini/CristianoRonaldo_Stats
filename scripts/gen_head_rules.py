@@ -84,6 +84,10 @@ def machine_text(head):
         spans.append((m.start(1), m.end(1)))
     for m in re.finditer(r'<script type="application/ld\+json">(.*?)</script>',
                          head, re.S):
+        # the FAQPage block is copied from the visible answers at build time,
+        # so its figures come from their markers and need no rules here
+        if '"@type": "FAQPage"' in m.group(1):
+            continue
         spans.append((m.start(1), m.end(1)))
     return spans
 

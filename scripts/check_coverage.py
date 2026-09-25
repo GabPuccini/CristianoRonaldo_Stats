@@ -41,12 +41,11 @@ EXEMPT = {
         (r"International career total",
          "this row adds the youth caps to the senior ones, so it is deliberately "
          "outside the career dataset"),
-        (r"debut at 17|At 17 he broke", "his age at the time, fixed by the event"),
-        (r"aged 19|At 19 he scored", "his age at the time, fixed by the event"),
+        (r"debut at 17|He was 17 when|A 17 year old breaks", "his age at the time, fixed by the event"),
+        (r"aged 19|came at 19", "his age at the time, fixed by the event"),
         (r"Ballon d'Or at 23", "his age at the time, fixed by the event"),
         (r"a Serie A record at 33|At 33 he became|Serie A's record signing at 33",
          "his age at the time, fixed by the event"),
-        (r"24 year career", "the length of the career so far, written as prose"),
         # Fees appear both as symbols and spelled out, and the spelled out form
         # is a bare number that will sooner or later equal a statistic: the 94
         # of the Real Madrid fee collided with Al Nassr's open play goals the
@@ -54,11 +53,11 @@ EXEMPT = {
         (r"£12\.24m|€94m|€117m|€100m|United pay £12\.24m"
          r"|(?:fee of|rising to|paid|pay) [\d.]+ million",
          "transfer fees, fixed by the event"),
-        (r"in a 42 goal season|crowning a 42 goal season",
+        (r"in a 42 goal season|capped a 42 goal season",
          "the 2007/08 total, quoted as history rather than as a live figure"),
-        (r"La Liga with 46 league goals|121 goals, 46 of them",
+        (r"La Liga with 46 league goals|46 of those goals were his",
          "the 2011/12 league total and Real Madrid's team total that season"),
-        (r"a record 17 goals in the campaign|His 17 goals that season",
+        (r"a record 17 goals in the campaign|His 17 goals in that campaign",
          "the 2013/14 Champions League record, a competition record not a career one"),
         (r"100 points", "Real Madrid's points total in 2011/12, not a Ronaldo figure"),
         (r"all 96 ballots", "the Ballon d'Or vote in 2008"),
@@ -122,7 +121,10 @@ def head_gaps(text, page, values, engine_values):
     # only the machine readable text, not the CSS
     pieces = re.findall(r'<title>(.*?)</title>', head, re.S)
     pieces += re.findall(r'<meta (?:name|property)="[^"]*(?:title|description)" content="([^"]*)"', head)
-    pieces += [m for m in re.findall(r'<script type="application/ld\+json">(.*?)</script>', head, re.S)]
+    # the FAQPage block is written from the visible answers on every build, so
+    # its figures are covered by the markers in the body
+    pieces += [m for m in re.findall(r'<script type="application/ld\+json">(.*?)</script>', head, re.S)
+               if '"@type": "FAQPage"' not in m]
 
     gaps = []
     for piece in pieces:

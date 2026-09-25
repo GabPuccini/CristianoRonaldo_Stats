@@ -27,6 +27,7 @@ Every command except show and build ends by rewriting the HTML.
 import argparse
 import copy
 import datetime as dt
+import html as htmllib
 import json
 import re
 import shutil
@@ -727,42 +728,13 @@ def text_rules(generated=True):
             (r"goals and " + G + r" assists broken down", "career.assists", 3),
             (r"All " + G + r" goals and [\d,]+ assists by club", "career.goals"),
             (r"All [\d,]+ goals and " + G + r" assists by club", "career.assists"),
-            # Real Madrid's Champions League goals reached 105, which is also the
-            # Saudi Pro League total, so the generator can no longer tell the two
-            # apart and drops the rule. Pinned by hand on the sentence it sits in.
-            (r"history of the competition\. That is " + G + r" for Real Madrid",
-             "comp.realmadrid.championsleague"),
-            (STAMP, "meta.updated.long", 10),
+            (STAMP, "meta.updated.long", 7),
             # 15 is Real Madrid's trophy count, the Nations League total, a
             # free kick tally and a FIFPro selection count all at once, so the
-            # generator cannot resolve it and these are pinned by hand
+            # generator cannot resolve it and this is pinned by hand. The FAQ
+            # answers that used to need a dozen rules like it are now copied
+            # from the page by sync_faq_schema, figures included.
             (r'"name": "Real Madrid: ' + G + r" trophies", "honours.realmadrid.count"),
-            (r"Real Madrid, with " + G + r" trophies in nine seasons", "honours.realmadrid.count"),
-            (r"awards and " + G + r" selections in the FIFA", "award.fifafifproworld11"),
-            (r"Cristiano Ronaldo is " + G + r" years old", "person.age"),
-            # came across with the timeline's "Where is he now" answer
-            (r"At " + G + r" he is still playing", "person.age"),
-            (r"for Real Madrid, " + G + r" for Manchester United and [\d,]+ for Juventus",
-             "comp.manutd.championsleague"),
-            (r"That is [\d,]+ for Real Madrid, [\d,]+ for Manchester United and "
-             + G + r" for Juventus", "comp.juventus.championsleague"),
-            (r"free kick goals: [\d,]+ for Real Madrid, [\d,]+ for Manchester United, "
-             r"[\d,]+ for Portugal, [\d,]+ for Al Nassr and " + G + r" for Juventus",
-             "freekicks.juventus"),
-            (r"[\d,]+ for Portugal, " + G + r" for Al Nassr and [\d,]+ for Juventus",
-             "freekicks.alnassr"),
-            (r"He also has [\d,]+ for Portugal, [\d,]+ for Al Nassr, [\d,]+ for "
-             r"Manchester United and " + G + r" for Juventus", "hattricks.juventus"),
-            (r"hat tricks, " + G + r" of them for Real Madrid", "hattricks.realmadrid"),
-            (r"He also has " + G + r" for Portugal", "hattricks.portugal"),
-            (r"for Portugal, " + G + r" for Al Nassr, [\d,]+ for Manchester United",
-             "hattricks.alnassr"),
-            (r"for Al Nassr, " + G + r" for Manchester United and [\d,]+ for Juventus\.",
-             "hattricks.manutd"),
-            (r"free kick goals: [\d,]* ?for Real Madrid, " + G + r" for Manchester United",
-             "freekicks.manutd"),
-            (r"for Manchester United, " + G + r" for Portugal, [\d,]* ?for Al Nassr",
-             "freekicks.portugal"),
         ],
     }
     # The rest of the head is generated: see scripts/gen_head_rules.py. The
@@ -845,10 +817,10 @@ def script_rules():
         # The dashboard's prose lives on the home page now that the standalone
         # page is gone.
         "index.html": [
-            (r"Lists like the " + G + r" against Atletico Madrid", "opponent.club.atleticomadrid.goals", 2),
+            (r"A total such as his " + G + r" against Atletico Madrid", "opponent.club.atleticomadrid.goals", 2),
             (r"a total such as the " + G + r" against Atletico Madrid", "opponent.club.atleticomadrid.goals"),
             (r"His " + G + r" World Cup goals include three", "comp.portugal.worldcup"),
-            (r"All " + G + r" across the whole career", "career.goals"),
+            (r"All " + G + r" by the part of the body", "career.goals"),
             # the provenance comment above DATA quotes the total it reconciles to
             (r"which reconciles exactly with the " + G + r" total here", "career.goals"),
             (r"published on ronaldostats\.app, updated ([A-Z][a-z]+ \d{4})", "meta.updated.short"),
@@ -873,6 +845,14 @@ def apply_text_rules(text, page, values, report):
     if split == -1:
         return text
     head, body = text[:split], text[split:]
+    # The FAQPage block is written from the visible answers by sync_faq_schema,
+    # so it is set aside here: no rule may match inside it, and no count may
+    # depend on how the answers happen to be worded.
+    faq = faq_block_span(head)
+    faq_text = ""
+    if faq:
+        faq_text = head[faq[0]:faq[1]]
+        head = head[:faq[0]] + FAQ_PLACEHOLDER + head[faq[1]:]
     for rule in text_rules().get(page, []):
         pattern, key = rule[0], rule[1]
         expected = rule[2] if len(rule) > 2 else 1
@@ -888,6 +868,8 @@ def apply_text_rules(text, page, values, report):
         for m in reversed(hits):            # right to left, so offsets hold
             head = head[:m.start(1)] + values[key] + head[m.end(1):]
         report["texts"] += len(hits)
+    if faq:
+        head = head.replace(FAQ_PLACEHOLDER, faq_text, 1)
 
     for rule in script_rules().get(page, []):
         pattern, key = rule[0], rule[1]
@@ -1332,6 +1314,60 @@ def check_pages():
     return errors
 
 
+FAQ_PLACEHOLDER = "\x00FAQPAGE\x00"
+
+
+def faq_block_span(head):
+    """Where the FAQPage JSON-LD sits in a page head, or None."""
+    for m in LD_RE.finditer(head):
+        if '"@type": "FAQPage"' in m.group(1):
+            return m.start(1), m.end(1)
+    return None
+
+
+FAQ_SECTION_RE = re.compile(r'<section class="(?:qa-grid|faq-grid)[^"]*".*?</section>', re.S)
+FAQ_PAIR_RE = re.compile(r'<h3[^>]*>(.*?)</h3>\s*<p>(.*?)</p>', re.S)
+
+
+def plain_text(fragment):
+    """Visible text of an HTML fragment, as a search engine would read it."""
+    text = htmllib.unescape(re.sub(r"<[^>]+>", "", fragment))
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def sync_faq_schema(text, report):
+    """Write the FAQPage JSON-LD from the questions and answers on the page.
+
+    The quick answers and the FAQ used to be typed twice, once for readers and
+    once for the structured data, and the two drifted: an answer kept a stale
+    date for ten days because nothing tied the copies together. The visible
+    answers are the source now. Their figures are already rewritten by their
+    markers, so the schema needs no text rules of its own."""
+    split = text.find("</head>")
+    if split == -1:
+        return text
+    head, body = text[:split], text[split:]
+    pairs = []
+    for section in FAQ_SECTION_RE.finditer(body):
+        for m in FAQ_PAIR_RE.finditer(section.group(0)):
+            pairs.append((plain_text(m.group(1)), plain_text(m.group(2))))
+    block = next((m for m in LD_RE.finditer(head) if '"@type": "FAQPage"' in m.group(1)), None)
+    if not pairs or block is None:
+        return text
+    schema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {"@type": "Question", "name": q,
+             "acceptedAnswer": {"@type": "Answer", "text": a}}
+            for q, a in pairs
+        ],
+    }
+    rendered = "\n" + json.dumps(schema, indent=6, ensure_ascii=False) + "\n    "
+    report["faq"] = len(pairs)
+    return head[:block.start(1)] + rendered + head[block.end(1):] + body
+
+
 def write_html(data, values, regions, dry_run=False):
     report = {"values": 0, "attrs": 0, "regions": 0, "texts": 0,
               "missing": set(), "rules": [], "nested": [], "files": []}
@@ -1341,6 +1377,7 @@ def write_html(data, values, regions, dry_run=False):
             continue
         original = path.read_text(encoding="utf-8")
         updated = rewrite_page(original, values, regions, report)
+        updated = sync_faq_schema(updated, report)
         updated = apply_text_rules(updated, name, values, report)
         if updated != original:
             report["files"].append(name)
