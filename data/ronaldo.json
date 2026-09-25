@@ -5,7 +5,7 @@
     "years rows carry apps as well as goals. Club appearances are stored by season, which straddles two calendar years, so the yearly figure cannot be derived from them and is held here instead. A goal or an appearance banks itself to the calendar year it was played in."
   ],
   "meta": {
-    "updated": "2026-09-15",
+    "updated": "2026-09-25",
     "goal_target": 1000,
     "born": "1985-02-05",
     "current_season": "2026/27"
@@ -877,7 +877,7 @@
     {
       "year": 2026,
       "goals": 22,
-      "apps": 36,
+      "apps": 37,
       "age": 41
     }
   ],
@@ -1183,10 +1183,10 @@
     },
     {
       "year": 2026,
-      "apps": 7,
+      "apps": 8,
       "goals": 3,
       "competitive": [
-        5,
+        6,
         3
       ],
       "friendly": [
@@ -1542,6 +1542,14 @@
       "team": "alnassr",
       "comp": "cont",
       "opponent": "Al Ain"
+    },
+    {
+      "date": "2026-09-25",
+      "event": "appearance",
+      "team": "portugal",
+      "comp": "league",
+      "competition": "Nations League",
+      "opponent": "Wales"
     }
   ],
   "competition_rollup": {
@@ -1778,5 +1786,82 @@
       }
     ],
     "individual_floor": 50
-  }
+  },
+  "portugal_youth": [
+    {
+      "team": "Portugal U15",
+      "year": 2001,
+      "competitive": [
+        2,
+        1
+      ],
+      "friendly": [
+        7,
+        6
+      ]
+    },
+    {
+      "team": "Portugal U17",
+      "year": 2001,
+      "competitive": null,
+      "friendly": [
+        3,
+        2
+      ]
+    },
+    {
+      "team": "Portugal U17",
+      "year": 2002,
+      "competitive": [
+        4,
+        3
+      ],
+      "friendly": null
+    },
+    {
+      "team": "Portugal U20",
+      "year": 2003,
+      "competitive": null,
+      "friendly": [
+        5,
+        1
+      ]
+    },
+    {
+      "team": "Portugal U21",
+      "year": 2002,
+      "competitive": [
+        0,
+        0
+      ],
+      "friendly": [
+        1,
+        1
+      ]
+    },
+    {
+      "team": "Portugal U21",
+      "year": 2003,
+      "competitive": [
+        7,
+        2
+      ],
+      "friendly": [
+        2,
+        0
+      ]
+    },
+    {
+      "team": "Portugal U23",
+      "year": 2004,
+      "competitive": [
+        2,
+        1
+      ],
+      "friendly": [
+        1,
+        1
+      ]
+    }
+  ]
 }

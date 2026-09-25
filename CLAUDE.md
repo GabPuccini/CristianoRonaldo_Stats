@@ -121,6 +121,18 @@ opposition, and `--assists N` if he also created goals.
     python scripts/update_stats.py build    # rewrite HTML from current data
     python scripts/update_stats.py undo     # revert the last event
 
+For Portugal, pass `--competition-label` to `appearance` as well, since it
+decides which column of the Portugal table moves: `Friendlies` is a friendly,
+every other label is competitive, and leaving it out counts the match as
+competitive.
+
+    python scripts/update_stats.py appearance --team portugal \
+        --competition-label "Nations League" --opponent "Wales"
+
+The "International career total" row under the Portugal table adds the youth
+teams to the senior side. The youth rows are held in `portugal_youth` in the
+dataset, so that total moves with every cap like any other figure.
+
 Pass `--opponent "Name"` to `appearance` whenever he names the opposition, the
 same as for a goal. A match with no goal still counts against that side, and
 leaving it out slowly overstates his goals per game against them on the

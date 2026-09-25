@@ -407,6 +407,17 @@ def derive(data):
         for i, what in enumerate(("apps", "goals")):
             out[f"portugal.{kind}.{what}"] = str(sum(
                 (r.get(kind) or [0, 0])[i] or 0 for r in data["portugal_years"]))
+    # The international career total adds the youth teams to the senior side.
+    # The youth rows are finished history, but the total moves with every cap,
+    # and it was hand written until a Nations League match left it one behind.
+    rows = data["portugal_years"] + data.get("portugal_youth", [])
+    for kind in ("competitive", "friendly"):
+        for i, what in enumerate(("apps", "goals")):
+            out[f"portugal.intl.{kind}.{what}"] = str(sum(
+                (r.get(kind) or [0, 0])[i] or 0 for r in rows))
+    for i, what in enumerate(("apps", "goals")):
+        out[f"portugal.intl.{what}"] = str(sum(
+            (r.get(k) or [0, 0])[i] or 0 for r in rows for k in ("competitive", "friendly")))
 
     # Current season, as quoted on the home page and the season page
     cur = data["meta"]["current_season"]
@@ -1301,19 +1312,36 @@ def year_row(data, year):
     return row
 
 
+def portugal_row(data, year, label, apps, goals):
+    """Add to a Portugal year row and to its competitive or friendly split.
+
+    The split has to move with the total or check() rejects the update, and
+    the season table's split columns would drift from its total column. A
+    friendly is recorded under the "Friendlies" label; every other label
+    (qualifiers, Nations League, Euros, World Cup) is competitive."""
+    target = next((r for r in data["portugal_years"] if r["year"] == year), None)
+    if target is None:
+        target = {"year": year, "apps": 0, "goals": 0,
+                  "competitive": [0, 0], "friendly": [0, 0]}
+        data["portugal_years"].append(target)
+        data["portugal_years"].sort(key=lambda r: r["year"])
+    kind = "friendly" if label == "Friendlies" else "competitive"
+    # a year with no matches of one kind stores None, printed as n/a
+    cell = [c or 0 for c in (target.get(kind) or [0, 0])]
+    target[kind] = [cell[0] + apps, cell[1] + goals]
+    target["apps"] += apps
+    target["goals"] += goals
+    return target
+
+
 def apply_goal(data, args):
     team = args.team
     year = args.year or dt.date.today().year
     comp = args.comp
 
     if team == "portugal":
-        target = next((r for r in data["portugal_years"] if r["year"] == year), None)
-        if target is None:
-            target = {"year": year, "apps": 0, "goals": 0}
-            data["portugal_years"].append(target)
-        target["goals"] += 1
-        if args.new_appearance:
-            target["apps"] += 1
+        portugal_row(data, year, args.competition_label,
+                     apps=1 if args.new_appearance else 0, goals=1)
     else:
         row = find_season_row(data, team, comp, args.season)
         if row is None:
@@ -1366,12 +1394,8 @@ def apply_goal(data, args):
 
 def apply_appearance(data, args):
     if args.team == "portugal":
-        year = args.year or dt.date.today().year
-        target = next((r for r in data["portugal_years"] if r["year"] == year), None)
-        if target is None:
-            target = {"year": year, "apps": 0, "goals": 0}
-            data["portugal_years"].append(target)
-        target["apps"] += 1
+        portugal_row(data, args.year or dt.date.today().year,
+                     args.competition_label, apps=1, goals=0)
     else:
         row = find_season_row(data, args.team, args.comp, args.season)
         if row is None:
@@ -1382,7 +1406,8 @@ def apply_appearance(data, args):
         record_opponent(data, args.team, args.opponent, goals=0, apps=1)
     data.setdefault("log", []).append({
         "date": dt.date.today().isoformat(), "event": "appearance",
-        "team": args.team, "comp": args.comp, "opponent": args.opponent})
+        "team": args.team, "comp": args.comp,
+        "competition": args.competition_label, "opponent": args.opponent})
     return data
 
 
@@ -1437,6 +1462,9 @@ def main():
     a.add_argument("--opponent",
                    help="the side he faced, so his record against them stays "
                         "right even when he does not score")
+    a.add_argument("--competition-label", dest="competition_label",
+                   help="for Portugal, decides the competitive or friendly "
+                        "column: Friendlies is friendly, anything else competitive")
 
     s = sub.add_parser("assist", help="record assists")
     s.add_argument("--team", required=True)
