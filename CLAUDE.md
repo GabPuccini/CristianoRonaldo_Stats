@@ -260,23 +260,6 @@ achievements merged in: `.ach-filter-tab`, since the dashboard owns
 owns `.trophy-grid`. Tables merged from the old pages reuse `.dash-table`,
 which they already matched.
 
-## Transfer history
-
-The transfer table sits under the career table, at `/#transfers`. It is built
-from `transfers` in the dataset, one entry per move, oldest first: `season`,
-`date`, `from` and `to` (keys of `transfer_clubs`, or `null` for a spell without
-a club), and `fee` and `market_value` in millions of euros, as Transfermarkt
-publishes them. A move with no fee carries `fee_text` instead, such as
-`Free transfer`. The page lists the moves newest first and adds up the total
-fee itself.
-
-When he moves club, add one entry and run `build`. A club he has never played
-for needs a line in `transfer_clubs` with its name, country and badge file.
-`check` refuses two moves in the same calendar year, since each move's figures
-are keyed by its year.
-
-## The whole site is one page, continued
-
 Under the profile card an "On this page" row of pills links to every chapter:
 `#clubs`, `#transfers`, `#goalsbyyear`, `#goalsbyseason`, `#records`, `#dashboard`,
 `#timeline`, `#achievements` and `#faq`. Add a pill there whenever a section is
@@ -293,6 +276,21 @@ There is one "how these numbers are compiled" section, at the foot of the page.
 Each merged page brought its own and they said the same thing four times over,
 so the clauses that were genuinely different were folded into that one block
 and the rest deleted. Do not add another: put anything new in the single block.
+
+## Transfer history
+
+The transfer table sits under the career table, at `/#transfers`. It is built
+from `transfers` in the dataset, one entry per move, oldest first: `season`,
+`date`, `from` and `to` (keys of `transfer_clubs`, or `null` for a spell without
+a club), and `fee` and `market_value` in millions of euros, as Transfermarkt
+publishes them. A move with no fee carries `fee_text` instead, such as
+`Free transfer`. The page lists the moves newest first and adds up the total
+fee itself.
+
+When he moves club, add one entry and run `build`. A club he has never played
+for needs a line in `transfer_clubs` with its name, country and badge file.
+`check` refuses two moves in the same calendar year, since each move's figures
+are keyed by its year.
 
 ## Site wide writing rules
 
