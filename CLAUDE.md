@@ -212,8 +212,8 @@ Redirect Rule rather than as a file in the repo.
 ## The timeline
 
 The career timeline is a section of `index.html` too, under
-`<section id="timeline">`, reached at `/#timeline`. It sits below the dashboard
-and above the quick answers. Photos live in `timeline/` as a jpg and webp pair
+`<section id="timeline">`, reached at `/#timeline`. It sits below the Ballon d'Or
+section and above the transfer history. Photos live in `timeline/` as a jpg and webp pair
 named for the slot they fill, and the rules for them are in the writing rules
 below.
 
@@ -244,10 +244,12 @@ than loading the library again.
 
 ## The whole site is one page
 
-Every statistics page has been folded into `index.html`: goals by year, goals
-by season, the dashboard, the timeline and the achievements, each a section
-with its own id and reached at `/#goalsbyyear`, `/#goalsbyseason`,
-`/#dashboard`, `/#timeline` and `/#achievements`. Only `privacy.html` is still
+Every statistics page has been folded into `index.html`. The chapters run in
+this order, each a `<section>` with its own id: goals by year, goals by season,
+the dashboard, the Ballon d'Or, the timeline, the transfer history and the
+achievements, reached at `/#goalsbyyear`, `/#goalsbyseason`, `/#dashboard`,
+`/#ballondor`, `/#timeline`, `/#transfers` and `/#achievements`. The sidebar
+lists them in the same order, on `privacy.html` as well as the home page. Only `privacy.html` is still
 a page of its own. `PAGES` in the engine is a single entry as a result.
 
 Five stub files sit in the repo holding a canonical and a meta refresh, one per
@@ -261,12 +263,15 @@ owns `.trophy-grid`. Tables merged from the old pages reuse `.dash-table`,
 which they already matched.
 
 Under the profile card an "On this page" row of pills links to every chapter:
-`#clubs`, `#transfers`, `#goalsbyyear`, `#goalsbyseason`, `#records`,
-`#dashboard`, `#timeline`, `#achievements`, `#ballondor` and `#faq`. Add a pill there whenever a section is
+`#clubs`, `#goalsbyyear`, `#goalsbyseason`, `#records`, `#dashboard`,
+`#ballondor`, `#timeline`, `#transfers`, `#achievements` and `#faq`. Add a pill there whenever a section is
 added, and give its links `class="plain"`, which is what opts a link inside a
 list out of the underline body links carry. The sidebar highlights the section
-being read as the page scrolls, and a back to top button appears once the reader
-is well down the page, so neither needs touching when content moves.
+being read as the page scrolls, and the address bar follows it, so it reads
+`/#ballondor` while that section is on screen; it switches to plain `/` in the
+stretches no sidebar item covers. Both work from the sidebar's own links, so a
+new chapter needs a `<section id>` and a sidebar item and nothing else. A back
+to top button appears once the reader is well down the page.
 
 Links between sections say "section", never "page": "in the goals by season
 section", not "on the goals by season page".
@@ -295,7 +300,8 @@ and the rest deleted. Do not add another: put anything new in the single block.
 
 ## Transfer history
 
-The transfer table sits under the career table, at `/#transfers`. It is built
+The transfer table is its own section between the timeline and the
+achievements, at `/#transfers`. It is built
 from `transfers` in the dataset, one entry per move, oldest first: `season`,
 `date`, `from` and `to` (keys of `transfer_clubs`, or `null` for a spell without
 a club), and `fee` and `market_value` in millions of euros, as Transfermarkt
@@ -310,7 +316,7 @@ are keyed by its year.
 
 ## Ballon d'Or
 
-The Ballon d'Or section follows the achievements, at `/#ballondor`: the trophy
+The Ballon d'Or section follows the dashboard, at `/#ballondor`: the trophy
 (`ballondor.webp` with a `ballondor.png` fallback, both cut out onto a
 transparent background), a short case for what his nominations show, and a
 table of every edition he was shortlisted for. The table is built from

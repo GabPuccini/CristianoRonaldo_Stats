@@ -1237,7 +1237,7 @@ def build_regions(data, tables, values):
         fee_cls = "tr-fee" if t.get("fee") else "tr-fee none"
         mv_cls = "tr-mv" if t.get("market_value") else "tr-mv none"
         rows.append(
-            f'{" " * 28}<tr role="row">'
+            f'{" " * 32}<tr role="row">'
             f'<th scope="row" role="rowheader"><span class="tr-date">{when.day} {when:%b %Y}</span>'
             f'<small>{t["season"]}</small></th>'
             f'<td class="tr-club tr-left" role="cell" data-label="Left">{club_cell(t["from"])}</td>'
