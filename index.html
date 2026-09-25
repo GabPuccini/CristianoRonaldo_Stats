@@ -2256,6 +2256,57 @@
             .transfer-table thead th.left + th.left { padding-left: 8px; }
         }
 
+        /* Feedback, at the foot of the page: a short invitation to suggest
+           what should be added, with the address as a link in the sentence
+           and a button that opens an email with the subject filled in. */
+        .feedback {
+            margin-top: 26px;
+            padding: 22px 26px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px 28px;
+            border-radius: var(--r-lg);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-sm);
+            background: linear-gradient(135deg, rgba(47, 86, 207, 0.09), rgba(47, 86, 207, 0.02)), var(--surface);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+        .feedback-text { flex: 1 1 380px; min-width: 0; }
+        .feedback h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            margin-bottom: 6px;
+        }
+        .feedback p { font-size: 0.92rem; color: var(--ink-2); max-width: 66ch; }
+        .feedback-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            min-height: 44px;
+            padding: 0 20px;
+            border-radius: 999px;
+            background: var(--hero-grad);
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration: none;
+            white-space: nowrap;
+            box-shadow: 0 8px 20px rgba(31, 58, 138, 0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .feedback-btn:hover { transform: translateY(-1px); box-shadow: 0 12px 26px rgba(31, 58, 138, 0.32); }
+        .feedback-btn svg { width: 17px; height: 17px; flex-shrink: 0; }
+        @media (max-width: 640px) {
+            .feedback { padding: 20px 18px; }
+            .feedback-btn { width: 100%; justify-content: center; }
+        }
+
         /* Ballon d'Or. The trophy sits on a faint gold glow beside the case
            for the nominations, then the table. Every finish is plain text;
            a win is set in bold on a faintly tinted row. */
@@ -4420,6 +4471,21 @@
                 <p>Goals, assists, penalties, free kicks and hat tricks are counted by hand from full match records and then checked against club and competition sources. Assists especially: each one is credited goal by goal rather than taken from a data feed, which is why the total of <span data-stat="career.assists">291</span> is higher than several football databases carry.</p>
                 <p>A few things are worth knowing about how the sections above divide that same tally. Calendar years run from 1 January to 31 December, so a year mixes two club campaigns with any Portugal matches played in between, while seasons follow the club calendar instead. The competition, finish type and body part splits each add up to <span data-stat="career.goals">979</span>, so no goal is counted twice or left out. Opponent records span whole careers rather than single spells, so a total such as the 25 against Atletico Madrid covers more than one of his clubs. The timeline is extended when Ronaldo reaches a new milestone rather than after every match, so its dates and its running total are checked together.</p>
                 <p>Figures are updated after every match Ronaldo features in. Last updated <span data-stat="meta.updated.long">25 September 2026</span>.</p>
+            </section>
+
+            <!-- Feedback -->
+            <section class="feedback reveal" style="animation-delay:.10s" aria-labelledby="feedback-title">
+                <div class="feedback-text">
+                    <h2 id="feedback-title">What would you like to see on the site?</h2>
+                    <p>A statistic that is missing, a chart that would make something clearer, or any other improvement: email me at <a href="mailto:ronaldostats@pm.me">ronaldostats@pm.me</a>.</p>
+                </div>
+                <a class="feedback-btn" href="mailto:ronaldostats@pm.me?subject=Suggestion%20for%20RonaldoStats.app">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    Send a suggestion
+                </a>
             </section>
 
             <footer class="footer reveal" style="animation-delay:.12s">
