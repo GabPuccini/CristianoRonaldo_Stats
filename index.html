@@ -3309,7 +3309,7 @@
                         </div>
                         <div class="spotlight-stats">
                             <div class="spotlight-stat"><div class="v" id="spotGoals"></div><div class="l">Goals</div></div>
-                            <div class="spotlight-stat"><div class="v" id="spotApps"></div><div class="l" id="spotAppsLabel">Games</div></div>
+                            <div class="spotlight-stat" id="spotAppsWrap"><div class="v" id="spotApps"></div><div class="l">Games</div></div>
                             <div class="spotlight-stat" id="spotRateWrap"><div class="v" id="spotRate"></div><div class="l">Per game</div></div>
                         </div>
                     </div>
@@ -4924,10 +4924,10 @@
                 club:       { mode: 'career', name: 'opponents across all his clubs', sub: 'Click any bar for his full record against that team.', foot: 'Career records in every competition. A total such as his 25 against Atletico Madrid spans more than one of his clubs, so it is shown whole rather than split.' },
                 saudi:      { mode: 'career', name: 'Al Nassr opponents', sub: 'Click any bar for his full record against that team.', foot: 'Saudi opponents for Al Nassr, every competition included.' },
                 intl:       { mode: 'career', name: 'international opponents', sub: 'Click any bar for his full record against that team.', foot: 'Every Portugal match included, friendlies as well as tournaments.' },
-                sporting:   { mode: 'era', name: 'Sporting CP opponents', sub: 'Every side he scored against for Sporting CP. Click a bar for details.', foot: 'The complete set: all four sides from his first five senior goals, compiled from the full goal log on Transfermarkt. Click a bar for his goals against that side and the number of matches he scored in.' },
-                manutd:     { mode: 'era', name: 'Man United opponents', sub: 'The sides he scored against most for Man United, every competition included.', foot: 'The top of 44 sides he scored against for Man United across both spells, compiled from the full goal log on Transfermarkt. Click a bar for his goals against that side and the number of matches he scored in.' },
-                realmadrid: { mode: 'era', name: 'Real Madrid opponents', sub: 'The sides he scored against most for Real Madrid, every competition included.', foot: 'The top of 64 sides he scored against for Real Madrid, compiled from the full goal log on Transfermarkt. Click a bar for his goals against that side and the number of matches he scored in.' },
-                juventus:   { mode: 'era', name: 'Juventus opponents', sub: 'The sides he scored against most for Juventus, every competition included.', foot: 'The top of 30 sides he scored against for Juventus, compiled from the full goal log on Transfermarkt. Click a bar for his goals against that side and the number of matches he scored in.' }
+                sporting:   { mode: 'era', name: 'Sporting CP opponents', sub: 'Every side he scored against for Sporting CP. Click a bar for details.', foot: 'The complete set: all four sides from his first five senior goals, compiled from the full goal log on Transfermarkt.' },
+                manutd:     { mode: 'era', name: 'Man United opponents', sub: 'The sides he scored against most for Man United, every competition included.', foot: 'The top of 44 sides he scored against for Man United across both spells, compiled from the full goal log on Transfermarkt.' },
+                realmadrid: { mode: 'era', name: 'Real Madrid opponents', sub: 'The sides he scored against most for Real Madrid, every competition included.', foot: 'The top of 64 sides he scored against for Real Madrid, compiled from the full goal log on Transfermarkt.' },
+                juventus:   { mode: 'era', name: 'Juventus opponents', sub: 'The sides he scored against most for Juventus, every competition included.', foot: 'The top of 30 sides he scored against for Juventus, compiled from the full goal log on Transfermarkt.' }
             }
         };
 
@@ -5214,7 +5214,9 @@
             document.getElementById('spotRank').textContent = 'Number ' + (index + 1) + ' of his ' + meta.name;
             document.getElementById('spotGoals').textContent = row[1];
             document.getElementById('spotApps').textContent = row[2];
-            document.getElementById('spotAppsLabel').textContent = meta.mode === 'era' ? 'Matches scored in' : 'Games';
+            // the club lists hold goals only until games against each side are
+            // researched, so their card shows the goals and nothing else
+            document.getElementById('spotAppsWrap').hidden = meta.mode === 'era';
             document.getElementById('spotRateWrap').hidden = meta.mode === 'era';
             document.getElementById('spotRate').textContent = (row[1] / row[2]).toFixed(2);
             spotlight.classList.add('show');

@@ -208,11 +208,13 @@ charts.
 The "Who does Ronaldo score against most?" card has a tab for every team: All
 clubs, Sporting CP, Man United, Real Madrid, Juventus, Al Nassr and Portugal,
 each drawn from `opponents` in the dataset. All clubs, Al Nassr and Portugal
-give goals and games against each side; the four earlier clubs give goals and
-the number of matches he scored in, because that is what their goal logs hold,
-so their detail card leaves out goals per game. `check` fails if a side's goals
-across the club lists add up to more than its total in the All clubs list, or
-if a club list says he scored in more matches than he scored goals.
+give goals and games against each side. The four earlier clubs show goals only:
+their `opponent_apps` entries hold the number of matches he scored in, taken from
+the goal logs, which readers would mistake for games played, so the page does
+not show them. Games against each side for those clubs are still to be
+researched; when they are, replace those entries with games and show them.
+`check` fails if a side's goals across the club lists add up to more than its
+total in the All clubs list.
 
 `dashboard.html` was retired in September 2026. `/dashboard.html` must keep
 returning a 301 to `https://ronaldostats.app/#dashboard`, set as a Cloudflare
