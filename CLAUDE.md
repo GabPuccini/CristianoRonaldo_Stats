@@ -296,13 +296,16 @@ it, and `gen_head_rules.py` and `check_coverage.py` skip it too.
 
 ## House style for the copy
 
-The site is written the way the Ballon d'Or section is: the answer first, with
-the figure, then the context that makes the figure mean something, in plain
-sentences of varied length. No marketing adjectives, no stock phrases, no
-rhetorical questions. Say what a number shows rather than calling it
-impressive. Every figure is either marked or, if it is fixed history such as an
-age at the time or a transfer fee, exempted in `check_coverage.py` with its
-reason.
+Plain and factual. State the figure and the fact behind it in short, simple
+sentences, the way a reference site would. No commentary or interpretation
+("the running total is where the pace shows", "the shape of the career is plain
+in them"), no metaphors, no dramatic reveals after a colon, no marketing
+adjectives, no rhetorical questions. A reader flagged the earlier, more
+polished explanatory style as reading like AI copywriting, and it was removed
+from the whole site in September 2026. Section links name their destination
+("Goals by season", "Timeline"), nothing more. Every figure is either marked
+or, if it is fixed history such as an age at the time or a transfer fee,
+exempted in `check_coverage.py` with its reason.
 
 The "What records does Cristiano Ronaldo hold?" list is hidden, wrapped in
 `<div class="records-hold" hidden>`: most of its entries were goal totals rather
