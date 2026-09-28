@@ -659,6 +659,23 @@ def validate(data, facts):
             if apps and name not in apps:
                 errors.append(f"{group}: {name} has goals recorded but no appearances")
 
+    # The dashboard shows each club's opponents on its own tab beside the all
+    # clubs list, so the two must agree: a side's goals across the club lists
+    # can never add up to more than its career total in the all clubs list.
+    # In a club list the second figure is matches he scored in, so it can
+    # never be more than the goals against that side either.
+    opps = data.get("opponents", {})
+    club_list = opps.get(OPPONENT_AGGREGATE, {})
+    club_groups = [g for g in opps if g != OPPONENT_AGGREGATE and group_team.get(g) != "portugal"]
+    for name, career in club_list.items():
+        spread = sum(opps[g].get(name, 0) for g in club_groups)
+        if spread > career:
+            errors.append(f"{name}: the club lists give {spread} goals, the all clubs list {career}")
+    for g in ("sporting", "manutd", "realmadrid", "juventus"):
+        for name, scored_in in data.get("opponent_apps", {}).get(g, {}).items():
+            if scored_in > opps.get(g, {}).get(name, 0):
+                errors.append(f"{g}: scored in {scored_in} matches against {name} but has fewer goals")
+
     return errors
 
 

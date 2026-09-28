@@ -129,7 +129,7 @@ record("index.html", "summary years scoring", str(len(tables["years"])),
        find("index.html", r'id="yearsScoring">([^<]+)<'))
 record("index.html", "summary best year goals", values["year.best.goals"],
        find("index.html", r'id="bestYear">([^<]+)<'), key="year.best.goals")
-record("index.html", "summary best year label", f'Best year ({values["year.best.year"]})',
+record("index.html", "summary best year label", f'Most goals ({values["year.best.year"]})',
        find("index.html", r'id="bestYearLabel">([^<]+)<'), key="year.best.year")
 record("index.html", "summary average per year",
        f'{sum(r["goals"] for r in tables["years"]) / len(tables["years"]):.1f}',

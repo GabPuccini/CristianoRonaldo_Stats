@@ -205,6 +205,15 @@ are the content: they are written from the dataset like any other table and
 they read correctly with JavaScript off, so never replace them with canvas only
 charts.
 
+The "Who does Ronaldo score against most?" card has a tab for every team: All
+clubs, Sporting CP, Man United, Real Madrid, Juventus, Al Nassr and Portugal,
+each drawn from `opponents` in the dataset. All clubs, Al Nassr and Portugal
+give goals and games against each side; the four earlier clubs give goals and
+the number of matches he scored in, because that is what their goal logs hold,
+so their detail card leaves out goals per game. `check` fails if a side's goals
+across the club lists add up to more than its total in the All clubs list, or
+if a club list says he scored in more matches than he scored goals.
+
 `dashboard.html` was retired in September 2026. `/dashboard.html` must keep
 returning a 301 to `https://ronaldostats.app/#dashboard`, set as a Cloudflare
 Redirect Rule rather than as a file in the repo.
