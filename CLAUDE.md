@@ -274,7 +274,7 @@ owns `.trophy-grid`. Tables merged from the old pages reuse `.dash-table`,
 which they already matched.
 
 Under the profile card an "On this page" row of pills links to every chapter:
-`#clubs`, `#goalsbyyear`, `#goalsbyseason`, `#records`, `#dashboard`,
+`#clubs`, `#goalsbyyear`, `#goalsbyseason`, `#dashboard`,
 `#ballondor`, `#timeline`, `#transfers`, `#achievements` and `#faq`. Add a pill there whenever a section is
 added, and give its links `class="plain"`, which is what opts a link inside a
 list out of the underline body links carry. The sidebar highlights the section
@@ -303,6 +303,12 @@ rhetorical questions. Say what a number shows rather than calling it
 impressive. Every figure is either marked or, if it is fixed history such as an
 age at the time or a transfer fee, exempted in `check_coverage.py` with its
 reason.
+
+The "What records does Cristiano Ronaldo hold?" list is hidden, wrapped in
+`<div class="records-hold" hidden>`: most of its entries were goal totals rather
+than records, and his real records were not all there. A proper records section
+is planned to replace it. Until then it is not shown or linked, and its markers
+keep its figures current.
 
 There is one "how these numbers are compiled" section, at the foot of the page.
 Each merged page brought its own and they said the same thing four times over,

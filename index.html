@@ -2741,7 +2741,6 @@
                     <li><a class="plain" href="/#clubs">Clubs</a></li>
                     <li><a class="plain" href="/#goalsbyyear">Goals by year</a></li>
                     <li><a class="plain" href="/#goalsbyseason">Goals by season</a></li>
-                    <li><a class="plain" href="/#records">Records</a></li>
                     <li><a class="plain" href="/#dashboard">Dashboard</a></li>
                     <li><a class="plain" href="/#ballondor">Ballon d'Or</a></li>
                     <li><a class="plain" href="/#timeline">Through the years</a></li>
@@ -3137,19 +3136,23 @@
                 <p class="section-note">His most prolific season was <b><span data-stat="season.best.season">2014/15</span> at <span data-stat="season.best.team">Real Madrid</span>: <span data-stat="season.best.goals">61</span> goals in <span data-stat="season.best.apps">54</span> games</b>, <span data-stat="season.best.league_goals">48</span> of them in La Liga, still the club's record for a league season. Six of his seven highest totals came in Madrid: <span data-stat="season.rank1.goals">61</span> in <span data-stat="season.rank1.season">2014/15</span>, <span data-stat="season.rank2.goals">60</span> in <span data-stat="season.rank2.season">2011/12</span>, <span data-stat="season.rank3.goals">55</span> in <span data-stat="season.rank3.season">2012/13</span>, <span data-stat="season.rank4.goals">53</span> in <span data-stat="season.rank4.season">2010/11</span> and <span data-stat="season.rank5.goals">51</span> in both <span data-stat="season.rank5.season">2013/14</span> and <span data-stat="season.rank6.season">2015/16</span>. The seventh is the one people overlook: <b><span data-stat="team.alnassr.bestseason.goals">50</span> for Al Nassr in <span data-stat="team.alnassr.bestseason.season">2023/24</span></b>, in his late thirties. His highest in England was <span data-stat="team.manutd.bestseason.goals">42</span> for Manchester United in <span data-stat="team.manutd.bestseason.season">2007/08</span>, the season that won him his first Ballon d'Or.</p>
             </section>
 
-            <!-- Records -->
-            <div class="section-head">
-                <h2 class="section-title" id="records">What records does Cristiano Ronaldo hold?</h2>
-                <a class="section-link" href="/#dashboard">Explore by competition</a>
+            <!-- Records: hidden until a proper records section replaces it. Most of
+                 these are goal totals rather than records, and his real records are
+                 not all here. The markup stays so its figures keep updating. -->
+            <div class="records-hold" hidden>
+                <div class="section-head">
+                    <h2 class="section-title" id="records">What records does Cristiano Ronaldo hold?</h2>
+                    <a class="section-link" href="/#dashboard">Explore by competition</a>
+                </div>
+                <ul class="record-list reveal" style="animation-delay:.10s">
+                    <li><span class="num tnum" data-stat="comp.championsleague">140</span><span><b>Champions League goals</b>, more than anyone in the competition's history, and <span data-stat="comp.realmadrid.championsleague">105</span> of them in nine seasons at Real Madrid.</span></li>
+                    <li><span class="num tnum" data-stat="team.portugal.goals">146</span><span><b>Goals in <span data-stat="team.portugal.apps">234</span> caps for Portugal</b>, the most by any man in international football. He passed Ali Daei in September 2021 and has not stopped since.</span></li>
+                    <li><span class="num tnum" data-stat="comp.laliga">311</span><span><b>La Liga goals for Real Madrid</b> in nine seasons, part of <span data-stat="team.realmadrid.goals">450</span> for the club in all competitions, better than a goal a game.</span></li>
+                    <li><span class="num tnum" data-stat="year.best.goals">69</span><span><b>Goals in <span data-stat="year.best.year">2013</span></b>, his highest scoring calendar year, and one of <span data-stat="year.above40.word">fourteen</span> in which he reached <span data-stat="year.above40.threshold">40</span>.</span></li>
+                    <li><span class="num tnum" data-stat="comp.worldcup">11</span><span><b>World Cup goals</b> across six tournaments. He is the only man to have scored at six different World Cups.</span></li>
+                    <li><span class="num tnum" data-stat="hattricks.total">66</span><span><b>Career hat tricks</b>, alongside <span data-stat="freekicks.total">66</span> direct free kick goals, both spread across four clubs and Portugal.</span></li>
+                </ul>
             </div>
-            <ul class="record-list reveal" style="animation-delay:.10s">
-                <li><span class="num tnum" data-stat="comp.championsleague">140</span><span><b>Champions League goals</b>, more than anyone in the competition's history, and <span data-stat="comp.realmadrid.championsleague">105</span> of them in nine seasons at Real Madrid.</span></li>
-                <li><span class="num tnum" data-stat="team.portugal.goals">146</span><span><b>Goals in <span data-stat="team.portugal.apps">234</span> caps for Portugal</b>, the most by any man in international football. He passed Ali Daei in September 2021 and has not stopped since.</span></li>
-                <li><span class="num tnum" data-stat="comp.laliga">311</span><span><b>La Liga goals for Real Madrid</b> in nine seasons, part of <span data-stat="team.realmadrid.goals">450</span> for the club in all competitions, better than a goal a game.</span></li>
-                <li><span class="num tnum" data-stat="year.best.goals">69</span><span><b>Goals in <span data-stat="year.best.year">2013</span></b>, his highest scoring calendar year, and one of <span data-stat="year.above40.word">fourteen</span> in which he reached <span data-stat="year.above40.threshold">40</span>.</span></li>
-                <li><span class="num tnum" data-stat="comp.worldcup">11</span><span><b>World Cup goals</b> across six tournaments. He is the only man to have scored at six different World Cups.</span></li>
-                <li><span class="num tnum" data-stat="hattricks.total">66</span><span><b>Career hat tricks</b>, alongside <span data-stat="freekicks.total">66</span> direct free kick goals, both spread across four clubs and Portugal.</span></li>
-            </ul>
 
             <!-- Trophies -->
             <div class="section-head">
