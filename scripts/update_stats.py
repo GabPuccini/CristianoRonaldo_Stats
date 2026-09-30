@@ -834,7 +834,7 @@ def script_rules():
         "index.html": [
             (r"A total such as his " + G + r" against Atletico Madrid", "opponent.club.atleticomadrid.goals", 2),
             (r"a total such as the " + G + r" against Atletico Madrid", "opponent.club.atleticomadrid.goals"),
-            (r"His " + G + r" World Cup goals include three", "comp.portugal.worldcup"),
+            (r"His " + G + r" FIFA World Cup goals include three", "comp.portugal.worldcup"),
             (r"All " + G + r" by the part of the body", "career.goals"),
             # the provenance comment above DATA quotes the total it reconciles to
             (r"which reconciles exactly with the " + G + r" total here", "career.goals"),

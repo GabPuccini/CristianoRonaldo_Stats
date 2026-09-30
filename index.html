@@ -60,6 +60,26 @@
       "about": {
             "@id": "https://ronaldostats.app/#cristiano-ronaldo"
       },
+      "mentions": [
+            { "@id": "https://ronaldostats.app/#sporting" },
+            { "@id": "https://ronaldostats.app/#manutd" },
+            { "@id": "https://ronaldostats.app/#realmadrid" },
+            { "@id": "https://ronaldostats.app/#juventus" },
+            { "@id": "https://ronaldostats.app/#alnassr" },
+            { "@id": "https://ronaldostats.app/#portugal" },
+            { "@type": "Thing", "name": "UEFA Champions League", "sameAs": "https://www.wikidata.org/wiki/Q18756" },
+            { "@type": "Thing", "name": "FIFA World Cup", "sameAs": "https://www.wikidata.org/wiki/Q19317" },
+            { "@type": "Thing", "name": "UEFA European Championship", "sameAs": "https://www.wikidata.org/wiki/Q260858" },
+            { "@type": "Thing", "name": "UEFA Nations League", "sameAs": "https://www.wikidata.org/wiki/Q15980635" },
+            { "@type": "Thing", "name": "Premier League", "sameAs": "https://www.wikidata.org/wiki/Q9448" },
+            { "@type": "Thing", "name": "La Liga", "sameAs": "https://www.wikidata.org/wiki/Q324867" },
+            { "@type": "Thing", "name": "Serie A", "sameAs": "https://www.wikidata.org/wiki/Q15804" },
+            { "@type": "Thing", "name": "Saudi Pro League", "sameAs": "https://www.wikidata.org/wiki/Q255633" },
+            { "@type": "Thing", "name": "Primeira Liga", "sameAs": "https://www.wikidata.org/wiki/Q182994" },
+            { "@type": "Thing", "name": "FIFA Club World Cup", "sameAs": "https://www.wikidata.org/wiki/Q223366" },
+            { "@type": "Thing", "name": "AFC Champions League", "sameAs": "https://www.wikidata.org/wiki/Q193041" },
+            { "@type": "Thing", "name": "Ballon d'Or", "sameAs": "https://www.wikidata.org/wiki/Q166177" }
+      ],
       "primaryImageOfPage": {
             "@type": "ImageObject",
             "url": "https://ronaldostats.app/cristiano-ronaldo-foot-ball.jpg"
@@ -78,12 +98,23 @@
       "birthDate": "1985-02-05",
       "birthPlace": { "@type": "Place", "name": "Funchal, Madeira, Portugal" },
       "height": "1.87 m",
-      "nationality": "Portuguese",
+      "nationality": { "@type": "Country", "name": "Portugal" },
       "gender": "Male",
       "jobTitle": "Professional footballer",
       "memberOf": [
-        { "@type": "SportsTeam", "name": "Al Nassr FC" },
-        { "@type": "SportsTeam", "name": "Portugal national football team" }
+        { "@type": "OrganizationRole", "roleName": "Forward", "startDate": "2023-01-01", "memberOf": { "@type": "SportsTeam", "@id": "https://ronaldostats.app/#alnassr", "name": "Al Nassr FC", "sameAs": "https://www.wikidata.org/wiki/Q482764" } },
+        { "@type": "OrganizationRole", "roleName": "Forward", "startDate": "2003-08-20", "memberOf": { "@type": "SportsTeam", "@id": "https://ronaldostats.app/#portugal", "name": "Portugal national football team", "sameAs": "https://www.wikidata.org/wiki/Q267245" } },
+        { "@type": "OrganizationRole", "roleName": "Forward", "startDate": "2021-08-31", "endDate": "2022-11-22", "memberOf": { "@type": "SportsTeam", "@id": "https://ronaldostats.app/#manutd", "name": "Manchester United F.C.", "sameAs": "https://www.wikidata.org/wiki/Q18656" } },
+        { "@type": "OrganizationRole", "roleName": "Forward", "startDate": "2018-07-10", "endDate": "2021-08-31", "memberOf": { "@type": "SportsTeam", "@id": "https://ronaldostats.app/#juventus", "name": "Juventus FC", "sameAs": "https://www.wikidata.org/wiki/Q1422" } },
+        { "@type": "OrganizationRole", "roleName": "Forward", "startDate": "2009-07-06", "endDate": "2018-07-10", "memberOf": { "@type": "SportsTeam", "@id": "https://ronaldostats.app/#realmadrid", "name": "Real Madrid CF", "sameAs": "https://www.wikidata.org/wiki/Q8682" } },
+        { "@type": "OrganizationRole", "roleName": "Forward", "startDate": "2003-08-12", "endDate": "2009-07-06", "memberOf": { "@id": "https://ronaldostats.app/#manutd" } },
+        { "@type": "OrganizationRole", "roleName": "Forward", "startDate": "2002-08-14", "endDate": "2003-08-12", "memberOf": { "@type": "SportsTeam", "@id": "https://ronaldostats.app/#sporting", "name": "Sporting CP", "sameAs": "https://www.wikidata.org/wiki/Q75729" } }
+      ],
+      "award": [
+        "Ballon d'Or (2008, 2013, 2014, 2016, 2017)",
+        "The Best FIFA Men's Player (2016, 2017)",
+        "European Golden Shoe (2007/08, 2010/11, 2013/14, 2014/15)",
+        "UEFA Men's Player of the Year (2013/14, 2015/16, 2016/17)"
       ],
       "sameAs": [
         "https://en.wikipedia.org/wiki/Cristiano_Ronaldo",
@@ -670,7 +701,7 @@
                   "name": "How many goals has Ronaldo scored this season?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Ronaldo has scored 3 goals for Al Nassr in 2026/27 so far, 3 of them in the Saudi Pro League. In the 2026 calendar year, including the World Cup, he has 22. Every season is in the goals by season section."
+                        "text": "Ronaldo has scored 3 goals for Al Nassr in 2026/27 so far, 3 of them in the Saudi Pro League. In the 2026 calendar year, including the FIFA World Cup, he has 22. Every season is in the goals by season section."
                   }
             },
             {
@@ -718,7 +749,7 @@
                   "name": "How many Champions League goals has Ronaldo scored?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Ronaldo has scored 140 Champions League goals, more than anyone in the competition's history: 105 for Real Madrid, 21 for Manchester United and 14 for Juventus. He finished as its top scorer in seven seasons."
+                        "text": "Ronaldo has scored 140 goals in the UEFA Champions League, a record: 105 for Real Madrid, 21 for Manchester United and 14 for Juventus. He was the top scorer in seven UEFA Champions League seasons."
                   }
             },
             {
@@ -726,7 +757,7 @@
                   "name": "How many international goals has Ronaldo scored?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Ronaldo has scored 146 goals in 234 senior caps for Portugal, the most by any man in international football. His 11 World Cup goals came across six tournaments."
+                        "text": "Ronaldo has scored 146 goals in 234 senior caps for Portugal, the most by any man in international football. His 11 FIFA World Cup goals came across six tournaments."
                   }
             },
             {
@@ -774,7 +805,7 @@
                   "name": "How much did Ronaldo cost when he joined Juventus?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Juventus paid €100m, rising to €117m with add ons, on 10 July 2018. At 33 he became the most expensive signing in Serie A history, and he won the league in each of his first two seasons."
+                        "text": "Juventus paid €100m, rising to €117m with add ons, on 10 July 2018. At 33 he became the most expensive signing in Serie A history, and he won Serie A in each of his first two seasons."
                   }
             },
             {
@@ -790,7 +821,7 @@
                   "name": "When did Ronaldo score his 900th goal?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "On 5 September 2024, with a first time finish against Croatia in Lisbon in the Nations League. Nobody had scored 900 official goals before him."
+                        "text": "On 5 September 2024, with a first time finish against Croatia in Lisbon in the UEFA Nations League. Nobody had scored 900 official goals before him."
                   }
             },
             {
@@ -814,7 +845,7 @@
                   "name": "How many World Cups has Ronaldo played at?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Six, from 2006 to 2026. On 23 June 2026 two goals against Uzbekistan made him the first man to score at six different World Cups, at the tournament he had said would be his last."
+                        "text": "Six FIFA World Cups, from 2006 to 2026. On 23 June 2026 two goals against Uzbekistan made him the first man to score at six different World Cups, at the 2026 FIFA World Cup, which he had said would be his last."
                   }
             },
             {
@@ -838,7 +869,7 @@
                   "name": "How many Champions Leagues has Ronaldo won?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Five: once with Manchester United, in 2007/08, and four times with Real Madrid, in 2013/14, 2015/16, 2016/17 and 2017/18. He is also the competition's all time top scorer, with 140 goals."
+                        "text": "Five UEFA Champions League titles: once with Manchester United, in 2007/08, and four times with Real Madrid, in 2013/14, 2015/16, 2016/17 and 2017/18. He is also the all time top scorer in the UEFA Champions League, with 140 goals."
                   }
             },
             {
@@ -854,7 +885,7 @@
                   "name": "What has Ronaldo won with Portugal?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Three trophies: Euro 2016 and the UEFA Nations League in 2018/19 and 2024/25. He scored in the 2025 final, at forty. All three are covered in the through the years section."
+                        "text": "Three trophies: UEFA Euro 2016 and the UEFA Nations League in 2018/19 and 2024/25. He scored in the 2025 final, at forty. All three are covered in the through the years section."
                   }
             },
             {
@@ -862,7 +893,7 @@
                   "name": "Has Ronaldo won the World Cup?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "No. Ronaldo has never won the World Cup. His major international honours are Euro 2016 and two Nations League titles, and in 2026 he became the first man to score at six different World Cups."
+                        "text": "No. Ronaldo has never won the FIFA World Cup. His major international honours are UEFA Euro 2016 and two UEFA Nations League titles, and in 2026 he became the first man to score at six different World Cups."
                   }
             },
             {
@@ -870,7 +901,7 @@
                   "name": "Which club has Ronaldo won the most trophies with?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Real Madrid, with 15 trophies in nine seasons: 4 Champions Leagues, 3 FIFA Club World Cups, 2 La Liga titles, 2 Copas del Rey, 2 Supercopas de Espana and 2 UEFA Super Cups."
+                        "text": "Real Madrid, with 15 trophies in nine seasons: 4 UEFA Champions Leagues, 3 FIFA Club World Cups, 2 La Liga titles, 2 Copas del Rey, 2 Supercopas de Espana and 2 UEFA Super Cups."
                   }
             },
             {
@@ -894,7 +925,7 @@
                   "name": "How many trophies did Ronaldo win at Manchester United?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Nine across his two spells: 3 Premier Leagues, the 2007/08 Champions League, the 2008 FIFA Club World Cup, 2 League Cups, the 2003/04 FA Cup and the 2007 Community Shield."
+                        "text": "Nine across his two spells: 3 Premier Leagues, the 2007/08 UEFA Champions League, the 2008 FIFA Club World Cup, 2 League Cups, the 2003/04 FA Cup and the 2007 Community Shield."
                   }
             },
             {
@@ -902,7 +933,7 @@
                   "name": "How many trophies has Ronaldo won at Al Nassr?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Two: the Arab Club Champions Cup in 2023, where he was top scorer, and the Saudi Pro League in 2025/26. The league title made Saudi Arabia the fourth country in which he has won one."
+                        "text": "Two: the Arab Club Champions Cup in 2023, where he was top scorer, and the Saudi Pro League in 2025/26. Winning the Saudi Pro League made Saudi Arabia the fourth country in which he has won a league title."
                   }
             },
             {
@@ -3133,7 +3164,7 @@
                     <h3 class="section-title">What was Ronaldo's most prolific season?</h3>
                     <a class="section-link" href="/#goalsbyyear">Goals by year</a>
                 </div>
-                <p class="section-note">His most prolific season was <b><span data-stat="season.best.season">2014/15</span> at <span data-stat="season.best.team">Real Madrid</span>: <span data-stat="season.best.goals">61</span> goals in <span data-stat="season.best.apps">54</span> games</b>, <span data-stat="season.best.league_goals">48</span> of them in La Liga, still the club's record for a league season. Six of his seven highest totals came at Real Madrid: <span data-stat="season.rank1.goals">61</span> in <span data-stat="season.rank1.season">2014/15</span>, <span data-stat="season.rank2.goals">60</span> in <span data-stat="season.rank2.season">2011/12</span>, <span data-stat="season.rank3.goals">55</span> in <span data-stat="season.rank3.season">2012/13</span>, <span data-stat="season.rank4.goals">53</span> in <span data-stat="season.rank4.season">2010/11</span> and <span data-stat="season.rank5.goals">51</span> in both <span data-stat="season.rank5.season">2013/14</span> and <span data-stat="season.rank6.season">2015/16</span>. The seventh was <b><span data-stat="team.alnassr.bestseason.goals">50</span> for Al Nassr in <span data-stat="team.alnassr.bestseason.season">2023/24</span></b>. His highest in England was <span data-stat="team.manutd.bestseason.goals">42</span> for Manchester United in <span data-stat="team.manutd.bestseason.season">2007/08</span>, the season he won his first Ballon d'Or.</p>
+                <p class="section-note">His most prolific season was <b><span data-stat="season.best.season">2014/15</span> at <span data-stat="season.best.team">Real Madrid</span>: <span data-stat="season.best.goals">61</span> goals in <span data-stat="season.best.apps">54</span> games</b>, <span data-stat="season.best.league_goals">48</span> of them in La Liga, still Real Madrid's record for a La Liga season. Six of his seven highest totals came at Real Madrid: <span data-stat="season.rank1.goals">61</span> in <span data-stat="season.rank1.season">2014/15</span>, <span data-stat="season.rank2.goals">60</span> in <span data-stat="season.rank2.season">2011/12</span>, <span data-stat="season.rank3.goals">55</span> in <span data-stat="season.rank3.season">2012/13</span>, <span data-stat="season.rank4.goals">53</span> in <span data-stat="season.rank4.season">2010/11</span> and <span data-stat="season.rank5.goals">51</span> in both <span data-stat="season.rank5.season">2013/14</span> and <span data-stat="season.rank6.season">2015/16</span>. The seventh was <b><span data-stat="team.alnassr.bestseason.goals">50</span> for Al Nassr in <span data-stat="team.alnassr.bestseason.season">2023/24</span></b>. His highest in England was <span data-stat="team.manutd.bestseason.goals">42</span> for Manchester United in <span data-stat="team.manutd.bestseason.season">2007/08</span>, the season he won his first Ballon d'Or.</p>
             </section>
 
             <!-- Records: hidden until a proper records section replaces it. Most of
@@ -3177,7 +3208,7 @@
                     <div class="trophy-label">Ballon d'Or</div>
                 </div>
             </section>
-            <p class="section-note after">Ronaldo has won <span data-stat="honours.total">35</span> team trophies, in England, Spain, Italy and Saudi Arabia and with Portugal. They include <span data-stat="honours.manutd.premierleague">3</span> Premier Leagues, <span data-stat="honours.realmadrid.laliga">2</span> La Liga titles, <span data-stat="honours.juventus.seriea">2</span> Serie A titles, the 2025/26 Saudi Pro League, <span data-stat="honours.championsleague">5</span> Champions Leagues, Euro 2016 and two Nations Leagues. Every trophy, with its year, is listed club by club in the <a href="/#achievements">achievements section</a>.</p>
+            <p class="section-note after">Ronaldo has won <span data-stat="honours.total">35</span> team trophies, in England, Spain, Italy and Saudi Arabia and with Portugal. They include <span data-stat="honours.manutd.premierleague">3</span> Premier Leagues, <span data-stat="honours.realmadrid.laliga">2</span> La Liga titles, <span data-stat="honours.juventus.seriea">2</span> Serie A titles, the 2025/26 Saudi Pro League, <span data-stat="honours.championsleague">5</span> UEFA Champions Leagues, UEFA Euro 2016 and two UEFA Nations Leagues. Every trophy, with its year, is listed club by club in the <a href="/#achievements">achievements section</a>.</p>
 
             <!-- More statistics -->
             <div class="section-head">
@@ -3222,7 +3253,7 @@
                 <div class="section-head">
                     <h2 class="section-title" id="dashboard-title">Cristiano Ronaldo stats dashboard</h2>
                 </div>
-                <p class="page-lead">The dashboard breaks down the same <b><span data-stat="career.goals">979</span> goals in <span data-stat="career.apps">1,338</span> games</b>, for six teams as of <span data-stat="meta.updated.long">25 September 2026</span>, by competition, season, opponent and type of finish. La Liga is his highest scoring competition with <b><span data-stat="comp.laliga">311</span></b>, followed by the Champions League with <b><span data-stat="comp.championsleague">140</span></b>, the most anyone has scored in it, the Saudi Pro League with <span data-stat="comp.saudiproleague">105</span> and the Premier League with <span data-stat="comp.premierleague">103</span>. Pick a team and every chart updates.</p>
+                <p class="page-lead">The dashboard breaks down the same <b><span data-stat="career.goals">979</span> goals in <span data-stat="career.apps">1,338</span> games</b>, for six teams as of <span data-stat="meta.updated.long">25 September 2026</span>, by competition, season, opponent and type of finish. La Liga is his highest scoring competition with <b><span data-stat="comp.laliga">311</span></b>, followed by the UEFA Champions League with <b><span data-stat="comp.championsleague">140</span></b>, the most anyone has scored in it, the Saudi Pro League with <span data-stat="comp.saudiproleague">105</span> and the Premier League with <span data-stat="comp.premierleague">103</span>. Pick a team and every chart updates.</p>
 
                 <!-- Team selector -->
                 <section class="reveal" style="animation-delay:.06s" aria-label="Team selector">
@@ -3263,13 +3294,13 @@
                     <div class="chart-head">
                         <div>
                             <h3 class="chart-title">Which competitions has Ronaldo scored in most?</h3>
-                            <p class="chart-subtitle" id="compSubtitle">Every competition he has scored in, from La Liga to the World Cup.</p>
+                            <p class="chart-subtitle" id="compSubtitle">Every competition he has scored in, from La Liga to the FIFA World Cup.</p>
                         </div>
                     </div>
                     <div class="chart-wrapper">
                         <canvas id="compChart" role="img" aria-label="Bar chart of Cristiano Ronaldo goals by competition for the selected team"></canvas>
                     </div>
-                    <p class="chart-footnote" id="compFootnote">Other cup competitions groups the Club World Cup, the UEFA Super Cup, domestic super cups, the Arab Club Champions Cup, the AFC Champions League Two and one Champions League qualifying goal.</p>
+                    <p class="chart-footnote" id="compFootnote">Other cup competitions groups the FIFA Club World Cup, the UEFA Super Cup, domestic super cups, the Arab Club Champions Cup, the AFC Champions League Two and one UEFA Champions League qualifying goal.</p>
                 </section>
 
                 <!-- Goals by season -->
@@ -3358,7 +3389,7 @@
                 <section class="data-card reveal" style="animation-delay:.10s">
                     <div class="data-scroll">
                         <table class="dash-table">
-                            <caption>Cristiano Ronaldo career goals by competition, as of <span data-stat="meta.updated.long">25 September 2026</span>. His <span data-stat="comp.championsleague">140</span> Champions League goals are the most in the history of the competition, and his <span data-stat="comp.laliga">311</span> La Liga goals all came for Real Madrid.</caption>
+                            <caption>Cristiano Ronaldo career goals by competition, as of <span data-stat="meta.updated.long">25 September 2026</span>. His <span data-stat="comp.championsleague">140</span> goals in the UEFA Champions League are a record, and his <span data-stat="comp.laliga">311</span> La Liga goals all came for Real Madrid.</caption>
                             <thead>
                                 <tr>
                                     <th scope="col" class="left">Competition</th>
@@ -3397,7 +3428,7 @@
                             </tfoot>
                         </table>
                     </div>
-                    <p class="data-note">Other cup competitions groups the Club World Cup, the UEFA Super Cup, domestic super cups, the Arab Club Champions Cup, the AFC Champions League Two and one Champions League qualifying goal.</p>
+                    <p class="data-note">Other cup competitions groups the FIFA Club World Cup, the UEFA Super Cup, domestic super cups, the Arab Club Champions Cup, the AFC Champions League Two and one UEFA Champions League qualifying goal.</p>
                 </section>
 
                 <div class="section-head">
@@ -3541,21 +3572,21 @@
                 <ol class="keydates reveal" style="animation-delay:.06s">
                     <li><span class="kd-date">Aug 2002</span><span>Breaks into the <b>Sporting CP</b> first team at 17, debuting against Inter.</span></li>
                     <li><span class="kd-date">16 Aug 2003</span><span>Joins <b>Manchester United</b> for £12.24m and takes the number 7 shirt.</span></li>
-                    <li><span class="kd-date">12 Jun 2004</span><span>Scores his <b>first Portugal goal</b>, against Greece at Euro 2004, aged 19.</span></li>
-                    <li><span class="kd-date">21 May 2008</span><span>Wins his <b>first Champions League</b> in Moscow, in a 42 goal season.</span></li>
+                    <li><span class="kd-date">12 Jun 2004</span><span>Scores his <b>first Portugal goal</b>, against Greece at UEFA Euro 2004, aged 19.</span></li>
+                    <li><span class="kd-date">21 May 2008</span><span>Wins his <b>first UEFA Champions League</b> in Moscow, in a 42 goal season.</span></li>
                     <li><span class="kd-date">2 Dec 2008</span><span>Wins his <b>first Ballon d'Or</b> at 23, named on all 96 ballots.</span></li>
                     <li><span class="kd-date">6 Jul 2009</span><span>Moves to <b>Real Madrid</b> for a then world record €94m.</span></li>
                     <li><span class="kd-date">2 May 2012</span><span>Wins La Liga with <b>46 league goals</b> and a record 100 points.</span></li>
                     <li><span class="kd-date">24 May 2014</span><span>Seals <b>La Decima</b> in Lisbon, with a record 17 goals in the campaign.</span></li>
-                    <li><span class="kd-date">10 Jul 2016</span><span>Wins <b>Euro 2016</b>, Portugal's first major title.</span></li>
+                    <li><span class="kd-date">10 Jul 2016</span><span>Wins <b>UEFA Euro 2016</b>, Portugal's first major title.</span></li>
                     <li><span class="kd-date">7 Dec 2017</span><span>Collects a <b>fifth Ballon d'Or</b> after three Champions Leagues in a row.</span></li>
                     <li><span class="kd-date">10 Jul 2018</span><span>Joins <b>Juventus</b> in a deal rising to €117m, a Serie A record at 33.</span></li>
                     <li><span class="kd-date">1 Sep 2021</span><span>Passes Ali Daei to become the <b>top scorer in men's international football</b>.</span></li>
                     <li><span class="kd-date">22 Jan 2023</span><span>Debuts as <b>Al Nassr</b> captain in the Saudi Pro League.</span></li>
                     <li><span class="kd-date">5 Sep 2024</span><span>Scores <b>career goal 900</b> against Croatia, the first man to reach it.</span></li>
-                    <li><span class="kd-date">8 Jun 2025</span><span>Wins a <b>second Nations League</b> after equalising against Spain in the final.</span></li>
+                    <li><span class="kd-date">8 Jun 2025</span><span>Wins a <b>second UEFA Nations League</b> after equalising against Spain in the final.</span></li>
                     <li><span class="kd-date">21 May 2026</span><span>Wins the <b>Saudi Pro League</b>, a league title in a fourth country.</span></li>
-                    <li><span class="kd-date">23 Jun 2026</span><span>Becomes the <b>first man to score at six World Cups</b>, against Uzbekistan.</span></li>
+                    <li><span class="kd-date">23 Jun 2026</span><span>Becomes the <b>first man to score at six FIFA World Cups</b>, against Uzbekistan.</span></li>
                     <li><span class="kd-date" data-stat="meta.updated.compact">25 Sep 2026</span><span>Stands on <b><span data-stat="career.goals">979</span> career goals</b>, <span data-stat="career.remaining">21</span> short of <span data-stat="career.target">1,000</span>.</span></li>
                 </ol>
 
@@ -3620,7 +3651,7 @@
                                         <div class="tl-body">
                                             <time class="tl-time" datetime="2004-06-12">12 June 2004</time>
                                             <h5>First for Portugal</h5>
-                                            <p>He scored his first international goal at 19, a late header against Greece in the opening match of Euro 2004. Portugal lost that match and, three weeks later, the final against Greece in Lisbon.</p>
+                                            <p>He scored his first international goal at 19, a late header against Greece in the opening match of UEFA Euro 2004. Portugal lost that match and, three weeks later, the final against Greece in Lisbon.</p>
                                         </div>
                                     </article>
                                 </li>
@@ -3631,7 +3662,7 @@
                                         <div class="tl-body">
                                             <time class="tl-time" datetime="2008-05-21">21 May 2008</time>
                                             <h5>Champions League in Moscow</h5>
-                                            <p>He headed United in front against Chelsea in Moscow and missed his penalty in the shoot out, but United won it for his first Champions League. He scored 42 goals that season, the second of three straight Premier League titles.</p>
+                                            <p>He headed United in front against Chelsea in Moscow and missed his penalty in the shoot out, but United won it for his first UEFA Champions League. He scored 42 goals that season, the second of three straight Premier League titles.</p>
                                         </div>
                                     </article>
                                 </li>
@@ -3682,7 +3713,7 @@
                                         <div class="tl-body">
                                             <time class="tl-time" datetime="2014-05-24">24 May 2014</time>
                                             <h5>La Decima</h5>
-                                            <p>His penalty at the end of extra time made it 4 to 1 against Atletico in Lisbon and gave Madrid their tenth European Cup, twelve years after the ninth. His 17 goals that season are still the record for a single Champions League campaign.</p>
+                                            <p>His penalty at the end of extra time made it 4 to 1 against Atletico in Lisbon and gave Madrid their tenth European Cup, twelve years after the ninth. His 17 goals that season are still the record for a single UEFA Champions League campaign.</p>
                                         </div>
                                     </article>
                                 </li>
@@ -3693,7 +3724,7 @@
                                         <div class="tl-body">
                                             <time class="tl-time" datetime="2016-07-10">10 July 2016</time>
                                             <h5>Champion of Europe with Portugal</h5>
-                                            <p>A challenge from Payet forced him off after 25 minutes of the final. He spent extra time on the touchline giving instructions, and Eder's goal won Portugal their first major title.</p>
+                                            <p>A challenge from Payet forced him off after 25 minutes of the UEFA Euro 2016 final against France. He spent extra time on the touchline giving instructions, and Eder's goal won Portugal their first major title.</p>
                                         </div>
                                     </article>
                                 </li>
@@ -3726,7 +3757,7 @@
                                         <div class="tl-body">
                                             <time class="tl-time" datetime="2018-05-26">26 May 2018</time>
                                             <h5>Three in a row</h5>
-                                            <p>Real Madrid won the Champions League in Milan in 2016, where he scored the winning penalty in the shoot out, in Cardiff in 2017, where he scored twice in the final, and in Kyiv in 2018. No club had won three in a row in the Champions League era. It took him to five European Cups, and he also scored a hat trick in the 2016 Club World Cup final.</p>
+                                            <p>Real Madrid won the UEFA Champions League in Milan in 2016, where he scored the winning penalty in the shoot out, in Cardiff in 2017, where he scored twice in the final, and in Kyiv in 2018. No club had won three in a row in the Champions League era. It took him to five European Cups, and he also scored a hat trick in the 2016 FIFA Club World Cup final.</p>
                                         </div>
                                     </article>
                                 </li>
@@ -3744,7 +3775,7 @@
                                         <div class="tl-body">
                                             <time class="tl-time" datetime="2018-07-10">10 July 2018</time>
                                             <h5>The move to Juventus</h5>
-                                            <p>Juventus paid €100m, rising to €117m with add ons, which made him Serie A's record signing at 33. Juventus won the league in his first two seasons, and he was Serie A's top scorer in 2020/21.</p>
+                                            <p>Juventus paid €100m, rising to €117m with add ons, which made him Serie A's record signing at 33. Juventus won Serie A in his first two seasons, and he was Serie A's top scorer in 2020/21.</p>
                                         </div>
                                     </article>
                                 </li>
@@ -3755,7 +3786,7 @@
                                         <div class="tl-body">
                                             <time class="tl-time" datetime="2021-07-11">Summer 2021</time>
                                             <h5>The Euros record</h5>
-                                            <p>Five goals at Euro 2020 won him the Golden Boot and took him to 14 at European Championships, a record for the tournament. He has scored at five European Championships.</p>
+                                            <p>Five goals at UEFA Euro 2020 won him the Golden Boot and took him to 14 at UEFA European Championships, the most by any player. He has scored at five UEFA European Championships.</p>
                                         </div>
                                     </article>
                                 </li>
@@ -3813,7 +3844,7 @@
                                         <div class="tl-body">
                                             <time class="tl-time" datetime="2024-09-05">5 September 2024</time>
                                             <h5>Goal 900</h5>
-                                            <p>His 900th official goal was a first time finish from a Nuno Mendes cross against Croatia in Lisbon, in the Nations League. He was the first player to reach 900.</p>
+                                            <p>His 900th official goal was a first time finish from a Nuno Mendes cross against Croatia in Lisbon, in the UEFA Nations League. He was the first player to reach 900.</p>
                                         </div>
                                     </article>
                                 </li>
@@ -3824,7 +3855,7 @@
                                         <div class="tl-body">
                                             <time class="tl-time" datetime="2025-06-08">8 June 2025</time>
                                             <h5>Nations League, again</h5>
-                                            <p>Spain led twice in the final in Munich. His equaliser made it 2 to 2, and Portugal won the shoot out to take the Nations League for a second time. He was forty.</p>
+                                            <p>Spain led twice in the UEFA Nations League final in Munich. His equaliser made it 2 to 2, and Portugal won the shoot out to take the trophy for a second time. He was forty.</p>
                                         </div>
                                     </article>
                                 </li>
@@ -3846,7 +3877,7 @@
                                         <div class="tl-body">
                                             <time class="tl-time" datetime="2026-06-23">23 June 2026</time>
                                             <h5>Six World Cups</h5>
-                                            <p>Two goals against Uzbekistan made him the first man to score at six World Cups and Portugal's record scorer at World Cups. He had said before the tournament that it would be his last.</p>
+                                            <p>Two goals against Uzbekistan made him the first man to score at six FIFA World Cups and Portugal's record scorer at the FIFA World Cup. He had said before the 2026 FIFA World Cup that it would be his last.</p>
                                         </div>
                                     </article>
                                 </li>
@@ -3915,7 +3946,7 @@
                 <div class="section-head">
                     <h2 class="section-title" id="achievements-title">Cristiano Ronaldo achievements and honours</h2>
                 </div>
-                <p class="page-lead">Cristiano Ronaldo has won <b><span data-stat="honours.total">35</span> team trophies</b> and more than <b><span data-stat="award.floor">50</span> individual awards</b>, as of <span data-stat="meta.updated.long">25 September 2026</span>. They include <b><span data-stat="honours.championsleague">5</span> Champions Leagues</b>, <b><span data-stat="honours.leagues">8</span> league titles</b> in four countries, Euro 2016 with Portugal and <b><span data-stat="award.ballondor">5</span> Ballon d'Or</b> awards. Every trophy is listed below, club by club, with the year it was won.</p>
+                <p class="page-lead">Cristiano Ronaldo has won <b><span data-stat="honours.total">35</span> team trophies</b> and more than <b><span data-stat="award.floor">50</span> individual awards</b>, as of <span data-stat="meta.updated.long">25 September 2026</span>. They include <b><span data-stat="honours.championsleague">5</span> UEFA Champions Leagues</b>, <b><span data-stat="honours.leagues">8</span> league titles</b> in four countries, UEFA Euro 2016 with Portugal and <b><span data-stat="award.ballondor">5</span> Ballon d'Or</b> awards. Every trophy is listed below, club by club, with the year it was won.</p>
 
                 <div class="section-head">
                     <h3 class="section-title">Every trophy, club by club</h3>
@@ -4316,7 +4347,7 @@
                 </article>
                 <article class="qa reveal" style="animation-delay:.13s">
                     <h3>How many goals has Ronaldo scored this season?</h3>
-                    <p>Ronaldo has scored <b><span data-stat="season.current.goals">3</span> goals</b> for Al Nassr in <span data-stat="season.current.name">2026/27</span> so far, <span data-stat="season.current.league_goals">3</span> of them in the Saudi Pro League. In the <span data-stat="year.current.year">2026</span> calendar year, including the World Cup, he has <span data-stat="year.current.goals">22</span>. Every season is in the <a href="/#goalsbyseason">goals by season section</a>.</p>
+                    <p>Ronaldo has scored <b><span data-stat="season.current.goals">3</span> goals</b> for Al Nassr in <span data-stat="season.current.name">2026/27</span> so far, <span data-stat="season.current.league_goals">3</span> of them in the Saudi Pro League. In the <span data-stat="year.current.year">2026</span> calendar year, including the FIFA World Cup, he has <span data-stat="year.current.goals">22</span>. Every season is in the <a href="/#goalsbyseason">goals by season section</a>.</p>
                 </article>
                 <article class="qa reveal" style="animation-delay:.16s">
                     <h3>Which club has Ronaldo scored the most goals for?</h3>
@@ -4347,11 +4378,11 @@
                 </div>
                 <div class="faq-item">
                     <h3>How many Champions League goals has Ronaldo scored?</h3>
-                    <p>Ronaldo has scored <span data-stat="comp.championsleague">140</span> Champions League goals, more than anyone in the competition's history: <span data-stat="comp.realmadrid.championsleague">105</span> for Real Madrid, <span data-stat="comp.manutd.championsleague">21</span> for Manchester United and <span data-stat="comp.juventus.championsleague">14</span> for Juventus. He finished as its top scorer in seven seasons.</p>
+                    <p>Ronaldo has scored <span data-stat="comp.championsleague">140</span> goals in the UEFA Champions League, a record: <span data-stat="comp.realmadrid.championsleague">105</span> for Real Madrid, <span data-stat="comp.manutd.championsleague">21</span> for Manchester United and <span data-stat="comp.juventus.championsleague">14</span> for Juventus. He was the top scorer in seven UEFA Champions League seasons.</p>
                 </div>
                 <div class="faq-item">
                     <h3>How many international goals has Ronaldo scored?</h3>
-                    <p>Ronaldo has scored <span data-stat="team.portugal.goals">146</span> goals in <span data-stat="team.portugal.apps">234</span> senior caps for Portugal, the most by any man in international football. His <span data-stat="comp.worldcup">11</span> World Cup goals came across six tournaments.</p>
+                    <p>Ronaldo has scored <span data-stat="team.portugal.goals">146</span> goals in <span data-stat="team.portugal.apps">234</span> senior caps for Portugal, the most by any man in international football. His <span data-stat="comp.worldcup">11</span> FIFA World Cup goals came across six tournaments.</p>
                 </div>
                 <div class="faq-item">
                     <h3>How many free kick goals has Ronaldo scored?</h3>
@@ -4375,7 +4406,7 @@
                 </div>
                 <div class="faq-item">
                     <h3>How much did Ronaldo cost when he joined Juventus?</h3>
-                    <p>Juventus paid €100m, rising to €117m with add ons, on 10 July 2018. At 33 he became the most expensive signing in Serie A history, and he won the league in each of his first two seasons.</p>
+                    <p>Juventus paid €100m, rising to €117m with add ons, on 10 July 2018. At 33 he became the most expensive signing in Serie A history, and he won Serie A in each of his first two seasons.</p>
                 </div>
                 <div class="faq-item">
                     <h3>When did Ronaldo win his first Ballon d'Or?</h3>
@@ -4383,7 +4414,7 @@
                 </div>
                 <div class="faq-item">
                     <h3>When did Ronaldo score his 900th goal?</h3>
-                    <p>On 5 September 2024, with a first time finish against Croatia in Lisbon in the Nations League. Nobody had scored 900 official goals before him.</p>
+                    <p>On 5 September 2024, with a first time finish against Croatia in Lisbon in the UEFA Nations League. Nobody had scored 900 official goals before him.</p>
                 </div>
                 <div class="faq-item">
                     <h3>Which clubs has Ronaldo played for and when?</h3>
@@ -4395,7 +4426,7 @@
                 </div>
                 <div class="faq-item">
                     <h3>How many World Cups has Ronaldo played at?</h3>
-                    <p>Six, from 2006 to 2026. On 23 June 2026 two goals against Uzbekistan made him the first man to score at six different World Cups, at the tournament he had said would be his last.</p>
+                    <p>Six FIFA World Cups, from 2006 to 2026. On 23 June 2026 two goals against Uzbekistan made him the first man to score at six different World Cups, at the 2026 FIFA World Cup, which he had said would be his last.</p>
                 </div>
                 <div class="faq-item">
                     <h3>Where is Cristiano Ronaldo now?</h3>
@@ -4407,7 +4438,7 @@
                 </div>
                 <div class="faq-item">
                     <h3>How many Champions Leagues has Ronaldo won?</h3>
-                    <p>Five: once with Manchester United, in 2007/08, and four times with Real Madrid, in 2013/14, 2015/16, 2016/17 and 2017/18. He is also the competition's all time top scorer, with <span data-stat="comp.championsleague">140</span> goals.</p>
+                    <p>Five UEFA Champions League titles: once with Manchester United, in 2007/08, and four times with Real Madrid, in 2013/14, 2015/16, 2016/17 and 2017/18. He is also the all time top scorer in the UEFA Champions League, with <span data-stat="comp.championsleague">140</span> goals.</p>
                 </div>
                 <div class="faq-item">
                     <h3>How many league titles has Ronaldo won?</h3>
@@ -4415,15 +4446,15 @@
                 </div>
                 <div class="faq-item">
                     <h3>What has Ronaldo won with Portugal?</h3>
-                    <p>Three trophies: <b>Euro 2016</b> and the <b>UEFA Nations League</b> in 2018/19 and 2024/25. He scored in the 2025 final, at forty. All three are covered in the <a href="/#timeline">through the years section</a>.</p>
+                    <p>Three trophies: <b>UEFA Euro 2016</b> and the <b>UEFA Nations League</b> in 2018/19 and 2024/25. He scored in the 2025 final, at forty. All three are covered in the <a href="/#timeline">through the years section</a>.</p>
                 </div>
                 <div class="faq-item">
                     <h3>Has Ronaldo won the World Cup?</h3>
-                    <p><b>No.</b> Ronaldo has never won the World Cup. His major international honours are Euro 2016 and two Nations League titles, and in 2026 he became the first man to score at six different World Cups.</p>
+                    <p><b>No.</b> Ronaldo has never won the FIFA World Cup. His major international honours are UEFA Euro 2016 and two UEFA Nations League titles, and in 2026 he became the first man to score at six different World Cups.</p>
                 </div>
                 <div class="faq-item">
                     <h3>Which club has Ronaldo won the most trophies with?</h3>
-                    <p>Real Madrid, with <span data-stat="honours.realmadrid.count">15</span> trophies in nine seasons: <span data-stat="honours.realmadrid.uefachampionsleague">4</span> Champions Leagues, <span data-stat="honours.realmadrid.fifaclubworldcup">3</span> FIFA Club World Cups, <span data-stat="honours.realmadrid.laliga">2</span> La Liga titles, <span data-stat="honours.realmadrid.copadelrey">2</span> Copas del Rey, <span data-stat="honours.realmadrid.supercopadeespaa">2</span> Supercopas de Espana and <span data-stat="honours.realmadrid.uefasupercup">2</span> UEFA Super Cups.</p>
+                    <p>Real Madrid, with <span data-stat="honours.realmadrid.count">15</span> trophies in nine seasons: <span data-stat="honours.realmadrid.uefachampionsleague">4</span> UEFA Champions Leagues, <span data-stat="honours.realmadrid.fifaclubworldcup">3</span> FIFA Club World Cups, <span data-stat="honours.realmadrid.laliga">2</span> La Liga titles, <span data-stat="honours.realmadrid.copadelrey">2</span> Copas del Rey, <span data-stat="honours.realmadrid.supercopadeespaa">2</span> Supercopas de Espana and <span data-stat="honours.realmadrid.uefasupercup">2</span> UEFA Super Cups.</p>
                 </div>
                 <div class="faq-item">
                     <h3>How many individual awards has Ronaldo won?</h3>
@@ -4435,11 +4466,11 @@
                 </div>
                 <div class="faq-item">
                     <h3>How many trophies did Ronaldo win at Manchester United?</h3>
-                    <p>Nine across his two spells: 3 Premier Leagues, the 2007/08 Champions League, the 2008 FIFA Club World Cup, 2 League Cups, the 2003/04 FA Cup and the 2007 Community Shield.</p>
+                    <p>Nine across his two spells: 3 Premier Leagues, the 2007/08 UEFA Champions League, the 2008 FIFA Club World Cup, 2 League Cups, the 2003/04 FA Cup and the 2007 Community Shield.</p>
                 </div>
                 <div class="faq-item">
                     <h3>How many trophies has Ronaldo won at Al Nassr?</h3>
-                    <p>Two: the Arab Club Champions Cup in 2023, where he was top scorer, and the Saudi Pro League in 2025/26. The league title made Saudi Arabia the fourth country in which he has won one.</p>
+                    <p>Two: the Arab Club Champions Cup in 2023, where he was top scorer, and the Saudi Pro League in 2025/26. Winning the Saudi Pro League made Saudi Arabia the fourth country in which he has won a league title.</p>
                 </div>
                 <div class="faq-item">
                     <h3>Did Ronaldo win anything at Sporting CP?</h3>
@@ -4821,13 +4852,13 @@
                 // STATS:END array.dash.competitions
             },
             compFootnotes: {
-                all: 'Other cup competitions groups the Club World Cup, the UEFA Super Cup, domestic super cups, the Arab Club Champions Cup, the AFC Champions League Two and one Champions League qualifying goal.',
+                all: 'Other cup competitions groups the FIFA Club World Cup, the UEFA Super Cup, domestic super cups, the Arab Club Champions Cup, the AFC Champions League Two and one UEFA Champions League qualifying goal.',
                 sporting: 'His five senior goals for Sporting CP, all in 2002/03.',
-                manutd: 'Both spells combined. Other cup competitions covers the Club World Cup and one Champions League qualifying goal.',
-                realmadrid: 'Other cup competitions covers seven Club World Cup goals, three in the Supercopa and two in the UEFA Super Cup.',
+                manutd: 'Both spells combined. Other cup competitions covers the FIFA Club World Cup and one UEFA Champions League qualifying goal.',
+                realmadrid: 'Other cup competitions covers seven FIFA Club World Cup goals, three in the Supercopa de Espana and two in the UEFA Super Cup.',
                 juventus: 'Other cup competitions covers the Supercoppa Italiana.',
                 alnassr: 'He was the top scorer as Al Nassr won the 2023 Arab Club Champions Cup.',
-                portugal: 'His 11 World Cup goals include three at the 2026 finals, where he became the first man to score at six World Cups.'
+                portugal: 'His 11 FIFA World Cup goals include three at the 2026 FIFA World Cup, where he became the first man to score at six World Cups.'
             },
             seasons: {
                 // STATS:BEGIN array.dash.seasons
@@ -5013,7 +5044,7 @@
             compChart.data.datasets[0].data = comps.map(row => row[1]);
             compChart.update();
             document.getElementById('compSubtitle').textContent = currentTeam === 'all'
-                ? 'Every competition he has scored in, from La Liga to the World Cup.'
+                ? 'Every competition he has scored in, from La Liga to the FIFA World Cup.'
                 : 'Every competition he scored in for ' + t.name + '.';
             document.getElementById('compFootnote').textContent = DATA.compFootnotes[currentTeam];
 

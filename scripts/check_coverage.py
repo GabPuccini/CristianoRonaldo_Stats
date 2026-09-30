@@ -61,7 +61,7 @@ EXEMPT = {
          "the 2013/14 Champions League record, a competition record not a career one"),
         (r"100 points", "Real Madrid's points total in 2011/12, not a Ronaldo figure"),
         (r"all 96 ballots", "the Ballon d'Or vote in 2008"),
-        (r"take him to a record 14 at the Euros|took him to 14 at European Championships",
+        (r"take him to a record 14 at the Euros|took him to 14 at (?:UEFA )?European Championships",
          "his Euros total at the end of Euro 2020, quoted as history"),
         (r"(?:Injured|final|off) after 25 minutes", "minutes played in the Euro 2016 final"),
         (r"23 June 2026", "the date of the sixth World Cup"),
