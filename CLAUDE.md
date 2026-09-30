@@ -357,6 +357,12 @@ under individual honours.
 * **Never use em dashes, en dashes or hyphens in visible text.** Hyphens are
   allowed only inside CSS, HTML and code syntax such as attribute names and
   file names. Write "goals per game" and "2002 to 2003", never with a dash.
+* Name competitions and clubs, never "the competition", "the tournament" or
+  "the league". Use the official name on first mention in each card, footnote
+  and FAQ answer ("UEFA Champions League", "FIFA World Cup", "UEFA Euro 2016",
+  "UEFA Nations League", "FIFA Club World Cup") and the short form after. The
+  Person and WebPage JSON-LD link each club and competition to its Wikidata
+  entry; add one there when a new club or competition appears.
 * Never render statistics as images. Always real HTML tables.
 * Timeline photos are shown whole. The box takes the image's own proportions
   rather than forcing a shape onto it, and an image is never scaled up past the
