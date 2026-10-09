@@ -27,6 +27,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import update_stats as engine
+from check_coverage import EXEMPT
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "scripts" / "head_rules.py"
@@ -186,6 +187,22 @@ DATE_RE = re.compile(rf"(?:\d{{1,2}} )?(?:{MONTHS}) \d{{4}}|\d{{4}}-\d\d-\d\d")
 # these are never eligible.
 DAY_OF_DATE_RE = re.compile(rf"\s+(?:{MONTHS})\b")
 
+# An age is a bare number too. "His first international goal comes against
+# Greece at 19" was bound to the 19 goals of the current year, and "his first
+# Ballon d'Or at 23" to the 23 still needed for 1,000, because each was the only
+# key holding that value on the day the rules were generated. Both then moved
+# with every goal. "at 19." or "aged 19" with no noun after it is never eligible.
+AGE_BEFORE_RE = re.compile(r"\b(?:at|aged) $")
+AGE_AFTER_RE = re.compile(r"\s*[a-zA-Z]")
+
+
+def exempt_spans(head, page):
+    """Figures check_coverage.py declares fixed history, such as ages at the
+    time and transfer fees. They are deliberately not driven, so no rule may
+    claim them."""
+    return [(m.start(), m.end()) for pat, _ in EXEMPT.get(page, [])
+            for m in re.finditer(pat, head)]
+
 
 def anchor_for(head, pos, end, width):
     """A pattern that pins this figure using the words around it. Digits in the
@@ -251,7 +268,7 @@ def main():
     rules, skipped = {}, []
     for page in engine.PAGES:
         head = head_of(page)
-        covered = []
+        covered = exempt_spans(head, page)
         for rule in engine.text_rules(generated=False).get(page, []):
             for m in re.finditer(rule[0], head):
                 covered.append((m.start(1), m.end(1)))
@@ -278,6 +295,9 @@ def main():
                     continue
                 if DAY_OF_DATE_RE.match(head[end:end + 12]):
                     continue                      # the day of a written date
+                if AGE_BEFORE_RE.search(head[max(0, pos - 6):pos]) \
+                        and not AGE_AFTER_RE.match(head[end:end + 4]):
+                    continue                      # an age at the time
                 key = choose_key(n, by_value[n], head[max(0, pos - 120):pos],
                                  head[end:end + 24])
                 if key is None:
