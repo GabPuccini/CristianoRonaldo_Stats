@@ -7,7 +7,7 @@
     "ballon_dor lists every edition at which Ronaldo was on the shortlist, with his final position (joint marks a shared place), his club when the award was presented, and the winner. The 2010 to 2015 editions were the FIFA Ballon d'Or. There was no award in 2020. ballon_dor_next_most is the player with the next most nominations; check fails if that ever reaches Ronaldo's total, because the page calls his total a record."
   ],
   "meta": {
-    "updated": "2026-10-09",
+    "updated": "2026-10-12",
     "goal_target": 1000,
     "born": "1985-02-05",
     "current_season": "2026/27"
@@ -724,8 +724,8 @@
         "cup": null,
         "lcup": null,
         "cont": {
-          "apps": 1,
-          "goals": 0
+          "apps": 2,
+          "goals": 1
         },
         "other": null
       }
@@ -878,8 +878,8 @@
     },
     {
       "year": 2026,
-      "goals": 23,
-      "apps": 38,
+      "goals": 24,
+      "apps": 39,
       "age": 41
     }
   ],
@@ -1223,7 +1223,7 @@
     },
     "alnassr": {
       "Saudi Pro League": 106,
-      "AFC Champions League": 14,
+      "AFC Champions League": 15,
       "AFC Champions League Two": 1,
       "Arab Club Champions Cup": 6,
       "Saudi Super Cup": 3,
@@ -1266,7 +1266,7 @@
       0
     ],
     "alnassr": [
-      88,
+      89,
       27,
       17,
       1
@@ -1562,6 +1562,18 @@
       "body": "right",
       "type": "openplay",
       "opponent": "Ar Diriyah",
+      "assists": 0,
+      "new_appearance": true
+    },
+    {
+      "date": "2026-10-12",
+      "event": "goal",
+      "team": "alnassr",
+      "comp": "cont",
+      "year": 2026,
+      "body": "right",
+      "type": "openplay",
+      "opponent": "Neftchi",
       "assists": 0,
       "new_appearance": true
     }
