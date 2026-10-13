@@ -5583,6 +5583,51 @@
             });
         });
         })();
+
+        // ===== Stay current when the app is reopened =====
+        // Added to a phone's home screen, the site opens with no address bar
+        // and no reload button, and tapping the icon resumes the copy already
+        // in memory, which can be days old. So when the page comes back into
+        // view after a while, fetch the live page and reload if a headline
+        // figure has moved. A browser tab gets the same check after a longer
+        // absence, since a tab can sit open for days too.
+        (function () {
+            const KEYS = ['meta.updated.long', 'career.goals', 'career.apps', 'career.assists'];
+            const installed = window.matchMedia('(display-mode: standalone)').matches
+                || window.navigator.standalone === true;
+            const AWAY_MS = installed ? 60 * 1000 : 30 * 60 * 1000;
+            let hiddenAt = 0, checking = false;
+
+            function figures(doc) {
+                return KEYS.map(k => {
+                    const el = doc.querySelector('[data-stat="' + k + '"]');
+                    return el ? el.textContent.trim() : '';
+                }).join('|');
+            }
+            const shown = figures(document);
+
+            function check() {
+                if (checking || !navigator.onLine) return;
+                checking = true;
+                fetch(location.pathname, { cache: 'no-store' })
+                    .then(r => r.ok ? r.text() : Promise.reject(r.status))
+                    .then(html => {
+                        const live = figures(new DOMParser().parseFromString(html, 'text/html'));
+                        if (live.replace(/\|/g, '') && live !== shown) location.reload();
+                    })
+                    .catch(() => {})
+                    .finally(() => { checking = false; });
+            }
+            function back() {
+                if (hiddenAt && Date.now() - hiddenAt >= AWAY_MS) { hiddenAt = 0; check(); }
+            }
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) hiddenAt = Date.now(); else back();
+            });
+            // a page restored from the back forward cache may skip visibilitychange
+            window.addEventListener('pageshow', e => { if (e.persisted) back(); });
+            window.addEventListener('pagehide', () => { hiddenAt = hiddenAt || Date.now(); });
+        })();
     </script>
 </body>
 </html>

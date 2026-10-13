@@ -284,6 +284,13 @@ stretches no sidebar item covers. Both work from the sidebar's own links, so a
 new chapter needs a `<section id>` and a sidebar item and nothing else. A back
 to top button appears once the reader is well down the page.
 
+Added to a phone's home screen, the site opens with no address bar or reload
+button, and tapping the icon resumes the copy in memory, however old. So when
+the page comes back into view after a minute away (half an hour in a browser
+tab), a script at the foot of `index.html` fetches the live page and reloads if
+`meta.updated.long`, `career.goals`, `career.apps` or `career.assists` differs.
+Keep those four markers in the page, or it can no longer tell.
+
 Links between sections say "section", never "page": "in the goals by season
 section", not "on the goals by season page".
 
