@@ -376,7 +376,10 @@ under individual honours.
   size it was supplied at, so it stays as sharp as the file. Drop a new photo in
   `timeline/` at whatever proportions it has, portrait or landscape, and add it
   as a `<picture>` with a `webp` source, a `jpg` fallback and the real `width`
-  and `height`. Give the `<picture>` a `style="--w: Npx"`, where N is the
+  and `height`. When the supplied file is a JPEG that is already heavily
+  compressed, any WebP made from it comes out larger with no gain in quality,
+  so ship the original JPEG alone inside the `<picture>`, untouched, as
+  `fa-cup-2004.jpg` is. Give the `<picture>` a `style="--w: Npx"`, where N is the
   photo's width or the width at which it would be 560px tall, whichever is
   smaller. That sizes the box before the file loads; without it the page grows
   as photos arrive and the jump links land short. Do not add `object-fit: cover` to it: that is what was cutting
