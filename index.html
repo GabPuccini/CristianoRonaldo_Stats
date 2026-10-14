@@ -2101,22 +2101,13 @@
         .page-title { font-size: clamp(2rem, 1.35rem + 2.3vw, 3rem); letter-spacing: -0.03em; }
 
         /* Section headings. With every page folded into this one the h2s
-           are the chapters, so they are larger than the h3s inside them,
-           carry a short brand rule above, and get more air before them. */
+           are the chapters, so they are larger than the h3s inside them
+           and get more air before them. */
         .main h2.section-title {
             font-size: clamp(1.32rem, 1.05rem + 0.75vw, 1.62rem);
             font-weight: 800;
             letter-spacing: -0.022em;
             line-height: 1.22;
-        }
-        .main h2.section-title::before {
-            content: '';
-            display: block;
-            width: 34px;
-            height: 4px;
-            border-radius: 4px;
-            background: linear-gradient(90deg, #1e3a8a, #2f56cf 55%, #8aa4ea);
-            margin-bottom: 12px;
         }
         .section-head:has(> h2) { margin-top: 64px; }
 
