@@ -2050,20 +2050,11 @@
         }
         .milestone.feature .tl-card h5 { font-size: 1.5rem; }
 
-        /* A milestone without a photo used to carry a large era tinted box
-           with its year faded to ten percent, which read as a missing image.
-           It is a slim strip in the club's colour now: the era still shows,
-           the date is already in the card, and each one is about 180px
-           shorter. */
-        .tl-photo:not(.has-img),
-        .milestone.feature .tl-photo:not(.has-img) { aspect-ratio: auto; height: 5px; }
-        .tl-photo:not(.has-img)::before,
-        .tl-photo:not(.has-img)::after { display: none; }
-        .tl-photo[data-era="sporting"]:not(.has-img) { background: #1f8a4c; }
-        .tl-photo[data-era="united"]:not(.has-img)   { background: #c7302a; }
-        .tl-photo[data-era="madrid"]:not(.has-img)   { background: linear-gradient(90deg, #2f56cf, #d6b250); }
-        .tl-photo[data-era="juventus"]:not(.has-img) { background: #16243a; }
-        .tl-photo[data-era="alnassr"]:not(.has-img)  { background: linear-gradient(90deg, #f2b705, #1e3a8a); }
+        /* A milestone without a photo shows no box at all. Its figure stays in
+           the markup as the slot a photo will fill, but until then it takes no
+           room: the era tint, and later the coloured strip that replaced it,
+           were decoration with nothing to say. */
+        .tl-photo:not(.has-img) { display: none; }
 
         /* Timeline photos were width and height auto, so each took no room
            until it loaded and the page grew by thousands of pixels as a
