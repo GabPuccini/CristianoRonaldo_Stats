@@ -30,7 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Hero image -->
-    <link rel="preload" as="image" href="/ronaldo-avatar-170.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="/ronaldo-avatar-360.webp" type="image/webp" fetchpriority="high">
 
     <!-- Security -->
     <meta name="referrer" content="same-origin">
@@ -1265,17 +1265,19 @@
             margin-bottom: 8px;
         }
         .identity-photo {
-            /* 96px is the size this photo was before the home page was rebuilt.
-               The file is 170px square, so at 96px it is 1.77x rather than a
-               full 2x. Close enough that it reads sharp; a 192px crop of the
-               same frame would finish the job. */
-            width: 96px; height: 96px;
+            /* 120px and this framing are what the site showed in July 2025:
+               cristiano-ronaldo-foot-ball.jpg, cropped to a centred square.
+               ronaldo-avatar-360.jpg is that same square at three times the
+               size, so it stays sharp on any screen. The light grey ring is the
+            one it had then too. */
+            width: 120px; height: 120px;
             flex-shrink: 0;
             border-radius: 50%;
             overflow: hidden;
-            border: 3px solid var(--glass-border);
-            box-shadow: var(--shadow-sm);
+            border: 3px solid #e5e7eb;
+            background: #f3f4f6;
         }
+        .identity-photo picture { display: block; width: 100%; height: 100%; }
         .identity-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .identity-main { min-width: 0; flex: 1 1 280px; }
         .identity-name {
@@ -2593,7 +2595,6 @@
 }
 
         @media (max-width: 460px) {
-            .identity-photo { width: 76px; height: 76px; }
             .trophy-grid { gap: 12px; }
         
             /* dashboard */
@@ -2770,7 +2771,7 @@
             <!-- Identity strip -->
             <section class="identity reveal" style="animation-delay:.06s" aria-label="Player profile">
                 <div class="identity-photo">
-                    <img src="ronaldo-avatar-170.jpg" alt="Cristiano Ronaldo kissing the Ballon d'Or trophy" width="96" height="96" loading="eager" decoding="async" fetchpriority="high">
+                    <picture><source srcset="/ronaldo-avatar-360.webp" type="image/webp"><img src="/ronaldo-avatar-360.jpg" alt="Cristiano Ronaldo kissing the Ballon d'Or trophy" width="120" height="120" loading="eager" decoding="async" fetchpriority="high"></picture>
                 </div>
                 <div class="identity-main">
                     <p class="identity-name">Cristiano Ronaldo <span class="jersey" aria-label="Shirt number 7">7</span></p>
