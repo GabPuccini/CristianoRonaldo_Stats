@@ -1322,6 +1322,13 @@
             border-radius: 999px;
             white-space: nowrap;
         }
+        /* On tablets and phones the card stacks: his photo centred on top,
+           with the name, the details and the chips centred under it. */
+        @media (max-width: 1024px) {
+            .identity { flex-direction: column; text-align: center; }
+            .identity-main { flex: none; width: 100%; }
+            .identity-name, .chips { justify-content: center; }
+        }
 
         /* ========== SECTION HEADINGS ========== */
         .section-head {
@@ -1839,8 +1846,10 @@
         .chart-wrapper.short { height: 300px; }
         .chart-footnote { font-size: 0.8rem; color: var(--ink-3); margin-top: 14px; }
         .filter-tabs[hidden] { display: none; }
-        .filter-tabs { display: inline-flex; gap: 6px; background: var(--surface); padding: 6px; border-radius: var(--r-md); border: 1px solid var(--glass-border); box-shadow: var(--shadow-sm); max-width: 100%; }
-        .filter-tab { padding: 9px 16px; border: none; background: transparent; color: var(--ink-2); font-family: inherit; font-size: 0.84rem; font-weight: 600; border-radius: var(--r-sm); cursor: pointer; transition: background 0.2s ease, color 0.2s ease; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+        /* The tabs scroll inside their own box once they outgrow the column, at
+           every width: on a tablet they used to push the whole page sideways. */
+        .filter-tabs { display: inline-flex; gap: 6px; background: var(--surface); padding: 6px; border-radius: var(--r-md); border: 1px solid var(--glass-border); box-shadow: var(--shadow-sm); max-width: 100%; overflow-x: auto; }
+        .filter-tab { flex-shrink: 0; padding: 9px 16px; border: none; background: transparent; color: var(--ink-2); font-family: inherit; font-size: 0.84rem; font-weight: 600; border-radius: var(--r-sm); cursor: pointer; transition: background 0.2s ease, color 0.2s ease; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
         .filter-tab:hover { color: var(--ink); }
         .filter-tab.active { background: var(--surface-strong); color: var(--ink); box-shadow: var(--shadow-sm); }
         .spotlight { display: none; margin-top: 18px; padding: 18px 22px; background: var(--brand-soft); border: 1px solid var(--brand); border-radius: var(--r-md); align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
