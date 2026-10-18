@@ -171,10 +171,12 @@ def ronaldo(data, values):
         nl_goals=v("comp.portugal.nationsleague"),
         cl_assists=vs["championsleague_assists"],
         pens_missed=data["penalties_missed"],
-        # the countries where he has won the league, in the order he played there
-        league_countries=[data["transfer_clubs"][tid]["country"]
-                          for (tid, _), (_, items) in zip(RONALDO_TEAMS, ronaldo_trophies(data))
-                          if tid in data["transfer_clubs"] and any(t["kind"] == "league" for t in items)],
+        # the countries where he has won a title with his club, in the order he
+        # played there, and whether that is every club he has played for
+        title_countries=[data["transfer_clubs"][tid]["country"]
+                         for (tid, _), (_, items) in zip(RONALDO_TEAMS, ronaldo_trophies(data))
+                         if tid in data["transfer_clubs"] and items],
+        titles_everywhere=all(data["honours"]["teams"].get(tid) for tid in data["transfer_clubs"]),
         nl_titles=sum(len(t["years"]) for t in data["honours"]["teams"].get("portugal", [])
                       if t["name"] == "UEFA Nations League"),
     )
@@ -528,9 +530,10 @@ def questions(data, R, M):
     for k in ("r", "m"):
         if leads[k]:
             a += f" {SHORT[k]} leads in {series(leads[k])}."
-    if len(R["league_countries"]) > 1:
-        a += (f" Ronaldo has won a league title in {word(len(R['league_countries']))} countries: "
-              f"{series(R['league_countries'])}.")
+    if len(R["title_countries"]) > 1:
+        every = " with every club he has played for," if R["titles_everywhere"] else ""
+        a += (f" Ronaldo has won titles{every} in {word(len(R['title_countries']))} countries: "
+              f"{series(R['title_countries'])}.")
     qs.append(("Who is better, Messi or Ronaldo?", a))
     return qs
 
