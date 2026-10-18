@@ -169,6 +169,7 @@ def ronaldo(data, values):
         trophy_groups=ronaldo_trophies(data),
         rm_apps=v("team.realmadrid.apps"), rm_goals=v("team.realmadrid.goals"),
         nl_goals=v("comp.portugal.nationsleague"),
+        cl_assists=vs["championsleague_assists"],
         nl_titles=sum(len(t["years"]) for t in data["honours"]["teams"].get("portugal", [])
                       if t["name"] == "UEFA Nations League"),
     )
@@ -193,6 +194,7 @@ def messi(data):
         hattricks=sum(t["hattricks"] for t in teams), intl_hattricks=sum(t["hattricks"] for t in nat),
         pens=m["career"]["penalties"], freekicks=m["career"]["freekicks"], headers=m["career"]["headers"],
         laliga=m["competitions"]["laliga"], cl=m["competitions"]["championsleague"],
+        cl_assists=m["competitions"]["championsleague_assists"],
         cdr=m["competitions"]["copadelrey"], wc=m["competitions"]["worldcup"],
         continental=m["competitions"]["continental"],
         bdo=len(aw["ballondor"]), bdo_second=aw["ballondor_second"], bdo_third=aw["ballondor_third"],
@@ -417,6 +419,12 @@ def questions(data, R, M):
              f"Messi has {T['m']['championsleague']} titles and {M['cl']} goals.")
     a += " Messi was injured and did not play in the 2006 final, which Barcelona won against Arsenal."
     qs.append(("Who has more Champions League titles and goals?", a))
+
+    qs.append(("Who has more assists in the Champions League?", most(
+        "cl_assists",
+        lambda w, x: f"{SHORT[w]}, with {x[w]} UEFA Champions League assists.",
+        lambda o, x: f"{SHORT[o]} has {x[o]}.",
+        lambda n: f"They are level on {n} UEFA Champions League assists.")))
 
     caps = {"r": f"{R['intl_goals']} goals in {R['intl_apps']} caps for Portugal",
             "m": f"{M['intl_goals']} goals in {M['intl_apps']} caps for Argentina"}

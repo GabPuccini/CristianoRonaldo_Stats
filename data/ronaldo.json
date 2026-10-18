@@ -2428,7 +2428,8 @@
       "championsleague": 129,
       "copadelrey": 56,
       "worldcup": 21,
-      "continental": 14
+      "continental": 14,
+      "championsleague_assists": 40
     },
     "best": {
       "season": "2011/12",
@@ -2729,7 +2730,8 @@
           2024
         ]
       },
-      "last_european_match": "November 2022, aged 37"
+      "last_european_match": "November 2022, aged 37",
+      "championsleague_assists": 42
     },
     "teams_2024": {
       "euros": 24,
