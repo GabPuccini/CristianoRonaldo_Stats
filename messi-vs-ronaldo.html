@@ -10,6 +10,8 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="256x256" href="/cr7-logo-v2-256.png">
     <link rel="apple-touch-icon" href="/cr7-logo-v2-512.png">
+    <link rel="preload" as="font" href="/fonts/source-sans-3-latin.woff2" type="font/woff2" crossorigin>
+    <link rel="preload" as="font" href="/fonts/dm-sans-latin.woff2" type="font/woff2" crossorigin>
 
     <!-- Social sharing -->
     <meta property="og:type" content="website">
@@ -23,11 +25,6 @@
     <meta name="twitter:title" content="Messi vs Ronaldo Stats: Goals, Assists and Trophies Compared">
     <meta name="twitter:description" content="Messi and Ronaldo side by side: goals, assists, trophies, Ballon d'Or awards and the head to head record.">
     <meta name="twitter:image" content="https://ronaldostats.app/messi-vs-ronaldo.jpg">
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,600;9..40,700&family=Plus+Jakarta+Sans:wght@800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Security -->
     <meta name="referrer" content="same-origin">
@@ -250,6 +247,21 @@
     </script>
 
     <style>
+        /* Fonts are served from this site rather than Google Fonts, so the
+           first paint no longer waits on a connection to a second server.
+           Each family is one variable font per character set, cut down to the
+           weights the site uses; a browser fetches the latin-ext file only for
+           a character outside latin. The latin files are preloaded and
+           optional: a font that is not ready for the first paint is skipped
+           for that visit rather than swapped in later, which moved the text
+           and counted against Core Web Vitals. */
+        @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 400 700; font-display: optional; src: url(/fonts/dm-sans-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+        @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 400 700; font-display: optional; src: url(/fonts/dm-sans-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+        @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 500 800; font-display: optional; src: url(/fonts/plus-jakarta-sans-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+        @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 500 800; font-display: optional; src: url(/fonts/plus-jakarta-sans-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+        @font-face { font-family: 'Source Sans 3'; font-style: normal; font-weight: 400 700; font-display: optional; src: url(/fonts/source-sans-3-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+        @font-face { font-family: 'Source Sans 3'; font-style: normal; font-weight: 400 700; font-display: optional; src: url(/fonts/source-sans-3-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
         /* The home page's menu on the left, then boxed sections with dark title
            strips and dense comparison tables in one column. Same palette as the
            home page; the boxes have rounded corners. */
@@ -527,7 +539,7 @@ Ronaldo as of 12 October 2026. Messi as of 17 October 2026.
 
             <figure class="hero">
                 <picture>
-                    <source srcset="/messi-vs-ronaldo.webp" type="image/webp">
+                    <source srcset="/messi-vs-ronaldo-800.webp 800w, /messi-vs-ronaldo-1200.webp 1200w, /messi-vs-ronaldo.webp 1600w" sizes="(max-width: 768px) calc(100vw - 32px), 1060px" type="image/webp">
                     <img src="/messi-vs-ronaldo.jpg" alt="Lionel Messi and Cristiano Ronaldo playing chess" width="1600" height="900" fetchpriority="high">
                 </picture>
                 <figcaption>Lionel Messi and Cristiano Ronaldo, Louis Vuitton campaign, 2022. Photograph by Annie Leibovitz.</figcaption>

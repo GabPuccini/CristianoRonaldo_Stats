@@ -419,13 +419,44 @@ under individual honours.
   centralise it into a shared include or inject it with JavaScript; static
   markup on every page is deliberate for search engines.
 * Keep the flat design system: DM Sans for body, Plus Jakarta Sans for
-  display, a navy sidebar `#0f1f3d`, brand blue `#1d6fa5`, navy `#1b3358` for
+  display (both served from `fonts/`, see Speed below), a navy sidebar `#0f1f3d`, brand blue `#1d6fa5`, navy `#1b3358` for
   table heads and accents, solid white rounded cards on a light grey page
   `#e8ebf0`. No glassmorphism (no `backdrop-filter`, no translucent cards, no
   background glows) and no colour gradients: table heads and chart bars are
   one solid colour from end to end. This replaced the frosted glass design in
   October 2026.
 * Every page keeps its reduced motion override and its JSON-LD block.
+
+## Speed (Core Web Vitals)
+
+In October 2026 Search Console flagged the home page on mobile: Largest
+Contentful Paint at 2.6s, over the 2.5s line. The LCP element on a phone is the
+intro paragraph under the title, and three things held it back, all fixed:
+
+* **An entrance animation.** The header, profile card and figures faded in from
+  invisible, and the paragraph does not count as painted until it starts to
+  show, which on a busy phone came over a second after the first paint. Do not
+  bring back a fade or slide in for anything above the fold.
+* **Google Fonts.** Its stylesheet blocked the first paint while the phone
+  connected to a second server. The fonts now live in `fonts/` as woff2 files,
+  declared with `@font-face` at the top of each page's styles. Each family is
+  one variable font per character set (latin and latin-ext), DM Sans and Plus
+  Jakarta Sans cut down with fontTools to the weights in use (400 to 700 and
+  500 to 800). Never link Google Fonts again.
+* **Font swapping.** The latin files are preloaded and use
+  `font-display: optional`: a font not ready for the first paint is skipped
+  for that visit instead of swapped in later, which rewrapped the text and
+  would have counted as layout shift. Repeat visits always get it from cache.
+
+The Messi vs Ronaldo page's LCP element is its chess photo, served through
+`srcset` at 800, 1200 and 1600 pixels wide so a phone fetches a small one; a
+new large photo above the fold needs the same.
+
+To check a change, run Lighthouse with mobile throttling against the page
+served gzipped, as GitHub Pages serves it. After this fix the home page
+measured LCP 2.1s and CLS 0 in Lighthouse, against 3.4s before; real phones
+come in faster than Lighthouse's throttling. Search Console judges a fix over
+a rolling 28 days of real visits, so press Validate Fix and give it a month.
 
 ## Messi vs Ronaldo
 

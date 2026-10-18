@@ -24,13 +24,10 @@
     <meta name="twitter:description" content="981 goals and 291 assists broken down by club, season, competition, opponent and finish type.">
     <meta name="twitter:image" content="https://ronaldostats.app/cr7-logo-v2-1024.png">
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
-
     <!-- Hero image -->
     <link rel="preload" as="image" href="/ronaldo-avatar-360.webp" type="image/webp" fetchpriority="high">
+    <link rel="preload" as="font" href="/fonts/dm-sans-latin.woff2" type="font/woff2" crossorigin>
+    <link rel="preload" as="font" href="/fonts/plus-jakarta-sans-latin.woff2" type="font/woff2" crossorigin>
 
     <!-- Security -->
     <meta name="referrer" content="same-origin">
@@ -1021,6 +1018,19 @@
     </script>
 
     <style>
+        /* Fonts are served from this site rather than Google Fonts, so the
+           first paint no longer waits on a connection to a second server.
+           Each family is one variable font per character set, cut down to the
+           weights the site uses; a browser fetches the latin-ext file only for
+           a character outside latin. The latin files are preloaded and
+           optional: a font that is not ready for the first paint is skipped
+           for that visit rather than swapped in later, which moved the text
+           and counted against Core Web Vitals. */
+        @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 400 700; font-display: optional; src: url(/fonts/dm-sans-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+        @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 400 700; font-display: optional; src: url(/fonts/dm-sans-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+        @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 500 800; font-display: optional; src: url(/fonts/plus-jakarta-sans-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+        @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 500 800; font-display: optional; src: url(/fonts/plus-jakarta-sans-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
         /* ========== TOKENS ========== */
         :root {
             --bg-start: #e8ebf0;
@@ -1802,13 +1812,6 @@
         }
         .overlay.active { opacity: 1; pointer-events: auto; }
 
-        /* ========== LOAD MOTION ========== */
-        .reveal {
-            opacity: 0;
-            transform: translateY(16px);
-            animation: rise 0.6s cubic-bezier(.2,.7,.2,1) forwards;
-        }
-        @keyframes rise { to { opacity: 1; transform: translateY(0); } }
 
 
 
@@ -2433,7 +2436,6 @@
 
         @media (prefers-reduced-motion: reduce) {
             * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
-            .reveal { opacity: 1 !important; transform: none !important; }
         
             /* timeline: it animates on a scroll timeline, so the blanket
                animation reset above leaves these at their start state */
@@ -2738,7 +2740,7 @@
 
         <!-- Main -->
         <main class="main">
-            <header class="page-head reveal" style="animation-delay:.02s">
+            <header class="page-head">
                 <p class="eyebrow">
                     Career statistics
                     <span class="updated-badge"><span data-stat="meta.updated.badge">Updated 12 October 2026</span></span>
@@ -2748,7 +2750,7 @@
             </header>
 
             <!-- Identity strip -->
-            <section class="identity reveal" style="animation-delay:.06s" aria-label="Player profile">
+            <section class="identity" aria-label="Player profile">
                 <div class="identity-photo">
                     <picture><source srcset="/ronaldo-avatar-360.webp" type="image/webp"><img src="/ronaldo-avatar-360.jpg" alt="Cristiano Ronaldo kissing the Ballon d'Or trophy" width="120" height="120" loading="eager" decoding="async" fetchpriority="high"></picture>
                 </div>
@@ -2764,7 +2766,7 @@
             </section>
 
             <!-- On this page -->
-            <nav class="jump-nav reveal" style="animation-delay:.08s" aria-label="On this page">
+            <nav class="jump-nav" aria-label="On this page">
                 <span class="jump-label">On this page</span>
                 <ul>
                     <li><a class="plain" href="/#clubs">Clubs</a></li>
@@ -2787,19 +2789,19 @@
             </div>
 
             <section class="kpi-grid" aria-label="Career totals">
-                <div class="kpi-card reveal" style="animation-delay:.10s">
+                <div class="kpi-card">
                     <span class="kpi-label">Career goals</span>
                     <span class="kpi-value" data-stat="career.goals">981</span>
                 </div>
-                <div class="kpi-card reveal" style="animation-delay:.13s">
+                <div class="kpi-card">
                     <span class="kpi-label">Appearances</span>
                     <span class="kpi-value" data-stat="career.apps">1,340</span>
                 </div>
-                <div class="kpi-card reveal" style="animation-delay:.16s">
+                <div class="kpi-card">
                     <span class="kpi-label">Assists</span>
                     <span class="kpi-value" data-stat="career.assists">291</span>
                 </div>
-                <div class="kpi-card reveal" style="animation-delay:.19s">
+                <div class="kpi-card">
                     <span class="kpi-label">Goals in <span data-stat="season.current.name">2026/27</span></span>
                     <span class="kpi-value" data-stat="season.current.goals">5</span>
                 </div>
@@ -2810,7 +2812,7 @@
                 <h2 class="section-title" id="clubs">Goals by Club and Country</h2>
                 <a class="section-link" href="/#goalsbyseason">Goals by season</a>
             </div>
-            <section class="table-card reveal" style="animation-delay:.10s">
+            <section class="table-card">
                 <div class="table-scroll">
                     <table class="data-table">
                         <caption>Every senior team he has played for, ranked by goals, as of <span data-stat="meta.updated.long">12 October 2026</span>. The <a href="/#goalsbyseason">goals by season section</a> splits each one by competition.</caption>
@@ -2886,7 +2888,7 @@
                 <h2 class="section-title">Calendar Year Stats</h2>
             </div>
             <p class="section-note">Ronaldo has scored in every calendar year since <span data-stat="year.first">2002</span>. He reached <span data-stat="year.above40.threshold">40</span> goals or more in <span data-stat="year.above40.word">fourteen</span> of them, and his highest total was <span data-stat="year.best.goals">69</span>, in <span data-stat="year.best.year">2013</span>.</p>
-            <section class="year-pick reveal" style="animation-delay:.08s" aria-labelledby="year-pick-title">
+            <section class="year-pick" aria-labelledby="year-pick-title">
                 <div class="year-pick-head">
                     <h3 class="year-pick-title" id="year-pick-title">Ronaldo stats by calendar year</h3>
                     <div class="year-pick-control">
@@ -2945,7 +2947,7 @@
             <section id="goalsbyyear" aria-label="Ronaldo goals in every calendar year">
                 <p class="page-lead">Cristiano Ronaldo has scored <b><span data-stat="career.goals">981</span> goals</b> across <span data-stat="year.count">25</span> calendar years, from <span data-stat="year.first.goals">5</span> in <span data-stat="year.first">2002</span> to <b><span data-stat="year.current.goals">24</span> so far in <span data-stat="year.current.year">2026</span></b>, as of <span data-stat="meta.updated.long">12 October 2026</span>. The bars show the goals in each year and the line shows the running total.</p>
 
-                <section class="dash-chart-card reveal" style="animation-delay:.08s">
+                <section class="dash-chart-card">
                     <div class="chart-header">
                         <p class="chart-subtitle">Goals in each calendar year and the running total, now <span data-stat="career.goals">981</span></p>
                     </div>
@@ -2980,7 +2982,7 @@
                     <a class="section-link" href="/#goalsbyseason">Goals by season</a>
                 </div>
                 <p class="section-note">The same figures as the chart. He reached <b>500 career goals in <span data-stat="milestone.500.year">2015</span></b> and <b>900 in <span data-stat="milestone.900.year">2024</span></b>. The first 500 took thirteen years and the next 400 took nine.</p>
-                <section class="data-card reveal" style="animation-delay:.10s">
+                <section class="data-card">
                     <div class="data-scroll">
                         <table class="dash-table">
                             <caption>Cristiano Ronaldo goals in every calendar year for club and country, with the running career total and his age at the end of each year, as of <span data-stat="meta.updated.long">12 October 2026</span>. The <span data-stat="year.current.year">2026</span> row is still in progress. Club by club totals are in the <a href="/#clubs">goals by club and country table</a>.</caption>
@@ -3048,14 +3050,14 @@
                 </div>
                 <p class="page-lead">Cristiano Ronaldo has scored <b><span data-stat="career.club_goals">835</span> club goals in <span data-stat="career.club_apps">1,106</span> games</b> and <b><span data-stat="team.portugal.goals">146</span> in <span data-stat="team.portugal.apps">234</span> caps</b> for Portugal, as of <span data-stat="meta.updated.long">12 October 2026</span>. The tables below split every season by competition. His highest season total was <b><span data-stat="season.best.goals">61</span> for <span data-stat="season.best.team">Real Madrid</span> in <span data-stat="season.best.season">2014/15</span></b>, and he has <span data-stat="season.current.goals">5</span> so far for Al Nassr in <span data-stat="season.current.name">2026/27</span>.</p>
 
-                <div class="summary-grid reveal" style="animation-delay:.06s">
+                <div class="summary-grid">
                     <div class="summary-card"><div class="summary-value" data-stat="career.club_goals">835</div><div class="summary-label">Club goals</div></div>
                     <div class="summary-card"><div class="summary-value" data-stat="team.portugal.goals">146</div><div class="summary-label">International goals</div></div>
                     <div class="summary-card"><div class="summary-value" data-stat="career.club_apps">1,106</div><div class="summary-label">Club appearances</div></div>
                     <div class="summary-card"><div class="summary-value" data-stat="team.portugal.apps">234</div><div class="summary-label">International caps</div></div>
                 </div>
 
-                <section class="table-card reveal" style="animation-delay:.10s">
+                <section class="table-card">
                     <div class="table-header">
                         <h3 class="table-title">Club goals and appearances, season by season</h3>
                         <p class="table-subtitle">Every club season from <span data-stat="season.span">2002/03 to 2026/27</span>, split by competition</p>
@@ -3106,7 +3108,7 @@
                     </div>
                 </section>
 
-                <section class="table-card reveal" style="animation-delay:.14s">
+                <section class="table-card">
                     <div class="table-header">
                         <h3 class="table-title">How many goals has Ronaldo scored for Portugal each year?</h3>
                         <p class="table-subtitle">Every year for Portugal, from the youth teams to the present day</p>
@@ -3174,7 +3176,7 @@
                     <h2 class="section-title" id="records">What records does Cristiano Ronaldo hold?</h2>
                     <a class="section-link" href="/#dashboard">Goals by competition</a>
                 </div>
-                <ul class="record-list reveal" style="animation-delay:.10s">
+                <ul class="record-list">
                     <li><span class="num tnum" data-stat="comp.championsleague">140</span><span><b>Champions League goals</b>, more than anyone in the competition's history, and <span data-stat="comp.realmadrid.championsleague">105</span> of them in nine seasons at Real Madrid.</span></li>
                     <li><span class="num tnum" data-stat="team.portugal.goals">146</span><span><b>Goals in <span data-stat="team.portugal.apps">234</span> caps for Portugal</b>, the most by any man in international football. He passed Ali Daei in September 2021 and has not stopped since.</span></li>
                     <li><span class="num tnum" data-stat="comp.laliga">311</span><span><b>La Liga goals for Real Madrid</b> in nine seasons, part of <span data-stat="team.realmadrid.goals">450</span> for the club in all competitions, better than a goal a game.</span></li>
@@ -3189,7 +3191,7 @@
                 <h2 class="section-title">How many trophies has Ronaldo won?</h2>
                 <a class="section-link" href="/#achievements">All trophies and awards</a>
             </div>
-            <section class="trophy-grid reveal" style="animation-delay:.10s" aria-label="Trophy summary">
+            <section class="trophy-grid" aria-label="Trophy summary">
                 <div class="trophy-card">
                     <div class="trophy-value" data-stat="honours.total">35</div>
                     <div class="trophy-label">Team trophies</div>
@@ -3214,7 +3216,7 @@
                 <h2 class="section-title">Free kicks, penalties and hat tricks</h2>
                 <a class="section-link" href="/#dashboard">Goals by type of finish</a>
             </div>
-            <section class="table-card reveal" style="animation-delay:.10s">
+            <section class="table-card">
                 <div class="table-scroll">
                     <table class="data-table">
                         <caption>Direct free kick goals, penalties and hat tricks by team, as of <span data-stat="meta.updated.long">12 October 2026</span>. The <a href="/#dashboard">dashboard</a> splits the same goals by body part and finish.</caption>
@@ -3255,7 +3257,7 @@
                 <p class="page-lead">The dashboard breaks down the same <b><span data-stat="career.goals">981</span> goals in <span data-stat="career.apps">1,340</span> games</b>, for six teams as of <span data-stat="meta.updated.long">12 October 2026</span>, by competition, season, opponent and type of finish. La Liga is his highest scoring competition with <b><span data-stat="comp.laliga">311</span></b>, followed by the UEFA Champions League with <b><span data-stat="comp.championsleague">140</span></b>, the most anyone has scored in it, the Saudi Pro League with <span data-stat="comp.saudiproleague">106</span> and the Premier League with <span data-stat="comp.premierleague">103</span>. Pick a team and every chart updates.</p>
 
                 <!-- Team selector -->
-                <section class="reveal" style="animation-delay:.06s" aria-label="Team selector">
+                <section aria-label="Team selector">
                     <div class="team-row" role="group" aria-label="Choose a team to filter the dashboard">
                         <button type="button" class="team-chip all-chip active" data-team="all">All teams</button>
                         <button type="button" class="team-chip" data-team="sporting">
@@ -3281,7 +3283,7 @@
                 </section>
 
                 <!-- Summary cards -->
-                <section class="summary-grid reveal" style="animation-delay:.10s" aria-label="Summary for the selected team">
+                <section class="summary-grid" aria-label="Summary for the selected team">
                     <div class="summary-card"><div class="summary-value" id="sumGames" data-stat="career.apps">1,340</div><div class="summary-label">Games</div></div>
                     <div class="summary-card"><div class="summary-value" id="sumGoals" data-stat="career.goals">981</div><div class="summary-label">Goals</div></div>
                     <div class="summary-card"><div class="summary-value" id="sumRate" data-stat="career.gpg">0.73</div><div class="summary-label">Goals per game</div></div>
@@ -3289,7 +3291,7 @@
                 </section>
 
                 <!-- Goals by competition -->
-                <section class="dash-chart-card reveal" style="animation-delay:.14s">
+                <section class="dash-chart-card">
                     <div class="chart-head">
                         <div>
                             <h3 class="chart-title">Which competitions has Ronaldo scored in most?</h3>
@@ -3303,7 +3305,7 @@
                 </section>
 
                 <!-- Goals by season -->
-                <section class="dash-chart-card reveal" style="animation-delay:.18s">
+                <section class="dash-chart-card">
                     <div class="chart-head">
                         <div>
                             <h3 class="chart-title">How has Ronaldo's scoring changed season by season?</h3>
@@ -3316,7 +3318,7 @@
                 </section>
 
                 <!-- Favourite opponents -->
-                <section class="dash-chart-card reveal" style="animation-delay:.22s">
+                <section class="dash-chart-card">
                     <div class="chart-head">
                         <div>
                             <h3 class="chart-title">Who does Ronaldo score against most?</h3>
@@ -3351,7 +3353,7 @@
 
                 <!-- How the goals go in -->
                 <div class="duo-grid">
-                    <section class="dash-chart-card reveal" style="animation-delay:.26s">
+                    <section class="dash-chart-card">
                         <div class="chart-head">
                             <div>
                                 <h3 class="chart-title" id="finishTitle">Open play, penalties or free kicks?</h3>
@@ -3364,7 +3366,7 @@
                         <p class="chart-footnote" id="finishFootnote">The penalty and free kick totals match the free kicks, penalties and hat tricks table above.</p>
                     </section>
 
-                    <section class="dash-chart-card reveal" style="animation-delay:.30s">
+                    <section class="dash-chart-card">
                         <div class="chart-head">
                             <div>
                                 <h3 class="chart-title">Which foot does Ronaldo score with?</h3>
@@ -3385,7 +3387,7 @@
                 </div>
                 <p class="section-note">These tables cover the whole career, every team combined, so they do not change when you pick a team above. Each adds up to exactly <b><span data-stat="career.goals">981</span> goals</b>.</p>
 
-                <section class="data-card reveal" style="animation-delay:.10s">
+                <section class="data-card">
                     <div class="data-scroll">
                         <table class="dash-table">
                             <caption>Cristiano Ronaldo career goals by competition, as of <span data-stat="meta.updated.long">12 October 2026</span>. His <span data-stat="comp.championsleague">140</span> goals in the UEFA Champions League are a record, and his <span data-stat="comp.laliga">311</span> La Liga goals all came for Real Madrid.</caption>
@@ -3437,7 +3439,7 @@
                 <p class="section-note">Just over <b><span data-stat="career.openplay_pct_round">74</span> percent of his goals came from open play</b> and nearly two thirds from his right foot. He has also scored <b><span data-stat="body.all.head">158</span> headers</b>.</p>
 
                 <div class="duo-grid">
-                    <section class="data-card reveal" style="animation-delay:.10s">
+                    <section class="data-card">
                         <div class="data-scroll">
                             <table class="dash-table">
                                 <caption>Goals by finish type, career totals as of <span data-stat="meta.updated.long">12 October 2026</span>.</caption>
@@ -3462,7 +3464,7 @@
                         </div>
                     </section>
 
-                    <section class="data-card reveal" style="animation-delay:.10s">
+                    <section class="data-card">
                         <div class="data-scroll">
                             <table class="dash-table">
                                 <caption>Goals by body part, career totals as of <span data-stat="meta.updated.long">12 October 2026</span>.</caption>
@@ -3497,7 +3499,7 @@
                 </div>
                 <p class="page-lead">Cristiano Ronaldo has won the Ballon d'Or <b><span data-stat="ballondor.wins.word">five</span> times</b> and been runner up <span data-stat="ballondor.runnerup.word">six</span> times. He was shortlisted at <b>all <span data-stat="ballondor.nominations.word">eighteen</span> editions</b> held from <span data-stat="ballondor.first">2004</span> to <span data-stat="ballondor.last">2022</span>, the most nominations of any player in the award's history, with <span data-stat="ballondor.next.player">Lionel Messi</span> next on <span data-stat="ballondor.next.nominations">17</span>.</p>
 
-                <div class="bd-feature reveal" style="animation-delay:.06s">
+                <div class="bd-feature">
                     <figure class="bd-trophy">
                         <picture>
                             <source srcset="/ballondor.webp" type="image/webp">
@@ -3510,7 +3512,7 @@
                     </div>
                 </div>
 
-                <section class="table-card reveal" style="animation-delay:.10s">
+                <section class="table-card">
                     <div class="table-scroll">
                         <table class="data-table bd-table">
                             <caption>Cristiano Ronaldo's finishing position at every Ballon d'Or he was nominated for, with his club and that year's winner.</caption>
@@ -3568,7 +3570,7 @@
                     <a class="section-link" href="/#dashboard">Dashboard</a>
                 </div>
                 <p class="section-note">A short list first. Each date is covered in more detail in the timeline below.</p>
-                <ol class="keydates reveal" style="animation-delay:.06s">
+                <ol class="keydates">
                     <li><span class="kd-date">Aug 2002</span><span>Breaks into the <b>Sporting CP</b> first team at 17, debuting against Inter.</span></li>
                     <li><span class="kd-date">16 Aug 2003</span><span>Joins <b>Manchester United</b> for £12.24m and takes the number 7 shirt.</span></li>
                     <li><span class="kd-date">12 Jun 2004</span><span>Scores his <b>first Portugal goal</b>, against Greece at UEFA Euro 2004, aged 19.</span></li>
@@ -3982,7 +3984,7 @@
                     <a class="section-link" href="/#timeline">Timeline</a>
                 </div>
                 <p class="section-note">Clubs have paid a combined <b><span data-stat="transfers.fees.total">€247m</span></b> for Cristiano Ronaldo across <span data-stat="transfers.paid.word">four</span> transfers. The largest fee was the <b><span data-stat="transfer.2018.fee">€117m</span></b> Juventus paid Real Madrid in July 2018. The <span data-stat="transfer.2009.fee">€94m</span> Real Madrid paid Manchester United in 2009 was a world record at the time. He joined Al Nassr on a free transfer in January 2023.</p>
-                <section class="table-card reveal" style="animation-delay:.10s">
+                <section class="table-card">
                     <div class="table-scroll">
                         <table class="data-table transfer-table" role="table">
                             <caption>Every move of Cristiano Ronaldo's senior career, newest first, with the fee paid and his market value at the time, as of <span data-stat="meta.updated.long">12 October 2026</span>.</caption>
@@ -4030,7 +4032,7 @@
                 </div>
                 <p class="section-note">Open any club to see each competition, how many times he won it and the years. Personal honours sit in their own section at the end and are counted separately from the <span data-stat="honours.total">35</span> team trophies.</p>
 
-                <section class="filter-section reveal" style="animation-delay:.10s">
+                <section class="filter-section">
                     <div class="filter-tabs" role="group" aria-label="Filter achievements">
                         <button type="button" class="ach-filter-tab active" data-filter="all" aria-pressed="true">All <span class="count" data-stat="honours.total">35</span></button>
                         <button type="button" class="ach-filter-tab" data-filter="club" aria-pressed="false">Club honours <span class="count" data-stat="honours.club">32</span></button>
@@ -4039,7 +4041,7 @@
                     </div>
                 </section>
 
-                <div class="achievements reveal" style="animation-delay:.14s">
+                <div class="achievements">
                     <!-- Sporting CP -->
                     <div class="accordion" data-category="club">
                         <h4 class="accordion-heading">
@@ -4557,27 +4559,27 @@
                 <h2 class="section-title">Quick answers</h2>
             </div>
             <section class="qa-grid" aria-label="Quick answers about Cristiano Ronaldo">
-                <article class="qa reveal" style="animation-delay:.10s">
+                <article class="qa">
                     <h3>How many goals has Cristiano Ronaldo scored?</h3>
                     <p>Cristiano Ronaldo has scored <b><span data-stat="career.goals">981</span> career goals</b> in <span data-stat="career.apps">1,340</span> senior appearances for club and country, as of <span data-stat="meta.updated.long">12 October 2026</span>, an average of <span data-stat="career.gpg">0.73</span> a game. No man has scored more in official football. The <a href="/#goalsbyyear">goals by year section</a> has the total year by year.</p>
                 </article>
-                <article class="qa reveal" style="animation-delay:.13s">
+                <article class="qa">
                     <h3>How many goals has Ronaldo scored this season?</h3>
                     <p>Ronaldo has scored <b><span data-stat="season.current.goals">5</span> goals</b> for Al Nassr in <span data-stat="season.current.name">2026/27</span> so far, <span data-stat="season.current.league_goals">4</span> of them in the Saudi Pro League. In the <span data-stat="year.current.year">2026</span> calendar year, including the FIFA World Cup, he has <span data-stat="year.current.goals">24</span>. Every season is in the <a href="/#goalsbyseason">goals by season section</a>.</p>
                 </article>
-                <article class="qa reveal" style="animation-delay:.16s">
+                <article class="qa">
                     <h3>Which club has Ronaldo scored the most goals for?</h3>
                     <p>Real Madrid: <b><span data-stat="team.realmadrid.goals">450</span> goals in <span data-stat="team.realmadrid.apps">438</span> games</b> between 2009 and 2018, an average of <span data-stat="team.realmadrid.gpg">1.03</span> a game. That is more than his totals for any two of his other clubs combined. Each season is in the <a href="/#goalsbyseason">goals by season section</a>.</p>
                 </article>
-                <article class="qa reveal" style="animation-delay:.19s">
+                <article class="qa">
                     <h3>How many Ballon d'Or awards does Ronaldo have?</h3>
                     <p>Ronaldo has won the <b>Ballon d'Or <span data-stat="ballondor.wins.word">five</span> times</b>, in 2008, 2013, 2014, 2016 and 2017, and finished second in <span data-stat="ballondor.runnerup.word">six</span> more years. His <span data-stat="ballondor.nominations.word">eighteen</span> nominations are the most of any player, and every edition is in the <a href="/#ballondor">Ballon d'Or section</a>.</p>
                 </article>
-                <article class="qa reveal" style="animation-delay:.22s">
+                <article class="qa">
                     <h3>How old is Cristiano Ronaldo?</h3>
                     <p>Cristiano Ronaldo is <b><span data-stat="person.age">41</span> years old</b>. He was born on <span data-stat="person.born.long">5 February 1985</span> in Funchal, Madeira, and still plays for Al Nassr and Portugal. The <a href="/#timeline">through the years section</a> covers his career in order.</p>
                 </article>
-                <article class="qa reveal" style="animation-delay:.25s">
+                <article class="qa">
                     <h3>What was Ronaldo's most prolific season?</h3>
                     <p>His most prolific club season was <b><span data-stat="season.best.season">2014/15</span> at <span data-stat="season.best.team">Real Madrid</span></b>: <span data-stat="season.best.goals">61</span> goals in <span data-stat="season.best.apps">54</span> games in all competitions. Measured by calendar year rather than season, his most prolific was <span data-stat="year.best.year">2013</span>, with <span data-stat="year.best.goals">69</span>. Every season is compared in the <a href="/#goalsbyseason">goals by season section</a>.</p>
                 </article>
@@ -4587,7 +4589,7 @@
             <div class="section-head">
                 <h2 class="section-title" id="faq">Frequently asked questions</h2>
             </div>
-            <section class="faq-grid reveal" style="animation-delay:.10s" aria-label="Frequently asked questions">
+            <section class="faq-grid" aria-label="Frequently asked questions">
                 <div class="faq-item">
                     <h3>How many assists does Cristiano Ronaldo have?</h3>
                     <p>Cristiano Ronaldo has <span data-stat="career.assists">291</span> career assists in <span data-stat="career.apps">1,340</span> appearances, as of <span data-stat="meta.updated.long">12 October 2026</span>, roughly one every <span data-stat="career.assist_rate">4.6</span> games. The figure is gathered from several sources, from club and competition records to specialist football databases, and checked against one another, so it can differ from totals published elsewhere.</p>
@@ -4699,7 +4701,7 @@
             </section>
 
             <!-- Sourcing and methodology -->
-            <section class="method reveal" style="animation-delay:.10s">
+            <section class="method">
                 <h2>How these numbers are compiled</h2>
                 <p>Every figure on this site counts official senior first team matches for Sporting CP, Manchester United, Real Madrid, Juventus, Al Nassr and Portugal, in all league, domestic cup, continental and international competitions. Youth and reserve football is excluded, including Ronaldo's Sporting CP B and Portugal youth appearances.</p>
                 <p>Goals, assists, penalties, free kicks and hat tricks are gathered from several sources, including club and competition records and specialist football databases, and checked against one another. Assists are credited goal by goal, which is why the total of <span data-stat="career.assists">291</span> is higher than some football databases show.</p>
@@ -4708,14 +4710,14 @@
             </section>
 
             <!-- Feedback -->
-            <section class="feedback reveal" style="animation-delay:.10s" aria-labelledby="feedback-title">
+            <section class="feedback" aria-labelledby="feedback-title">
                 <div class="feedback-text">
                     <h2 id="feedback-title">What would you like to see on the site?</h2>
                     <p>A statistic that is missing, a chart that would make something clearer, or any other improvement: email me at <a href="mailto:ronaldostats@pm.me">ronaldostats@pm.me</a>.</p>
                 </div>
             </section>
 
-            <footer class="footer reveal" style="animation-delay:.12s">
+            <footer class="footer">
                 <p>Statistics updated <span data-stat="meta.updated.long">12 October 2026</span></p>
                 <div class="footer-links">
                     <!-- <a href="https://x.com/CR7statsapp" target="_blank" rel="noopener">
