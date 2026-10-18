@@ -444,11 +444,9 @@ def questions(data, R, M):
                f"{SHORT[w]}, with {caps[w]}{after[w]}. {SHORT[o]} scored {caps[o]}{after[o]}."))
 
     wt = {"r": T["r"]["worldcup"], "m": T["m"]["worldcup"]}
-    gw = leader(R["wc"], M["wc"]) or "m"
     a = ("No. " if not wt["r"] else f"Yes, {wt['r']} times. ") + (
         "Messi won the 2022 FIFA World Cup with Argentina, and lost the 2014 final to Germany and the "
-        "2026 final to Spain. "
-        f"{SHORT[gw]} has {P[gw]['wc']} World Cup goals and {SHORT[OTHER[gw]]} {P[OTHER[gw]]['wc']}.")
+        "2026 final to Spain.")
     qs.append(("Has Ronaldo won the World Cup?", a))
 
     qs.append(("How many penalties did Argentina get at the 2022 World Cup?",
