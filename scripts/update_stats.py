@@ -40,6 +40,9 @@ BACKUP = ROOT / "data" / "ronaldo.backup.json"
 
 PAGES = [
     "index.html",
+    # Written almost entirely from the dataset by messi_vs_ronaldo.py, which
+    # holds Lionel Messi's side in the messi block alongside Ronaldo's.
+    "messi-vs-ronaldo.html",
 ]
 
 # Files that are not HTML but still publish figures. They carry no markers and
@@ -70,8 +73,10 @@ def load():
         return json.load(fh)
 
 
-def save(data):
-    data["meta"]["updated"] = dt.date.today().isoformat()
+def save(data, touch=True):
+    # A Messi match changes nothing of Ronaldo's, so it leaves his date alone
+    if touch:
+        data["meta"]["updated"] = dt.date.today().isoformat()
     with DATA.open("w", encoding="utf-8") as fh:
         json.dump(data, fh, indent=2, ensure_ascii=False)
         fh.write("\n")
@@ -505,6 +510,8 @@ def derive(data):
         out["ballondor.next.player"] = nxt["player"]
         out["ballondor.next.nominations"] = str(nxt["nominations"])
 
+    out.update(mvr.dates(data))
+
     tables = {
         "years": year_rows,
         "seasons": data["seasons"],
@@ -676,6 +683,7 @@ def validate(data, facts):
             if scored_in > opps.get(g, {}).get(name, 0):
                 errors.append(f"{g}: scored in {scored_in} matches against {name} but has fewer goals")
 
+    errors += mvr.validate(data)
     return errors
 
 
@@ -719,6 +727,8 @@ try:
 except ImportError:                                   # generated file not present
     GENERATED_HEAD_RULES = {}
 
+import messi_vs_ronaldo as mvr
+
 
 def text_rules(generated=True):
     G = r"([\d,]+)"                       # a figure, with or without a comma
@@ -750,6 +760,10 @@ def text_rules(generated=True):
             # answers that used to need a dozen rules like it are now copied
             # from the page by sync_faq_schema, figures included.
             (r'"name": "Real Madrid: ' + G + r" trophies", "honours.realmadrid.count"),
+        ],
+        # Dated by whichever player was updated last, since either moves it
+        mvr.PAGE: [
+            (r'"dateModified": "(\d{4}-\d\d-\d\d)"', "mvr.updated.iso"),
         ],
     }
     # The rest of the head is generated: see scripts/gen_head_rules.py. The
@@ -1294,6 +1308,7 @@ def build_regions(data, tables, values):
          ("Headers", int(values["body.all.head"])),
          ("Other", int(values["body.all.other"]))], " " * 32)
 
+    r.update(mvr.regions(data, values))
     return r
 
 
@@ -1436,7 +1451,8 @@ def update_sitemap(values, report, dry_run=False):
                 f"sitemap.xml: expected 1 entry for {name}, found {len(hits)}")
             continue
         m = hits[0]
-        updated = updated[:m.start(2)] + values["meta.updated.iso"] + updated[m.end(2):]
+        date = values["mvr.updated.iso"] if name == mvr.PAGE else values["meta.updated.iso"]
+        updated = updated[:m.start(2)] + date + updated[m.end(2):]
         report["texts"] += 1
     if updated == original:
         return None
@@ -1673,6 +1689,15 @@ def main():
     h = sub.add_parser("hattrick", help="record a hat trick")
     h.add_argument("--team", required=True)
 
+    m = sub.add_parser("messi", help="record one Lionel Messi match, for the Messi vs Ronaldo page")
+    m.add_argument("--team", default="intermiami", help="a team id in the messi block")
+    m.add_argument("--goals", type=int, default=0, help="three or more also counts a hat trick")
+    m.add_argument("--assists", type=int, default=0)
+    m.add_argument("--penalties", type=int, default=0, help="how many of the goals were penalties")
+    m.add_argument("--freekicks", type=int, default=0, help="how many were direct free kicks")
+    m.add_argument("--headers", type=int, default=0, help="how many were headers")
+    m.add_argument("--date", type=dt.date.fromisoformat, help="match date, defaults to today")
+
     sub.add_parser("build", help="rewrite the HTML from the current data")
     sub.add_parser("show", help="print the current headline figures")
     sub.add_parser("undo", help="restore the dataset from the last backup")
@@ -1693,10 +1718,11 @@ def main():
 
     data = load()
 
-    if args.cmd in ("goal", "appearance", "assist", "hattrick"):
+    if args.cmd in ("goal", "appearance", "assist", "hattrick", "messi"):
         shutil.copy(DATA, BACKUP)
         handlers = {"goal": apply_goal, "appearance": apply_appearance,
-                    "assist": apply_assist, "hattrick": apply_hattrick}
+                    "assist": apply_assist, "hattrick": apply_hattrick,
+                    "messi": mvr.apply_match}
         data = handlers[args.cmd](copy.deepcopy(data), args)
 
     values, tables, facts = derive(data)
@@ -1728,12 +1754,16 @@ def main():
         return
 
     if args.cmd != "build":
-        save(data)
+        save(data, touch=args.cmd != "messi")
         values, tables, facts = derive(data)
 
     regions = build_regions(data, tables, values)
     report = write_html(data, values, regions)
 
+    if args.cmd == "messi":
+        M = mvr.messi(data)
+        print(f"Messi now {M['goals']:,} goals, {M['assists']:,} assists in {M['apps']:,} games, "
+              f"as of {values['messi.updated.long']}.")
     print(f"Goals now {values['career.goals']}, {values['career.remaining']} from 1,000.")
     print(f"Rewrote {report['values']} values, {report['attrs']} attributes, "
           f"{report['regions']} table regions and {report['texts']} text rules "

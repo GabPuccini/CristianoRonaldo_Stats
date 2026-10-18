@@ -24,9 +24,28 @@ figure there is quoted back as fact rather than being eyeballed by a person,
 which is why every number in it is a rule in `file_rules()` and
 `check_coverage.py` fails if one is added without one.
 
-`sitemap.xml` is driven too: `index.html` is the only statistics page left, so
-its `lastmod` tracks the update date. Only `privacy.html` keeps a hand written
-date, because the script never touches it.
+`sitemap.xml` is driven too: the `lastmod` of `index.html` tracks the update
+date, and that of `messi-vs-ronaldo.html` the later of Ronaldo's and Messi's.
+Only `privacy.html` keeps a hand written date, because the script never touches
+it.
+
+## When Rambo says Messi scored or played
+
+The Messi vs Ronaldo page carries Messi's side too, so record each Inter Miami
+match he plays, one command per match, with what he did in it:
+
+    python scripts/update_stats.py messi --goals N --assists N --date YYYY-MM-DD
+
+It adds the game, the goals and assists to his Inter Miami totals and current
+season row, and moves `messi.updated`, which is the "Messi as of" date on the
+page. It never touches Ronaldo's figures or `meta.updated`. Three goals or more
+count a hat trick on their own. Add `--penalties N`, `--freekicks N` or
+`--headers N` for how many of the goals were of that kind; open play goals need
+nothing extra. `--date` defaults to today, so pass the match date when
+recording a match after the day. `undo` reverts it like any other event.
+
+Commit with a message naming the match, for example
+`Messi: Inter Miami v Atlanta United, two goals`.
 
 ## When Rambo says Ronaldo scored
 
@@ -185,11 +204,12 @@ Note only the first goal of a match carries `--new-appearance`.
 
 1. The script prints the new totals and refuses to write if anything fails to
    reconcile. If it fails, read the error, fix the data, do not force it.
-2. Check `git diff` and confirm only expected numbers moved. One goal touches all
-   `index.html` plus `sitemap.xml` and `llms.txt`, so a diff of fewer than
-   three files
+2. Check `git diff` and confirm only expected numbers moved. One goal touches
+   `index.html`, `messi-vs-ronaldo.html`, `sitemap.xml` and `llms.txt`, so a
+   diff of fewer than four files
    means something is not wired up and should be looked at rather than
-   committed.
+   committed. A Messi match touches `messi-vs-ronaldo.html` and `sitemap.xml`
+   only.
 3. Commit with a message naming the event, for example
    `Goal 977: Al Nassr v Al Hilal, Saudi Pro League`.
 4. Push. Cloudflare serves the new file within a minute or two, and a hard
@@ -260,8 +280,11 @@ this order, each a `<section>` with its own id: goals by year, goals by season,
 the dashboard, the Ballon d'Or, the timeline, the transfer history and the
 achievements, reached at `/#goalsbyyear`, `/#goalsbyseason`, `/#dashboard`,
 `/#ballondor`, `/#timeline`, `/#transfers` and `/#achievements`. The sidebar
-lists them in the same order, on `privacy.html` as well as the home page. Only `privacy.html` is still
-a page of its own. `PAGES` in the engine is a single entry as a result.
+lists them in the same order, on `privacy.html` as well as the home page. Only `privacy.html` and
+`messi-vs-ronaldo.html` are pages of their own, so `PAGES` in the engine holds
+`index.html` and the Messi page. The sidebar ends with a link to the Messi page
+after the chapters; the scroll highlighting ignores it, since it has no section
+on the home page.
 
 Five stub files sit in the repo holding a canonical and a meta refresh, one per
 retired URL. Each is the weaker stand in for a Cloudflare 301 and should be
@@ -396,6 +419,36 @@ under individual honours.
   one solid colour from end to end. This replaced the frosted glass design in
   October 2026.
 * Every page keeps its reduced motion override and its JSON-LD block.
+
+## Messi vs Ronaldo
+
+`messi-vs-ronaldo.html` compares the two careers side by side, Ronaldo on the
+left and Messi on the right, and exists to rank for "Messi vs Ronaldo" and
+"Messi vs Ronaldo stats" searches. It is laid out after Transfermarkt rather
+than like the home page, on purpose: a navy top bar in place of the sidebar,
+boxes with navy title strips and 12px rounded corners, dense tables, a main
+column and a side column, Source Sans 3 for type, and a dark mode. The palette
+is the home page's. The top bar repeats the home page's navigation in full.
+
+Almost all of it is written by `scripts/messi_vs_ronaldo.py`, region by region
+(`mvr.*`): the profiles, the 18 questions and answers, every comparison table,
+the club and season lists, the trophy lists and the side panel. Change the
+wording of a question or a table there, not in the HTML, which is rewritten on
+every build. Which player leads each row is worked out on every build, so the
+green highlight and the player each answer names first follow the figures: if
+Ronaldo overtakes Messi in a row, the page changes without an edit. The FAQPage
+JSON-LD is filled from the questions by `sync_faq_schema` as on the home page.
+
+Messi's figures live in the `messi` block of `data/ronaldo.json`: his teams
+(career games, goals and hat tricks are their sums), his club seasons, which
+must add up to the club totals, trophies by team with the kind that decides
+their row in the trophy table, awards and best seasons. `versus` holds what
+belongs to the pair: their 36 meetings, El Clasico, and the fixed facts about
+Ronaldo that only this page compares. The hand written parts are the context
+box (the 2022 penalties, the 2026 World Cup route, the Finalissima and the
+Negreira case) and the notes and sources; keep anything there that might be
+read as a claim strictly factual and attributed, and never state as fact what
+a court has not ruled. `check` validates the Messi block too.
 
 ## Validation the script enforces
 

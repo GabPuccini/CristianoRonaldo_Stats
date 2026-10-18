@@ -388,11 +388,24 @@ record("index.html", "club goals total", values["career.club_goals"],
        find("index.html", r'<div class="summary-value">([\d,]+)</div><div class="summary-label">Club goals</div>'),
        key="career.club_goals")
 
-# The machine readable date, on every page that carries a dateModified
+# The machine readable date, on every page that carries a dateModified. The
+# Messi vs Ronaldo page moves when either player does, so it carries the later.
 for page in PAGES:
     if '"dateModified"' in PAGES[page]:
-        record(page, "schema dateModified", values["meta.updated.iso"],
-               find(page, r'"dateModified": "([^"]+)"'), key="meta.updated.iso")
+        key = "mvr.updated.iso" if page == engine.mvr.PAGE else "meta.updated.iso"
+        record(page, "schema dateModified", values[key],
+               find(page, r'"dateModified": "([^"]+)"'), key=key)
+
+# The Messi vs Ronaldo page is written from the dataset, so these only prove a
+# build has reached it since the data last changed.
+MVR = engine.mvr.PAGE
+record(MVR, "Ronaldo career goals in the score row", values["career.goals"],
+       find(MVR, r'<div class="score"><div>([\d,]+)</div>'), key="career.goals")
+record(MVR, "Ronaldo as of date", values["meta.updated.long"],
+       find(MVR, r"Ronaldo as of (\d{1,2} \w+ \d{4})\."), key="meta.updated.long")
+record(MVR, "Messi as of date", values["messi.updated.long"],
+       find(MVR, r"Messi as of (\d{1,2} \w+ \d{4})\."), key="messi.updated.long")
+exercised.add("mvr.updated.long")     # the later of the two, not printed today
 record("index.html", "visible updated date", values["meta.updated.long"],
        find("index.html", r'<span class="updated-badge">Updated ([^<]+)</span>'), key="meta.updated.long")
 exercised.add("meta.updated.short")   # only ever rendered as part of the long form today

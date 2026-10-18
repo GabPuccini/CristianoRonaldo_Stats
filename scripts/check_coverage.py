@@ -72,6 +72,11 @@ EXEMPT = {
          "the Portugal goals that passed Ali Daei in 2021, a milestone rather "
          "than a live figure"),
     ],
+    # Everything with a figure on this page is written from the dataset, so
+    # what is left is the hand written context: match results and round names.
+    "messi-vs-ronaldo.html": [
+        (r"Round of (?:32|16)", "the name of a FIFA World Cup knockout round, not a count"),
+    ],
 }
 
 

@@ -4,7 +4,8 @@
     "competitions is keyed by team, then by the label the site prints on the competitions chart. The career totals are rolled up from these, with the labels in competition_rollup folded into Other cup competitions, so a goal recorded against a team updates the team chart and the overall chart together.",
     "years rows carry apps as well as goals. Club appearances are stored by season, which straddles two calendar years, so the yearly figure cannot be derived from them and is held here instead. A goal or an appearance banks itself to the calendar year it was played in.",
     "transfers lists every move of the senior career, oldest first, as Transfermarkt publishes it. fee and market_value are millions of euros; null means none was paid or none was published, and fee_text then says why. from and to are keys of transfer_clubs, or null for a spell without a club.",
-    "ballon_dor lists every edition at which Ronaldo was on the shortlist, with his final position (joint marks a shared place), his club when the award was presented, and the winner. The 2010 to 2015 editions were the FIFA Ballon d'Or. There was no award in 2020. ballon_dor_next_most is the player with the next most nominations; check fails if that ever reaches Ronaldo's total, because the page calls his total a record."
+    "ballon_dor lists every edition at which Ronaldo was on the shortlist, with his final position (joint marks a shared place), his club when the award was presented, and the winner. The 2010 to 2015 editions were the FIFA Ballon d'Or. There was no award in 2020. ballon_dor_next_most is the player with the next most nominations; check fails if that ever reaches Ronaldo's total, because the page calls his total a record.",
+    "messi holds Lionel Messi's figures for the Messi vs Ronaldo page, official senior matches for club and country only. Career games, goals and hat tricks are the sums of teams; seasons must add up to the club totals, and the Inter Miami row, which spans calendar year seasons, is labelled from its from year to the year of messi.updated. trophies are grouped by team, each with a kind that decides which row of the trophy table it counts in. The messi command records one match and moves messi.updated without touching meta.updated. versus holds what belongs to the pair: their meetings, El Clasico, and the fixed facts about Ronaldo that the page compares but no other part of the dataset holds."
   ],
   "meta": {
     "updated": "2026-10-12",
@@ -2245,5 +2246,494 @@
     "player": "Lionel Messi",
     "nominations": 17,
     "as_of": 2026
+  },
+  "messi": {
+    "updated": "2026-10-17",
+    "born": "1987-06-24",
+    "profile": {
+      "full_name": "Lionel Andres Messi",
+      "number": 10,
+      "birthplace": "Rosario, Argentina",
+      "height": "1.70 m",
+      "foot": "Left",
+      "position": "Forward",
+      "club": "Inter Miami",
+      "debut": "16 October 2004, Barcelona"
+    },
+    "career": {
+      "assists": 409,
+      "penalties": 110,
+      "freekicks": 76,
+      "headers": 31
+    },
+    "teams": [
+      {
+        "id": "barcelona",
+        "name": "Barcelona",
+        "years": "2004 to 2021",
+        "apps": 778,
+        "goals": 672,
+        "hattricks": 48
+      },
+      {
+        "id": "psg",
+        "name": "Paris Saint Germain",
+        "years": "2021 to 2023",
+        "apps": 75,
+        "goals": 32,
+        "hattricks": 0
+      },
+      {
+        "id": "intermiami",
+        "name": "Inter Miami",
+        "years": "2023 to present",
+        "apps": 121,
+        "goals": 106,
+        "hattricks": 3
+      },
+      {
+        "id": "argentina",
+        "name": "Argentina",
+        "years": "2005 to 2026",
+        "apps": 208,
+        "goals": 126,
+        "hattricks": 11,
+        "national": true
+      }
+    ],
+    "seasons": [
+      {
+        "season": "2004/05",
+        "team": "barcelona",
+        "apps": 9,
+        "goals": 1
+      },
+      {
+        "season": "2005/06",
+        "team": "barcelona",
+        "apps": 25,
+        "goals": 8
+      },
+      {
+        "season": "2006/07",
+        "team": "barcelona",
+        "apps": 36,
+        "goals": 17
+      },
+      {
+        "season": "2007/08",
+        "team": "barcelona",
+        "apps": 40,
+        "goals": 16
+      },
+      {
+        "season": "2008/09",
+        "team": "barcelona",
+        "apps": 51,
+        "goals": 38
+      },
+      {
+        "season": "2009/10",
+        "team": "barcelona",
+        "apps": 53,
+        "goals": 47
+      },
+      {
+        "season": "2010/11",
+        "team": "barcelona",
+        "apps": 55,
+        "goals": 53
+      },
+      {
+        "season": "2011/12",
+        "team": "barcelona",
+        "apps": 60,
+        "goals": 73
+      },
+      {
+        "season": "2012/13",
+        "team": "barcelona",
+        "apps": 50,
+        "goals": 60
+      },
+      {
+        "season": "2013/14",
+        "team": "barcelona",
+        "apps": 46,
+        "goals": 41
+      },
+      {
+        "season": "2014/15",
+        "team": "barcelona",
+        "apps": 57,
+        "goals": 58
+      },
+      {
+        "season": "2015/16",
+        "team": "barcelona",
+        "apps": 49,
+        "goals": 41
+      },
+      {
+        "season": "2016/17",
+        "team": "barcelona",
+        "apps": 52,
+        "goals": 54
+      },
+      {
+        "season": "2017/18",
+        "team": "barcelona",
+        "apps": 54,
+        "goals": 45
+      },
+      {
+        "season": "2018/19",
+        "team": "barcelona",
+        "apps": 50,
+        "goals": 51
+      },
+      {
+        "season": "2019/20",
+        "team": "barcelona",
+        "apps": 44,
+        "goals": 31
+      },
+      {
+        "season": "2020/21",
+        "team": "barcelona",
+        "apps": 47,
+        "goals": 38
+      },
+      {
+        "season": "2021/22",
+        "team": "psg",
+        "apps": 34,
+        "goals": 11
+      },
+      {
+        "season": "2022/23",
+        "team": "psg",
+        "apps": 41,
+        "goals": 21
+      },
+      {
+        "from": 2023,
+        "team": "intermiami",
+        "apps": 121,
+        "goals": 106
+      }
+    ],
+    "competitions": {
+      "laliga": 474,
+      "championsleague": 129,
+      "copadelrey": 56,
+      "worldcup": 21,
+      "continental": 14
+    },
+    "best": {
+      "season": "2011/12",
+      "season_goals": 73,
+      "league_season": "2011/12",
+      "league_goals": 50,
+      "year": "2012",
+      "year_goals": 91,
+      "cl_season": "2011/12",
+      "cl_goals": 14
+    },
+    "trophies": [
+      {
+        "team": "barcelona",
+        "items": [
+          {
+            "name": "La Liga",
+            "kind": "league",
+            "years": [
+              "2004/05",
+              "2005/06",
+              "2008/09",
+              "2009/10",
+              "2010/11",
+              "2012/13",
+              "2014/15",
+              "2015/16",
+              "2017/18",
+              "2018/19"
+            ]
+          },
+          {
+            "name": "UEFA Champions League",
+            "kind": "championsleague",
+            "years": [
+              "2005/06",
+              "2008/09",
+              "2010/11",
+              "2014/15"
+            ]
+          },
+          {
+            "name": "Copa del Rey",
+            "kind": "cup",
+            "years": [
+              "2008/09",
+              "2011/12",
+              "2014/15",
+              "2015/16",
+              "2016/17",
+              "2017/18",
+              "2020/21"
+            ]
+          },
+          {
+            "name": "Supercopa de España",
+            "kind": "supercup",
+            "years": [
+              "2005",
+              "2006",
+              "2009",
+              "2010",
+              "2011",
+              "2013",
+              "2016",
+              "2018"
+            ]
+          },
+          {
+            "name": "UEFA Super Cup",
+            "kind": "uefasupercup",
+            "years": [
+              "2009",
+              "2011",
+              "2015"
+            ]
+          },
+          {
+            "name": "FIFA Club World Cup",
+            "kind": "clubworldcup",
+            "years": [
+              "2009",
+              "2011",
+              "2015"
+            ]
+          }
+        ]
+      },
+      {
+        "team": "psg",
+        "items": [
+          {
+            "name": "Ligue 1",
+            "kind": "league",
+            "years": [
+              "2021/22",
+              "2022/23"
+            ]
+          },
+          {
+            "name": "Trophée des Champions",
+            "kind": "supercup",
+            "years": [
+              "2022"
+            ]
+          }
+        ]
+      },
+      {
+        "team": "intermiami",
+        "items": [
+          {
+            "name": "Leagues Cup",
+            "kind": "other",
+            "years": [
+              "2023"
+            ]
+          },
+          {
+            "name": "MLS Supporters' Shield",
+            "kind": "other",
+            "years": [
+              "2024"
+            ]
+          },
+          {
+            "name": "MLS Cup",
+            "kind": "other",
+            "years": [
+              "2025"
+            ]
+          },
+          {
+            "name": "Campeones Cup",
+            "kind": "other",
+            "years": [
+              "2026"
+            ]
+          }
+        ]
+      },
+      {
+        "team": "argentina",
+        "items": [
+          {
+            "name": "FIFA World Cup",
+            "kind": "worldcup",
+            "years": [
+              "2022"
+            ]
+          },
+          {
+            "name": "Copa America",
+            "kind": "continental",
+            "years": [
+              "2021",
+              "2024"
+            ]
+          },
+          {
+            "name": "Finalissima",
+            "kind": "other",
+            "years": [
+              "2022"
+            ]
+          }
+        ]
+      }
+    ],
+    "youth_titles": [
+      {
+        "name": "FIFA U20 World Cup",
+        "years": [
+          "2005"
+        ]
+      },
+      {
+        "name": "Olympic gold",
+        "years": [
+          "2008"
+        ]
+      }
+    ],
+    "awards": {
+      "ballondor": [
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2015",
+        "2019",
+        "2021",
+        "2023"
+      ],
+      "ballondor_second": 5,
+      "ballondor_third": 1,
+      "thebest": 3,
+      "worldplayer": 1,
+      "goldenshoe": 6,
+      "uefa_player": 2,
+      "uefa_club": 1,
+      "cl_topscorer": 6,
+      "worldcup_goldenball": 2,
+      "clubworldcup_goldenball": 2,
+      "continental_topscorer": 1,
+      "puskas": 0,
+      "league_topscorer": [
+        {
+          "name": "Pichichi Trophy",
+          "years": [
+            "2009/10",
+            "2011/12",
+            "2012/13",
+            "2016/17",
+            "2017/18",
+            "2018/19",
+            "2019/20",
+            "2020/21"
+          ]
+        },
+        {
+          "name": "MLS Golden Boot",
+          "years": [
+            "2025"
+          ]
+        }
+      ]
+    },
+    "international": {
+      "first_cap": "17 August 2005",
+      "retired": "6 October 2026",
+      "world_cups_played": 6,
+      "world_cups_scored_in": 5,
+      "continental_editions": [
+        2007,
+        2011,
+        2015,
+        2016,
+        2019,
+        2021,
+        2024
+      ]
+    },
+    "top_leagues": {
+      "seasons": 17,
+      "span": "2004/05 to 2020/21",
+      "ligue1_seasons": 2,
+      "last_european_match": "June 2023, aged 35"
+    }
+  },
+  "versus": {
+    "head_to_head": {
+      "matches": 36,
+      "draws": 9,
+      "ronaldo": {
+        "wins": 11,
+        "goals": 21,
+        "assists": 1
+      },
+      "messi": {
+        "wins": 16,
+        "goals": 22,
+        "assists": 12
+      }
+    },
+    "clasico": {
+      "ronaldo": {
+        "matches": 30,
+        "goals": 18
+      },
+      "messi": {
+        "matches": 45,
+        "goals": 26
+      }
+    },
+    "ronaldo": {
+      "profile": {
+        "full_name": "Cristiano Ronaldo dos Santos Aveiro",
+        "number": 7,
+        "birthplace": "Funchal, Portugal",
+        "height": "1.87 m",
+        "foot": "Right",
+        "position": "Forward",
+        "club": "Al Nassr",
+        "debut": "14 August 2002, Sporting CP"
+      },
+      "international": {
+        "first_cap": "20 August 2003",
+        "world_cups_played": 6,
+        "world_cups_scored_in": 6,
+        "worldcup_goldenball": 0,
+        "continental_editions": [
+          2004,
+          2008,
+          2012,
+          2016,
+          2020,
+          2024
+        ]
+      },
+      "last_european_match": "November 2022, aged 37"
+    },
+    "teams_2024": {
+      "euros": 24,
+      "copa": 16
+    }
   }
 }
