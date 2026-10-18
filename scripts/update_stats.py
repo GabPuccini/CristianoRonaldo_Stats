@@ -1440,8 +1440,10 @@ def update_sitemap(values, report, dry_run=False):
         return None
     original = path.read_text(encoding="utf-8")
     updated = original
+    # Pages are published at clean addresses: the host serves
+    # messi-vs-ronaldo.html at /messi-vs-ronaldo, and that is the canonical.
     owned = {"index.html": "https://ronaldostats.app/"}
-    owned.update({name: f"https://ronaldostats.app/{name}" for name in PAGES
+    owned.update({name: f"https://ronaldostats.app/{name.removesuffix('.html')}" for name in PAGES
                   if name != "index.html"})
     for name, loc in owned.items():
         pattern = (r"(<loc>" + re.escape(loc) + r"</loc>\s*<lastmod>)([^<]*)(</lastmod>)")

@@ -27,7 +27,7 @@ Scope and method: figures count official senior first team matches for Sporting 
 - [Interactive dashboard](https://ronaldostats.app/#dashboard): goals by competition, season, opponent, finish type and body part, filtered by team. It is a section of the home page.
 - [Through the years](https://ronaldostats.app/#timeline): the career story from the Sporting CP debut to the 2026 World Cup.
 - [Achievements](https://ronaldostats.app/#achievements): every team trophy and major individual award, club by club.
-- [Messi vs Ronaldo](https://ronaldostats.app/messi-vs-ronaldo.html): Ronaldo and Lionel Messi side by side, with goals, assists, trophies, Ballon d'Or awards, their head to head record and every club season. Both sides are updated after each match.
+- [Messi vs Ronaldo](https://ronaldostats.app/messi-vs-ronaldo): Ronaldo and Lionel Messi side by side, with goals, assists, trophies, Ballon d'Or awards, their head to head record and every club season. Both sides are updated after each match.
 
 ## Contact
 

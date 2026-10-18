@@ -430,6 +430,13 @@ boxes with navy title strips and 12px rounded corners, dense tables, a main
 column and a side column, Source Sans 3 for type, and a dark mode. The palette
 is the home page's. The top bar repeats the home page's navigation in full.
 
+Its address is `https://ronaldostats.app/messi-vs-ronaldo`, without `.html`:
+the host serves the file there, and the canonical, the JSON-LD, the sitemap,
+`llms.txt` and every link use that form, so link to the clean address only.
+The `.html` address still answers with the same page, whose canonical points
+search engines at the clean one; a Cloudflare Redirect Rule sending
+`/messi-vs-ronaldo.html` to `/messi-vs-ronaldo` with a 301 makes that explicit.
+
 Almost all of it is written by `scripts/messi_vs_ronaldo.py`, region by region
 (`mvr.*`): the profiles, the 18 questions and answers, every comparison table,
 the club and season lists, the trophy lists and the side panel. Change the
