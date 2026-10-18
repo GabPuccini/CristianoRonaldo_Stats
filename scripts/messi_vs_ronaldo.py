@@ -391,7 +391,7 @@ def questions(data, R, M):
     total = lambda k: sum(c[k] for r in early for c in r["comps"].values() if c)
     a += (f" Ronaldo played mainly as a winger in his first {word(sum(spells.values()))} senior seasons, "
           f"{word(spells['sporting'])} with Sporting CP and {word(spells['manutd'])} with Manchester United in "
-          f"the Premier League, which was first in UEFA's league rankings in 2008 and 2009. He scored "
+          f"the Premier League, which UEFA ranked as the strongest league in Europe in 2008 and 2009. He scored "
           f"{total('goals')} goals in {total('apps')} club games in those seasons. He played as a forward from "
           f"his move to Real Madrid in {madrid[:4]} and scored {R['rm_goals']:,} goals in "
           f"{R['rm_apps']:,} games for them.")
@@ -405,9 +405,9 @@ def questions(data, R, M):
     psg = next(t for t in data["messi"]["teams"] if t["id"] == "psg")
     psg_joined = dt.date.fromisoformat(psg["joined"])
     a += (f" Ronaldo returned to the Premier League with Manchester United for {series(back)}, aged "
-          f"{series(map(str, ages))}, when it was again first in UEFA's league rankings. Messi moved to "
+          f"{series(map(str, ages))}, when UEFA again ranked it as the strongest league in Europe. Messi moved to "
           f"Ligue 1 with Paris Saint Germain in {psg_joined.year}, aged {_age(M['born'], psg_joined)}, "
-          f"when it was fifth.")
+          f"when UEFA ranked it as the fifth strongest league in Europe.")
     qs.append(("Who has the better goals per game record?", a))
 
     qs.append(("Who has more assists?", most(
