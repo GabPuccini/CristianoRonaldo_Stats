@@ -298,7 +298,8 @@ which they already matched.
 
 Under the profile card an "On this page" row of pills links to every chapter:
 `#clubs`, `#goalsbyyear`, `#goalsbyseason`, `#dashboard`,
-`#ballondor`, `#timeline`, `#transfers`, `#achievements` and `#faq`. Add a pill there whenever a section is
+`#ballondor`, `#timeline`, `#transfers`, `#achievements` and `#faq`, then a last
+pill for the Messi vs Ronaldo page. Add a pill there whenever a section is
 added, and give its links `class="plain"`, which is what opts a link inside a
 list out of the underline body links carry. The sidebar highlights the section
 being read as the page scrolls, and the address bar follows it, so it reads
