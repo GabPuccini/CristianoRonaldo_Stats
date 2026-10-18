@@ -449,10 +449,13 @@ def questions(data, R, M):
         "2026 final to Spain.")
     qs.append(("Has Ronaldo won the World Cup?", a))
 
+    # fixed history: his goals and penalty goals at the 2022 World Cup
+    wc22_goals, wc22_pens = 7, 4
     qs.append(("How many penalties did Argentina get at the 2022 World Cup?",
                "Five, all taken by Messi. He scored against Saudi Arabia, the Netherlands, Croatia and France, "
-               "and Wojciech Szczesny saved his penalty against Poland. Four of his seven goals at the 2022 "
-               "FIFA World Cup were penalties."))
+               "and Wojciech Szczesny saved his penalty against Poland. "
+               f"{WORDS[wc22_pens].capitalize()} of his {WORDS[wc22_goals]} goals at the 2022 FIFA World Cup "
+               f"were penalties, which is {100 * wc22_pens / wc22_goals:.1f} percent."))
 
     hw = leader(h2h["ronaldo"]["wins"], h2h["messi"]["wins"])
     hk = {"r": "ronaldo", "m": "messi"}
