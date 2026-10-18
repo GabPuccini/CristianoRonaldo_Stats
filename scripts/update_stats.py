@@ -1640,6 +1640,14 @@ def apply_assist(data, args):
     return data
 
 
+def apply_missed_penalty(data, args):
+    """Only the Messi vs Ronaldo page shows it today, as his conversion rate."""
+    if args.count < 1:
+        sys.exit("--count must be at least 1.")
+    data["penalties_missed"] += args.count
+    return data
+
+
 def apply_hattrick(data, args):
     data["hattricks"][args.team] = data["hattricks"].get(args.team, 0) + 1
     data.setdefault("log", []).append({
@@ -1698,6 +1706,11 @@ def main():
     m.add_argument("--penalties", type=int, default=0, help="how many of the goals were penalties")
     m.add_argument("--freekicks", type=int, default=0, help="how many were direct free kicks")
     m.add_argument("--headers", type=int, default=0, help="how many were headers")
+    m.add_argument("--missed-penalties", dest="missed_penalties", type=int, default=0,
+                   help="penalties he took and missed in the match, shootouts not counted")
+
+    mp = sub.add_parser("missed-penalty", help="record a penalty Ronaldo missed, shootouts not counted")
+    mp.add_argument("--count", type=int, default=1)
     m.add_argument("--date", type=dt.date.fromisoformat, help="match date, defaults to today")
 
     sub.add_parser("build", help="rewrite the HTML from the current data")
@@ -1720,11 +1733,11 @@ def main():
 
     data = load()
 
-    if args.cmd in ("goal", "appearance", "assist", "hattrick", "messi"):
+    if args.cmd in ("goal", "appearance", "assist", "hattrick", "messi", "missed-penalty"):
         shutil.copy(DATA, BACKUP)
         handlers = {"goal": apply_goal, "appearance": apply_appearance,
                     "assist": apply_assist, "hattrick": apply_hattrick,
-                    "messi": mvr.apply_match}
+                    "messi": mvr.apply_match, "missed-penalty": apply_missed_penalty}
         data = handlers[args.cmd](copy.deepcopy(data), args)
 
     values, tables, facts = derive(data)

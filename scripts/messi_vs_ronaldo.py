@@ -170,6 +170,11 @@ def ronaldo(data, values):
         rm_apps=v("team.realmadrid.apps"), rm_goals=v("team.realmadrid.goals"),
         nl_goals=v("comp.portugal.nationsleague"),
         cl_assists=vs["championsleague_assists"],
+        pens_missed=data["penalties_missed"],
+        # the countries where he has won the league, in the order he played there
+        league_countries=[data["transfer_clubs"][tid]["country"]
+                          for (tid, _), (_, items) in zip(RONALDO_TEAMS, ronaldo_trophies(data))
+                          if tid in data["transfer_clubs"] and any(t["kind"] == "league" for t in items)],
         nl_titles=sum(len(t["years"]) for t in data["honours"]["teams"].get("portugal", [])
                       if t["name"] == "UEFA Nations League"),
     )
@@ -193,6 +198,7 @@ def messi(data):
         intl_apps=sum(t["apps"] for t in nat), intl_goals=sum(t["goals"] for t in nat),
         hattricks=sum(t["hattricks"] for t in teams), intl_hattricks=sum(t["hattricks"] for t in nat),
         pens=m["career"]["penalties"], freekicks=m["career"]["freekicks"], headers=m["career"]["headers"],
+        pens_missed=m["career"]["penalties_missed"],
         laliga=m["competitions"]["laliga"], cl=m["competitions"]["championsleague"],
         cl_assists=m["competitions"]["championsleague_assists"],
         cdr=m["competitions"]["copadelrey"], wc=m["competitions"]["worldcup"],
@@ -417,7 +423,8 @@ def questions(data, R, M):
     else:
         a = (f"Ronaldo has {T['r']['championsleague']} UEFA Champions League titles and {R['cl']} goals. "
              f"Messi has {T['m']['championsleague']} titles and {M['cl']} goals.")
-    a += " Messi was injured and did not play in the 2006 final, which Barcelona won against Arsenal."
+    a += (" Messi was injured and did not play in the 2006 final, which Barcelona won against Arsenal, "
+          "but he was counted as a winner.")
     qs.append(("Who has more Champions League titles and goals?", a))
 
     qs.append(("Who has more assists in the Champions League?", most(
@@ -473,14 +480,16 @@ def questions(data, R, M):
                            lambda o, x: f"{SHORT[o]} has {x[o]}.",
                            lambda n, unit=unit: f"They are level on {n}{unit or ' each'}.")))
 
-    np_ = {k: P[k]["goals"] - P[k]["pens"] for k in P}
-    nw = leader(np_["r"], np_["m"]) or "r"
+    pct = {k: 100 * P[k]["pens"] / (P[k]["pens"] + P[k]["pens_missed"]) for k in P}
+    cw = leader(round(pct["r"], 1), round(pct["m"], 1)) or "r"
     qs.append(("Who has more penalty goals?", most(
         "pens",
         lambda w, x: f"{SHORT[w]}, with {x[w]}.",
         lambda o, x: f"{SHORT[o]} has {x[o]}.",
         lambda n: f"They are level on {n}.")
-        + f" Without penalties, {SHORT[nw]} has {np_[nw]:,} goals and {SHORT[OTHER[nw]]} {np_[OTHER[nw]]:,}."))
+        + f" Ronaldo has missed {R['pens_missed']} and Messi {M['pens_missed']}, so {SHORT[cw]} has scored "
+          f"{pct[cw]:.1f} percent of his penalties and {SHORT[OTHER[cw]]} {pct[OTHER[cw]]:.1f} percent. "
+          "Shootouts are not counted."))
 
     qs.append(("Who has more headed goals?", most(
         "headers",
@@ -519,6 +528,9 @@ def questions(data, R, M):
     for k in ("r", "m"):
         if leads[k]:
             a += f" {SHORT[k]} leads in {series(leads[k])}."
+    if len(R["league_countries"]) > 1:
+        a += (f" Ronaldo has won a league title in {word(len(R['league_countries']))} countries: "
+              f"{series(R['league_countries'])}.")
     qs.append(("Who is better, Messi or Ronaldo?", a))
     return qs
 
@@ -727,6 +739,9 @@ def validate(data):
     c = m["career"]
     if c["penalties"] + c["freekicks"] > goals:
         errors.append("messi: penalties and free kicks exceed his goals")
+    for who, n in (("Ronaldo", data.get("penalties_missed")), ("Messi", c.get("penalties_missed"))):
+        if not isinstance(n, int) or n < 0:
+            errors.append(f"{who}: missed penalties must be a whole number")
     if c["headers"] > goals - c["penalties"] - c["freekicks"]:
         errors.append("messi: headed goals exceed his open play goals")
     for g in m["trophies"]:
@@ -752,7 +767,7 @@ def apply_match(data, args):
     if team is None:
         sys.exit(f"Unknown Messi team {args.team}: use one of "
                  + ", ".join(t["id"] for t in m["teams"]))
-    if min(args.goals, args.assists, args.penalties, args.freekicks, args.headers) < 0:
+    if min(args.goals, args.assists, args.penalties, args.freekicks, args.headers, args.missed_penalties) < 0:
         sys.exit("Counts cannot be negative.")
     if args.penalties + args.freekicks + args.headers > args.goals:
         sys.exit("More penalties, free kicks and headers than goals.")
@@ -767,6 +782,7 @@ def apply_match(data, args):
     c = m["career"]
     c["assists"] += args.assists
     c["penalties"] += args.penalties
+    c["penalties_missed"] += args.missed_penalties
     c["freekicks"] += args.freekicks
     c["headers"] += args.headers
     m["updated"] = (args.date or dt.date.today()).isoformat()

@@ -5,7 +5,8 @@
     "years rows carry apps as well as goals. Club appearances are stored by season, which straddles two calendar years, so the yearly figure cannot be derived from them and is held here instead. A goal or an appearance banks itself to the calendar year it was played in.",
     "transfers lists every move of the senior career, oldest first, as Transfermarkt publishes it. fee and market_value are millions of euros; null means none was paid or none was published, and fee_text then says why. from and to are keys of transfer_clubs, or null for a spell without a club.",
     "ballon_dor lists every edition at which Ronaldo was on the shortlist, with his final position (joint marks a shared place), his club when the award was presented, and the winner. The 2010 to 2015 editions were the FIFA Ballon d'Or. There was no award in 2020. ballon_dor_next_most is the player with the next most nominations; check fails if that ever reaches Ronaldo's total, because the page calls his total a record.",
-    "messi holds Lionel Messi's figures for the Messi vs Ronaldo page, official senior matches for club and country only. Career games, goals and hat tricks are the sums of teams; seasons must add up to the club totals, and the Inter Miami row, which spans calendar year seasons, is labelled from its from year to the year of messi.updated. trophies are grouped by team, each with a kind that decides which row of the trophy table it counts in. The messi command records one match and moves messi.updated without touching meta.updated. versus holds what belongs to the pair: their meetings, El Clasico, and the fixed facts about Ronaldo that the page compares but no other part of the dataset holds."
+    "messi holds Lionel Messi's figures for the Messi vs Ronaldo page, official senior matches for club and country only. Career games, goals and hat tricks are the sums of teams; seasons must add up to the club totals, and the Inter Miami row, which spans calendar year seasons, is labelled from its from year to the year of messi.updated. trophies are grouped by team, each with a kind that decides which row of the trophy table it counts in. The messi command records one match and moves messi.updated without touching meta.updated. versus holds what belongs to the pair: their meetings, El Clasico, and the fixed facts about Ronaldo that the page compares but no other part of the dataset holds.",
+    "penalties_missed is the number of penalties Ronaldo has missed in matches, shootouts not counted; the missed-penalty command adds to it. messi.career.penalties_missed is the same for Messi. The scored and missed counts for each player come from one published penalty record, so the conversion rates on the Messi vs Ronaldo page compare like with like."
   ],
   "meta": {
     "updated": "2026-10-12",
@@ -1286,6 +1287,7 @@
     "alnassr": 32,
     "juventus": 28
   },
+  "penalties_missed": 36,
   "freekicks": {
     "realmadrid": 33,
     "manutd": 15,
@@ -2262,9 +2264,10 @@
     },
     "career": {
       "assists": 409,
-      "penalties": 110,
+      "penalties": 115,
       "freekicks": 76,
-      "headers": 31
+      "headers": 31,
+      "penalties_missed": 35
     },
     "teams": [
       {

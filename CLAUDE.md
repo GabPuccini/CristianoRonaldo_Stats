@@ -41,7 +41,8 @@ season row, and moves `messi.updated`, which is the "Messi as of" date on the
 page. It never touches Ronaldo's figures or `meta.updated`. Three goals or more
 count a hat trick on their own. Add `--penalties N`, `--freekicks N` or
 `--headers N` for how many of the goals were of that kind; open play goals need
-nothing extra. `--date` defaults to today, so pass the match date when
+nothing extra. Add `--missed-penalties N` when he misses one, shootouts not
+counted, since the page gives each player's penalty conversion rate. `--date` defaults to today, so pass the match date when
 recording a match after the day. `undo` reverts it like any other event.
 
 Commit with a message naming the match, for example
@@ -135,10 +136,15 @@ opposition, and `--assists N` if he also created goals.
     python scripts/update_stats.py appearance --team alnassr --comp league
     python scripts/update_stats.py assist --team portugal --count 1
     python scripts/update_stats.py hattrick --team alnassr
+    python scripts/update_stats.py missed-penalty   # a penalty he missed, not in a shootout
     python scripts/update_stats.py show     # current headline figures
     python scripts/update_stats.py check    # validate, write nothing
     python scripts/update_stats.py build    # rewrite HTML from current data
     python scripts/update_stats.py undo     # revert the last event
+
+When he misses a penalty, run `missed-penalty` as well as the `appearance` or
+`goal` for that match. The count sits in `penalties_missed` and feeds his
+conversion rate on the Messi vs Ronaldo page.
 
 For Portugal, pass `--competition-label` to `appearance` as well, since it
 decides which column of the Portugal table moves: `Friendlies` is a friendly,
