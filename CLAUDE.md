@@ -388,8 +388,13 @@ under individual honours.
 * The navigation is duplicated in full on every page on purpose. Do not
   centralise it into a shared include or inject it with JavaScript; static
   markup on every page is deliberate for search engines.
-* Keep the light glassmorphism design system: DM Sans for body, Plus Jakarta
-  Sans for display, brand blue `#2f56cf`, frosted translucent cards.
+* Keep the flat design system: DM Sans for body, Plus Jakarta Sans for
+  display, a navy sidebar `#0f1f3d`, brand blue `#1d6fa5`, navy `#1b3358` for
+  table heads and accents, solid white rounded cards on a light grey page
+  `#e8ebf0`. No glassmorphism (no `backdrop-filter`, no translucent cards, no
+  background glows) and no colour gradients: table heads and chart bars are
+  one solid colour from end to end. This replaced the frosted glass design in
+  October 2026.
 * Every page keeps its reduced motion override and its JSON-LD block.
 
 ## Validation the script enforces

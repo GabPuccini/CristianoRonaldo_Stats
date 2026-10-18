@@ -71,30 +71,30 @@
     <style>
         /* ========== TOKENS ========== */
         :root {
-            --bg-start: #eaf0f9;
-            --bg-end: #dde6f3;
+            --bg-start: #e8ebf0;
+            --bg-end: #dde2ea;
 
-            --surface: rgba(255, 255, 255, 0.72);
-            --surface-strong: rgba(255, 255, 255, 0.86);
-            --sidebar-bg: rgba(255, 255, 255, 0.62);
+            --surface: #ffffff;
+            --surface-strong: #ffffff;
+            --sidebar-bg: #0f1f3d;
 
-            --ink: #16243a;
-            --ink-2: #56657f;
-            --ink-3: #8593a8;
+            --ink: #1b2433;
+            --ink-2: #5d6879;
+            --ink-3: #7c8797;
 
-            --brand: #2f56cf;
-            --brand-ink: #2f56cf;
-            --brand-soft: rgba(47, 86, 207, 0.14);
+            --brand: #1d6fa5;
+            --brand-ink: #1d6fa5;
+            --brand-soft: rgba(29, 111, 165, 0.14);
 
             --line: rgba(20, 30, 50, 0.08);
             --line-strong: rgba(20, 30, 50, 0.12);
-            --glass-border: rgba(255, 255, 255, 0.85);
+            --glass-border: #dde2ea;
 
             --shadow-sm: 0 2px 14px rgba(20, 35, 70, 0.05);
             --shadow-md: 0 10px 34px rgba(20, 35, 70, 0.08);
             --shadow-lg: 0 18px 50px rgba(20, 35, 70, 0.14);
 
-            --hero-grad: linear-gradient(135deg, #1e3a8a 0%, #2f56cf 58%, #3a63d8 100%);
+            --hero-grad: #1b3358;
 
             --sidebar-w: 220px;
             --sidebar-expanded: 248px;
@@ -119,19 +119,6 @@
             transition: background 0.4s ease, color 0.3s ease;
             overflow-x: hidden;
         }
-        /* the same fixed gradient layer as the home page, which iOS Safari
-           honours where it ignored background-attachment: fixed */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            pointer-events: none;
-            background:
-                radial-gradient(1100px 620px at 88% -8%, rgba(47, 86, 207, 0.13), transparent 62%),
-                radial-gradient(900px 560px at -6% 104%, rgba(214, 178, 80, 0.10), transparent 60%),
-                linear-gradient(150deg, var(--bg-start) 0%, var(--bg-end) 100%);
-        }
         a { color: inherit; }
 
         :focus-visible {
@@ -150,8 +137,6 @@
             width: var(--sidebar-w);
             height: 100vh;
             background: var(--sidebar-bg);
-            backdrop-filter: blur(22px);
-            -webkit-backdrop-filter: blur(22px);
             border-right: 1px solid var(--glass-border);
             display: flex;
             flex-direction: column;
@@ -174,7 +159,7 @@
             letter-spacing: 0.02em;
             margin-bottom: 30px;
             text-decoration: none;
-            box-shadow: 0 6px 18px rgba(31, 58, 138, 0.35);
+            box-shadow: 0 6px 18px rgba(27, 51, 88, 0.35);
         }
         .sidebar-nav {
             display: flex;
@@ -279,8 +264,6 @@
         /* ========== PRIVACY CARD ========== */
         .privacy-card {
             background: var(--surface);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
             border: 1px solid var(--glass-border);
             border-radius: var(--r-xl);
             padding: 40px;
@@ -354,8 +337,6 @@
             margin-top: 24px;
             padding: 24px 30px;
             background: var(--surface);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
             border: 1px solid var(--glass-border);
             border-radius: var(--r-lg);
             display: flex;
@@ -387,8 +368,6 @@
             bottom: 22px; left: 50%;
             transform: translateX(-50%);
             background: var(--surface-strong);
-            backdrop-filter: blur(22px);
-            -webkit-backdrop-filter: blur(22px);
             border: 1px solid var(--glass-border);
             border-radius: var(--r-lg);
             padding: 18px 24px;
@@ -430,8 +409,6 @@
             top: 18px; left: 18px;
             width: 48px; height: 48px;
             background: var(--surface-strong);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
             border: 1px solid var(--glass-border);
             border-radius: 14px;
             z-index: 200;
@@ -545,7 +522,7 @@
                 padding: calc(18px + env(safe-area-inset-top, 0px)) 14px calc(20px + env(safe-area-inset-bottom, 0px));
                 padding-left: calc(14px + env(safe-area-inset-left, 0px));
                 align-items: stretch;
-                background: rgba(255, 255, 255, 0.95);
+                background: var(--sidebar-bg);
                 transform: translateX(-100%);
                 visibility: hidden;
                 box-shadow: none;
@@ -628,6 +605,16 @@
             }
             .nav-item.active .nav-label { font-weight: 700; }
         }
+        /* The sidebar is navy, so its links, edges and close button are light.
+           This sits last so it also wins over the drawer rules for phones. */
+        .sidebar { border-right-color: rgba(255, 255, 255, 0.06); }
+        .sidebar-logo { background: var(--brand); box-shadow: none; }
+        .nav-item { color: #b8c4d9; }
+        .nav-item:hover { background: rgba(255, 255, 255, 0.08); color: #ffffff; }
+        .nav-item.active { background: rgba(255, 255, 255, 0.12); color: #ffffff; box-shadow: none; }
+        .nav-item.active::before { background: #ffffff; }
+        .drawer-head { border-bottom-color: rgba(255, 255, 255, 0.12); }
+        .drawer-close { color: #c9d3e6; background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.12); }
     </style>
 </head>
 <body>

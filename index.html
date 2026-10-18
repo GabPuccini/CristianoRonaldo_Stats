@@ -1023,33 +1023,33 @@
     <style>
         /* ========== TOKENS ========== */
         :root {
-            --bg-start: #eaf0f9;
-            --bg-end: #dde6f3;
+            --bg-start: #e8ebf0;
+            --bg-end: #dde2ea;
 
-            --surface: rgba(255, 255, 255, 0.72);
-            --surface-strong: rgba(255, 255, 255, 0.86);
-            --sidebar-bg: rgba(255, 255, 255, 0.62);
+            --surface: #ffffff;
+            --surface-strong: #ffffff;
+            --sidebar-bg: #0f1f3d;
 
-            --ink: #16243a;
-            --ink-2: #56657f;
-            --ink-3: #8593a8;
+            --ink: #1b2433;
+            --ink-2: #5d6879;
+            --ink-3: #7c8797;
 
-            --brand: #2f56cf;
-            --brand-ink: #2f56cf;
-            --brand-soft: rgba(47, 86, 207, 0.14);
+            --brand: #1d6fa5;
+            --brand-ink: #1d6fa5;
+            --brand-soft: rgba(29, 111, 165, 0.14);
 
             --good: #1f7a4d;
             --good-soft: rgba(31, 122, 77, 0.10);
 
             --line: rgba(20, 30, 50, 0.08);
             --line-strong: rgba(20, 30, 50, 0.12);
-            --glass-border: rgba(255, 255, 255, 0.85);
+            --glass-border: #dde2ea;
 
             --shadow-sm: 0 2px 14px rgba(20, 35, 70, 0.05);
             --shadow-md: 0 10px 34px rgba(20, 35, 70, 0.08);
             --shadow-lg: 0 18px 50px rgba(20, 35, 70, 0.14);
 
-            --hero-grad: linear-gradient(135deg, #1e3a8a 0%, #2f56cf 58%, #3a63d8 100%);
+            --hero-grad: #1b3358;
 
             --sidebar-w: 220px;
             --sidebar-expanded: 248px;
@@ -1059,9 +1059,9 @@
             --r-lg: 22px;
             --r-xl: 30px;
             /* the season tables: a solid head and two faint row washes */
-            --table-head: #1e3a8a;
-            --table-row-alt: rgba(47, 86, 207, 0.045);
-            --table-row-hover: rgba(47, 86, 207, 0.09);
+            --table-head: #1b3358;
+            --table-row-alt: rgba(29, 111, 165, 0.045);
+            --table-row-hover: rgba(29, 111, 165, 0.09);
         }
 
         /* ========== RESET ========== */
@@ -1125,8 +1125,6 @@
             width: var(--sidebar-w);
             height: 100vh;
             background: var(--sidebar-bg);
-            backdrop-filter: blur(22px);
-            -webkit-backdrop-filter: blur(22px);
             border-right: 1px solid var(--glass-border);
             display: flex;
             flex-direction: column;
@@ -1149,7 +1147,7 @@
             font-size: 0.95rem;
             letter-spacing: 0.02em;
             margin-bottom: 30px;
-            box-shadow: 0 6px 18px rgba(31, 58, 138, 0.35);
+            box-shadow: 0 6px 18px rgba(27, 51, 88, 0.35);
         }
 
         .sidebar-nav {
@@ -1263,8 +1261,6 @@
             flex-wrap: wrap;
             padding: 16px 22px;
             background: var(--surface);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
             border: 1px solid var(--glass-border);
             border-radius: var(--r-lg);
             box-shadow: var(--shadow-sm);
@@ -1320,7 +1316,7 @@
             font-size: 0.76rem;
             font-weight: 600;
             color: var(--ink-2);
-            background: rgba(47, 86, 207, 0.08);
+            background: rgba(29, 111, 165, 0.08);
             border: 1px solid var(--line);
             padding: 4px 11px;
             border-radius: 999px;
@@ -1367,8 +1363,6 @@
         }
         .kpi-card {
             background: var(--surface);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
             border: 1px solid var(--glass-border);
             border-radius: var(--r-lg);
             padding: 20px;
@@ -1404,8 +1398,6 @@
         /* ========== CALENDAR YEAR PICKER ========== */
         .year-pick {
             background: var(--surface);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
             border: 1px solid var(--glass-border);
             border-radius: var(--r-xl);
             padding: 22px 24px;
@@ -1466,8 +1458,6 @@
         }
         .qa {
             background: var(--surface);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
             border: 1px solid var(--glass-border);
             border-radius: var(--r-lg);
             padding: 20px 22px;
@@ -1491,8 +1481,6 @@
         /* ========== TABLES ========== */
         .table-card {
             background: var(--surface);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
             border: 1px solid var(--glass-border);
             border-radius: var(--r-xl);
             padding: 26px 30px;
@@ -1581,8 +1569,6 @@
         /* ========== SPARKLINE ========== */
         .chart-card {
             background: var(--surface);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
             border: 1px solid var(--glass-border);
             border-radius: var(--r-xl);
             padding: 26px 30px;
@@ -1628,8 +1614,6 @@
         }
         .trophy-card {
             background: var(--surface);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
             border: 1px solid var(--glass-border);
             border-radius: var(--r-lg);
             padding: 22px 18px;
@@ -1661,8 +1645,6 @@
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 0 36px;
             background: var(--surface);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
             border: 1px solid var(--glass-border);
             border-radius: var(--r-xl);
             padding: 10px 30px 26px;
@@ -1711,8 +1693,6 @@
             margin-top: 26px;
             padding: 26px 30px;
             background: var(--surface);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
             border: 1px solid var(--glass-border);
             border-radius: var(--r-lg);
             display: flex;
@@ -1743,8 +1723,6 @@
             bottom: 22px; left: 50%;
             transform: translateX(-50%);
             background: var(--surface-strong);
-            backdrop-filter: blur(22px);
-            -webkit-backdrop-filter: blur(22px);
             border: 1px solid var(--glass-border);
             border-radius: var(--r-lg);
             padding: 18px 24px;
@@ -1786,8 +1764,6 @@
             top: 18px; left: 18px;
             width: 48px; height: 48px;
             background: var(--surface-strong);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
             border: 1px solid var(--glass-border);
             border-radius: 14px;
             z-index: 200;
@@ -1840,7 +1816,7 @@
            same reason: unscoped it would underline every link on the page.
            ================================================================ */
         .team-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
-        .team-chip { display: inline-flex; align-items: center; gap: 10px; padding: 9px 16px 9px 10px; cursor: pointer; background: var(--surface); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--glass-border); border-radius: 999px; font-family: inherit; font-size: 0.86rem; font-weight: 600; color: var(--ink-2); box-shadow: var(--shadow-sm); transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+        .team-chip { display: inline-flex; align-items: center; gap: 10px; padding: 9px 16px 9px 10px; cursor: pointer; background: var(--surface); border: 1px solid var(--glass-border); border-radius: 999px; font-family: inherit; font-size: 0.86rem; font-weight: 600; color: var(--ink-2); box-shadow: var(--shadow-sm); transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
         .team-chip:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); color: var(--ink); }
         .team-chip.active { background: var(--brand); border-color: var(--brand); color: #fff; box-shadow: var(--shadow-md); }
         .team-chip img { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; background: #fff; }
@@ -1850,11 +1826,11 @@
         .team-status { font-size: 0.9rem; color: var(--ink-2); margin-bottom: 22px; min-height: 1.4em; }
         .team-status b { color: var(--brand-ink); font-weight: 700; }
         .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
-        .summary-card { background: var(--surface); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--glass-border); border-radius: var(--r-md); padding: 22px 20px; text-align: center; box-shadow: var(--shadow-sm); transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .summary-card { background: var(--surface); border: 1px solid var(--glass-border); border-radius: var(--r-md); padding: 22px 20px; text-align: center; box-shadow: var(--shadow-sm); transition: transform 0.25s ease, box-shadow 0.25s ease; }
         .summary-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
         .summary-value { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.7rem, 3vw, 2.1rem); font-weight: 800; line-height: 1; color: var(--brand-ink); font-variant-numeric: tabular-nums; }
         .summary-label { font-size: 0.74rem; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 8px; font-weight: 600; }
-        .dash-chart-card { background: var(--surface); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid var(--glass-border); border-radius: var(--r-xl); padding: 28px 30px; margin-bottom: 24px; box-shadow: var(--shadow-md); }
+        .dash-chart-card { background: var(--surface); border: 1px solid var(--glass-border); border-radius: var(--r-xl); padding: 28px 30px; margin-bottom: 24px; box-shadow: var(--shadow-md); }
         .chart-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; flex-wrap: wrap; margin-bottom: 20px; }
         .chart-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.2rem, 2.2vw, 1.45rem); font-weight: 700; letter-spacing: -0.01em; color: var(--ink); }
         .chart-subtitle { color: var(--ink-2); font-size: 0.9rem; margin-top: 5px; max-width: 60ch; }
@@ -1863,7 +1839,7 @@
         .chart-wrapper.short { height: 300px; }
         .chart-footnote { font-size: 0.8rem; color: var(--ink-3); margin-top: 14px; }
         .filter-tabs[hidden] { display: none; }
-        .filter-tabs { display: inline-flex; gap: 6px; background: var(--surface); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); padding: 6px; border-radius: var(--r-md); border: 1px solid var(--glass-border); box-shadow: var(--shadow-sm); max-width: 100%; }
+        .filter-tabs { display: inline-flex; gap: 6px; background: var(--surface); padding: 6px; border-radius: var(--r-md); border: 1px solid var(--glass-border); box-shadow: var(--shadow-sm); max-width: 100%; }
         .filter-tab { padding: 9px 16px; border: none; background: transparent; color: var(--ink-2); font-family: inherit; font-size: 0.84rem; font-weight: 600; border-radius: var(--r-sm); cursor: pointer; transition: background 0.2s ease, color 0.2s ease; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
         .filter-tab:hover { color: var(--ink); }
         .filter-tab.active { background: var(--surface-strong); color: var(--ink); box-shadow: var(--shadow-sm); }
@@ -1880,7 +1856,7 @@
         #dashboard p a, #dashboard li a { color: var(--brand-ink); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
         #dashboard p a:hover, #dashboard li a:hover { text-decoration-thickness: 2px; }
         .section-note b { color: var(--ink); font-weight: 700; }
-        .data-card { background: var(--surface); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid var(--glass-border); border-radius: var(--r-xl); padding: 26px 30px; box-shadow: var(--shadow-md); }
+        .data-card { background: var(--surface); border: 1px solid var(--glass-border); border-radius: var(--r-xl); padding: 26px 30px; box-shadow: var(--shadow-md); }
         .data-scroll { overflow-x: auto; }
         .dash-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums lining-nums; }
         .dash-table caption { caption-side: top; text-align: left; font-size: 0.88rem; color: var(--ink-2); margin-bottom: 16px; max-width: 78ch; }
@@ -1908,7 +1884,7 @@
         .timeline, .era-items { list-style: none; }
         .timeline > li { position: relative; }
         .era-mark { position: sticky; top: 14px; z-index: 20; display: flex; justify-content: flex-start; margin: 0 0 26px 52px; pointer-events: none; }
-        .era-mark > span { display: inline-flex; align-items: center; gap: 9px; background: var(--surface-strong); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid var(--glass-border); box-shadow: var(--shadow-sm); border-radius: 999px; padding: 8px 18px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--ink); }
+        .era-mark > span { display: inline-flex; align-items: center; gap: 9px; background: var(--surface-strong); border: 1px solid var(--glass-border); box-shadow: var(--shadow-sm); border-radius: 999px; padding: 8px 18px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--ink); }
         .era-badge { width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 1px solid var(--line); overflow: hidden; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .era-badge img { width: 100%; height: 100%; object-fit: cover; }
         .era-badge.fallback { background: var(--brand); }
@@ -1917,25 +1893,24 @@
         .milestone { position: relative; margin: 0 0 30px 52px; }
         .milestone:last-child { margin-bottom: 44px; }
         .node { position: absolute; left: -39px; top: 22px; width: 17px; height: 17px; border-radius: 50%; background: var(--surface-strong); border: 3px solid var(--brand); box-shadow: 0 0 0 5px var(--brand-soft); }
-        .tl-card { background: var(--surface); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: var(--r-lg); box-shadow: var(--shadow-sm); overflow: hidden; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .tl-card { background: var(--surface); border: 1px solid var(--glass-border); border-radius: var(--r-lg); box-shadow: var(--shadow-sm); overflow: hidden; transition: transform 0.25s ease, box-shadow 0.25s ease; }
         .tl-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
         .tl-body { padding: 20px 24px 24px; }
         .tl-time { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-ink); margin-bottom: 8px; }
         .tl-card h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.28rem; font-weight: 700; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 8px; }
         .tl-card p { font-size: 0.94rem; color: var(--ink-2); max-width: 56ch; }
         .tl-card p a { color: var(--brand-ink); font-weight: 600; }
-        .tl-photo { position: relative; aspect-ratio: 3 / 2; overflow: hidden; background: linear-gradient(140deg, rgba(47, 86, 207, 0.12), rgba(47, 86, 207, 0.04)); }
-        .tl-photo::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 78% 18%, rgba(255, 255, 255, 0.55), transparent 55%); }
+        .tl-photo { position: relative; aspect-ratio: 3 / 2; overflow: hidden; background: rgba(29, 111, 165, 0.08); }
         .tl-photo::after { content: attr(data-year); position: absolute; right: 14px; bottom: 2px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(3.4rem, 8vw, 5rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: rgba(22, 36, 58, 0.10); }
         .tl-photo.has-img { aspect-ratio: auto; display: flex; align-items: center; justify-content: center; padding: 0; }
         .tl-photo.has-img picture { display: block; max-width: 100%; }
         .tl-photo img { display: block; width: auto; max-width: 100%; height: auto; max-height: 560px; margin: 0 auto; }
         .tl-photo.has-img::before, .tl-photo.has-img::after { display: none; }
-        .tl-photo[data-era="sporting"] { background: linear-gradient(140deg, rgba(46, 139, 87, 0.16), rgba(46, 139, 87, 0.04)); }
-        .tl-photo[data-era="united"] { background: linear-gradient(140deg, rgba(192, 57, 43, 0.14), rgba(192, 57, 43, 0.04)); }
-        .tl-photo[data-era="madrid"] { background: linear-gradient(140deg, rgba(47, 86, 207, 0.14), rgba(214, 178, 80, 0.08)); }
-        .tl-photo[data-era="juventus"] { background: linear-gradient(140deg, rgba(22, 36, 58, 0.16), rgba(22, 36, 58, 0.04)); }
-        .tl-photo[data-era="alnassr"] { background: linear-gradient(140deg, rgba(214, 158, 46, 0.18), rgba(214, 158, 46, 0.05)); }
+        .tl-photo[data-era="sporting"] { background: rgba(46, 139, 87, 0.10); }
+        .tl-photo[data-era="united"] { background: rgba(192, 57, 43, 0.09); }
+        .tl-photo[data-era="madrid"] { background: rgba(29, 111, 165, 0.10); }
+        .tl-photo[data-era="juventus"] { background: rgba(22, 36, 58, 0.10); }
+        .tl-photo[data-era="alnassr"] { background: rgba(214, 158, 46, 0.12); }
         .milestone.feature .tl-photo { aspect-ratio: 16 / 9; }
         .milestone.feature .tl-card { box-shadow: var(--shadow-md); }
         .milestone.feature h4 { font-size: 1.55rem; }
@@ -1943,7 +1918,7 @@
         .tljs .tl-reveal.in { opacity: 1; transform: none; }
         .main p a, .main li a { color: var(--brand-ink); font-weight: 600; }
         .main p a:not(.plain), .main li a:not(.plain) { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
-        .keydates { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 0 34px; background: var(--surface); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: var(--r-xl); padding: 10px 30px 22px; box-shadow: var(--shadow-md); }
+        .keydates { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 0 34px; background: var(--surface); border: 1px solid var(--glass-border); border-radius: var(--r-xl); padding: 10px 30px 22px; box-shadow: var(--shadow-md); }
         .keydates li { display: grid; grid-template-columns: 122px 1fr; gap: 16px; align-items: baseline; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 0.92rem; color: var(--ink-2); }
         .kd-date { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--brand-ink); font-variant-numeric: tabular-nums lining-nums; }
         .keydates b { color: var(--ink); font-weight: 700; }
@@ -2033,7 +2008,7 @@
         .ach-filter-tab .count { background: var(--brand-soft); color: var(--brand-ink); padding: 2px 9px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; }
         .ach-filter-tab.active .count { background: var(--brand); color: #fff; }
         .achievements { display: flex; flex-direction: column; gap: 12px; }
-        .accordion { background: var(--surface); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-sm); transition: box-shadow 0.2s ease, transform 0.2s ease; }
+        .accordion { background: var(--surface); border: 1px solid var(--glass-border); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-sm); transition: box-shadow 0.2s ease, transform 0.2s ease; }
         .accordion:hover { box-shadow: var(--shadow-md); }
         .accordion-heading { margin: 0; font: inherit; font-weight: inherit; }
         .accordion-header { display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; padding: 18px 24px; border: none; background: transparent; font: inherit; color: inherit; text-align: left; cursor: pointer; user-select: none; transition: background 0.2s ease; }
@@ -2115,23 +2090,7 @@
         .milestone.feature { z-index: 2; }
         .milestone.feature .tl-card { background: var(--surface-strong); }
 
-        /* The page gradient sits on its own fixed layer. It used
-           background-attachment: fixed, which iOS Safari ignores, so on a
-           phone the gradient stretched over the whole length of the page and
-           read as flat. Two faint glows, brand blue and Madrid gold, give the
-           glass cards something to frost. */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            pointer-events: none;
-            background:
-                radial-gradient(1100px 620px at 88% -8%, rgba(47, 86, 207, 0.13), transparent 62%),
-                radial-gradient(900px 560px at -6% 104%, rgba(214, 178, 80, 0.10), transparent 60%),
-                linear-gradient(150deg, var(--bg-start) 0%, var(--bg-end) 100%);
-        }
-        ::selection { background: rgba(47, 86, 207, 0.18); }
+        ::selection { background: rgba(29, 111, 165, 0.18); }
 
         .page-title { font-size: clamp(2rem, 1.35rem + 2.3vw, 3rem); letter-spacing: -0.03em; }
 
@@ -2180,8 +2139,6 @@
             padding: 0 15px;
             border-radius: 999px;
             background: var(--surface);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
             border: 1px solid var(--glass-border);
             box-shadow: var(--shadow-sm);
             font-size: 0.84rem;
@@ -2193,7 +2150,7 @@
         }
         .jump-nav li a:hover {
             color: var(--brand-ink);
-            border-color: rgba(47, 86, 207, 0.35);
+            border-color: rgba(29, 111, 165, 0.35);
             box-shadow: var(--shadow-md);
             transform: translateY(-1px);
             text-decoration: none;
@@ -2215,7 +2172,7 @@
             background: var(--hero-grad);
             color: #fff;
             cursor: pointer;
-            box-shadow: 0 10px 26px rgba(31, 58, 138, 0.32);
+            box-shadow: 0 10px 26px rgba(27, 51, 88, 0.32);
             opacity: 0;
             visibility: hidden;
             transform: translateY(12px);
@@ -2223,7 +2180,7 @@
         }
         .to-top svg { width: 20px; height: 20px; }
         .to-top.show { opacity: 1; visibility: visible; transform: none; }
-        .to-top.show:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(31, 58, 138, 0.4); }
+        .to-top.show:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(27, 51, 88, 0.4); }
 
         @media (max-width: 768px) {
             .main [id] { scroll-margin-top: 80px; }
@@ -2326,9 +2283,7 @@
             border-radius: var(--r-lg);
             border: 1px solid var(--glass-border);
             box-shadow: var(--shadow-sm);
-            background: linear-gradient(135deg, rgba(47, 86, 207, 0.09), rgba(47, 86, 207, 0.02)), var(--surface);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
+            background: var(--surface);
         }
         .feedback-text { flex: 1 1 380px; min-width: 0; }
         .feedback h2 {
@@ -2357,11 +2312,7 @@
             border-radius: var(--r-xl);
             border: 1px solid var(--glass-border);
             box-shadow: var(--shadow-md);
-            background:
-                radial-gradient(360px 300px at 14% 50%, rgba(214, 178, 80, 0.22), transparent 70%),
-                var(--surface);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
+            background: var(--surface);
         }
         .bd-trophy { margin: 0; }
         .bd-trophy img {
@@ -2634,7 +2585,7 @@
                 padding: calc(18px + env(safe-area-inset-top, 0px)) 14px calc(20px + env(safe-area-inset-bottom, 0px));
                 padding-left: calc(14px + env(safe-area-inset-left, 0px));
                 align-items: stretch;
-                background: rgba(255, 255, 255, 0.95);
+                background: var(--sidebar-bg);
                 transform: translateX(-100%);
                 visibility: hidden;
                 box-shadow: none;
@@ -2717,6 +2668,16 @@
             }
             .nav-item.active .nav-label { font-weight: 700; }
         }
+        /* The sidebar is navy, so its links, edges and close button are light.
+           This sits last so it also wins over the drawer rules for phones. */
+        .sidebar { border-right-color: rgba(255, 255, 255, 0.06); }
+        .sidebar-logo { background: var(--brand); box-shadow: none; }
+        .nav-item { color: #b8c4d9; }
+        .nav-item:hover { background: rgba(255, 255, 255, 0.08); color: #ffffff; }
+        .nav-item.active { background: rgba(255, 255, 255, 0.12); color: #ffffff; box-shadow: none; }
+        .nav-item.active::before { background: #ffffff; }
+        .drawer-head { border-bottom-color: rgba(255, 255, 255, 0.12); }
+        .drawer-close { color: #c9d3e6; background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.12); }
     </style>
 </head>
 <body>
@@ -5122,7 +5083,7 @@
             teamColors: {
                 sporting: 'rgba(46, 139, 87, 0.75)',
                 manutd: 'rgba(192, 57, 43, 0.72)',
-                realmadrid: 'rgba(47, 86, 207, 0.75)',
+                realmadrid: 'rgba(29, 111, 165, 0.75)',
                 juventus: 'rgba(22, 36, 58, 0.80)',
                 alnassr: 'rgba(214, 158, 46, 0.80)'
             },
@@ -5210,13 +5171,13 @@
         const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const fonts = { body: "'DM Sans', sans-serif", display: "'Plus Jakarta Sans', sans-serif" };
         const colors = {
-            barBg: 'rgba(47, 86, 207, 0.50)',
-            barBorder: '#2f56cf',
-            barHover: '#1e3a8a',
+            barBg: 'rgba(29, 111, 165, 0.50)',
+            barBorder: '#1d6fa5',
+            barHover: '#1b3358',
             gridColor: 'rgba(20, 30, 50, 0.06)',
-            textColor: '#56657f',
-            textPrimary: '#16243a',
-            wheel: ['#1e3a8a', '#2f56cf', '#6f8fe0', '#b9c7ec']
+            textColor: '#5d6879',
+            textPrimary: '#1b2433',
+            wheel: ['#1b3358', '#1d6fa5', '#5d9bc9', '#bcd5e8']
         };
         const tooltipStyle = {
             backgroundColor: 'rgba(22, 36, 58, 0.96)',
@@ -5226,27 +5187,8 @@
             cornerRadius: 10
         };
         const axisTicks = { font: { family: fonts.body, size: 12 }, color: colors.textColor };
-        // Bars shade from a light blue at the base to brand navy at the far end of
-        // the axis, so a longer bar reads darker as well as longer. The gradient
-        // spans the whole plot area and is rebuilt only when that area resizes.
-        function barGradient(axis) {
-            let cache = null, key = '';
-            return context => {
-                const area = context.chart.chartArea;
-                if (!area) return colors.barBg;
-                const k = area.left + ',' + area.top + ',' + area.right + ',' + area.bottom;
-                if (k !== key) {
-                    const c = context.chart.ctx;
-                    cache = axis === 'x' ? c.createLinearGradient(area.left, 0, area.right, 0)
-                                         : c.createLinearGradient(0, area.bottom, 0, area.top);
-                    cache.addColorStop(0, '#8aa4ea');
-                    cache.addColorStop(0.55, '#2f56cf');
-                    cache.addColorStop(1, '#1e3a8a');
-                    key = k;
-                }
-                return cache;
-            };
-        }
+        // Bars are one solid brand blue from end to end, so length alone shows the value.
+        const BAR_COLOUR = '#1d6fa5';
         const axisTicksInk = { font: { family: fonts.body, size: 12 }, color: colors.textPrimary };
 
         let currentTeam = 'all';
@@ -5320,7 +5262,7 @@
                 datasets: [{
                     label: 'Goals',
                     data: [],
-                    backgroundColor: barGradient('x'),
+                    backgroundColor: BAR_COLOUR,
                     hoverBackgroundColor: colors.barHover,
                     borderWidth: 0,
                     borderRadius: 6,
@@ -5409,7 +5351,7 @@
                     type: 'bar',
                     data: {
                         labels: DATA.portugalYears.map(row => row[0]),
-                        datasets: [{ label: 'Goals', data: DATA.portugalYears.map(row => row[1]), backgroundColor: barGradient('y'), hoverBackgroundColor: colors.barHover, borderWidth: 0, borderRadius: 5, maxBarThickness: 34 }]
+                        datasets: [{ label: 'Goals', data: DATA.portugalYears.map(row => row[1]), backgroundColor: BAR_COLOUR, hoverBackgroundColor: colors.barHover, borderWidth: 0, borderRadius: 5, maxBarThickness: 34 }]
                     },
                     options: Object.assign(JSON.parse(JSON.stringify(base)), {
                         plugins: { legend: { display: false }, tooltip: Object.assign({}, tooltipStyle, { callbacks: { label: ctx => ctx.parsed.y + ' goals' } }) }
@@ -5422,7 +5364,7 @@
                     type: 'bar',
                     data: {
                         labels: rows.map(row => row[0]),
-                        datasets: [{ label: 'Goals', data: rows.map(row => row[1]), backgroundColor: barGradient('y'), hoverBackgroundColor: colors.barHover, borderWidth: 0, borderRadius: 5, maxBarThickness: 34 }]
+                        datasets: [{ label: 'Goals', data: rows.map(row => row[1]), backgroundColor: BAR_COLOUR, hoverBackgroundColor: colors.barHover, borderWidth: 0, borderRadius: 5, maxBarThickness: 34 }]
                     },
                     options: Object.assign(JSON.parse(JSON.stringify(base)), {
                         plugins: { legend: { display: false }, tooltip: Object.assign({}, tooltipStyle, { callbacks: { label: ctx => ctx.parsed.y + ' goals' } }) }
@@ -5444,7 +5386,7 @@
                 datasets: [{
                     label: 'Goals',
                     data: currentOppRows.map(row => row[1]),
-                    backgroundColor: barGradient('x'),
+                    backgroundColor: BAR_COLOUR,
                     hoverBackgroundColor: colors.barHover,
                     borderWidth: 0,
                     borderRadius: 6,
@@ -5653,13 +5595,13 @@
             // every year in the same tint, so the bars sit behind the cumulative
             // line without any one of them singled out
             return {
-                barBg: isDark ? 'rgba(111, 151, 240, 0.42)' : 'rgba(47, 86, 207, 0.38)',
-                barBorder: isDark ? '#6f97f0' : '#2f56cf',
-                lineColor: isDark ? '#bcd0fa' : '#1e3a8a',
-                lineFill: isDark ? 'rgba(111, 151, 240, 0.15)' : 'rgba(30, 58, 138, 0.08)',
+                barBg: isDark ? 'rgba(111, 151, 240, 0.42)' : 'rgba(29, 111, 165, 0.38)',
+                barBorder: isDark ? '#6f97f0' : '#1d6fa5',
+                lineColor: isDark ? '#bcd0fa' : '#1b3358',
+                lineFill: isDark ? 'rgba(111, 151, 240, 0.15)' : 'rgba(27, 51, 88, 0.08)',
                 gridColor: isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(20, 30, 50, 0.06)',
-                textColor: isDark ? '#a6b3c6' : '#56657f',
-                textPrimary: isDark ? '#e9eef6' : '#16243a'
+                textColor: isDark ? '#a6b3c6' : '#5d6879',
+                textPrimary: isDark ? '#e9eef6' : '#1b2433'
             };
         }
 
