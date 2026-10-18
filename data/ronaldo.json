@@ -2282,9 +2282,10 @@
         "id": "psg",
         "name": "Paris Saint Germain",
         "years": "2021 to 2023",
-        "apps": 75,
         "goals": 32,
-        "hattricks": 0
+        "hattricks": 0,
+        "joined": "2021-08-10",
+        "apps": 75
       },
       {
         "id": "intermiami",

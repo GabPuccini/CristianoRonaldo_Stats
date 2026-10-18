@@ -395,6 +395,19 @@ def questions(data, R, M):
           f"{total('goals')} goals in {total('apps')} club games in those seasons. He played as a forward from "
           f"his move to Real Madrid in {madrid[:4]} and scored {R['rm_goals']:,} goals in "
           f"{R['rm_apps']:,} games for them.")
+    # his second Manchester United spell, and Messi's move to Ligue 1 the same
+    # summer; the UEFA league rankings are fixed history
+    back = sorted({r["season"] for r in rows if r["team"] == "manutd" and r["season"] > madrid})
+    moves = data["transfers"]
+    joined = next(dt.date.fromisoformat(t["date"]) for t in moves if t["to"] == "manutd" and t["season"] == back[0])
+    left = next(dt.date.fromisoformat(t["date"]) for t in moves if t["from"] == "manutd" and t["season"] == back[-1])
+    ages = sorted({_age(R["born"], joined), _age(R["born"], left)})
+    psg = next(t for t in data["messi"]["teams"] if t["id"] == "psg")
+    psg_joined = dt.date.fromisoformat(psg["joined"])
+    a += (f" Ronaldo returned to the Premier League with Manchester United for {series(back)}, aged "
+          f"{series(map(str, ages))}, when it was again first in UEFA's league rankings. Messi moved to "
+          f"Ligue 1 with Paris Saint Germain in {psg_joined.year}, aged {_age(M['born'], psg_joined)}, "
+          f"when it was fifth.")
     qs.append(("Who has the better goals per game record?", a))
 
     qs.append(("Who has more assists?", most(
