@@ -251,16 +251,30 @@
            first paint no longer waits on a connection to a second server.
            Each family is one variable font per character set, cut down to the
            weights the site uses; a browser fetches the latin-ext file only for
-           a character outside latin. The latin files are preloaded and
-           optional: a font that is not ready for the first paint is skipped
-           for that visit rather than swapped in later, which moved the text
-           and counted against Core Web Vitals. */
-        @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 400 700; font-display: optional; src: url(/fonts/dm-sans-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-        @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 400 700; font-display: optional; src: url(/fonts/dm-sans-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-        @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 500 800; font-display: optional; src: url(/fonts/plus-jakarta-sans-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-        @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 500 800; font-display: optional; src: url(/fonts/plus-jakarta-sans-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
-        @font-face { font-family: 'Source Sans 3'; font-style: normal; font-weight: 400 700; font-display: optional; src: url(/fonts/source-sans-3-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-        @font-face { font-family: 'Source Sans 3'; font-style: normal; font-weight: 400 700; font-display: optional; src: url(/fonts/source-sans-3-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+           a character outside latin. The latin files are preloaded, and every
+           browser swaps the real font in when it arrives. */
+        @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 400 700; font-display: swap; src: url(/fonts/dm-sans-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+        @font-face { font-family: 'DM Sans'; font-style: normal; font-weight: 400 700; font-display: swap; src: url(/fonts/dm-sans-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+        @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 500 800; font-display: swap; src: url(/fonts/plus-jakarta-sans-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+        @font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 500 800; font-display: swap; src: url(/fonts/plus-jakarta-sans-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+        @font-face { font-family: 'Source Sans 3'; font-style: normal; font-weight: 400 700; font-display: swap; src: url(/fonts/source-sans-3-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+        @font-face { font-family: 'Source Sans 3'; font-style: normal; font-weight: 400 700; font-display: swap; src: url(/fonts/source-sans-3-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+        /* Until a font arrives, text is drawn in Arial, or Roboto on Android,
+           scaled to the real font's width and line metrics, so swapping the
+           real font in does not move the text. The figures were measured with
+           fontTools against the site's own text, regular and bold. */
+        @font-face { font-family: 'DM Sans Arial'; src: local('Arial'), local('ArialMT'); font-weight: 400; size-adjust: 102.62%; ascent-override: 96.67%; descent-override: 30.21%; line-gap-override: 0%; }
+        @font-face { font-family: 'DM Sans Arial'; src: local('Arial Bold'), local('Arial-BoldMT'); font-weight: 700; size-adjust: 101.53%; ascent-override: 97.71%; descent-override: 30.53%; line-gap-override: 0%; }
+        @font-face { font-family: 'DM Sans Roboto'; src: local('Roboto'), local('Roboto-Regular'), local('Roboto Regular'); font-weight: 400; size-adjust: 103.43%; ascent-override: 95.91%; descent-override: 29.97%; line-gap-override: 0%; }
+        @font-face { font-family: 'DM Sans Roboto'; src: local('Roboto Bold'), local('Roboto-Bold'); font-weight: 700; size-adjust: 106.83%; ascent-override: 92.86%; descent-override: 29.02%; line-gap-override: 0%; }
+        @font-face { font-family: 'Plus Jakarta Sans Arial'; src: local('Arial'), local('ArialMT'); font-weight: 400; size-adjust: 103.88%; ascent-override: 99.92%; descent-override: 21.37%; line-gap-override: 0%; }
+        @font-face { font-family: 'Plus Jakarta Sans Arial'; src: local('Arial Bold'), local('Arial-BoldMT'); font-weight: 700; size-adjust: 99.95%; ascent-override: 103.85%; descent-override: 22.21%; line-gap-override: 0%; }
+        @font-face { font-family: 'Plus Jakarta Sans Roboto'; src: local('Roboto'), local('Roboto-Regular'), local('Roboto Regular'); font-weight: 400; size-adjust: 104.7%; ascent-override: 99.14%; descent-override: 21.2%; line-gap-override: 0%; }
+        @font-face { font-family: 'Plus Jakarta Sans Roboto'; src: local('Roboto Bold'), local('Roboto-Bold'); font-weight: 700; size-adjust: 105.17%; ascent-override: 98.7%; descent-override: 21.11%; line-gap-override: 0%; }
+        @font-face { font-family: 'Source Sans 3 Arial'; src: local('Arial'), local('ArialMT'); font-weight: 400; size-adjust: 91.54%; ascent-override: 111.86%; descent-override: 43.69%; line-gap-override: 0%; }
+        @font-face { font-family: 'Source Sans 3 Arial'; src: local('Arial Bold'), local('Arial-BoldMT'); font-weight: 700; size-adjust: 91.29%; ascent-override: 112.17%; descent-override: 43.81%; line-gap-override: 0%; }
+        @font-face { font-family: 'Source Sans 3 Roboto'; src: local('Roboto'), local('Roboto-Regular'), local('Roboto Regular'); font-weight: 400; size-adjust: 92.27%; ascent-override: 110.98%; descent-override: 43.35%; line-gap-override: 0%; }
+        @font-face { font-family: 'Source Sans 3 Roboto'; src: local('Roboto Bold'), local('Roboto-Bold'); font-weight: 700; size-adjust: 96.06%; ascent-override: 106.6%; descent-override: 41.64%; line-gap-override: 0%; }
 
         /* The home page's menu on the left, then boxed sections with dark title
            strips and dense comparison tables in one column. Same palette as the
@@ -285,8 +299,8 @@
             --menu-ink: #b8c4d9;
             --sidebar-w: 220px;
             --sidebar-expanded: 248px;
-            --font: 'Source Sans 3', 'Source Sans Pro', Arial, Helvetica, sans-serif;
-            --menu-font: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font: 'Source Sans 3', 'Source Sans Pro', 'Source Sans 3 Arial', 'Source Sans 3 Roboto', Arial, Helvetica, sans-serif;
+            --menu-font: 'DM Sans', 'DM Sans Arial', 'DM Sans Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
         }
         @media (prefers-color-scheme: dark) {
             :root:not([data-theme="light"]) {
@@ -314,7 +328,7 @@
            being read marked as the page scrolls. On a phone it is the same
            drawer, opened from the button in the corner. */
         .sidebar { position: fixed; left: 0; top: 0; width: var(--sidebar-w); height: 100vh; background: var(--menu); border-right: 1px solid rgba(255, 255, 255, 0.06); display: flex; flex-direction: column; padding: 22px 14px; z-index: 100; font-family: var(--menu-font); }
-        .sidebar-logo { width: 46px; height: 46px; flex-shrink: 0; background: var(--button); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #fff; font-family: 'Plus Jakarta Sans', var(--menu-font); font-weight: 800; font-size: .95rem; letter-spacing: .02em; margin-bottom: 30px; }
+        .sidebar-logo { width: 46px; height: 46px; flex-shrink: 0; background: var(--button); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #fff; font-family: 'Plus Jakarta Sans', 'Plus Jakarta Sans Arial', 'Plus Jakarta Sans Roboto', var(--menu-font); font-weight: 800; font-size: .95rem; letter-spacing: .02em; margin-bottom: 30px; }
         .sidebar-logo:hover { text-decoration: none; }
         .sidebar-nav { position: relative; display: flex; flex-direction: column; gap: 8px; padding: 0 14px; flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.18) transparent; }
         .nav-item { position: relative; flex-shrink: 0; min-height: 44px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; color: var(--menu-ink); transition: background .2s ease, color .2s ease; }

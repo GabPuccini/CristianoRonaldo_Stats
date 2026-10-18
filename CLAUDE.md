@@ -444,9 +444,17 @@ intro paragraph under the title, and three things held it back, all fixed:
   Jakarta Sans cut down with fontTools to the weights in use (400 to 700 and
   500 to 800). Never link Google Fonts again.
 * **Font swapping.** The latin files are preloaded and use
-  `font-display: optional`: a font not ready for the first paint is skipped
-  for that visit instead of swapped in later, which rewrapped the text and
-  would have counted as layout shift. Repeat visits always get it from cache.
+  `font-display: swap`, so every browser ends up with the real font. Until it
+  arrives, text is drawn in a stand in font scaled to the real one's width and
+  line metrics: `@font-face` rules such as `'DM Sans Arial'` and
+  `'DM Sans Roboto'`, using the device's own Arial (computers, iPhone) or
+  Roboto (Android) with `size-adjust` and the ascent, descent and line gap
+  overrides. Each family's stack lists them straight after the real font, so
+  the swap moves nothing. The figures were measured with fontTools against
+  the site's own text; recompute them if a font or its weights change.
+  `font-display: optional` was tried first and removed: browsers other than
+  Chrome often skipped the real font for the whole visit, and the pages looked
+  worse.
 
 The Messi vs Ronaldo page's LCP element is its chess photo, served through
 `srcset` at 800, 1200 and 1600 pixels wide so a phone fetches a small one; a
