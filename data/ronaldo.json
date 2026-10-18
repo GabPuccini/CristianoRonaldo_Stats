@@ -1747,6 +1747,13 @@
         "count": 5
       },
       {
+        "name": "FIFA World Player of the Year",
+        "years": [
+          "2008"
+        ],
+        "count": 1
+      },
+      {
         "name": "The Best FIFA Men's Player",
         "years": [
           "2016",
@@ -1755,14 +1762,18 @@
         "count": 2
       },
       {
-        "name": "European Golden Shoe",
+        "name": "The Best FIFA Special Award for Outstanding Career Achievement",
         "years": [
-          "2007/08",
-          "2010/11",
-          "2013/14",
-          "2014/15"
+          "2021"
         ],
-        "count": 4
+        "count": 1
+      },
+      {
+        "name": "UEFA Club Footballer of the Year",
+        "years": [
+          "2007/08"
+        ],
+        "count": 1
       },
       {
         "name": "UEFA Men's Player of the Year",
@@ -1772,6 +1783,27 @@
           "2016/17"
         ],
         "count": 3
+      },
+      {
+        "name": "UEFA Champions League All Time Top Scorer Award",
+        "years": [
+          "2024"
+        ],
+        "count": 1
+      },
+      {
+        "name": "FIFA Puskas Award",
+        "years": [
+          "2009"
+        ],
+        "count": 1
+      },
+      {
+        "name": "FIFA Club World Cup Golden Ball",
+        "years": [
+          "2016"
+        ],
+        "count": 1
       },
       {
         "name": "UEFA Champions League top scorer",
@@ -1787,12 +1819,66 @@
         "count": 7
       },
       {
+        "name": "European Golden Shoe",
+        "years": [
+          "2007/08",
+          "2010/11",
+          "2013/14",
+          "2014/15"
+        ],
+        "count": 4
+      },
+      {
+        "name": "UEFA European Championship All Time XI",
+        "years": [
+          "2016"
+        ],
+        "count": 1
+      },
+      {
+        "name": "UEFA European Championship Golden Boot",
+        "years": [
+          "2020"
+        ],
+        "count": 1
+      },
+      {
+        "name": "UEFA Nations League Finals top scorer",
+        "years": [
+          "2019",
+          "2025 (shared)"
+        ],
+        "count": 2
+      },
+      {
         "name": "Premier League Player of the Season",
         "years": [
           "2006/07",
           "2007/08"
         ],
         "count": 2
+      },
+      {
+        "name": "La Liga Best Player",
+        "years": [
+          "2013/14"
+        ],
+        "count": 1
+      },
+      {
+        "name": "Serie A Footballer of the Year",
+        "years": [
+          "2019",
+          "2020"
+        ],
+        "count": 2
+      },
+      {
+        "name": "Premier League Golden Boot",
+        "years": [
+          "2007/08"
+        ],
+        "count": 1
       },
       {
         "name": "Pichichi Trophy",
@@ -1804,11 +1890,79 @@
         "count": 3
       },
       {
+        "name": "Capocannoniere",
+        "years": [
+          "2020/21"
+        ],
+        "count": 1
+      },
+      {
+        "name": "Saudi Pro League Golden Boot",
+        "years": [
+          "2023/24",
+          "2024/25"
+        ],
+        "count": 2
+      },
+      {
+        "name": "Golden Foot",
+        "years": [
+          "2020"
+        ],
+        "count": 1
+      },
+      {
+        "name": "Globe Soccer Player of the Century",
+        "years": [
+          "2020"
+        ],
+        "count": 1
+      },
+      {
+        "name": "Primeira Liga Best Player of All Time",
+        "years": [
+          "2025"
+        ],
+        "count": 1
+      },
+      {
+        "name": "Ballon d'Or Dream Team",
+        "years": [
+          "2020"
+        ],
+        "count": 1
+      },
+      {
         "name": "FIFA FIFPro World 11",
         "years": [
           "2007 to 2021"
         ],
         "count": 15
+      },
+      {
+        "name": "Portuguese Sportsman of the Year",
+        "years": [
+          "2011",
+          "2012",
+          "2014",
+          "2015",
+          "2016",
+          "2017",
+          "2018",
+          "2019"
+        ],
+        "count": 8
+      },
+      {
+        "name": "FPF Portuguese Player of the Year",
+        "years": [
+          "2015",
+          "2016",
+          "2017",
+          "2018",
+          "2019"
+        ],
+        "count": 5
       }
     ],
     "individual_floor": 50
