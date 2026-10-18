@@ -424,11 +424,14 @@ under individual honours.
 
 `messi-vs-ronaldo.html` compares the two careers side by side, Ronaldo on the
 left and Messi on the right, and exists to rank for "Messi vs Ronaldo" and
-"Messi vs Ronaldo stats" searches. It is laid out after Transfermarkt rather
-than like the home page, on purpose: a navy top bar in place of the sidebar,
-boxes with navy title strips and 12px rounded corners, dense tables, a main
-column and a side column, Source Sans 3 for type, and a dark mode. The palette
-is the home page's. The top bar repeats the home page's navigation in full.
+"Messi vs Ronaldo stats" searches. It carries the home page's menu, the same
+navy sidebar and drawer with the site's chapters, and lists this page's own
+sections under its item, marking the one being read as the page scrolls. The
+content is one column of boxes with navy title strips and 12px rounded
+corners, dense comparison tables, Source Sans 3 for the text, the home page's
+palette, and a dark mode. It began as a preview in the style of Transfermarkt;
+keep it from drifting back towards a copy of their layout, so no top bar of
+links and no side column of boxes.
 
 Its address is `https://ronaldostats.app/messi-vs-ronaldo`, without `.html`:
 the host serves the file there, and the canonical, the JSON-LD, the sitemap,
@@ -438,7 +441,7 @@ search engines at the clean one; a Cloudflare Redirect Rule sending
 `/messi-vs-ronaldo.html` to `/messi-vs-ronaldo` with a 301 makes that explicit.
 
 Almost all of it is written by `scripts/messi_vs_ronaldo.py`, region by region
-(`mvr.*`): the profiles, the 18 questions and answers, every comparison table,
+(`mvr.*`): the profiles, the questions and answers, every comparison table,
 the club and season lists, the trophy lists and the side panel. Change the
 wording of a question or a table there, not in the HTML, which is rewritten on
 every build. Which player leads each row is worked out on every build, so the

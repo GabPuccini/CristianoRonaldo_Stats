@@ -27,7 +27,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,600;9..40,700&family=Plus+Jakarta+Sans:wght@800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Security -->
     <meta name="referrer" content="same-origin">
@@ -92,7 +92,7 @@
                   "name": "Who has the better goals per game record?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Messi, with 0.79 goals per game. Ronaldo averages 0.73."
+                        "text": "Messi, with 0.79 goals per game. Ronaldo averages 0.73. Ronaldo played mainly as a winger in his first seven senior seasons, one with Sporting CP and six with Manchester United in the Premier League, which was first in UEFA's league rankings in 2008 and 2009. He scored 123 goals in 323 club games in those seasons. He played as a forward from his move to Real Madrid in 2009 and scored 450 goals in 438 games for them."
                   }
             },
             {
@@ -116,7 +116,7 @@
                   "name": "Who has won more trophies?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Messi, with 46 senior team trophies. Ronaldo has 35. Messi's total is often given as 48, which adds the 2005 FIFA U20 World Cup and the 2008 Olympic gold, won with Argentina's youth teams."
+                        "text": "Messi, with 46 senior team trophies. Ronaldo has 35."
                   }
             },
             {
@@ -124,7 +124,7 @@
                   "name": "Who has more Champions League titles and goals?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Ronaldo, with 5 UEFA Champions League titles and 140 goals. Messi has 4 titles and 129 goals."
+                        "text": "Ronaldo, with 5 UEFA Champions League titles and 140 goals. Messi has 4 titles and 129 goals. Messi was injured and did not play in the 2006 final, which Barcelona won against Arsenal."
                   }
             },
             {
@@ -140,7 +140,7 @@
                   "name": "Has Ronaldo won the World Cup?",
                   "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "No. Messi won the 2022 FIFA World Cup with Argentina and lost the 2026 final to Spain. Messi has 21 World Cup goals and Ronaldo 11."
+                        "text": "No. Messi won the 2022 FIFA World Cup with Argentina, and lost the 2014 final to Germany and the 2026 final to Spain. Messi has 21 World Cup goals and Ronaldo 11."
                   }
             },
             {
@@ -209,14 +209,6 @@
             },
             {
                   "@type": "Question",
-                  "name": "Who is older and who is taller?",
-                  "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Ronaldo was born on 5 February 1985 and is 41. Messi was born on 24 June 1987 and is 39. Ronaldo is 1.87 m tall and Messi 1.70 m."
-                  }
-            },
-            {
-                  "@type": "Question",
                   "name": "Who is better, Messi or Ronaldo?",
                   "acceptedAnswer": {
                         "@type": "Answer",
@@ -250,9 +242,9 @@
     </script>
 
     <style>
-        /* A reference page after Transfermarkt: a navy bar, boxed sections with
-           dark title strips, dense tables, a main column and a narrow side
-           column. Same palette as the home page; the boxes have rounded corners. */
+        /* The home page's menu on the left, then boxed sections with dark title
+           strips and dense comparison tables in one column. Same palette as the
+           home page; the boxes have rounded corners. */
         :root {
             --page: #e8ebf0;
             --box: #ffffff;
@@ -269,7 +261,12 @@
             --lead: #e2f1e6;
             --lead-ink: #14532d;
             --radius: 12px;
+            --menu: #0f1f3d;
+            --menu-ink: #b8c4d9;
+            --sidebar-w: 220px;
+            --sidebar-expanded: 248px;
             --font: 'Source Sans 3', 'Source Sans Pro', Arial, Helvetica, sans-serif;
+            --menu-font: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
         }
         @media (prefers-color-scheme: dark) {
             :root:not([data-theme="light"]) {
@@ -291,18 +288,31 @@
         a:hover { text-decoration: underline; }
         a:focus-visible, button:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
         .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-        .pad { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-        .inner { max-width: 1160px; margin: 0 auto; }
 
-        /* top bar */
-        .bar { background: var(--bar); color: #fff; }
-        .bar .inner { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; padding-block: 10px; }
-        .brand { color: #fff; font-weight: 700; font-size: 1.12rem; letter-spacing: .01em; }
-        .brand:hover { text-decoration: none; }
-        .nav { display: flex; flex-wrap: wrap; gap: 2px 16px; font-size: .9rem; }
-        .nav a { color: #c9d3e6; padding: 4px 0; border-bottom: 2px solid transparent; }
-        .nav a:hover { color: #fff; text-decoration: none; }
-        .nav a.on { color: #fff; border-bottom-color: #fff; }
+        /* The menu is the home page's: a fixed navy sidebar with the site's
+           chapters, and this page's sections listed under its own item, the one
+           being read marked as the page scrolls. On a phone it is the same
+           drawer, opened from the button in the corner. */
+        .sidebar { position: fixed; left: 0; top: 0; width: var(--sidebar-w); height: 100vh; background: var(--menu); border-right: 1px solid rgba(255, 255, 255, 0.06); display: flex; flex-direction: column; padding: 22px 14px; z-index: 100; font-family: var(--menu-font); }
+        .sidebar-logo { width: 46px; height: 46px; flex-shrink: 0; background: var(--button); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #fff; font-family: 'Plus Jakarta Sans', var(--menu-font); font-weight: 800; font-size: .95rem; letter-spacing: .02em; margin-bottom: 30px; }
+        .sidebar-logo:hover { text-decoration: none; }
+        .sidebar-nav { position: relative; display: flex; flex-direction: column; gap: 8px; padding: 0 14px; flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.18) transparent; }
+        .nav-item { position: relative; flex-shrink: 0; min-height: 44px; padding: 0 14px; border-radius: 14px; display: flex; align-items: center; color: var(--menu-ink); transition: background .2s ease, color .2s ease; }
+        .nav-item:hover { background: rgba(255, 255, 255, 0.08); color: #fff; text-decoration: none; }
+        .nav-item.active { background: rgba(255, 255, 255, 0.12); color: #fff; }
+        .nav-item.active::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 3px; height: 22px; background: #fff; border-radius: 0 3px 3px 0; }
+        .nav-label { font-size: .88rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .nav-sub { display: flex; flex-direction: column; gap: 2px; padding: 0 0 8px 14px; }
+        .nav-sub a { flex-shrink: 0; padding: 5px 12px; border-radius: 10px; color: #8f9db5; font-size: .82rem; font-weight: 600; transition: background .2s ease, color .2s ease; }
+        .nav-sub a:hover { background: rgba(255, 255, 255, 0.08); color: #fff; text-decoration: none; }
+        .nav-sub a.current { background: rgba(255, 255, 255, 0.06); color: #fff; }
+        .sidebar a:focus-visible, .sidebar button:focus-visible { outline-color: #fff; }
+        .drawer-head { display: contents; }
+        .drawer-close { display: none; }
+        .mobile-btn { display: none; position: fixed; top: calc(18px + env(safe-area-inset-top, 0px)); left: calc(18px + env(safe-area-inset-left, 0px)); width: 48px; height: 48px; background: var(--box); border: 1px solid var(--rule); border-radius: 14px; z-index: 200; cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
+        .mobile-btn span { width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
+        .overlay { display: none; position: fixed; inset: 0; background: rgba(8, 14, 24, 0.5); z-index: 90; opacity: 0; pointer-events: none; transition: opacity .3s ease; }
+        .overlay.active { opacity: 1; pointer-events: auto; }
 
         /* title area */
         .crumbs { font-size: .82rem; color: var(--muted); padding-top: 14px; margin: 0; }
@@ -316,9 +326,9 @@
         .hero figcaption { font-size: .78rem; color: var(--muted); padding: 6px 12px; }
 
         /* layout */
-        .cols { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 16px; align-items: start; padding-bottom: 40px; }
+        .page { margin-left: var(--sidebar-w); min-width: 0; }
+        .content { max-width: 1140px; padding: 8px 40px 40px; }
         .main { display: grid; gap: 16px; min-width: 0; }
-        .side { display: grid; gap: 16px; position: sticky; top: 12px; }
 
         /* boxes */
         .box { background: var(--box); border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; min-width: 0; }
@@ -394,26 +404,13 @@
         .qa h3 { font-size: .98rem; margin: 0 0 2px; }
         .qa p { margin: 0; color: var(--ink); }
 
-        /* side column */
-        .toc { display: grid; }
-        .toc a { padding: 7px 14px; border-bottom: 1px solid var(--rule); font-size: .92rem; }
-        .toc a:last-child { border-bottom: 0; }
-        .glance { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
-        .glance td, .glance th { padding: 6px 14px; font-size: .9rem; }
-        .glance thead th { background: var(--zebra); font-size: .76rem; color: var(--muted); text-align: right; }
-        .glance thead th:first-child { text-align: left; }
-        .glance tbody th { text-align: left; font-weight: 400; color: var(--muted); }
-        .glance td { text-align: right; font-weight: 700; }
-        .glance tbody tr + tr > * { border-top: 1px solid var(--rule); }
-
         .notes { padding: 10px 14px; font-size: .86rem; color: var(--muted); }
         .notes p { margin: 0 0 6px; }
         .notes ul { margin: 4px 0 0; padding-left: 18px; }
         .notes li { margin: 2px 0; }
 
-        footer { background: var(--bar); color: #9fb0cc; font-size: .82rem; }
-        footer .inner { padding-block: 16px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; }
-        footer a { color: #c9d3e6; }
+        .foot { max-width: 1140px; padding: 0 40px 32px; }
+        .foot div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; padding-top: 16px; border-top: 1px solid var(--rule); color: var(--muted); font-size: .82rem; }
 
         /* cookie banner */
         .cookie-banner { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: var(--box); border: 1px solid var(--rule); border-radius: var(--radius); padding: 14px 18px; box-shadow: 0 10px 30px rgba(15, 31, 61, 0.18); display: flex; align-items: center; gap: 16px; z-index: 1000; max-width: 560px; width: calc(100% - 32px); transition: transform .35s ease, opacity .35s ease; }
@@ -425,12 +422,23 @@
         .cookie-accept { background: var(--button); color: #fff; border: 0; }
         .cookie-reject { background: transparent; color: var(--ink); border: 1px solid var(--rule); }
 
-        @media (max-width: 900px) {
-            .cols { grid-template-columns: 1fr; }
-            .side { position: static; order: -1; }
-            .toc { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
-            .toc a { border-right: 1px solid var(--rule); }
-            .glancebox { display: none; }
+        @media (max-width: 768px) {
+            .mobile-btn { display: flex; }
+            .mobile-btn.active { opacity: 0; visibility: hidden; pointer-events: none; }
+            .overlay { display: block; z-index: 1100; }
+            .page { margin-left: 0; }
+            .content, .foot { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+            .content { padding-top: 84px; }
+            .sidebar { z-index: 1200; width: min(var(--sidebar-expanded), 82vw); padding: calc(18px + env(safe-area-inset-top, 0px)) 14px calc(20px + env(safe-area-inset-bottom, 0px)); padding-left: calc(14px + env(safe-area-inset-left, 0px)); transform: translateX(-100%); visibility: hidden; transition: transform .32s cubic-bezier(.4,0,.2,1), visibility 0s linear .32s; }
+            .sidebar.active { transform: translateX(0); visibility: visible; transition: transform .32s cubic-bezier(.4,0,.2,1), visibility 0s linear 0s; box-shadow: 16px 0 50px rgba(20, 35, 70, 0.20); }
+            .drawer-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 20px; padding-bottom: 18px; border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+            .sidebar-logo { margin: 0; }
+            .drawer-close { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; flex-shrink: 0; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 13px; background: rgba(255, 255, 255, 0.06); color: #c9d3e6; cursor: pointer; }
+            .drawer-close svg { width: 20px; height: 20px; }
+            .sidebar-nav { gap: 4px; padding: 0; overscroll-behavior: contain; }
+            .nav-item { min-height: 52px; padding: 0 14px 0 18px; }
+            .nav-label { font-size: .95rem; white-space: normal; }
+            .nav-sub a { padding: 8px 12px; font-size: .9rem; }
         }
         @media (max-width: 640px) {
             h1 { font-size: 1.5rem; }
@@ -450,30 +458,55 @@
         }
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
-            .cookie-banner { transition: none; }
+            .cookie-banner, .sidebar, .overlay { transition: none !important; }
         }
     </style>
 </head>
 <body>
-    <header class="bar pad" id="top">
-        <div class="inner">
-            <a class="brand" href="/">ronaldostats.app</a>
-            <nav class="nav" aria-label="Primary">
-                <a href="/">Home</a>
-                <a href="/#goalsbyyear">Goals by Year</a>
-                <a href="/#goalsbyseason">Goals by Season</a>
-                <a href="/#dashboard">Dashboard</a>
-                <a href="/#ballondor">Ballon d'Or</a>
-                <a href="/#timeline">Through the Years</a>
-                <a href="/#transfers">Transfers</a>
-                <a href="/#achievements">Achievements</a>
-                <a class="on" href="/messi-vs-ronaldo" aria-current="page">Messi vs Ronaldo</a>
-            </nav>
-        </div>
-    </header>
+    <!-- Mobile menu -->
+    <button class="mobile-btn" id="mobileBtn" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar">
+        <span></span><span></span><span></span>
+    </button>
+    <div class="overlay" id="overlay"></div>
 
-    <main class="pad">
-        <div class="inner">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="drawer-head">
+            <a href="/" class="sidebar-logo" aria-label="Home">CR7</a>
+            <button type="button" class="drawer-close" id="drawerClose" aria-label="Close navigation">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <nav class="sidebar-nav" aria-label="Primary">
+            <a href="/" class="nav-item"><span class="nav-label">Home</span></a>
+            <a href="/#goalsbyyear" class="nav-item"><span class="nav-label">Goals by Year</span></a>
+            <a href="/#goalsbyseason" class="nav-item"><span class="nav-label">Goals by Season</span></a>
+            <a href="/#dashboard" class="nav-item"><span class="nav-label">Dashboard</span></a>
+            <a href="/#ballondor" class="nav-item"><span class="nav-label">Ballon d'Or</span></a>
+            <a href="/#timeline" class="nav-item"><span class="nav-label">Through the Years</span></a>
+            <a href="/#transfers" class="nav-item"><span class="nav-label">Transfers</span></a>
+            <a href="/#achievements" class="nav-item"><span class="nav-label">Achievements</span></a>
+            <a href="/messi-vs-ronaldo" class="nav-item active" aria-current="page"><span class="nav-label">Messi vs Ronaldo</span></a>
+            <div class="nav-sub" role="group" aria-label="On this page">
+                <a href="#questions">Questions</a>
+                <a href="#totals">Career totals</a>
+                <a href="#trophies">Trophies</a>
+                <a href="#awards">Individual awards</a>
+                <a href="#ballondor">Ballon d'Or</a>
+                <a href="#headtohead">Head to head</a>
+                <a href="#context">Context</a>
+                <a href="#international">International</a>
+                <a href="#seasons">Best seasons</a>
+                <a href="#clubs">Clubs</a>
+                <a href="#byseason">By season</a>
+                <a href="#trophylist">Trophy list</a>
+                <a href="#notes">Notes</a>
+            </div>
+        </nav>
+    </aside>
+
+    <div class="page" id="top">
+        <main class="content">
             <p class="crumbs"><a href="/">Home</a> / Messi vs Ronaldo</p>
             <div class="title">
                 <h1>Messi vs Ronaldo</h1>
@@ -492,7 +525,6 @@ Ronaldo as of 12 October 2026. Messi as of 17 October 2026.
                 <figcaption>Lionel Messi and Cristiano Ronaldo, Louis Vuitton campaign, 2022. Photograph by Annie Leibovitz.</figcaption>
             </figure>
 
-            <div class="cols">
                 <div class="main">
                     <section class="box" aria-label="Players">
                     <!-- STATS:BEGIN mvr.players -->
@@ -511,13 +543,13 @@ Ronaldo as of 12 October 2026. Messi as of 17 October 2026.
                         <div class="qagrid">
                         <!-- STATS:BEGIN mvr.questions -->
 <div class="qa"><h3>Who has more goals, Messi or Ronaldo?</h3><p>Cristiano Ronaldo, with 981 goals in 1,340 games. Lionel Messi has 936 goals in 1,182 games.</p></div>
-<div class="qa"><h3>Who has the better goals per game record?</h3><p>Messi, with 0.79 goals per game. Ronaldo averages 0.73.</p></div>
+<div class="qa"><h3>Who has the better goals per game record?</h3><p>Messi, with 0.79 goals per game. Ronaldo averages 0.73. Ronaldo played mainly as a winger in his first seven senior seasons, one with Sporting CP and six with Manchester United in the Premier League, which was first in UEFA's league rankings in 2008 and 2009. He scored 123 goals in 323 club games in those seasons. He played as a forward from his move to Real Madrid in 2009 and scored 450 goals in 438 games for them.</p></div>
 <div class="qa"><h3>Who has more assists?</h3><p>Messi, with 409 assists. Ronaldo has 291.</p></div>
 <div class="qa"><h3>Who has more Ballon d'Or awards?</h3><p>Messi has won 8 and Ronaldo 5. Ronaldo has been shortlisted 18 times and Messi 17.</p></div>
-<div class="qa"><h3>Who has won more trophies?</h3><p>Messi, with 46 senior team trophies. Ronaldo has 35. Messi's total is often given as 48, which adds the 2005 FIFA U20 World Cup and the 2008 Olympic gold, won with Argentina's youth teams.</p></div>
-<div class="qa"><h3>Who has more Champions League titles and goals?</h3><p>Ronaldo, with 5 UEFA Champions League titles and 140 goals. Messi has 4 titles and 129 goals.</p></div>
+<div class="qa"><h3>Who has won more trophies?</h3><p>Messi, with 46 senior team trophies. Ronaldo has 35.</p></div>
+<div class="qa"><h3>Who has more Champions League titles and goals?</h3><p>Ronaldo, with 5 UEFA Champions League titles and 140 goals. Messi has 4 titles and 129 goals. Messi was injured and did not play in the 2006 final, which Barcelona won against Arsenal.</p></div>
 <div class="qa"><h3>Who has more international goals?</h3><p>Ronaldo, with 146 goals in 234 caps for Portugal. Messi scored 126 goals in 208 caps for Argentina before retiring from international football on 6 October 2026.</p></div>
-<div class="qa"><h3>Has Ronaldo won the World Cup?</h3><p>No. Messi won the 2022 FIFA World Cup with Argentina and lost the 2026 final to Spain. Messi has 21 World Cup goals and Ronaldo 11.</p></div>
+<div class="qa"><h3>Has Ronaldo won the World Cup?</h3><p>No. Messi won the 2022 FIFA World Cup with Argentina, and lost the 2014 final to Germany and the 2026 final to Spain. Messi has 21 World Cup goals and Ronaldo 11.</p></div>
 <div class="qa"><h3>How many penalties did Argentina get at the 2022 World Cup?</h3><p>Five, all taken by Messi. He scored against Saudi Arabia, the Netherlands, Croatia and France, and Wojciech Szczesny saved his penalty against Poland. Four of his seven goals at the 2022 FIFA World Cup were penalties.</p></div>
 <div class="qa"><h3>What is the head to head record between Messi and Ronaldo?</h3><p>They have met 36 times. Messi has won 16, Ronaldo 11, and 9 ended level. Messi scored 22 goals in those games and Ronaldo 21.</p></div>
 <div class="qa"><h3>Who scored more goals in El Clasico?</h3><p>Messi, with 26 goals in 45 matches against Real Madrid. Ronaldo scored 18 in 30 matches against Barcelona.</p></div>
@@ -526,7 +558,6 @@ Ronaldo as of 12 October 2026. Messi as of 17 October 2026.
 <div class="qa"><h3>Who has more penalty goals?</h3><p>Ronaldo, with 184. Messi has 110. Without penalties, Messi has 826 goals and Ronaldo 797.</p></div>
 <div class="qa"><h3>Who has more headed goals?</h3><p>Ronaldo, with 158. Messi has 31.</p></div>
 <div class="qa"><h3>Who scored more in a single season and a single year?</h3><p>Messi, with 73 goals in 2011/12 and 91 in 2012. Ronaldo's best are 61 in 2014/15 and 69 in 2013.</p></div>
-<div class="qa"><h3>Who is older and who is taller?</h3><p>Ronaldo was born on 5 February 1985 and is 41. Messi was born on 24 June 1987 and is 39. Ronaldo is 1.87 m tall and Messi 1.70 m.</p></div>
 <div class="qa"><h3>Who is better, Messi or Ronaldo?</h3><p>There is no official measure. Ronaldo leads in goals, international goals, UEFA Champions League titles and hat tricks. Messi leads in goals per game, assists, Ballon d'Or awards, team trophies and FIFA World Cup titles.</p></div>
                         <!-- STATS:END mvr.questions -->
                         </div>
@@ -737,24 +768,11 @@ Ronaldo as of 12 October 2026. Messi as of 17 October 2026.
 <tr><td>0</td><th scope="row">FIFA World Cup titles</th><td class="lead">1</td></tr>
 <tr><td>14</td><th scope="row">European Championship / Copa America goals</th><td>14</td></tr>
 <tr><td>1</td><th scope="row">European Championship / Copa America titles</th><td class="lead">2</td></tr>
+<tr><td>15</td><th scope="row">UEFA Nations League goals</th><td>n/a</td></tr>
+<tr><td>2</td><th scope="row">UEFA Nations League titles</th><td>n/a</td></tr>
 </tbody></table></div>
+<p class="note">The UEFA Nations League is for European national teams, so Argentina do not play in it.</p>
                         <!-- STATS:END mvr.international -->
-                    </section>
-
-                    <section class="box" id="competitions">
-                        <h2 class="box-h">Goals by competition</h2>
-                        <!-- STATS:BEGIN mvr.competitions -->
-<div class="tbl"><table class="cmp">
-<caption class="sr">Goals by competition</caption>
-<thead><tr><th scope="col">Cristiano Ronaldo</th><th scope="col"><span class="sr">Statistic</span></th><th scope="col">Lionel Messi</th></tr></thead>
-<tbody>
-<tr><td>311</td><th scope="row">La Liga</th><td class="lead">474</td></tr>
-<tr><td class="lead">140</td><th scope="row">UEFA Champions League</th><td>129</td></tr>
-<tr><td>22</td><th scope="row">Copa del Rey</th><td class="lead">56</td></tr>
-<tr><td>11</td><th scope="row">FIFA World Cup</th><td class="lead">21</td></tr>
-<tr><td>14</td><th scope="row">European Championship / Copa America</th><td>14</td></tr>
-</tbody></table></div>
-                        <!-- STATS:END mvr.competitions -->
                     </section>
 
                     <section class="box" id="seasons">
@@ -780,26 +798,26 @@ Ronaldo as of 12 October 2026. Messi as of 17 October 2026.
 <h3 class="sub">Cristiano Ronaldo</h3>
 <div class="tbl"><table class="list">
 <caption class="sr">Cristiano Ronaldo by team</caption>
-<thead><tr><th scope="col">Team</th><th scope="col">Games</th><th scope="col">Goals</th><th scope="col">Per game</th></tr></thead>
+<thead><tr><th scope="col">Team</th><th scope="col">Games</th><th scope="col">Goals</th></tr></thead>
 <tbody>
-<tr><th scope="row">Sporting CP<span class="yrs">2002 to 2003</span></th><td>31</td><td>5</td><td>0.16</td></tr>
-<tr><th scope="row">Manchester United<span class="yrs">2003 to 2009, 2021 to 2022</span></th><td>346</td><td>145</td><td>0.42</td></tr>
-<tr><th scope="row">Real Madrid<span class="yrs">2009 to 2018</span></th><td>438</td><td>450</td><td>1.03</td></tr>
-<tr><th scope="row">Juventus<span class="yrs">2018 to 2021</span></th><td>134</td><td>101</td><td>0.75</td></tr>
-<tr><th scope="row">Al Nassr<span class="yrs">2023 to present</span></th><td>157</td><td>134</td><td>0.85</td></tr>
-<tr><th scope="row">Portugal<span class="yrs">2003 to present</span></th><td>234</td><td>146</td><td>0.62</td></tr>
+<tr><th scope="row">Sporting CP<span class="yrs">2002 to 2003</span></th><td>31</td><td>5</td></tr>
+<tr><th scope="row">Manchester United<span class="yrs">2003 to 2009, 2021 to 2022</span></th><td>346</td><td>145</td></tr>
+<tr><th scope="row">Real Madrid<span class="yrs">2009 to 2018</span></th><td>438</td><td>450</td></tr>
+<tr><th scope="row">Juventus<span class="yrs">2018 to 2021</span></th><td>134</td><td>101</td></tr>
+<tr><th scope="row">Al Nassr<span class="yrs">2023 to present</span></th><td>157</td><td>134</td></tr>
+<tr><th scope="row">Portugal<span class="yrs">2003 to present</span></th><td>234</td><td>146</td></tr>
 </tbody></table></div>
 </div>
 <div>
 <h3 class="sub">Lionel Messi</h3>
 <div class="tbl"><table class="list">
 <caption class="sr">Lionel Messi by team</caption>
-<thead><tr><th scope="col">Team</th><th scope="col">Games</th><th scope="col">Goals</th><th scope="col">Per game</th></tr></thead>
+<thead><tr><th scope="col">Team</th><th scope="col">Games</th><th scope="col">Goals</th></tr></thead>
 <tbody>
-<tr><th scope="row">Barcelona<span class="yrs">2004 to 2021</span></th><td>778</td><td>672</td><td>0.86</td></tr>
-<tr><th scope="row">Paris Saint Germain<span class="yrs">2021 to 2023</span></th><td>75</td><td>32</td><td>0.43</td></tr>
-<tr><th scope="row">Inter Miami<span class="yrs">2023 to present</span></th><td>121</td><td>106</td><td>0.88</td></tr>
-<tr><th scope="row">Argentina<span class="yrs">2005 to 2026</span></th><td>208</td><td>126</td><td>0.61</td></tr>
+<tr><th scope="row">Barcelona<span class="yrs">2004 to 2021</span></th><td>778</td><td>672</td></tr>
+<tr><th scope="row">Paris Saint Germain<span class="yrs">2021 to 2023</span></th><td>75</td><td>32</td></tr>
+<tr><th scope="row">Inter Miami<span class="yrs">2023 to present</span></th><td>121</td><td>106</td></tr>
+<tr><th scope="row">Argentina<span class="yrs">2005 to 2026</span></th><td>208</td><td>126</td></tr>
 </tbody></table></div>
 </div>
 </div>
@@ -931,53 +949,15 @@ Ronaldo as of 12 October 2026. Messi as of 17 October 2026.
                         </div>
                     </section>
                 </div>
+        </main>
 
-                <aside class="side">
-                    <nav class="box" aria-label="On this page">
-                        <h2 class="box-h">On this page</h2>
-                        <div class="toc">
-                            <a href="#questions">Questions</a>
-                            <a href="#totals">Career totals</a>
-                            <a href="#trophies">Trophies</a>
-                            <a href="#awards">Individual awards</a>
-                            <a href="#ballondor">Ballon d'Or</a>
-                            <a href="#headtohead">Head to head</a>
-                            <a href="#context">Context</a>
-                            <a href="#international">International</a>
-                            <a href="#competitions">Competitions</a>
-                            <a href="#seasons">Best seasons</a>
-                            <a href="#clubs">Clubs</a>
-                            <a href="#byseason">By season</a>
-                            <a href="#trophylist">Trophy list</a>
-                            <a href="#notes">Notes</a>
-                        </div>
-                    </nav>
-                    <section class="box glancebox" aria-label="At a glance">
-                        <h2 class="box-h">At a glance</h2>
-                        <table class="glance">
-                            <thead><tr><th scope="col"><span class="sr">Statistic</span></th><th scope="col">Ronaldo</th><th scope="col">Messi</th></tr></thead>
-                            <tbody>
-                            <!-- STATS:BEGIN mvr.glance -->
-<tr><th scope="row">Goals</th><td>981</td><td>936</td></tr>
-<tr><th scope="row">Ballon d'Or</th><td>5</td><td>8</td></tr>
-<tr><th scope="row">Trophies</th><td>35</td><td>46</td></tr>
-<tr><th scope="row">Champions League</th><td>5</td><td>4</td></tr>
-<tr><th scope="row">World Cup</th><td>0</td><td>1</td></tr>
-                            <!-- STATS:END mvr.glance -->
-                            </tbody>
-                        </table>
-                    </section>
-                </aside>
+        <footer class="foot">
+            <div>
+                <span>ronaldostats.app. Statistics compiled from match records. Not affiliated with either player or any club.</span>
+                <a href="/privacy.html">Privacy policy</a>
             </div>
-        </div>
-    </main>
-
-    <footer class="pad">
-        <div class="inner">
-            <span>ronaldostats.app. Statistics compiled from match records. Not affiliated with either player or any club.</span>
-            <a href="/privacy.html">Privacy policy</a>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
     <!-- Cookie banner -->
     <div id="cookieBanner" class="cookie-banner hidden">
@@ -1022,6 +1002,86 @@ Ronaldo as of 12 October 2026. Messi as of 17 October 2026.
                 window['ga-disable-G-HPECDH5S32'] = true;
             }
         });
+
+        // ===== Mobile navigation drawer, as on the home page =====
+        (function () {
+            const mobileBtn = document.getElementById('mobileBtn');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const closeBtn = document.getElementById('drawerClose');
+            const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
+            const focusable = () => sidebar.querySelectorAll('a[href], button:not([disabled])');
+
+            function setOpen(open) {
+                sidebar.classList.toggle('active', open);
+                mobileBtn.classList.toggle('active', open);
+                overlay.classList.toggle('active', open);
+                mobileBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+                mobileBtn.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+                document.body.style.overflow = open ? 'hidden' : '';
+                if (open) {
+                    sidebar.getBoundingClientRect();
+                    closeBtn.focus();
+                } else if (isMobile() && sidebar.contains(document.activeElement)) {
+                    mobileBtn.focus();
+                }
+            }
+
+            mobileBtn.addEventListener('click', () => setOpen(!sidebar.classList.contains('active')));
+            overlay.addEventListener('click', () => setOpen(false));
+            closeBtn.addEventListener('click', () => setOpen(false));
+
+            document.addEventListener('keydown', event => {
+                if (!sidebar.classList.contains('active')) return;
+                if (event.key === 'Escape') { event.preventDefault(); setOpen(false); return; }
+                if (event.key !== 'Tab') return;
+                // Keep tabbing inside the open drawer
+                const items = Array.prototype.slice.call(focusable());
+                const first = items[0], last = items[items.length - 1];
+                if (!sidebar.contains(document.activeElement)) { event.preventDefault(); first.focus(); }
+                else if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+                else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+            });
+
+            sidebar.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => { if (isMobile()) setOpen(false); });
+            });
+
+            window.addEventListener('resize', () => {
+                if (!isMobile() && sidebar.classList.contains('active')) setOpen(false);
+            });
+        })();
+
+        /* The section crossing the upper third of the screen is marked in the
+           menu, and on a desktop the menu scrolls to keep it in sight when it is
+           taller than the window. The phone drawer opens at the top instead. */
+        (function () {
+            const nav = document.querySelector('.sidebar-nav');
+            const links = Array.prototype.slice.call(document.querySelectorAll('.nav-sub a'));
+            const targets = links.map(a => ({ a: a, el: document.getElementById(a.getAttribute('href').slice(1)) }))
+                                 .filter(t => t.el);
+            let current = null, queued = false;
+
+            function update() {
+                queued = false;
+                const line = window.innerHeight * 0.3;
+                let hit = null;
+                targets.forEach(t => { if (t.el.getBoundingClientRect().top <= line) hit = t.a; });
+                if (hit === current) return;
+                links.forEach(a => a.classList.toggle('current', a === hit));
+                current = hit;
+                if (hit && !window.matchMedia('(max-width: 768px)').matches) {
+                    const top = hit.offsetTop, bottom = top + hit.offsetHeight;
+                    if (top < nav.scrollTop) nav.scrollTop = top - 8;
+                    else if (bottom > nav.scrollTop + nav.clientHeight) nav.scrollTop = bottom - nav.clientHeight + 8;
+                }
+            }
+            window.addEventListener('scroll', () => {
+                if (!queued) { queued = true; window.requestAnimationFrame(update); }
+            }, { passive: true });
+            window.addEventListener('resize', update);
+            update();
+        })();
     </script>
 </body>
 </html>

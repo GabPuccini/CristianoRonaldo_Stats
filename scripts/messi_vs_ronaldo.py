@@ -167,6 +167,10 @@ def ronaldo(data, values):
                   sum(c["goals"] for c in r["comps"].values() if c))
                  for r in seasons if r["team"] != "portugal"],
         trophy_groups=ronaldo_trophies(data),
+        rm_apps=v("team.realmadrid.apps"), rm_goals=v("team.realmadrid.goals"),
+        nl_goals=v("comp.portugal.nationsleague"),
+        nl_titles=sum(len(t["years"]) for t in data["honours"]["teams"].get("portugal", [])
+                      if t["name"] == "UEFA Nations League"),
     )
     R["league_top_count"] = sum(c for _, c in R["league_top"])
     R["trophies"] = trophy_counts(R["trophy_groups"])
@@ -302,10 +306,10 @@ def profile(P, who, born, age):
 def club_table(rows, who):
     out = ['<div class="tbl"><table class="list">', f'<caption class="sr">{who} by team</caption>',
            '<thead><tr><th scope="col">Team</th><th scope="col">Games</th><th scope="col">Goals</th>'
-           '<th scope="col">Per game</th></tr></thead>', "<tbody>"]
+           '</tr></thead>', "<tbody>"]
     for name, years, a, g in rows:
         out.append(f'<tr><th scope="row">{name}<span class="yrs">{years}</span></th>'
-                   f'<td>{a:,}</td><td>{g:,}</td><td>{gpg(g, a):.2f}</td></tr>')
+                   f'<td>{a:,}</td><td>{g:,}</td></tr>')
     out.append("</tbody></table></div>")
     return out
 
@@ -345,7 +349,6 @@ def award_phrase(name, count):
 
 def questions(data, R, M):
     P = {"r": R, "m": M}
-    d = page_date(data)
     h2h = data["versus"]["head_to_head"]
     cl = data["versus"]["clasico"]
     T = {k: P[k]["trophies"] for k in P}
@@ -367,9 +370,22 @@ def questions(data, R, M):
         lambda n: f"They are level on {n:,} goals.")))
 
     w = leader(round(G["r"], 2), round(G["m"], 2))
-    qs.append(("Who has the better goals per game record?",
-               f"{SHORT[w]}, with {G[w]:.2f} goals per game. {SHORT[OTHER[w]]} averages {G[OTHER[w]]:.2f}."
-               if w else f"They are level, at {G['r']:.2f} goals per game each."))
+    a = (f"{SHORT[w]}, with {G[w]:.2f} goals per game. {SHORT[OTHER[w]]} averages {G[OTHER[w]]:.2f}."
+         if w else f"They are level, at {G['r']:.2f} goals per game each.")
+    # Ronaldo was a winger until he joined Real Madrid, which the career
+    # average hides, so the answer gives the two spells apart
+    rows = [r for r in data["seasons"] if r.get("in_career", True)]
+    madrid = min(r["season"] for r in rows if r["team"] == "realmadrid")
+    early = [r for r in rows if r["season"] < madrid]
+    spells = {t: len({r["season"] for r in early if r["team"] == t}) for t in ("sporting", "manutd")}
+    total = lambda k: sum(c[k] for r in early for c in r["comps"].values() if c)
+    a += (f" Ronaldo played mainly as a winger in his first {word(sum(spells.values()))} senior seasons, "
+          f"{word(spells['sporting'])} with Sporting CP and {word(spells['manutd'])} with Manchester United in "
+          f"the Premier League, which was first in UEFA's league rankings in 2008 and 2009. He scored "
+          f"{total('goals')} goals in {total('apps')} club games in those seasons. He played as a forward from "
+          f"his move to Real Madrid in {madrid[:4]} and scored {R['rm_goals']:,} goals in "
+          f"{R['rm_apps']:,} games for them.")
+    qs.append(("Who has the better goals per game record?", a))
 
     qs.append(("Who has more assists?", most(
         "assists",
@@ -384,15 +400,11 @@ def questions(data, R, M):
           f"{P[OTHER[nw]]['bdo_noms']}." if nw else f" Both have been shortlisted {R['bdo_noms']} times.")
     qs.append(("Who has more Ballon d'Or awards?", a))
 
-    youth = data["messi"]["youth_titles"]
-    youth_note = (f" Messi's total is often given as {M['trophies']['total'] + sum(len(y['years']) for y in youth)}, "
-                  f"which adds " + series(f"the {y['years'][0]} {y['name']}" for y in youth)
-                  + ", won with Argentina's youth teams.")
     qs.append(("Who has won more trophies?", most(
         {k: T[k]["total"] for k in P},
         lambda w, x: f"{SHORT[w]}, with {x[w]} senior team trophies.",
         lambda o, x: f"{SHORT[o]} has {x[o]}.",
-        lambda n: f"Both have {n} senior team trophies.") + youth_note))
+        lambda n: f"Both have {n} senior team trophies.")))
 
     tw = leader(T["r"]["championsleague"], T["m"]["championsleague"])
     gw = leader(R["cl"], M["cl"])
@@ -403,6 +415,7 @@ def questions(data, R, M):
     else:
         a = (f"Ronaldo has {T['r']['championsleague']} UEFA Champions League titles and {R['cl']} goals. "
              f"Messi has {T['m']['championsleague']} titles and {M['cl']} goals.")
+    a += " Messi was injured and did not play in the 2006 final, which Barcelona won against Arsenal."
     qs.append(("Who has more Champions League titles and goals?", a))
 
     caps = {"r": f"{R['intl_goals']} goals in {R['intl_apps']} caps for Portugal",
@@ -416,7 +429,8 @@ def questions(data, R, M):
     wt = {"r": T["r"]["worldcup"], "m": T["m"]["worldcup"]}
     gw = leader(R["wc"], M["wc"]) or "m"
     a = ("No. " if not wt["r"] else f"Yes, {wt['r']} times. ") + (
-        "Messi won the 2022 FIFA World Cup with Argentina and lost the 2026 final to Spain. "
+        "Messi won the 2022 FIFA World Cup with Argentina, and lost the 2014 final to Germany and the "
+        "2026 final to Spain. "
         f"{SHORT[gw]} has {P[gw]['wc']} World Cup goals and {SHORT[OTHER[gw]]} {P[OTHER[gw]]['wc']}.")
     qs.append(("Has Ronaldo won the World Cup?", a))
 
@@ -478,11 +492,6 @@ def questions(data, R, M):
              f"in {R['best_year_name']}. Messi's are {M['best_season']} in {M['best_season_name']} and "
              f"{M['best_year']} in {M['best_year_name']}.")
     qs.append(("Who scored more in a single season and a single year?", a))
-
-    qs.append(("Who is older and who is taller?",
-               f"Ronaldo was born on {_long(R['born'])} and is {_age(R['born'], d)}. Messi was born on "
-               f"{_long(M['born'])} and is {_age(M['born'], d)}. Ronaldo is {R['profile']['height']} tall "
-               f"and Messi {M['profile']['height']}."))
 
     measures = [("goals", R["goals"], M["goals"]),
                 ("goals per game", round(G["r"], 2), round(G["m"], 2)),
@@ -639,15 +648,10 @@ def regions(data, values):
         ("FIFA World Cup titles", TR["worldcup"], TM["worldcup"], "hi"),
         ("European Championship / Copa America goals", R["continental"], M["continental"], "hi"),
         ("European Championship / Copa America titles", TR["continental"], TM["continental"], "hi"),
-    ], "International career")
-
-    r["mvr.competitions"] = cmp_table([
-        ("La Liga", R["laliga"], M["laliga"], "hi"),
-        ("UEFA Champions League", R["cl"], M["cl"], "hi"),
-        ("Copa del Rey", R["cdr"], M["cdr"], "hi"),
-        ("FIFA World Cup", R["wc"], M["wc"], "hi"),
-        ("European Championship / Copa America", R["continental"], M["continental"], "hi"),
-    ], "Goals by competition")
+        ("UEFA Nations League goals", R["nl_goals"], "n/a", None),
+        ("UEFA Nations League titles", R["nl_titles"], "n/a", None),
+    ], "International career") + note(
+        "The UEFA Nations League is for European national teams, so Argentina do not play in it.")
 
     peaks = ['<div class="tbl"><table class="cmp"><caption class="sr">Best seasons</caption>', CMP_HEAD, "<tbody>"]
     for label, key in [("Most goals in a club season", "best_season"),
@@ -678,12 +682,6 @@ def regions(data, values):
                               trophy_list("Lionel Messi", TM["total"], m_blocks)) + note(
         "Not counted for Messi: " + series(f"the {y['years'][0]} {y['name']}" for y in youth)
         + ", which were won with Argentina's youth teams.")
-
-    r["mvr.glance"] = [f'<tr><th scope="row">{label}</th><td>{fmt(a)}</td><td>{fmt(b)}</td></tr>' for label, a, b in [
-        ("Goals", R["goals"], M["goals"]), ("Ballon d'Or", R["bdo"], M["bdo"]),
-        ("Trophies", TR["total"], TM["total"]),
-        ("Champions League", TR["championsleague"], TM["championsleague"]),
-        ("World Cup", TR["worldcup"], TM["worldcup"])]]
 
     return {k: "\n".join(v) for k, v in r.items()}
 
