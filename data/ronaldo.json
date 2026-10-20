@@ -9,7 +9,7 @@
     "penalties_missed is the number of penalties Ronaldo has missed in matches, shootouts not counted; the missed-penalty command adds to it. messi.career.penalties_missed is the same for Messi. The scored and missed counts for each player come from one published penalty record, so the conversion rates on the Messi vs Ronaldo page compare like with like."
   ],
   "meta": {
-    "updated": "2026-10-12",
+    "updated": "2026-10-20",
     "goal_target": 1000,
     "born": "1985-02-05",
     "current_season": "2026/27"
@@ -720,7 +720,7 @@
       "in_career": true,
       "comps": {
         "league": {
-          "apps": 7,
+          "apps": 8,
           "goals": 4
         },
         "cup": null,
@@ -881,7 +881,7 @@
     {
       "year": 2026,
       "goals": 24,
-      "apps": 39,
+      "apps": 40,
       "age": 41
     }
   ],
@@ -1579,6 +1579,14 @@
       "opponent": "Neftchi",
       "assists": 0,
       "new_appearance": true
+    },
+    {
+      "date": "2026-10-20",
+      "event": "appearance",
+      "team": "alnassr",
+      "comp": "league",
+      "competition": null,
+      "opponent": "Neom"
     }
   ],
   "competition_rollup": {
