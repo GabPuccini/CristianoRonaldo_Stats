@@ -420,8 +420,12 @@ under individual honours.
   markup on every page is deliberate for search engines.
 * Keep the flat design system: DM Sans for body, Plus Jakarta Sans for
   display (both served from `fonts/`, see Speed below), a navy sidebar `#0f1f3d`, brand blue `#1d6fa5`, navy `#1b3358` for
-  table heads and accents, solid white rounded cards on a light grey page
-  `#e8ebf0`. No glassmorphism (no `backdrop-filter`, no translucent cards, no
+  table heads and accents, solid white cards on a light grey page `#e8ebf0`.
+  Corners are small, after Spotify's: `--r-lg` and `--r-xl` are 8px for cards
+  and panels, `--r-md` 6px for smaller boxes, tables and menu items, `--r-sm`
+  4px for tabs; chips and buttons stay pill shaped and the profile photo
+  round. That holds for the home and privacy pages; the Messi vs Ronaldo page
+  keeps its own 12px boxes. No glassmorphism (no `backdrop-filter`, no translucent cards, no
   background glows) and no colour gradients: table heads and chart bars are
   one solid colour from end to end. This replaced the frosted glass design in
   October 2026.
