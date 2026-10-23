@@ -9,7 +9,7 @@
     "penalties_missed is the number of penalties Ronaldo has missed in matches, shootouts not counted; the missed-penalty command adds to it. messi.career.penalties_missed is the same for Messi. The scored and missed counts for each player come from one published penalty record, so the conversion rates on the Messi vs Ronaldo page compare like with like."
   ],
   "meta": {
-    "updated": "2026-10-20",
+    "updated": "2026-10-23",
     "goal_target": 1000,
     "born": "1985-02-05",
     "current_season": "2026/27"
@@ -720,8 +720,8 @@
       "in_career": true,
       "comps": {
         "league": {
-          "apps": 8,
-          "goals": 4
+          "apps": 9,
+          "goals": 5
         },
         "cup": null,
         "lcup": null,
@@ -880,8 +880,8 @@
     },
     {
       "year": 2026,
-      "goals": 24,
-      "apps": 40,
+      "goals": 25,
+      "apps": 41,
       "age": 41
     }
   ],
@@ -1224,7 +1224,7 @@
       "Other cup competitions": 2
     },
     "alnassr": {
-      "Saudi Pro League": 106,
+      "Saudi Pro League": 107,
       "AFC Champions League": 15,
       "AFC Champions League Two": 1,
       "Arab Club Champions Cup": 6,
@@ -1270,7 +1270,7 @@
     "alnassr": [
       89,
       27,
-      17,
+      18,
       1
     ],
     "portugal": [
@@ -1587,6 +1587,18 @@
       "comp": "league",
       "competition": null,
       "opponent": "Neom"
+    },
+    {
+      "date": "2026-10-23",
+      "event": "goal",
+      "team": "alnassr",
+      "comp": "league",
+      "year": 2026,
+      "body": "head",
+      "type": "openplay",
+      "opponent": "Al Faisaly",
+      "assists": 0,
+      "new_appearance": true
     }
   ],
   "competition_rollup": {
