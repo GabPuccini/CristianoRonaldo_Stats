@@ -450,6 +450,7 @@ def derive(data):
         cg = sum(c["goals"] for r in cur_rows for c in r["comps"].values() if c)
         out["season.current.name"] = cur
         out["season.current.goals"] = str(cg)
+        out["season.current.apps"] = str(sum(c["apps"] for r in cur_rows for c in r["comps"].values() if c))
         out["season.current.league_goals"] = str(sum(
             r["comps"]["league"]["goals"] for r in cur_rows if r["comps"].get("league")))
     out["season.count"] = str(len({r["season"] for r in data["seasons"] if r.get("in_career", True)}))

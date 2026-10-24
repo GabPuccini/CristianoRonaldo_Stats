@@ -73,6 +73,10 @@ record("index.html", "KPI appearances", values["career.apps"],
        find("index.html", r'<span class="kpi-label">Appearances</span>\s*<span class="kpi-value">([^<]+)</span>'), key="career.apps")
 record("index.html", "KPI assists", values["career.assists"],
        find("index.html", r'<span class="kpi-label">Assists</span>\s*<span class="kpi-value">([^<]+)</span>'), key="career.assists")
+record("index.html", "KPI season goals", values["season.current.goals"],
+       find("index.html", r'<span class="kpi-value">(\d+)<span class="kpi-games">'), key="season.current.goals")
+record("index.html", "KPI season games", values["season.current.apps"],
+       find("index.html", r'<span class="kpi-games"> in (\d+) games</span>'), key="season.current.apps")
 
 # Career table, one row per team plus the totals row
 for team in engine.load()["teams"]:

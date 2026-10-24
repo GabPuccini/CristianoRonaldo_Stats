@@ -2253,6 +2253,9 @@
             line-height: 1;
             font-size: clamp(2.2rem, 3.4vw, 2.8rem);
         }
+        /* The season card gives the games beside the goals, smaller and on the
+           same line, so it stays the height of the cards beside it. */
+        .kpi-games { font-family: 'DM Sans', 'DM Sans Arial', 'DM Sans Roboto', sans-serif; font-size: 0.95rem; font-weight: 600; letter-spacing: 0; color: var(--ink-2); }
         @media (max-width: 768px) {
             .kpi-grid .kpi-card { padding: 16px 18px 18px; }
             .kpi-grid .kpi-value { margin-top: 10px; font-size: 2.1rem; }
@@ -2813,7 +2816,7 @@
                 </div>
                 <div class="kpi-card">
                     <span class="kpi-label">Goals in <span data-stat="season.current.name">2026/27</span></span>
-                    <span class="kpi-value" data-stat="season.current.goals">6</span>
+                    <span class="kpi-value"><span data-stat="season.current.goals">6</span><span class="kpi-games"> in <span data-stat="season.current.apps">11</span> games</span></span>
                 </div>
             </section>
 
